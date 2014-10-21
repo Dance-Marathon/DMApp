@@ -1,0 +1,41 @@
+Timeline
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+10/21/14| Have Github set up on everyone's laptop. Understand how to use Git.
+10/21/14| Be familiar with how to implement basic UI elements in your respective programming language.
+10/21/14| Have solidified UI designs for both Android and IOS (in separate files).
+10/21/14| Have solidified functionality list.
+
+10/28/14| First release of homepage code. (May need alterations)
+10/28/14| Navigation Map created. 
+
+11/04/14| Finish homepage code.
+11/04/14| Timeline code should be at least halfway completed.
+11/04/14| Decide on how overalls can input events into the timeline. 
+
+11/11/14| AC Unity comes out! Yay!
+11/11/14| First release of timeline code
+11/11/14| Extensive bug check
+
+11/18/14| Revised timeline code.
+11/18/14| Fix all bugs.
+
+11/25/14| Finished timeline code.
+11/25/14| 50% progress on Miracle Kids GridView.
+11/25/14| 50% progress on Miracle Kids IndividualView.
+
+THANKSGIVING BREAK
+
+12/01/14| First release of Miracle Kids GridView and Individual View
+
+12/09/14| Finish Grid and Individual View
+
+FINAL EXAMS
+
+WINTER BREAK
+
+01/06/15| Finish Social Media View. 
+01/06/15| App should be beta-testing ready.
+
+
+Commit
+Branch
