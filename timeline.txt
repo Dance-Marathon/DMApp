@@ -7,6 +7,7 @@ Timeline
 
 10/28/14| First release of homepage code. (May need alterations)
 10/28/14| Navigation Map created. 
+10/28/14| Submit what's required from Art/Layout**********
 
 11/04/14| Finish homepage code.
 11/04/14| Timeline code should be at least halfway completed.
