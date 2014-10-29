@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- DM Colors -->
+     <color name="dm_orange">#FF8627</color>
+     
     <!-- Basic Colors -->
      <color name="yellow">#FFFF00</color>
      <color name="red">#FF0000</color> 
