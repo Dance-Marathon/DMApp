@@ -164,6 +164,6 @@ public class SwipeActivity extends ActionBarActivity
 					container, false);
 			return rootView;
 		}
-	}
 
+	}
 }
