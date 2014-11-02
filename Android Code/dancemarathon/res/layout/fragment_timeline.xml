@@ -2,13 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/olive"
+    android:background="@color/DarkOrchid"
     tools:context="com.example.dancemarathon.TimelineFragment" >
     
+    <ListView
+        android:id="@+id/event_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:footerDividersEnabled="true"/>
+    
+    <!--  
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/timeline_fragment" 
         android:gravity="center"/>
+        -->
 
 </FrameLayout>

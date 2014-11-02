@@ -208,4 +208,14 @@ public class Event
 	{
 		this.description = description;
 	}
+	
+	public String toString()
+	{
+		String rep = "";
+		rep = rep.concat(getTitle() + "\t");
+		rep = rep.concat(getLocation() + "\t");
+		rep = rep.concat(getT_startDate() + "\t");
+		
+		return rep;
+	}
 }
