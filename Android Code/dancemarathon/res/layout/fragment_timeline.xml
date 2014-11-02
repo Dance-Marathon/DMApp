@@ -2,8 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkOrchid"
+    android:background="@color/DodgerBlue"
     tools:context="com.example.dancemarathon.TimelineFragment" >
+    
+    <ProgressBar 
+        android:id="@+id/progress_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="true"
+        android:layout_gravity="center"
+        android:visibility="visible"/>
     
     <ListView
         android:id="@+id/event_list"

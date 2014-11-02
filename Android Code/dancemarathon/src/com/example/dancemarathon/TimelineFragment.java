@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,12 +38,14 @@ public class TimelineFragment extends Fragment
 	 * Flag stating whether or not the load operation was successful
 	 */
 	private boolean loadSuccessful;
+	private EventLoader loader;
 
 	public TimelineFragment()
 	{
 		// Required empty public constructor
 		loadSuccessful = false;
-		new EventLoader().execute(); //Perform the load operation
+		loader = new EventLoader();
+		loader.execute(); //Perform the load operation
 	}
 
 	@Override
@@ -59,27 +62,39 @@ public class TimelineFragment extends Fragment
 		return f;
 	}
 	
+	//Needed to override this method to cancel the async task if this fragment is destroyed
+	public void onDestroyView()
+	{
+		super.onDestroyView();
+		loader.cancel(true);
+	}
+	
 	/**
 	 * This class is responsible for loading the events. It is necessary because Android
 	 * does not allow you to have loading operations on the same thread as the UI.
 	 */
 	private class EventLoader extends AsyncTask<Void, Double, ArrayList<Event>>
 	{
-
+		
 		@Override
 		protected ArrayList<Event> doInBackground(Void... params)
 		{
 			ArrayList<Event> events = new ArrayList<Event>();
 			try
-			{
+			{	
 				URL url = new URL("http://mickmaccallum.com/ian/events.php"); //The path to the webservice 
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				
+				//Parse JSON response
 				String eventsJSON = reader.readLine();
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
+				
+				//Set success flag to true
 				loadSuccessful = true;
+				
+				
 			} catch (MalformedURLException e)
 			{
 				// TODO Auto-generated catch block
@@ -107,13 +122,17 @@ public class TimelineFragment extends Fragment
 			if(loadSuccessful)
 			{	
 				Log.d("load", "successful");
+				
 				//Populate list view
 				ArrayAdapter<Event> listAdapter = new ArrayAdapter<Event>(getActivity(), android.R.layout.simple_list_item_1);
-				populateAdapter(listAdapter, events); //Add the events to the list adapter
+				populateAdapter(listAdapter, events); 									 //Add the events to the list adapter
 				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 				
 				eventList.setAdapter(listAdapter);
-				eventList.addFooterView(new View(getActivity()), null, true); //This is needed to display a final divider after the last item
+			
+				//Hide progress wheel
+				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
+				bar.setVisibility(View.GONE);
 			}
 			else
 				Log.d("load", "unsuccessful");
