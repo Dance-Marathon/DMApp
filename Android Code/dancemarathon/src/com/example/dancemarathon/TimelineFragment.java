@@ -158,12 +158,12 @@ public class TimelineFragment extends Fragment
 			for(int i = 0; i < arr.length(); i++)
 			{
 				String id = arr.getJSONObject(i).getString("id");
-				String title = arr.getJSONObject(i).getString("title");
-				String location = arr.getJSONObject(i).getString("location");
-				String description = arr.getJSONObject(i).getString("description");
-				String startDate = arr.getJSONObject(i).getString("startDate");
-				String endDate = arr.getJSONObject(i).getString("endDate");
-				String lastModified = arr.getJSONObject(i).getString("lastModified");
+				String title = arr.getJSONObject(i).getString("title").trim();
+				String location = arr.getJSONObject(i).getString("location").trim();
+				String description = arr.getJSONObject(i).getString("description").trim();
+				String startDate = arr.getJSONObject(i).getString("startDate").trim();
+				String endDate = arr.getJSONObject(i).getString("endDate").trim();
+				String lastModified = arr.getJSONObject(i).getString("lastModified").trim();
 				
 				try
 				{
