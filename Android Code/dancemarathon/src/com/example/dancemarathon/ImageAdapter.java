@@ -8,7 +8,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 /**
- * @author Chris
+ * @author Chris Whitten
  * This class provides the image information to the mtk grid view. See the Android developer guide for more information.
  */
 public class ImageAdapter extends BaseAdapter
