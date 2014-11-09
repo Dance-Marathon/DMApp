@@ -126,8 +126,8 @@ public class TimelineFragment extends Fragment
 				Log.d("load", "successful");
 				
 				//Populate list view
-				ArrayAdapter<Event> listAdapter = new ArrayAdapter<Event>(getActivity(), android.R.layout.simple_list_item_1);
-				populateAdapter(listAdapter, events); 									 //Add the events to the list adapter
+				TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);
+				//populateAdapter(listAdapter, events); 									 //Add the events to the list adapter
 				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 				
 				eventList.setAdapter(listAdapter);
