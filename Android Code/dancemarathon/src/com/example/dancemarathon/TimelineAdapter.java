@@ -78,14 +78,39 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 	 */
 	private void setItemView(View itemView, int position)
 	{
+		Event e = events.get(position);
+		
 		//Get title and location text views
         TextView title = (TextView) itemView.findViewById(R.id.tlineitem_title);
         TextView location = (TextView) itemView.findViewById(R.id.tlineitem_location);
+        TextView time = (TextView) itemView.findViewById(R.id.tlineitem_startTime);
+        TextView month = (TextView) itemView.findViewById(R.id.tlineitem_month);
+        TextView day = (TextView) itemView.findViewById(R.id.tlineitem_day);
         
-        //Set text views
-        title.setText(events.get(position).getTitle());
-        location.setText("Location: " + events.get(position).getLocation());
+        //Set text views //
         
+        //Set title
+        String titleText = e.getTitle();
+        if(titleText.length() > 22)
+        	titleText = titleText.substring(0, 21);
+        title.setText(titleText);
+        
+        //Set location
+        location.setText("Location: " + e.getLocation());
+        
+        //Set time
+        String timeText = e.getT_startDate();
+        timeText = timeText.substring(timeText.length()-9, timeText.length()-3);
+        timeText = timeText.concat(" " + e.getAMOrPM(true));
+        time.setText(timeText);
+        
+        //Set month
+        String monthText = e.getMonthText(true);
+        month.setText(monthText);
+        
+        //Set day
+        String dayText = Integer.toString(e.getDay(true));
+        day.setText(dayText);
         
 	}
 

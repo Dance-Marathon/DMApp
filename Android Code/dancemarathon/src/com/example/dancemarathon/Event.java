@@ -38,6 +38,7 @@ public class Event
 	//The associated Date objects for the above timestamps
 	private Date startDate;
 	private Date endDate;
+	@SuppressWarnings("unused")
 	private Date lastMod;
 	
 	/**
@@ -228,6 +229,33 @@ public class Event
 	}
 	
 	/**
+	 * 
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return 3-character string representation of the month
+	 */
+	public String getMonthText(boolean useStartDate)
+	{
+		int month = getMonth(useStartDate);
+		
+		switch(month)
+		{
+		case 1: return "Jan";
+		case 2: return "Feb";
+		case 3: return "Mar";
+		case 4: return "Apr";
+		case 5: return "May";
+		case 6: return "Jun";
+		case 7: return "Jul";
+		case 8: return "Aug";
+		case 9: return "Sep";
+		case 10: return "Oct";
+		case 11: return "Nov";
+		case 12: return "Dec";
+		default: return "Nul";
+		}
+	}
+	
+	/**
 	 * This method gets the integer representation of the day of either the start or end date.
 	 * @param useStartDate Specify whether to use the start date or the end date
 	 * @return Integer represenation of the day for start or end date
@@ -241,7 +269,7 @@ public class Event
 		else
 			c.setTime(endDate);
 		
-		return c.get(Calendar.DAY_OF_YEAR);
+		return c.get(Calendar.DAY_OF_MONTH);
 	}
 	
 	/**
