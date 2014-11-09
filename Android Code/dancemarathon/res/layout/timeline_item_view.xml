@@ -5,21 +5,33 @@
     
     <RelativeLayout
         android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-    	android:layout_height="wrap_content">
+        android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft="12dp"
+    	android:paddingStart="12dp">
      	
         <TextView
 	        android:id="@+id/tlineitem_title"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentTop="true"
-	        android:textSize="16sp"/>
+	        android:textSize="20sp"/>
+        
     	<TextView
-       		android:id="@+id/tlineitem_location"
-       		android:layout_width="match_parent"
+    	    android:id="@+id/tlineitem_location"
+       		android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/tlineitem_title"
+	        android:layout_toRightOf="@+id/tlineitem_locIcon"
+    	    android:layout_toEndOf="@+id/tlineitem_locIcon"
+    	    android:layout_alignBottom="@+id/tlineitem_locIcon"
 	        android:textSize="12sp"/>
+    	
+    	<ImageView
+    	    android:id="@+id/tlineitem_locIcon"
+    	    android:layout_width="12sp"
+    	    android:layout_height="12sp"
+    	    android:layout_below="@+id/tlineitem_title"
+    	    android:src="@android:drawable/ic_menu_mylocation"/>
     	
     </RelativeLayout>
         

@@ -126,8 +126,7 @@ public class TimelineFragment extends Fragment
 				Log.d("load", "successful");
 				
 				//Populate list view
-				TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);
-				//populateAdapter(listAdapter, events); 									 //Add the events to the list adapter
+				TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
 				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 				
 				eventList.setAdapter(listAdapter);
@@ -149,15 +148,6 @@ public class TimelineFragment extends Fragment
 				bar.setVisibility(View.GONE);
 			}
 				
-		}
-		
-		private void populateAdapter(ArrayAdapter<Event> l, ArrayList<Event> events)
-		{
-			for(int i = 0; i < events.size(); i++)
-			{
-				Event e = events.get(i);
-				l.add(e);
-			}
 		}
 		
 		/**

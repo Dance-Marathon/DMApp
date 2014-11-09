@@ -2,6 +2,7 @@ package com.example.dancemarathon;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -207,6 +208,62 @@ public class Event
 	protected void setDescription(String description)
 	{
 		this.description = description;
+	}
+	
+	/**
+	 * This method gets the integer representation of the month of either the start or end date.
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return Integer represenation of the month for start or end date
+	 */
+	public int getMonth(boolean useStartDate)
+	{
+		Calendar c = Calendar.getInstance();
+		
+		if(useStartDate)
+			c.setTime(startDate);
+		else
+			c.setTime(endDate);
+		
+		return c.get(Calendar.MONTH);
+	}
+	
+	/**
+	 * This method gets the integer representation of the day of either the start or end date.
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return Integer represenation of the day for start or end date
+	 */
+	public int getDay(boolean useStartDate)
+	{
+		Calendar c = Calendar.getInstance();
+		
+		if(useStartDate)
+			c.setTime(startDate);
+		else
+			c.setTime(endDate);
+		
+		return c.get(Calendar.DAY_OF_YEAR);
+	}
+	
+	/**
+	 * This method gets the string representation of the AM or PM value of either the start or end date.
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return String represenation of the AM or PM value for start or end date
+	 */
+	public String getAMOrPM(boolean useStartDate)
+	{
+		Calendar c = Calendar.getInstance();
+		
+		if(useStartDate)
+			c.setTime(startDate);
+		else
+			c.setTime(endDate);
+		
+		int val =  c.get(Calendar.AM_PM);
+		
+		if(val == Calendar.AM)
+			return "AM";
+		else 
+			return "PM";
 	}
 	
 	public String toString()

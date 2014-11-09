@@ -60,19 +60,33 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 	        //Get the individual item view
 	        itemView = inflater.inflate(R.layout.timeline_item_view, parent, false);
 	        
-	        //Get title and location text views
-	        TextView title = (TextView) itemView.findViewById(R.id.tlineitem_title);
-	        TextView location = (TextView) itemView.findViewById(R.id.tlineitem_location);
+	        //Set all the values for the view
+	        setItemView(itemView, position);
 	        
-	        //Set text views
-	        title.setText(events.get(position).getTitle());
-	        location.setText("Location: " + events.get(position).getLocation());
         }
         //Else we can use the recycled view passed in as convertView
         else
         	itemView = convertView;
 
         return itemView;
+	}
+	
+	/**
+	 * This method sets the values of all the views which comprise the individual event view.
+	 * @param v The view to modify
+	 * @param position The position of the item
+	 */
+	private void setItemView(View itemView, int position)
+	{
+		//Get title and location text views
+        TextView title = (TextView) itemView.findViewById(R.id.tlineitem_title);
+        TextView location = (TextView) itemView.findViewById(R.id.tlineitem_location);
+        
+        //Set text views
+        title.setText(events.get(position).getTitle());
+        location.setText("Location: " + events.get(position).getLocation());
+        
+        
 	}
 
 }
