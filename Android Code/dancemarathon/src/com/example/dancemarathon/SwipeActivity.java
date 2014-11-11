@@ -24,7 +24,9 @@ public class SwipeActivity extends ActionBarActivity
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a 
+	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
+	 * derivative, which will keep every loaded fragment in memory. If this
+	 * becomes too memory intensive, it may be best to switch to a
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
@@ -129,7 +131,6 @@ public class SwipeActivity extends ActionBarActivity
 			return null;
 		}
 	}
-<<<<<<< HEAD
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -183,6 +184,4 @@ public class SwipeActivity extends ActionBarActivity
 
 	    startActivity(intent);
 	}
-=======
->>>>>>> FETCH_HEAD
 }
