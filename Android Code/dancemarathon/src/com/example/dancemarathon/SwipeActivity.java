@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -166,5 +168,20 @@ public class SwipeActivity extends ActionBarActivity
 			return rootView;
 		}
 
+	}
+	
+	public void openBrowser(View view){
+
+	    // Get url from tag
+	    String url = (String)view.getTag();
+
+	    Intent intent = new Intent();
+	    intent.setAction(Intent.ACTION_VIEW);
+	    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+	    // Pass the url to intent data
+	    intent.setData(Uri.parse(url));
+
+	    startActivity(intent);
 	}
 }

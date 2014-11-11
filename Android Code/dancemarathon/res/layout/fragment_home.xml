@@ -2,7 +2,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/homepage_temp"
+    android:background="@color/dm_blue_primary"
     tools:context="com.example.dancemarathon.HomeFragment" >
+    
+    <ImageView android:id="@+id/dance_marathon_header"
+        android:src="@drawable/dm_icon"
+        android:contentDescription="@string/dance_marathon"
+        android:layout_width="175dp"
+        android:layout_height="100dp" 
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_gravity="top|center"/>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/header"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="top|center" />
+    
+    <!-- DM Webpage Button -->
+	<Button android:id="@+id/website"
+	    android:layout_width="90dp"
+	    android:layout_height="40dp"
+	    android:text="@string/website" 
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="top|center"
+        android:tag="http://www.floridadm.org/"
+        android:onClick="openBrowser" /> 
 
+    <!-- Game Button -->
+    <Button android:id="@+id/game"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:text="@string/game" 
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="top|left"
+        android:tag="http://www.google.com/"
+        android:onClick="openBrowser" />
+
+    <!-- Donate Button -->
+    <Button android:id="@+id/donate"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:text="@string/donate" 
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="right"
+        android:tag="http://www.google.com/"
+        android:onClick="openBrowser" />
+
+    <!-- Facebook -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/follow_facebook"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginRight="230dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="left" />
+        
+        
+    <!-- 144 x 144 -->
+    <ImageView android:id="@+id/facebook"
+        android:src="@drawable/facebook_icon"
+        android:contentDescription="@string/facebook"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="left"
+        android:tag="http://www.facebook.com/floridaDM"
+        android:onClick="openBrowser" />
+    
+    <!-- Instagram -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/follow_instagram"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="left" />
+        
+    <!-- 512 x 512 -->
+    <ImageView
+        android:id="@+id/instagram"
+        android:contentDescription="@string/instagram"
+        android:src="@drawable/instagram_icon" 
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="325dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="left"
+        android:tag="http://www.instagram.com/dmatuf"
+        android:onClick="openBrowser" />
+    
+    <!-- Twitter -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/follow_twitter"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="right" />
+    
+    <!-- 1139 x 926 -->
+    <ImageView
+        android:id="@+id/twitter"
+        android:contentDescription="@string/twitter"
+        android:src="@drawable/twitter_icon" 
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="right"
+        android:tag="http://www.twitter.com/floridadm"
+        android:onClick="openBrowser" />
+    
+    <!-- YouTube -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/subscribe"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="right" />
+    
+    <!-- 773 x 481 -->
+    <ImageView
+        android:id="@+id/youtube"
+        android:contentDescription="@string/youtube"
+        android:src="@drawable/youtube_icon" 
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="295dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="200dp"
+        android:layout_gravity="right"
+        android:tag="http://www.youtube.com/user/UFDanceMarathon"
+        android:onClick="openBrowser" />
+
+    <!-- Kintera Login -->
+    <Button android:id="@+id/login"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:text="@string/login"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:tag="http://www.google.com/"
+        android:onClick="openBrowser" />
+    
+    <!-- Announcements -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/announcements"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center" />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/accouncements_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center" />
+        
+        
 </FrameLayout>

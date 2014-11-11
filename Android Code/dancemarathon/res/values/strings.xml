@@ -12,4 +12,23 @@
     <string name="timeline_fragment">This is where the timeline fragment will be</string>
     <string name="mtk_fragment">This is where the Meet The Kids Fragment will be</string>
 
+    <!-- Homepage Strings -->
+    <string name="dance_marathon">Dance Marathon!</string>
+    <string name="game">Game</string>
+    <string name="donate">Donate</string>
+    <string name="website">DMatUF</string>
+    <string name="header">Welcome to the University of Florida Dance Marathon app. Here you will find the latest updates on UFDM events and blahblahblah. Remember to stay FTK!</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="youtube">YouTube</string>
+    <string name="follow_facebook">Like us on Facebook!</string>
+    <string name="follow_instagram">Follow us on Instagram!</string>
+    <string name="follow_twitter">Follow us on Twitter!</string>
+    <string name="subscribe">Subscribe to our YouTube channel!</string>
+    <string name="announcements">Announcements</string>
+    <string name="accouncements_content">Content</string>
+    <string name="login">Login to See Progress</string>
+    <string name="title_activity_web_view">WebView</string>
+
 </resources>
