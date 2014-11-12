@@ -16,11 +16,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -133,7 +135,18 @@ public class TimelineFragment extends Fragment
 				bar.setVisibility(View.GONE);
 			}
 			else
+			{
 				Log.d("load", "unsuccessful");
+				//Display popup error message
+				Toast errorT = Toast.makeText(getActivity(), R.string.load_error_toast, Toast.LENGTH_LONG);
+				errorT.setGravity(Gravity.CENTER, 0, 0);
+				errorT.show();
+				
+				//Hide progress wheel
+				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
+				bar.setVisibility(View.GONE);
+			}
+				
 		}
 		
 		/**

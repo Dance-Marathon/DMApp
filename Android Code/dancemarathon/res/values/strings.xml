@@ -11,7 +11,6 @@
     <string name="title_section3">Meet The Kids</string>
     <string name="timeline_fragment">This is where the timeline fragment will be</string>
     <string name="mtk_fragment">This is where the Meet The Kids Fragment will be</string>
-
     <!-- Homepage Strings -->
     <string name="dance_marathon">Dance Marathon!</string>
     <string name="game">Game</string>
@@ -30,9 +29,7 @@
     <string name="accouncements_content">Content</string>
     <string name="login">Login to See Progress</string>
     <string name="title_activity_web_view">WebView</string>
-
     <string name="title_activity_web">WebActivity</string>
-
 	<string name="load_error_toast">Failed to Load Data!!!</string>
-
+	<string name="load_error_toast">Failed to Load Data!!!</string>
 </resources>

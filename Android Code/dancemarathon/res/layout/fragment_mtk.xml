@@ -2,14 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkGoldenrod"
+    android:background="@color/dm_orange_secondary"
     tools:context="com.example.dancemarathon.MtkFragment" >
 
-
+	<GridView 
+	    android:id="@+id/mtk_gridview"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:columnWidth="180dp"
+	    android:numColumns="2"
+	    android:verticalSpacing="10dp"
+	    android:horizontalSpacing="10dp"
+	    android:stretchMode="columnWidth"
+	    android:gravity="center"
+/>
+    
+    <!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/mtk_fragment"
         android:gravity="center" />
+        
+        -->
 
 </FrameLayout>
