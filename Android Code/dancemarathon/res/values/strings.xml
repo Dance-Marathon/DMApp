@@ -30,10 +30,9 @@
     <string name="accouncements_content">Content</string>
     <string name="login">Login to See Progress</string>
     <string name="title_activity_web_view">WebView</string>
-<<<<<<< HEAD
+
     <string name="title_activity_web">WebActivity</string>
-=======
+
 	<string name="load_error_toast">Failed to Load Data!!!</string>
->>>>>>> FETCH_HEAD
 
 </resources>
