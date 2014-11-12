@@ -2,6 +2,7 @@ package com.example.dancemarathon;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,6 +38,7 @@ public class Event
 	//The associated Date objects for the above timestamps
 	private Date startDate;
 	private Date endDate;
+	@SuppressWarnings("unused")
 	private Date lastMod;
 	
 	/**
@@ -207,6 +209,89 @@ public class Event
 	protected void setDescription(String description)
 	{
 		this.description = description;
+	}
+	
+	/**
+	 * This method gets the integer representation of the month of either the start or end date.
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return Integer represenation of the month for start or end date
+	 */
+	public int getMonth(boolean useStartDate)
+	{
+		Calendar c = Calendar.getInstance();
+		
+		if(useStartDate)
+			c.setTime(startDate);
+		else
+			c.setTime(endDate);
+		
+		return c.get(Calendar.MONTH);
+	}
+	
+	/**
+	 * 
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return 3-character string representation of the month
+	 */
+	public String getMonthText(boolean useStartDate)
+	{
+		int month = getMonth(useStartDate);
+		
+		switch(month)
+		{
+		case 1: return "Jan";
+		case 2: return "Feb";
+		case 3: return "Mar";
+		case 4: return "Apr";
+		case 5: return "May";
+		case 6: return "Jun";
+		case 7: return "Jul";
+		case 8: return "Aug";
+		case 9: return "Sep";
+		case 10: return "Oct";
+		case 11: return "Nov";
+		case 12: return "Dec";
+		default: return "Nul";
+		}
+	}
+	
+	/**
+	 * This method gets the integer representation of the day of either the start or end date.
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return Integer represenation of the day for start or end date
+	 */
+	public int getDay(boolean useStartDate)
+	{
+		Calendar c = Calendar.getInstance();
+		
+		if(useStartDate)
+			c.setTime(startDate);
+		else
+			c.setTime(endDate);
+		
+		return c.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	/**
+	 * This method gets the string representation of the AM or PM value of either the start or end date.
+	 * @param useStartDate Specify whether to use the start date or the end date
+	 * @return String represenation of the AM or PM value for start or end date
+	 */
+	public String getAMOrPM(boolean useStartDate)
+	{
+		Calendar c = Calendar.getInstance();
+		
+		if(useStartDate)
+			c.setTime(startDate);
+		else
+			c.setTime(endDate);
+		
+		int val =  c.get(Calendar.AM_PM);
+		
+		if(val == Calendar.AM)
+			return "AM";
+		else 
+			return "PM";
 	}
 	
 	public String toString()
