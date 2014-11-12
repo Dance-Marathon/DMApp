@@ -14,11 +14,9 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class SwipeActivity extends ActionBarActivity
 {
@@ -133,6 +131,7 @@ public class SwipeActivity extends ActionBarActivity
 		}
 	}
 
+<<<<<<< HEAD
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
@@ -177,6 +176,13 @@ public class SwipeActivity extends ActionBarActivity
 		// Get media type from tag
 	    String media = (String)view.getTag();
 	    
+=======
+	public void openBrowser(View view){
+
+	    // Get url from tag
+	    String url = (String)view.getTag();
+
+>>>>>>> FETCH_HEAD
 	    Intent intent = new Intent();
 	    
 	    // Associate the respective intent with the social media
@@ -204,6 +210,7 @@ public class SwipeActivity extends ActionBarActivity
 	    }
 	    startActivity(intent);
 	}
+<<<<<<< HEAD
 	
 	// Intent to open Facebook in either its respective app or the browser
 	public static Intent getOpenFacebookIntent(Context context)
@@ -269,3 +276,6 @@ public class SwipeActivity extends ActionBarActivity
 		}
 	}
 }
+=======
+}
+>>>>>>> FETCH_HEAD

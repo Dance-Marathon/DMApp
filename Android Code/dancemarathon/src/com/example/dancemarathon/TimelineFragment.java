@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -124,8 +123,7 @@ public class TimelineFragment extends Fragment
 				Log.d("load", "successful");
 				
 				//Populate list view
-				ArrayAdapter<Event> listAdapter = new ArrayAdapter<Event>(getActivity(), android.R.layout.simple_list_item_1);
-				populateAdapter(listAdapter, events); 									 //Add the events to the list adapter
+				TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
 				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 				
 				eventList.setAdapter(listAdapter);
@@ -136,15 +134,6 @@ public class TimelineFragment extends Fragment
 			}
 			else
 				Log.d("load", "unsuccessful");
-		}
-		
-		private void populateAdapter(ArrayAdapter<Event> l, ArrayList<Event> events)
-		{
-			for(int i = 0; i < events.size(); i++)
-			{
-				Event e = events.get(i);
-				l.add(e);
-			}
 		}
 		
 		/**
