@@ -2,16 +2,17 @@ package com.example.dancemarathon;
 
 import java.util.Locale;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,7 +43,7 @@ public class SwipeActivity extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe);
 		
-		//Hide actionbar
+		// Hide actionbar
 		this.getSupportActionBar().hide();
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -53,10 +54,10 @@ public class SwipeActivity extends ActionBarActivity
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
-		//Set the ViewPager to the center
+		// Set the ViewPager to the center
 		mViewPager.setCurrentItem(1, false);
 		
-		//Change PagerTabBar spacing
+		// Change PagerTabBar spacing
 		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
 		tabStrip.setTextSpacing(1);
 		tabStrip.setTextSize(TypedValue.COMPLEX_UNIT_PT, 7);
@@ -170,18 +171,101 @@ public class SwipeActivity extends ActionBarActivity
 
 	}
 	
-	public void openBrowser(View view){
-
-	    // Get url from tag
-	    String url = (String)view.getTag();
-
+	// onClick method to
+	public void openLink(View view)
+	{
+		// Get media type from tag
+	    String media = (String)view.getTag();
+	    
 	    Intent intent = new Intent();
-	    intent.setAction(Intent.ACTION_VIEW);
-	    intent.addCategory(Intent.CATEGORY_BROWSABLE);
-
-	    // Pass the url to intent data
-	    intent.setData(Uri.parse(url));
-
+	    
+	    // Associate the respective intent with the social media
+	    if (media.equals("Facebook"))
+	    {
+	    	intent = getOpenFacebookIntent(this);
+	    	
+	    }
+	    else if (media.equals("Twitter"))
+	    {
+	    	intent = getOpenTwitterIntent(this);
+	    	
+	    }
+	    else if (media.equals("Instagram"))
+	    {
+	    	intent = getOpenInstagramIntent(this);
+	    }
+	    else if (media.equals("YouTube"))
+	    {
+	    	intent = getOpenYouTubeIntent(this);
+	    }
+	    else
+	    {
+	    	intent = new Intent(Intent.ACTION_VIEW, Uri.parse(media));
+	    }
 	    startActivity(intent);
+	}
+	
+	// Intent to open Facebook in either its respective app or the browser
+	public static Intent getOpenFacebookIntent(Context context)
+	{
+		// Open Facebook page in Facebook app
+		try
+		{
+			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/116374146706"));
+		}
+		// Open Facebook page in browser
+		catch (Exception e)
+		{
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/floridaDM"));
+		}
+	}
+	
+	// Intent to open Twitter in either its respective app or the browser
+	public static Intent getOpenTwitterIntent(Context context)
+	{
+		// Open Twitter profile in Twitter app
+		try
+		{
+		    context.getPackageManager().getPackageInfo("com.twitter.android", 0);
+		    return new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=34755385"));
+		}
+		// Open Twitter profile in browser
+		catch (Exception e)
+		{
+		    return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.twitter.com/floridadm"));
+		}
+	}
+	
+	// Intent to open Instagram in either its respective app or the browser
+	public static Intent getOpenInstagramIntent(Context context)
+	{
+		// Open Instagram profile in Instagram app
+		try{
+			context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/dmatuf"));
+		}
+		// Open Instagram profile in browser
+		catch (Exception e)
+		{
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/dmatuf"));
+		}
+	}
+	
+	// Intent to open YouTube in either its respective app or the browser
+	public static Intent getOpenYouTubeIntent(Context context)
+	{
+		
+		// Open YouTube channel in YouTube app
+		try
+		{
+			context.getPackageManager().getPackageInfo("com.google.android.youtube", 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"));
+		}
+		// Open YouTube channel in browser
+		catch (Exception e)
+		{
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/user/UFDanceMarathon"));
+		}
 	}
 }

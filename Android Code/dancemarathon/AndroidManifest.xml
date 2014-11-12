@@ -33,6 +33,10 @@
             android:name=".WebView"
             android:label="@string/title_activity_web_view" >
         </activity>
+        <activity
+            android:name=".WebActivity"
+            android:label="@string/title_activity_web" >
+        </activity>
     </application>
 
 </manifest>
