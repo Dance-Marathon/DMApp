@@ -1,0 +1,25 @@
+*This is a list of tasks which need to be done.
+*Highest priority at the top, lowest priority at the bottom
+
+Status symbols
+Not Completed - (NC)
+In Progress   - (IP)
+Finished	  - (D)
+
+							Task								 | Status | Owner |
+-----------------------------------------------------------------------------------
+Get rid of military time in timeline times						     NC		Chris
+Get the proper image resources in MTK gridview					     NC     Zach
+Create activity for individual events that are shown on timeline     NC     Chris
+Add backward navigation from individual event page					 NC		Chris
+Create activity to display the individual miracle stories			 NC     Zach
+Add backward navigation from individual miracle story page			 NC     Zach
+Create class representing miracle child								 NC     Zach
+Create "user" fragment which shows user kintera info				 NC 	----
+Create "login" fragment which allows user to login					 NC		----
+Add login tab which shows (login fragment/user fragment)			 NC     ----
+Add donate tab which allows users to donate to DM					 NC     ----
+Add state preservation of data by using cache files					 NC		----
+Enable users to send add an event to their device calendar           NC     Chris
+Add sponsor list activity											 NC     ----
+Add social media tab												 NC 	----
