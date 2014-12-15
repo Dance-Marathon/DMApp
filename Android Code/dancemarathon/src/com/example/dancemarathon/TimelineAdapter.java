@@ -99,9 +99,10 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         location.setText("Location: " + e.getLocation());
         
         //Set time
-        String timeText = e.getT_startDate();
-        timeText = timeText.substring(timeText.length()-9, timeText.length()-3);
-        timeText = timeText.concat(" " + e.getAMOrPM(true));
+        String startDate = e.getT_startDate(); //Get full timestamp
+        String timeText = e.getAMPMHourVal(); //Get the value of the hour without military time
+        timeText += ":" + startDate.substring(startDate.length()-5, startDate.length()-3); //Append the minutes
+        timeText += (" " + e.getAMOrPM(true)); //Append AM/PM value
         time.setText(timeText);
         
         //Set month

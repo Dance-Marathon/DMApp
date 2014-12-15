@@ -72,6 +72,15 @@ public class Event
 
 
 	
+	protected String getAMPMHourVal()
+	{
+		String timeText = t_startDate.substring(t_startDate.length()-8, t_startDate.length()-3);
+		int hour = Integer.parseInt(timeText.split(":")[0]);
+		hour = hour % 12;
+		if(hour == 0)
+			hour = 12;
+		return Integer.toString(hour);
+	}
 	/**
 	 * This method will parse the timestamps of the event to give values to the {@link Date} objects
 	 */
