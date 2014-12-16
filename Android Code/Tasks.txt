@@ -15,6 +15,7 @@ Add backward navigation from individual event page					 NC		Chris
 Create fragment to display the individual miracle stories			 NC     Zach
 Add backward navigation from individual miracle story page			 NC     Zach
 Create class representing miracle child								 NC     Zach
+Change background color of app to white								 NC		----
 Create "user" fragment which shows user kintera info				 NC 	----
 Create "login" fragment which allows user to login					 NC		----
 Add login tab which shows (login fragment/user fragment)			 NC     ----
