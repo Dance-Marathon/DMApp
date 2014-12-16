@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="21" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,8 +26,16 @@
         </activity>
         <activity
             android:name=".SwipeActivity"
-            android:label="@string/title_activity_swipe" 
-            android:theme="@style/compatDark">
+            android:label="@string/title_activity_swipe"
+            android:theme="@style/compatDark" >
+        </activity>
+        <activity
+            android:name=".WebView"
+            android:label="@string/title_activity_web_view" >
+        </activity>
+        <activity
+            android:name=".WebActivity"
+            android:label="@string/title_activity_web" >
         </activity>
     </application>
 
