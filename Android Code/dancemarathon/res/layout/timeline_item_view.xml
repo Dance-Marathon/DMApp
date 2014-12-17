@@ -58,7 +58,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentTop="true"
 	        android:textSize="18sp"
-	        android:textColor="@color/AntiqueWhite"/>
+	        android:textColor="@color/Black"/>
         
     	<TextView
     	    android:id="@+id/tlineitem_location"

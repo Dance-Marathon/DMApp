@@ -10,12 +10,13 @@ Finished	  - (D)
 -----------------------------------------------------------------------------------
 Get rid of military time in timeline times						     D		Chris
 Get the proper image resources in MTK gridview					     NC     Zach
-Create fragment for individual events that are shown on timeline     NC     Chris
-Add backward navigation from individual event page					 NC		Chris
+Create fragment for individual events that are shown on timeline     IP     Chris
+Add backward navigation from individual event page					 IP		Chris
+Add swipe up to refresh option in timeline							 NC		Chris
 Create fragment to display the individual miracle stories			 NC     Zach
 Add backward navigation from individual miracle story page			 NC     Zach
 Create class representing miracle child								 NC     Zach
-Change background color of app to white								 NC		----
+Change background color of app to white								 IP		Chris
 Create "user" fragment which shows user kintera info				 NC 	----
 Create "login" fragment which allows user to login					 NC		----
 Add login tab which shows (login fragment/user fragment)			 NC     ----

@@ -27,7 +27,7 @@
         <activity
             android:name=".SwipeActivity"
             android:label="@string/title_activity_swipe"
-            android:theme="@style/compatDark" >
+            android:theme="@style/compatLight" >
         </activity>
         <activity
             android:name=".WebView"

@@ -15,14 +15,16 @@ import org.json.JSONException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,6 +91,7 @@ public class TimelineFragment extends Fragment
 				
 				//Parse JSON response
 				String eventsJSON = reader.readLine();
+				Log.d("json", eventsJSON);
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
 				
@@ -129,7 +132,29 @@ public class TimelineFragment extends Fragment
 				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 				
 				eventList.setAdapter(listAdapter);
-			
+				
+				//Set click listener which will replace this fragment with the event fragment on click
+				OnItemClickListener oc = new OnItemClickListener()
+				{
+
+					@Override
+					public void onItemClick(AdapterView<?> parent,
+							View selectedView, int position, long selectedViewId)
+					{
+						Event e = (Event) parent.getItemAtPosition(position);
+						EventFragment eventDetails = EventFragment.newInstance(e);
+						FragmentManager manager = getActivity().getSupportFragmentManager();
+						
+						manager.beginTransaction()
+						.replace(R.id.pager_title_strip, eventDetails)
+						.addToBackStack(null)
+						.commit();
+					}
+					
+				};
+				
+				//Add listener to listview
+				eventList.setOnItemClickListener(oc);
 				//Hide progress wheel
 				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
 				bar.setVisibility(View.GONE);
@@ -137,14 +162,17 @@ public class TimelineFragment extends Fragment
 			else
 			{
 				Log.d("load", "unsuccessful");
-				//Display popup error message
-				Toast errorT = Toast.makeText(getActivity(), R.string.load_error_toast, Toast.LENGTH_LONG);
-				errorT.setGravity(Gravity.CENTER, 0, 0);
-				errorT.show();
+				//Show error textview
+				TextView errorView = (TextView) getView().findViewById(R.id.tload_error);
+				errorView.setVisibility(View.VISIBLE);
 				
 				//Hide progress wheel
 				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
 				bar.setVisibility(View.GONE);
+				
+				//Hide listview
+				ListView eventList = (ListView) getView().findViewById(R.id.event_list);
+				eventList.setVisibility(View.GONE);
 			}
 				
 		}

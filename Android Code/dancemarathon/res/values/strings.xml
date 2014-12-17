@@ -30,6 +30,9 @@
     <string name="login">Login to See Progress</string>
     <string name="title_activity_web_view">WebView</string>
     <string name="title_activity_web">WebActivity</string>
-    <string name="load_error_toast">Failed to Load Data!!!</string>
-
+    <string name="timeline_load_error">Failed to Load Timeline</string>
+	<string name="start_time_label">Starts: </string>
+	<string name="end_time_label">Ends: </string>
+	<string name="location_label">Location: </string>
+	<string name="description_label">Description: </string>
 </resources>
