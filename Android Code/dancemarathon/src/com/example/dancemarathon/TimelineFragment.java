@@ -19,9 +19,11 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -165,6 +167,21 @@ public class TimelineFragment extends Fragment
 				//Show error textview
 				TextView errorView = (TextView) getView().findViewById(R.id.tload_error);
 				errorView.setVisibility(View.VISIBLE);
+				
+				//Show retry button
+				Button retry = (Button) getView().findViewById(R.id.retry_button);
+				//If button is click, try the load again
+				retry.setOnClickListener(new OnClickListener(){
+
+					@Override
+					public void onClick(View v)
+					{
+						loader = new EventLoader();
+						loader.execute();
+					}
+					
+				});
+				retry.setVisibility(View.VISIBLE);
 				
 				//Hide progress wheel
 				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
