@@ -103,7 +103,8 @@ public class SwipeActivity extends ActionBarActivity
 			{
 			case 0:return TimelineFragment.newInstance();
 			case 1:return HomeFragment.newInstance();
-			case 2:return MtkFragment.newInstance();
+			case 2:return LoginFragment.newInstance();
+			case 3:return MtkFragment.newInstance();
 			}
 			return null;
 		}
@@ -111,8 +112,8 @@ public class SwipeActivity extends ActionBarActivity
 		@Override
 		public int getCount()
 		{
-			// Show 3 total pages.
-			return 3;
+			// Get total number of pages
+			return 4;
 		}
 
 		@Override
@@ -124,6 +125,7 @@ public class SwipeActivity extends ActionBarActivity
 			case 0:return getString(R.string.title_section1).toUpperCase(l);
 			case 1:return getString(R.string.title_section2).toUpperCase(l);
 			case 2:return getString(R.string.title_section3).toUpperCase(l);
+			case 3:return getString(R.string.title_section4).toUpperCase(l);
 			}
 			return null;
 		}

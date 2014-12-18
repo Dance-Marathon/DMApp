@@ -8,7 +8,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_section1">Timeline</string>
     <string name="title_section2">Home</string>
-    <string name="title_section3">Meet The Kids</string>
+    <string name="title_section3">Login</string>
+    <string name="title_section4">Meet The Kids</string>
     <string name="timeline_fragment">This is where the timeline fragment will be</string>
     <string name="mtk_fragment">This is where the Meet The Kids Fragment will be</string>
     <!-- Homepage Strings -->
@@ -27,7 +28,10 @@
     <string name="subscribe">Subscribe to our channel!</string>
     <string name="announcements">Announcements</string>
     <string name="accouncements_content">Content</string>
-    <string name="login">Login to See Progress</string>
+    <string name="login_title">Login to See Progress!</string>
+    <string name="username_field">Username</string>
+    <string name="password_field">Password</string>
+    <string name="login_button_text">Login</string>
     <string name="title_activity_web_view">WebView</string>
     <string name="title_activity_web">WebActivity</string>
     <string name="timeline_load_error">Failed to Load Timeline</string>

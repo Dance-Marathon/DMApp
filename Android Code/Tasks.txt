@@ -18,8 +18,8 @@ Add backward navigation from individual miracle story page			 NC     Zach
 Create class representing miracle child								 NC     Zach
 Change background color of app to white								 D		Chris
 Create "user" fragment which shows user kintera info				 NC 	----
-Create "login" fragment which allows user to login					 NC		----
-Add login tab which shows (login fragment/user fragment)			 NC     ----
+Create "login" fragment which allows user to login					 IP		Chris
+Add login tab which shows (login fragment/user fragment)			 IP     Chris
 Create database or file on server which contains timeline			 NC  	----
 Add donate tab which allows users to donate to DM					 NC     ----
 Add state preservation of data by using cache files					 NC		----
