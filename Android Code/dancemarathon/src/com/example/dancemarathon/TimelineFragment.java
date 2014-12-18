@@ -29,7 +29,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A {@link Fragment} subclass which is responsible for displaying the timeline information. It uses
+ * an {@link AsyncTask} to load the data and then it updates the UI accordingly.
  * 
  */
 public class TimelineFragment extends Fragment
@@ -37,22 +38,30 @@ public class TimelineFragment extends Fragment
 	/**
 	 * The list of Events
 	 */
-	@SuppressWarnings("unused")
 	private ArrayList<Event> events;
 	/**
 	 * Flag stating whether or not the load operation was successful
 	 */
 	private boolean loadSuccessful;
+	/**
+	 * The loader which performs the async load operation.
+	 */
 	private EventLoader loader;
 
 	public TimelineFragment()
 	{
 		// Required empty public constructor
-		loadSuccessful = false;
-		loader = new EventLoader();
-		loader.execute(); //Perform the load operation
 	}
 
+	/**
+	 * Reset the loader so we can do another load operation.
+	 * An instance of async task may only be executed once
+	 * so we re-instantiate the loader.
+	 */
+	public void resetLoader()
+	{
+		loader = new EventLoader();
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -61,12 +70,40 @@ public class TimelineFragment extends Fragment
 		return inflater.inflate(R.layout.fragment_timeline, container, false);
 	}
 	
+	/**
+	 * This method is necessary because an empty, no argument constructor must be provided
+	 * for a fragment in Android
+	 * @return A new instance of timeline fragment that is executing the load operation
+	 */
 	public static TimelineFragment newInstance()
 	{
 		TimelineFragment f = new TimelineFragment();
+		f.loadSuccessful = false;
+		f.resetLoader();
+		f.loader.execute(); //Perform the load operation
 		return f;
 	}
 	
+	/**
+	 * @return the events
+	 */
+	public ArrayList<Event> getEvents()
+	{
+		return events;
+	}
+
+	/**
+	 * @param events the events to set
+	 */
+	public void setEvents(ArrayList<Event> events)
+	{
+		this.events = events;
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onStop()
+	 */
 	//Needed to override this method to cancel the async task if this fragment is stopped
 	public void onStop()
 	{
@@ -81,6 +118,10 @@ public class TimelineFragment extends Fragment
 	private class EventLoader extends AsyncTask<Void, Double, ArrayList<Event>>
 	{
 		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		//This method will perform the request to the web service and try to obtain the events
 		@Override
 		protected ArrayList<Event> doInBackground(Void... params)
 		{
@@ -122,6 +163,10 @@ public class TimelineFragment extends Fragment
 		}
 		
 		
+		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
 		//This method will update the UI after the load is finished.
 		protected void onPostExecute(ArrayList<Event> events)
 		{
@@ -140,6 +185,7 @@ public class TimelineFragment extends Fragment
 				{
 
 					@Override
+					//On item click, we replace the timeline fragment with the individual event fragment
 					public void onItemClick(AdapterView<?> parent,
 							View selectedView, int position, long selectedViewId)
 					{
@@ -198,11 +244,7 @@ public class TimelineFragment extends Fragment
 					}
 					
 				});
-				retry.setVisibility(View.VISIBLE);
-				
-				
-				
-				
+				retry.setVisibility(View.VISIBLE);	
 			}
 				
 		}
