@@ -67,10 +67,10 @@ public class TimelineFragment extends Fragment
 		return f;
 	}
 	
-	//Needed to override this method to cancel the async task if this fragment is destroyed
-	public void onDestroyView()
+	//Needed to override this method to cancel the async task if this fragment is stopped
+	public void onStop()
 	{
-		super.onDestroyView();
+		super.onStop();
 		loader.cancel(true);
 	}
 	
@@ -122,7 +122,7 @@ public class TimelineFragment extends Fragment
 		}
 		
 		
-		//This class will update the UI after the load is finished.
+		//This method will update the UI after the load is finished.
 		protected void onPostExecute(ArrayList<Event> events)
 		{
 			if(loadSuccessful)
@@ -165,17 +165,34 @@ public class TimelineFragment extends Fragment
 			{
 				Log.d("load", "unsuccessful");
 				//Show error textview
-				TextView errorView = (TextView) getView().findViewById(R.id.tload_error);
+				final TextView errorView = (TextView) getView().findViewById(R.id.tline_load_error);
 				errorView.setVisibility(View.VISIBLE);
 				
+				//Hide progress wheel
+				final ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
+				bar.setVisibility(View.GONE);
+				
+				//Hide listview
+				ListView eventList = (ListView) getView().findViewById(R.id.event_list);
+				eventList.setVisibility(View.GONE);
+				
 				//Show retry button
-				Button retry = (Button) getView().findViewById(R.id.retry_button);
-				//If button is click, try the load again
+				final Button retry = (Button) getView().findViewById(R.id.retry_button);
+				//If button is clicked, try the load again
 				retry.setOnClickListener(new OnClickListener(){
 
 					@Override
 					public void onClick(View v)
 					{
+						//Hide error textview
+						errorView.setVisibility(View.GONE);
+						//Hide retry button
+						retry.setVisibility(View.GONE);
+						
+						//Show progress wheel animation
+						bar.setVisibility(View.VISIBLE);
+						
+						//Execute load again
 						loader = new EventLoader();
 						loader.execute();
 					}
@@ -183,13 +200,9 @@ public class TimelineFragment extends Fragment
 				});
 				retry.setVisibility(View.VISIBLE);
 				
-				//Hide progress wheel
-				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
-				bar.setVisibility(View.GONE);
 				
-				//Hide listview
-				ListView eventList = (ListView) getView().findViewById(R.id.event_list);
-				eventList.setVisibility(View.GONE);
+				
+				
 			}
 				
 		}

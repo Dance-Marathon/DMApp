@@ -5,23 +5,10 @@
     android:background="@color/White"
     tools:context="com.example.dancemarathon.TimelineFragment" >
     
-    <ProgressBar 
-        android:id="@+id/progress_wheel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateOnly="true"
-        android:layout_gravity="center"
-        android:visibility="visible"/>
-    
-    <ListView
-        android:id="@+id/event_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:footerDividersEnabled="true"/>
     
     <!--  Error message to show -->
     <TextView
-        android:id="@+id/tload_error"
+        android:id="@+id/tline_load_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -33,15 +20,29 @@
         android:id="@+id/retry_button"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_below="@+id/tload_error"
+        android:layout_below="@+id/tline_load_error"
         android:layout_centerHorizontal="true"
         android:text="@string/retry"
         android:textColor="@color/White"
         android:textSize="12sp"
         android:background="@color/dm_blue_primary"
         android:visibility="gone"
-        android:onClick="loaderExecute"
-        />
+        android:onClick="loaderExecute"/>
+    
+    <!-- Progress wheel and List of events -->
+    <ProgressBar 
+        android:id="@+id/progress_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="true"
+        android:layout_centerInParent="true"
+        android:visibility="visible"/>
+    
+    <ListView
+        android:id="@+id/event_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:footerDividersEnabled="true"/>
         
 
 </RelativeLayout>
