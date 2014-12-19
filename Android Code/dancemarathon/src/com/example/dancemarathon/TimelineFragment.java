@@ -7,7 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,7 +130,7 @@ public class TimelineFragment extends Fragment
 			ArrayList<Event> events = new ArrayList<Event>();
 			try
 			{	
-				URL url = new URL("http://mickmaccallum.com/ian/events.php"); //The path to the webservice 
+				URL url = new URL("http://104.236.1.77/app/events.php"); //The path to the webservice 
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				
@@ -192,7 +194,22 @@ public class TimelineFragment extends Fragment
 						Event e = listAdapter.getItem(position);
 						Intent intent = new Intent(getActivity(), EventActivity.class);
 						Bundle args = new Bundle();
+						
+						//Get formatted times
+						String displayFormat = "hh:mm aa";
+				        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
+				        String stimeText = df.format(e.getStartDate());
+						String etimeText = df.format(e.getEndDate());
+						
+						//Add event information to bundle
 						args.putString("e_title", e.getTitle());
+						args.putString("e_desc", e.getDescription());
+						args.putString("e_stime", stimeText);
+						args.putString("e_etime", etimeText);
+						args.putString("e_loc", e.getLocation());
+						
+						//Add bundle to intent
+						intent.putExtras(args);
 						startActivity(intent);
 					}
 					

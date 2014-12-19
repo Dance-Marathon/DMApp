@@ -1,9 +1,11 @@
 package com.example.dancemarathon;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class EventActivity extends ActionBarActivity
 {
@@ -13,6 +15,25 @@ public class EventActivity extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event);
+		
+		//Get the textviews
+		TextView title = (TextView) findViewById(R.id.event_page_title);
+		TextView desc = (TextView) findViewById(R.id.event_page_desc);
+		TextView stime = (TextView) findViewById(R.id.event_page_stime);
+		TextView etime = (TextView) findViewById(R.id.event_page_etime);
+		TextView location = (TextView) findViewById(R.id.event_page_loc);
+		
+		//Set the textviews
+		Bundle b = getIntent().getExtras();
+		title.setText(b.getString("e_title"));
+		desc.setText(b.getString("e_desc"));
+		stime.setText(b.getString("e_stime"));
+		etime.setText(b.getString("e_etime"));
+		location.setText(b.getString("e_loc"));
+		
+		//Set action bar title
+		ActionBar bar = getSupportActionBar();
+		bar.setTitle(title.getText() + " details");
 	}
 
 	@Override
