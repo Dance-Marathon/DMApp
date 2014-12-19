@@ -24,7 +24,7 @@
       android:layout_centerHorizontal="true"
       android:text="@string/login_title"
       android:textSize="20sp"
-      android:textColor="@color/dm_orange_secondary"/>
+      android:textColor="@color/dm_orange_primary"/>
   
   <TextView 
         android:id="@+id/username_label"

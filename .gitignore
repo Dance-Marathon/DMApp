@@ -33,3 +33,5 @@ project.properties
 Android Code/dancemarathon/project.properties
 *.properties
 Android Code/dancemarathon/project.properties
+*.classpath
+Android Code/dancemarathon/.classpath

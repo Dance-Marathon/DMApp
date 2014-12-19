@@ -1,6 +1,7 @@
 package com.example.dancemarathon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -39,6 +40,20 @@ public class LoginFragment extends Fragment
 			}
 			
 		});
+		
+		v.findViewById(R.id.login_button).setOnClickListener(new OnClickListener(){
+
+			@Override
+			//Not working right now
+			public void onClick(View v)
+			{
+				Intent intent = new Intent(getActivity(), UserActivity.class);
+				startActivity(intent);
+			}
+			
+		});
+		
+	
 		return v;
 	}
 	

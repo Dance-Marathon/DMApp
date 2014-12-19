@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -175,7 +175,7 @@ public class TimelineFragment extends Fragment
 				Log.d("load", "successful");
 				
 				//Populate list view
-				TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
+				final TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
 				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 				
 				eventList.setAdapter(listAdapter);
@@ -185,18 +185,15 @@ public class TimelineFragment extends Fragment
 				{
 
 					@Override
-					//On item click, we replace the timeline fragment with the individual event fragment
+					//On item click, we start the individual event activity
 					public void onItemClick(AdapterView<?> parent,
 							View selectedView, int position, long selectedViewId)
 					{
-						Event e = (Event) parent.getItemAtPosition(position);
-						EventFragment eventDetails = EventFragment.newInstance(e);
-						FragmentManager manager = getActivity().getSupportFragmentManager();
-						
-						manager.beginTransaction()
-						.replace(R.id.pager_title_strip, eventDetails)
-						.addToBackStack(null)
-						.commit();
+						Event e = listAdapter.getItem(position);
+						Intent intent = new Intent(getActivity(), EventActivity.class);
+						Bundle args = new Bundle();
+						args.putString("e_title", e.getTitle());
+						startActivity(intent);
 					}
 					
 				};
