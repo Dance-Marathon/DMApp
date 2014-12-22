@@ -1,6 +1,8 @@
 package com.example.dancemarathon;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -99,9 +101,9 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         location.setText("Location: " + e.getLocation());
         
         //Set time
-        String timeText = e.getT_startDate();
-        timeText = timeText.substring(timeText.length()-9, timeText.length()-3);
-        timeText = timeText.concat(" " + e.getAMOrPM(true));
+        String displayFormat = "hh:mm aa";
+        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
+        String timeText = df.format(e.getStartDate());
         time.setText(timeText);
         
         //Set month

@@ -38,7 +38,6 @@ public class Event
 	//The associated Date objects for the above timestamps
 	private Date startDate;
 	private Date endDate;
-	@SuppressWarnings("unused")
 	private Date lastMod;
 	
 	/**
@@ -70,8 +69,6 @@ public class Event
 		parseTimeStamps();
 	}
 
-
-	
 	/**
 	 * This method will parse the timestamps of the event to give values to the {@link Date} objects
 	 */
@@ -272,28 +269,6 @@ public class Event
 		return c.get(Calendar.DAY_OF_MONTH);
 	}
 	
-	/**
-	 * This method gets the string representation of the AM or PM value of either the start or end date.
-	 * @param useStartDate Specify whether to use the start date or the end date
-	 * @return String represenation of the AM or PM value for start or end date
-	 */
-	public String getAMOrPM(boolean useStartDate)
-	{
-		Calendar c = Calendar.getInstance();
-		
-		if(useStartDate)
-			c.setTime(startDate);
-		else
-			c.setTime(endDate);
-		
-		int val =  c.get(Calendar.AM_PM);
-		
-		if(val == Calendar.AM)
-			return "AM";
-		else 
-			return "PM";
-	}
-	
 	public String toString()
 	{
 		String rep = "";
@@ -302,5 +277,75 @@ public class Event
 		rep = rep.concat(getT_startDate() + "\t");
 		
 		return rep;
+	}
+
+
+
+	/**
+	 * @return the timeStampFormat
+	 */
+	protected String getTimeStampFormat()
+	{
+		return timeStampFormat;
+	}
+
+
+
+	/**
+	 * @return the startDate
+	 */
+	protected Date getStartDate()
+	{
+		return startDate;
+	}
+
+
+
+	/**
+	 * @return the endDate
+	 */
+	protected Date getEndDate()
+	{
+		return endDate;
+	}
+
+
+
+	/**
+	 * @return the lastMod
+	 */
+	protected Date getLastMod()
+	{
+		return lastMod;
+	}
+
+
+
+	/**
+	 * @param startDate the startDate to set
+	 */
+	protected void setStartDate(Date startDate)
+	{
+		this.startDate = startDate;
+	}
+
+
+
+	/**
+	 * @param endDate the endDate to set
+	 */
+	protected void setEndDate(Date endDate)
+	{
+		this.endDate = endDate;
+	}
+
+
+
+	/**
+	 * @param lastMod the lastMod to set
+	 */
+	protected void setLastMod(Date lastMod)
+	{
+		this.lastMod = lastMod;
 	}
 }

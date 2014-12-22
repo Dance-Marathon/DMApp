@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
     
     <!-- Icon Section -->
     
@@ -11,10 +11,12 @@
    	    android:layout_height="50dp"
    	    android:layout_alignParentLeft="true"
    	    android:layout_alignParentStart="true"
-   	    android:paddingLeft="7dp"
-   	    android:paddingStart="7dp"
-   	    android:paddingRight="2dp"
-    	android:paddingEnd="2dp"
+   	    android:layout_marginLeft="7dp"
+   	    android:layout_marginStart="7dp"
+   	    android:layout_marginRight="2dp"
+    	android:layout_marginEnd="2dp"
+    	android:layout_marginTop="2dp"
+    	android:layout_marginBottom="2dp"
    	    android:background="@drawable/calendar_icon">
    	    
         <TextView 
@@ -58,7 +60,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentTop="true"
 	        android:textSize="18sp"
-	        android:textColor="@color/AntiqueWhite"/>
+	        android:textColor="@color/Black"/>
         
     	<TextView
     	    android:id="@+id/tlineitem_location"
@@ -90,6 +92,7 @@
    	    android:paddingEnd="7dp"
    	    android:paddingLeft="2dp"
     	android:paddingStart="2dp"
-   	    android:textSize="12sp"/>
+   	    android:textSize="12sp"
+   	    android:textColor="@color/Blue"/>
     
 </RelativeLayout>
