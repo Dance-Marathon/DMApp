@@ -28,11 +28,10 @@ public class MtkFragment extends Fragment
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
 	    gridview.setAdapter(new ImageAdapter(this.getActivity()));
-	    
 		// Inflate the layout for this fragment
 		return v;
 	}
-
+	
 	public static MtkFragment newInstance()
 	{
 		MtkFragment f = new MtkFragment();

@@ -2,6 +2,7 @@ package com.example.dancemarathon;
 
 import java.util.Locale;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -51,11 +52,11 @@ public class SwipeActivity extends ActionBarActivity
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
 		// Set the ViewPager to the center
-		mViewPager.setCurrentItem(1, false);
+		mViewPager.setCurrentItem(0, false);
 		
 		// Change PagerTabBar spacing
 		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
-		tabStrip.setTextSpacing(1);
+		tabStrip.setTextSpacing(0);
 		tabStrip.setTextSize(TypedValue.COMPLEX_UNIT_PT, 7);
 
 	}
@@ -101,8 +102,8 @@ public class SwipeActivity extends ActionBarActivity
 			// Return the fragment that corresponds to the position
 			switch (position)
 			{
-			case 0:return TimelineFragment.newInstance();
-			case 1:return HomeFragment.newInstance();
+			case 0:return HomeFragment.newInstance();
+			case 1:return TimelineFragment.newInstance();
 			case 2:return MtkFragment.newInstance();
 			}
 			return null;
@@ -129,7 +130,7 @@ public class SwipeActivity extends ActionBarActivity
 		}
 	}
 	
-	// onClick method to
+	// onClick method to open links
 	public void openLink(View view)
 	{
 		// Get media type from tag
@@ -140,13 +141,11 @@ public class SwipeActivity extends ActionBarActivity
 	    // Associate the respective intent with the social media
 	    if (media.equals("Facebook"))
 	    {
-	    	intent = getOpenFacebookIntent(this);
-	    	
+	    	intent = getOpenFacebookIntent(this);	
 	    }
 	    else if (media.equals("Twitter"))
 	    {
 	    	intent = getOpenTwitterIntent(this);
-	    	
 	    }
 	    else if (media.equals("Instagram"))
 	    {
