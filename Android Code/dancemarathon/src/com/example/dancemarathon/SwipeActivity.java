@@ -102,16 +102,9 @@ public class SwipeActivity extends ActionBarActivity
 			// Return the fragment that corresponds to the position
 			switch (position)
 			{
-<<<<<<< HEAD
 			case 0:return HomeFragment.newInstance();
 			case 1:return TimelineFragment.newInstance();
 			case 2:return MtkFragment.newInstance();
-=======
-			case 0:return TimelineFragment.newInstance();
-			case 1:return HomeFragment.newInstance();
-			case 2:return LoginFragment.newInstance();
-			case 3:return MtkFragment.newInstance();
->>>>>>> FETCH_HEAD
 			}
 			return null;
 		}
@@ -132,7 +125,6 @@ public class SwipeActivity extends ActionBarActivity
 			case 0:return getString(R.string.title_section1).toUpperCase(l);
 			case 1:return getString(R.string.title_section2).toUpperCase(l);
 			case 2:return getString(R.string.title_section3).toUpperCase(l);
-			case 3:return getString(R.string.title_section4).toUpperCase(l);
 			}
 			return null;
 		}

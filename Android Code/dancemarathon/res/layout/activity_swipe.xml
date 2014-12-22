@@ -10,13 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-<<<<<<< HEAD
         android:background="@color/dm_blue_primary"
         android:textColor="@color/dm_blue_secondary"
-=======
-        android:background="@color/dm_orange_primary"
-        android:textColor="@color/LemonChiffon"
->>>>>>> FETCH_HEAD
         android:paddingTop="4dp"
         android:paddingBottom="4dp" />
     
