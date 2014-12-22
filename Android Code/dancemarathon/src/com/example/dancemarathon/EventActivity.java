@@ -1,5 +1,6 @@
 package com.example.dancemarathon;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -31,9 +32,15 @@ public class EventActivity extends ActionBarActivity
 		etime.setText(b.getString("e_etime"));
 		location.setText(b.getString("e_loc"));
 		
-		//Set action bar title
+		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
-		bar.setTitle(title.getText() + " details");
+		bar.setTitle("Event Details");
+		
+		int color = getResources().getColor(R.color.dm_orange_primary);
+		ColorDrawable cd = new ColorDrawable();
+		cd.setColor(color);
+		bar.setBackgroundDrawable(cd);
+		
 	}
 
 	@Override

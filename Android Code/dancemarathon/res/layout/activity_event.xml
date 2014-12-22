@@ -12,21 +12,21 @@
     <!-- Event page title -->
     <TextView
         android:id="@+id/event_page_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
         android:textColor="@color/dm_blue_primary" 
         android:text=""/>
     
     <!-- Event page description -->
     <TextView
         android:id="@+id/event_page_desc"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:layout_below="@+id/event_page_title"
-        android:layout_alignLeft="@+id/event_page_title"
-        android:layout_alignStart="@+id/event_page_title"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textColor="@color/Black"
         android:text=""/>
     
      <!-- Event page start time label -->
@@ -36,8 +36,10 @@
 	     android:layout_width="wrap_content"
 	     android:layout_height="wrap_content"
 	     android:layout_below="@+id/event_page_desc"
+	     android:layout_marginTop="4dp"
 	     android:text="@string/start_time_label"
-	     android:textSize="12sp" />
+	     android:textSize="12sp"
+	     android:textColor="@color/dm_orange_primary" />
 	 
 	 <!-- Event page start time-->
 	 <TextView
@@ -48,7 +50,8 @@
         android:layout_toEndOf="@+id/event_page_stime_label"
         android:layout_alignTop="@+id/event_page_stime_label"
         android:textSize="12sp"
-        android:text=""/>
+        android:text=""
+        android:textColor="@color/Black"/>
 	 
 	 <!-- Event page end time label -->
 	 <TextView
@@ -58,8 +61,10 @@
         android:layout_below="@+id/event_page_stime_label"
         android:layout_alignLeft="@+id/event_page_stime_label"
         android:layout_alignStart="@+id/event_page_stime_label"
+        android:layout_marginTop="2dp"
         android:textSize="12sp"
-        android:text="@string/end_time_label"/>
+        android:text="@string/end_time_label"
+        android:textColor="@color/dm_orange_primary"/>
 	 
 	 <!-- Event page end time -->
 	 <TextView
@@ -70,7 +75,8 @@
         android:layout_toEndOf="@+id/event_page_etime_label"
         android:layout_alignTop="@+id/event_page_etime_label"
         android:textSize="12sp"
-        android:text=""/>
+        android:text=""
+        android:textColor="@color/Black"/>
 	 
 	 <!-- Event page location label-->
 	 <TextView
@@ -80,8 +86,10 @@
         android:layout_below="@+id/event_page_etime_label"
         android:layout_alignLeft="@+id/event_page_stime_label"
         android:layout_alignStart="@+id/event_page_stime_label"
+        android:layout_marginTop="2dp"
         android:textSize="12sp"
-        android:text="@string/location_label"/>
+        android:text="@string/location_label"
+        android:textColor="@color/dm_orange_primary" />
 	 
 	 <!-- Event page location -->
 	 <TextView
@@ -92,6 +100,7 @@
         android:layout_toEndOf="@+id/event_page_loc_label"
         android:layout_alignTop="@+id/event_page_loc_label"
         android:textSize="12sp"
-        android:text=""/>
+        android:text=""
+        android:textColor="@color/Black"/>
 	 
 </RelativeLayout>

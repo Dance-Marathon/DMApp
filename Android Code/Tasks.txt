@@ -10,8 +10,8 @@ Finished	  - (D)
 -----------------------------------------------------------------------------------
 Get rid of military time in timeline times						     D		Chris
 Get the proper image resources in MTK gridview					     NC     Zach
-Create activity for individual events that are shown on timeline     IP     Chris
-Add backward navigation from individual event page					 IP		Chris
+Create activity for individual events that are shown on timeline     D      Chris
+Add backward navigation from individual event page					 D		Chris
 Add retry button if loading timeline fails 							 D 		Chris
 Create activity to display the individual miracle stories			 NC     Zach
 Add backward navigation from individual miracle story page			 NC     Zach
@@ -19,9 +19,9 @@ Create class representing miracle child								 NC     Zach
 Change background color of app to white								 D		Chris
 Create "user" activity which shows user kintera info				 NC 	----
 Create "login" fragment which allows user to login					 D		Chris
-Add login tab which shows (login fragment/user fragment)			 D      Chris
+Add login tab which contains login fragment				  			 D      Chris
+Add check to see if login info is empty								 NC		Chris
 Populate user activity with kintera data 							 NC 	----
-Create database or file on server which contains timeline			 NC  	----
 Add donate tab which allows users to donate to DM					 NC     ----
 Add state preservation of data by using cache files					 NC		----
 Enable users to send add an event to their device calendar           NC     Chris
