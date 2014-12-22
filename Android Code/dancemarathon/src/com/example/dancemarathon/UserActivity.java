@@ -1,6 +1,8 @@
 package com.example.dancemarathon;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +15,15 @@ public class UserActivity extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user);
+		
+		//Set action bar title and color
+		ActionBar bar = getSupportActionBar();
+		bar.setTitle("Fundraising Progress");
+		
+		int color = getResources().getColor(R.color.dm_orange_primary);
+		ColorDrawable cd = new ColorDrawable();
+		cd.setColor(color);
+		bar.setBackgroundDrawable(cd);
 	}
 
 	@Override
