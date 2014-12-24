@@ -6,9 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_swipe">SwipeActivity</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_section1">Home</string>
-    <string name="title_section2">Timeline</string>
-    <string name="title_section3">Meet The Kids</string>
+    <string name="title_section1">HOME</string>
+    <string name="title_section2">CALENDAR</string>
+    <string name="title_section3">MEET THE KIDS</string>
     <string name="timeline_fragment">This is where the timeline fragment will be</string>
     <string name="mtk_fragment">This is where the Meet The Kids Fragment will be</string>
     

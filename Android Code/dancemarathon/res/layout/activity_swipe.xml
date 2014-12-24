@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@color/dm_blue_primary"
-        android:textColor="@color/dm_blue_secondary"
+        android:textColor="@color/White"
         android:paddingTop="4dp"
         android:paddingBottom="4dp" />
     

@@ -2,9 +2,9 @@ package com.example.dancemarathon;
 
 import java.util.Locale;
 
-
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +14,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,8 +43,9 @@ public class SwipeActivity extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe);
 		
-		// Hide actionbar
-		this.getSupportActionBar().hide();
+		//Hide Action Bar
+		getSupportActionBar().hide();
+		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -51,10 +55,10 @@ public class SwipeActivity extends ActionBarActivity
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
-		// Set the ViewPager to the center
-		mViewPager.setCurrentItem(0, false);
+		// Set the ViewPager to Home
+		mViewPager.setCurrentItem(1, false);
 		
-		// Change PagerTabBar spacing
+		// Change PagerTabStrip spacing
 		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
 		tabStrip.setTextSpacing(0);
 		tabStrip.setTextSize(TypedValue.COMPLEX_UNIT_PT, 7);
@@ -102,9 +106,10 @@ public class SwipeActivity extends ActionBarActivity
 			// Return the fragment that corresponds to the position
 			switch (position)
 			{
-			case 0:return HomeFragment.newInstance();
-			case 1:return TimelineFragment.newInstance();
-			case 2:return MtkFragment.newInstance();
+			case 0:return new Fragment(); //Return blank fragment because this will be covered by nav drawer
+			case 1:return HomeFragment.newInstance();
+			case 2:return TimelineFragment.newInstance();
+			case 3:return MtkFragment.newInstance();
 			}
 			return null;
 		}
@@ -119,12 +124,21 @@ public class SwipeActivity extends ActionBarActivity
 		@Override
 		public CharSequence getPageTitle(int position)
 		{
+			Drawable drawerIcon = getResources().getDrawable(R.drawable.ic_drawer);
+			SpannableStringBuilder sb = new SpannableStringBuilder("  "); 
+
+		    drawerIcon.setBounds(0, 0, drawerIcon.getIntrinsicWidth(), drawerIcon.getIntrinsicHeight()); 
+		    ImageSpan span = new ImageSpan(drawerIcon, ImageSpan.ALIGN_BASELINE); 
+		    sb.setSpan(span, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); 
+		   
+		    
 			Locale l = Locale.getDefault();
 			switch (position)
 			{
-			case 0:return getString(R.string.title_section1).toUpperCase(l);
-			case 1:return getString(R.string.title_section2).toUpperCase(l);
-			case 2:return getString(R.string.title_section3).toUpperCase(l);
+			case 0: return sb;
+			case 1:return getString(R.string.title_section1).toUpperCase(l);
+			case 2:return getString(R.string.title_section2).toUpperCase(l);
+			case 3:return getString(R.string.title_section3).toUpperCase(l);
 			}
 			return null;
 		}
