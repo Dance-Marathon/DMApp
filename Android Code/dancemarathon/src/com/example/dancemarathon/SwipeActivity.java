@@ -13,14 +13,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class SwipeActivity extends ActionBarActivity
 {
@@ -36,16 +42,11 @@ public class SwipeActivity extends ActionBarActivity
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	DrawerLayout mDrawerLayout;
+	ListView mDrawerList;
+	private String[] mOtherOptions;
+	private void setUpPagers()
 	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_swipe);
-		
-		//Hide Action Bar
-		getSupportActionBar().hide();
-		
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -62,7 +63,87 @@ public class SwipeActivity extends ActionBarActivity
 		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
 		tabStrip.setTextSpacing(0);
 		tabStrip.setTextSize(TypedValue.COMPLEX_UNIT_PT, 7);
+	}
+	
+	private void setUpNavDrawer()
+	{
+		 mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+	     mDrawerList = (ListView) findViewById(R.id.left_drawer);
+	     mOtherOptions = getResources().getStringArray(R.array.navList);
+	     
+	     // Set the adapter for the list view
+	     mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+	           R.layout.nav_drawer_item, R.id.nav_item, mOtherOptions));
+	     // Set the list's click listener
+	     //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+	     
+	     mDrawerLayout.setDrawerListener(new DrawerListener(){
 
+			@Override
+			public void onDrawerClosed(View arg0)
+			{
+			}
+
+			@Override
+			public void onDrawerOpened(View arg0)
+			{
+				// TODO Auto-generated method stub
+				mViewPager.setCurrentItem(1, false);
+			}
+
+			@Override
+			public void onDrawerSlide(View arg0, float arg1)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onDrawerStateChanged(int arg0)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+	    	 
+	     });
+	}
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_swipe);
+		
+		//Hide Action Bar
+		getSupportActionBar().hide();
+		
+		setUpPagers();
+		setUpNavDrawer();
+
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
+
+			@Override
+			public void onPageScrollStateChanged(int arg0)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onPageSelected(int pos)
+			{
+				if(pos == 0)
+					mDrawerLayout.openDrawer(Gravity.START);
+			}
+			
+		});
 	}
 
 	@Override

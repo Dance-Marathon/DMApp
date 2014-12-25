@@ -11,6 +11,16 @@
     <string name="title_section3">MEET THE KIDS</string>
     <string name="timeline_fragment">This is where the timeline fragment will be</string>
     <string name="mtk_fragment">This is where the Meet The Kids Fragment will be</string>
+    <string name="load_error_toast">Failed to Load Data!!!</string>
+    <string name="timeline_load_error">Failed to Load Timeline</string>
+    <string name="start_time_label">Starts: </string>
+    <string name="end_time_label">Ends: </string>
+    <string name="location_label">Location: </string>
+    <string name="description_label">Description: </string>
+    <string name="retry">Retry</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_event">EventActivity</string>
     
     <!-- Homepage Strings -->
     <string name="dance_marathon">Dance Marathon!</string>
@@ -34,15 +44,11 @@
     <string name="login_button_text">Login</string>
     <string name="title_activity_web_view">WebView</string>
     <string name="title_activity_web">WebActivity</string>
-	<string name="load_error_toast">Failed to Load Data!!!</string>
-    <string name="timeline_load_error">Failed to Load Timeline</string>
-    <string name="start_time_label">Starts: </string>
-    <string name="end_time_label">Ends: </string>
-    <string name="location_label">Location: </string>
-    <string name="description_label">Description: </string>
-    <string name="retry">Retry</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_user">UserActivity</string>
-    <string name="title_activity_event">EventActivity</string>
-
+	
+    <!-- Navigation Drawer List -->
+    <string-array name="navList">
+        <item>Login</item>
+        <item>Sponsors</item>
+        <item>Social Media</item>
+    </string-array>
 </resources>

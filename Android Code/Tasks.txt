@@ -19,7 +19,7 @@ Create class representing miracle child								 NC     Zach
 Change background color of app to white								 D		Chris
 Create "user" activity which shows user kintera info				 NC 	----
 Create "login" fragment which allows user to login					 D		Chris
-Add login tab which contains login fragment				  			 D      Chris
+Add navigation drawer for other options					  			 NC     Chris
 Add check to see if login info is empty								 NC		Chris
 Populate user activity with kintera data 							 NC 	----
 Add donate tab which allows users to donate to DM					 NC     ----
