@@ -10,14 +10,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.CalendarContract.EventsEntity;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -193,7 +190,7 @@ public class TimelineFragment extends Fragment
 							View selectedView, int position, long selectedViewId)
 					{
 						Event e = listAdapter.getItem(position);
-						Intent intent = new Intent(getActivity(), EventsEntity.class);
+						Intent intent = new Intent(getActivity(), EventActivity.class);
 						Bundle args = new Bundle();
 						
 						//Get formatted times

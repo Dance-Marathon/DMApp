@@ -25,6 +25,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -75,7 +77,21 @@ public class SwipeActivity extends ActionBarActivity
 	     mDrawerList.setAdapter(new ArrayAdapter<String>(this,
 	           R.layout.nav_drawer_item, R.id.nav_item, mOtherOptions));
 	     // Set the list's click listener
-	     //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+	     mDrawerList.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				// TODO Auto-generated method stub
+				switch(position)
+				{
+				case 0:openLoginActivity();
+				}
+				
+			}
+	    	 
+	     });
 	     
 	     mDrawerLayout.setDrawerListener(new DrawerListener(){
 
@@ -168,6 +184,11 @@ public class SwipeActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void openLoginActivity()
+	{
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
+	}
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.

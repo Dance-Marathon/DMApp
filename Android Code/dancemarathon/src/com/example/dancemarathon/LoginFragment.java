@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,8 +48,26 @@ public class LoginFragment extends Fragment
 			//Not working right now
 			public void onClick(View v)
 			{
-				Intent intent = new Intent(getActivity(), UserActivity.class);
-				startActivity(intent);
+				if(formValid())
+				{
+					Intent intent = new Intent(getActivity(), UserActivity.class);
+					startActivity(intent);
+				}
+				else
+				{
+					//Show error dialog
+				}
+			}
+			
+			private Boolean formValid()
+			{
+				int uSize = ((EditText) getView().findViewById(R.id.username_field)).getText().length();
+				int pSize = ((EditText) getView().findViewById(R.id.password_field)).getText().length();
+				if(uSize > 0 && pSize > 0)
+					return true;
+				else
+					return false;
+				
 			}
 			
 		});
