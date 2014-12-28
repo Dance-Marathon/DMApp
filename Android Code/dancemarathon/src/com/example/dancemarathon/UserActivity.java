@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +17,8 @@ public class UserActivity extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user);
 		
+		KinteraUser user = getIntent().getExtras().getParcelable("user");
+		Log.d("User", user.realName);
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle("Fundraising Progress");

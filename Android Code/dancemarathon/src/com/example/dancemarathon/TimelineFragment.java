@@ -134,7 +134,7 @@ public class TimelineFragment extends Fragment
 				
 				//Parse JSON response
 				String eventsJSON = reader.readLine();
-				Log.d("json", eventsJSON);
+				//Log.d("json", eventsJSON);
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
 				

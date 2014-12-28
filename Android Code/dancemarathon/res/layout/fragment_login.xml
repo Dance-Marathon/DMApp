@@ -84,6 +84,16 @@
         android:text="@string/login_button_text"
         android:textColor="@color/White"
         android:background="@color/dm_blue_primary"/>
+     
+     <ProgressBar 
+        android:id="@+id/login_loading_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="true"
+        android:layout_below="@+id/password_field"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>
 </RelativeLayout>
