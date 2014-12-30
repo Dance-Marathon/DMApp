@@ -46,7 +46,63 @@ public class SwipeActivity extends ActionBarActivity
 	ViewPager mViewPager;
 	DrawerLayout mDrawerLayout;
 	ListView mDrawerList;
+	KinteraUser user;
 	private String[] mOtherOptions;
+	static final int GET_USER_REQUEST = 1;
+	
+	//These methods allow us to maintain the state of the user//
+	public void onSaveInstanceState(Bundle savedInstanceState)
+	{
+		super.onSaveInstanceState(savedInstanceState);
+		savedInstanceState.putParcelable("user", user);
+	}
+	
+	public void onRestoreInstanceState(Bundle savedInstanceState)
+	{
+		super.onRestoreInstanceState(savedInstanceState);
+		//Get user from savedInstanceState
+		user = savedInstanceState.getParcelable("user");
+	}
+	//
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_swipe);
+		
+		//Hide Action Bar
+		getSupportActionBar().hide();
+		
+		setUpPagers();
+		setUpNavDrawer();
+		
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
+
+			@Override
+			public void onPageScrollStateChanged(int arg0)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onPageSelected(int pos)
+			{
+				if(pos == 0)
+					mDrawerLayout.openDrawer(Gravity.START);
+			}
+			
+		});
+	}
+	
 	private void setUpPagers()
 	{
 		// Create the adapter that will return a fragment for each of the three
@@ -86,7 +142,7 @@ public class SwipeActivity extends ActionBarActivity
 				// TODO Auto-generated method stub
 				switch(position)
 				{
-				case 0:openLoginActivity();
+				case 2:openFundraisingActivity();
 				}
 				
 			}
@@ -125,44 +181,6 @@ public class SwipeActivity extends ActionBarActivity
 	}
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_swipe);
-		
-		//Hide Action Bar
-		getSupportActionBar().hide();
-		
-		setUpPagers();
-		setUpNavDrawer();
-
-		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
-
-			@Override
-			public void onPageScrollStateChanged(int arg0)
-			{
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2)
-			{
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onPageSelected(int pos)
-			{
-				if(pos == 0)
-					mDrawerLayout.openDrawer(Gravity.START);
-			}
-			
-		});
-	}
-
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -184,10 +202,37 @@ public class SwipeActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void openLoginActivity()
+	/**
+	 * This method handles opening of the my fundraising progress activity.
+	 * If a user has been defined so far, then we open the user activity.
+	 * Else, the login activity is opened
+	 */
+	private void openFundraisingActivity()
 	{
-		Intent intent = new Intent(this, LoginActivity.class);
-		startActivity(intent);
+		if(user == null)
+		{
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivityForResult(intent, GET_USER_REQUEST);
+		}
+		else
+		{
+			Intent intent = new Intent(this, UserActivity.class);
+			Bundle b = new Bundle();
+			b.putParcelable("user", user);
+			intent.putExtras(b);
+			startActivity(intent);
+		}
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if(requestCode == GET_USER_REQUEST)
+		{
+			if(resultCode == RESULT_OK)
+			{
+				user = data.getExtras().getParcelable("user");
+			}
+		}
 	}
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

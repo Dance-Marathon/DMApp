@@ -9,10 +9,147 @@
     android:background="@color/White"
     tools:context="com.example.dancemarathon.UserActivity" >
 
-     <TextView
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      	android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/user_title_vertical_margin"
+        android:layout_marginTop="@dimen/user_title_vertical_margin"
+        android:text="Christopher Whitten"
+        android:textSize="20sp"
+        android:textColor="@color/dm_blue_primary"/>
+    
+    <View 
+        android:id="@+id/divider_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:text="This is where the user fragment will be." />
+        android:layout_height="1dp"
+        android:layout_below="@+id/user_name"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_marginRight="@dimen/user_title_horizontal_margin"
+        android:background="#f6f6f6"/>
+    
+    <!-- Goal -->
+    <RelativeLayout
+        android:id="@+id/goal_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fundraising_field_vertical_margin"
+        android:layout_marginTop="@dimen/fundraising_field_vertical_margin"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_below="@+id/divider_1">
+	     <TextView
+	        android:id="@+id/user_goal_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:text="@string/goal_label" 
+	        android:textColor="@color/gray"
+	     	android:textSize="17sp"/>
+	     <TextView
+	        android:id="@+id/user_goal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:layout_below="@+id/user_goal_label"
+	        android:textColor="@color/Black"
+	        android:textSize="17sp"/>
+     </RelativeLayout>
+     
+    <View 
+        android:id="@+id/divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/goal_view"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_marginRight="@dimen/user_title_horizontal_margin"
+        android:background="#f6f6f6"/>
+    
+     <!-- Raised -->
+     <RelativeLayout
+        android:id="@+id/raised_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fundraising_field_vertical_margin"
+        android:layout_marginTop="@dimen/fundraising_field_vertical_margin"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_below="@+id/divider_2">
+	     <TextView
+	        android:id="@+id/user_raised_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:text="@string/raised_label" 
+	        android:textColor="@color/gray"
+	        android:textSize="17sp"/>
+	     
+	     <TextView
+	        android:id="@+id/user_raised"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:layout_below="@+id/user_raised_label"
+	        android:textColor="@color/Black"
+	        android:textSize="17sp"/>
+     </RelativeLayout>
+     
+     <View 
+        android:id="@+id/divider_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/raised_view"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_marginRight="@dimen/user_title_horizontal_margin"
+        android:background="#f6f6f6"/>
+     
+     <!-- Progress -->
+      <RelativeLayout
+        android:id="@+id/progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fundraising_field_vertical_margin"
+        android:layout_marginTop="@dimen/fundraising_field_vertical_margin"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_below="@+id/divider_3">
+	     <TextView
+	        android:id="@+id/user_progress_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:text="@string/progress_label" 
+	        android:textColor="@color/gray"
+	        android:textSize="17sp"/>
+	     
+	     <TextView
+	        android:id="@+id/user_progress"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true"
+	        android:layout_below="@+id/user_progress_label"
+	        android:textColor="@color/Black"
+	        android:textSize="17sp"/>
+     </RelativeLayout>
+     
+      <View 
+        android:id="@+id/divider_4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/progress_view"
+        android:layout_alignLeft="@+id/user_name"
+        android:layout_alignStart="@+id/user_name"
+        android:layout_marginRight="@dimen/user_title_horizontal_margin"
+        android:background="#f6f6f6"/>
 
 </RelativeLayout>

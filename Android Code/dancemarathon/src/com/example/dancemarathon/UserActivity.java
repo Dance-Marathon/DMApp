@@ -1,12 +1,12 @@
 package com.example.dancemarathon;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class UserActivity extends ActionBarActivity
 {
@@ -17,8 +17,6 @@ public class UserActivity extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user);
 		
-		KinteraUser user = getIntent().getExtras().getParcelable("user");
-		Log.d("User", user.realName);
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle("Fundraising Progress");
@@ -27,6 +25,22 @@ public class UserActivity extends ActionBarActivity
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
+		
+		KinteraUser user = getIntent().getExtras().getParcelable("user");
+		//Log.d("User", user.realName);
+		
+		//Set textviews
+		TextView name = (TextView) findViewById(R.id.user_name);
+		TextView goal = (TextView) findViewById(R.id.user_goal);
+		TextView raised = (TextView) findViewById(R.id.user_raised);
+		TextView progress = (TextView) findViewById(R.id.user_progress);
+		
+		name.setText(user.realName);
+		goal.setText("$" + Integer.toString((int) user.fundGoal));
+		raised.setText("$" + Integer.toString((int) user.fundRaised));
+		int percentRaised = (int) ((user.fundRaised / user.fundGoal) * 100);
+		progress.setText(Integer.toString(percentRaised)+ "%");
+		
 	}
 
 	@Override

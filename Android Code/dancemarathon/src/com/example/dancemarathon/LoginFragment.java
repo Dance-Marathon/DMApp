@@ -105,7 +105,6 @@ public class LoginFragment extends Fragment
 			
 		});
 		
-	
 		return v;
 	}
 	
@@ -206,15 +205,7 @@ public class LoginFragment extends Fragment
 			makeToast(params[0]);
 		}
 		protected void onPostExecute(KinteraUser user)
-		{
-			//Hide the indeterminate progress wheel
-			ProgressBar bar = (ProgressBar) getView().findViewById(R.id.login_loading_wheel);
-			bar.setVisibility(View.GONE);
-			
-			//Show the login button
-			Button loginB = (Button) getView().findViewById(R.id.login_button);
-			loginB.setVisibility(View.VISIBLE);
-			
+		{	
 			//If the load was successful, start the user activity
 			if(loadSuccessful)
 			{
@@ -223,7 +214,22 @@ public class LoginFragment extends Fragment
 				b.putParcelable("user", user);
 				intent.putExtras(b);
 				startActivity(intent);
+				
+				//Pass back user data
+				getActivity().setResult(Activity.RESULT_OK, intent);
 			}		
+			else
+			{
+				//Cancel the pass back
+				getActivity().setResult(Activity.RESULT_CANCELED, new Intent());
+			}
+			//Hide the indeterminate progress wheel
+			ProgressBar bar = (ProgressBar) getView().findViewById(R.id.login_loading_wheel);
+			bar.setVisibility(View.GONE);
+			
+			//Show the login button
+			Button loginB = (Button) getView().findViewById(R.id.login_button);
+			loginB.setVisibility(View.VISIBLE);
 		}
 		
 		private KinteraUser parseUserJson(JSONObject o) throws JSONException

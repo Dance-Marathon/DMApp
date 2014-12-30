@@ -17,15 +17,16 @@ Create activity to display the individual miracle stories			 NC     Zach
 Add backward navigation from individual miracle story page			 NC     Zach
 Create class representing miracle child								 NC     Zach
 Change background color of app to white								 D		Chris
-Create "user" activity which shows user kintera info				 NC 	Chris
+Create "user" activity which shows user kintera info				 D   	Chris
 Create "login" fragment which allows user to login					 D		Chris
 Add navigation drawer for other options					  			 D      Chris
 Add check to see if login info is empty								 D		Chris
-Populate user activity with kintera data 							 NC 	----
+Populate user activity with kintera data 							 D  	Chris
 Create fundraising thermometer view									 NC     Chris
 Make individual event activity prettier 							 NC		----
 Add state preservation of data by using cache files					 NC		----
 Enable users to send add an event to their device calendar           NC     Chris
+Delete events that have already occurred from the timeline			 NC		----
 Add sponsor list activity											 NC     Zach
 Implement google analytics											 NC		----
 Add social media activity											 NC 	----
