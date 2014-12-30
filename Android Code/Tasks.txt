@@ -24,7 +24,8 @@ Add check to see if login info is empty								 D		Chris
 Populate user activity with kintera data 							 D  	Chris
 Create fundraising thermometer view									 NC     Chris
 Make individual event activity prettier 							 NC		----
-Add state preservation of data by using cache files					 NC		----
+Add state preservation of user data by using cache files			 D  	Chris
+Add state preservation of timeline data with cache					 NC	    ----
 Enable users to send add an event to their device calendar           NC     Chris
 Delete events that have already occurred from the timeline			 NC		----
 Add sponsor list activity											 NC     Zach

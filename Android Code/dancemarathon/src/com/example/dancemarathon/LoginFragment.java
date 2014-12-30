@@ -217,12 +217,17 @@ public class LoginFragment extends Fragment
 				
 				//Pass back user data
 				getActivity().setResult(Activity.RESULT_OK, intent);
-			}		
+				
+				//Write user data to cache
+				CacheManager.clearCacheFile(getActivity(), "user");
+				CacheManager.writeObjectToCacheFile(getActivity(), user, "user");
+			}
 			else
 			{
 				//Cancel the pass back
 				getActivity().setResult(Activity.RESULT_CANCELED, new Intent());
 			}
+			
 			//Hide the indeterminate progress wheel
 			ProgressBar bar = (ProgressBar) getView().findViewById(R.id.login_loading_wheel);
 			bar.setVisibility(View.GONE);
