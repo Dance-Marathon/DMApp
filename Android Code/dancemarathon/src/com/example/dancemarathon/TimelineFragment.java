@@ -133,12 +133,13 @@ public class TimelineFragment extends Fragment
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.Fragment#onStop()
 	 */
-	//Needed to override this method to cancel the async task if this fragment is stopped
+	//Needed to override this method to cancel the refresh if this fragment is stopped
 	public void onStop()
 	{
 		super.onStop();
 		loader.cancel(true);
-		
+		removeHazyForeground(getView());
+		((SwipeRefreshLayout) getView().findViewById(R.id.event_list_container)).setRefreshing(false);
 	}
 	
 	/**
@@ -265,6 +266,10 @@ public class TimelineFragment extends Fragment
 		toast.show();
 	}
 	
+	/**
+	 * Shows a hazy view over all the other views
+	 * @param v The container view
+	 */
 	private void showHazyForeground(View v)
 	{
 		View hazyView = v.findViewById(R.id.hazy_foreground);
@@ -352,7 +357,7 @@ public class TimelineFragment extends Fragment
 					isRefreshing = false;
 					l.setRefreshing(false);
 					removeHazyForeground(getView());
-					eventList.setEnabled(true);
+					eventList.setEnabled(true); //Enable eventlist
 				}
 			}
 			else
@@ -364,7 +369,7 @@ public class TimelineFragment extends Fragment
 					isRefreshing = false;
 					l.setRefreshing(false);
 					removeHazyForeground(getView());
-					eventList.setEnabled(true);
+					eventList.setEnabled(true);// Enable eventlist
 				}
 				else
 					showLoadErrorPage(getView());
