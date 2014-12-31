@@ -27,7 +27,7 @@
 	<string name="raised_label">Raised</string>
 	<string name="progress_label">Progress</string>
 	<string name="page_button_text">My Kintera Page</string>
-	
+	<string name="logout">Logout</string>
     <!-- Homepage Strings -->
     <string name="dance_marathon">Dance Marathon!</string>
     <string name="game">Game</string>

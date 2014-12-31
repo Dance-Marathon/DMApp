@@ -1,5 +1,7 @@
 package com.example.dancemarathon;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
@@ -9,7 +11,7 @@ import android.view.MenuItem;
 
 public class LoginActivity extends ActionBarActivity
 {
-	
+	public static int IS_USER_STILL_LOGGED_IN = 5;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -46,5 +48,16 @@ public class LoginActivity extends ActionBarActivity
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode)
+	{
+		if(requestCode == LoginFragment.IS_USER_STILL_LOGGED_IN)
+		{
+			if(resultCode == Activity.RESULT_CANCELED)
+			{
+				setResult(Activity.RESULT_CANCELED, new Intent());
+			}
+		}
 	}
 }

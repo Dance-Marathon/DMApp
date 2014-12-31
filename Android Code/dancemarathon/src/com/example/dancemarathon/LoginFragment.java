@@ -32,6 +32,7 @@ import android.widget.Toast;
  */
 public class LoginFragment extends Fragment
 {
+	public static int IS_USER_STILL_LOGGED_IN = 5;
 
 	public LoginFragment()
 	{
@@ -213,7 +214,7 @@ public class LoginFragment extends Fragment
 				Bundle b = new Bundle();
 				b.putParcelable("user", user);
 				intent.putExtras(b);
-				startActivity(intent);
+				startActivityForResult(intent, LoginFragment.IS_USER_STILL_LOGGED_IN);
 				
 				//Pass back user data
 				getActivity().setResult(Activity.RESULT_OK, intent);
@@ -249,4 +250,6 @@ public class LoginFragment extends Fragment
 			return user;
 		}
 	}
+	
+	
 }

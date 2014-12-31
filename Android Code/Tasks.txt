@@ -26,8 +26,9 @@ Create fundraising thermometer view									 NC     Chris
 Make individual event activity prettier 							 NC		----
 Add state preservation of user data by using cache files			 D  	Chris
 Add state preservation of timeline data with cache					 D	    Chris
-Add logout button on user activity									 NC		----
-Enable users to send add an event to their device calendar           NC     Chris
+Allow users to refresh timeline data								 D 		Chris
+Add logout button on user activity									 D		Chris
+Create service to send notifications when events happen	             NC     Chris
 Add sponsor list activity											 NC     Zach
 Make everything their proper fonts									 NC		----
 Implement google analytics											 NC		----

@@ -9,6 +9,26 @@
     android:background="@color/White"
     tools:context="com.example.dancemarathon.UserActivity" >
 
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginEnd="2dp"
+        android:text="@string/logout"
+        android:textSize="12sp"
+        android:textColor="@color/White"
+        android:background="@drawable/blue_rounded_button"
+        android:minHeight="25dp"
+        android:minWidth="50dp"
+        android:maxHeight="40dp"
+        android:maxWidth="80dp"
+        android:onClick="logout"/>
+    
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
@@ -16,6 +36,7 @@
       	android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/user_title_vertical_margin"
         android:layout_marginTop="@dimen/user_title_vertical_margin"
+        android:layout_below="@+id/logout_button"
         android:text="Christopher Whitten"
         android:textSize="20sp"
         android:textColor="@color/dm_blue_primary"/>
@@ -164,6 +185,7 @@
         android:layout_below="@+id/divider_4"
         android:text="@string/page_button_text"
         android:textColor="@color/White"
-        android:background="@drawable/orange_rounded_button"/>
+        android:background="@drawable/orange_rounded_button"
+        style="?android:attr/buttonStyleSmall"/>
 	
 </RelativeLayout>

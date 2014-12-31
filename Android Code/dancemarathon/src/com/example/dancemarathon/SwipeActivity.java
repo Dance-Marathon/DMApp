@@ -214,7 +214,7 @@ public class SwipeActivity extends ActionBarActivity
 			Bundle b = new Bundle();
 			b.putParcelable("user", user);
 			intent.putExtras(b);
-			startActivity(intent);
+			startActivityForResult(intent, GET_USER_REQUEST);
 		}
 		else
 		{
@@ -230,6 +230,11 @@ public class SwipeActivity extends ActionBarActivity
 			if(resultCode == RESULT_OK)
 			{
 				user = data.getExtras().getParcelable("user");
+			}
+			else if(resultCode == RESULT_CANCELED)
+			{
+				user = null;
+				CacheManager.clearCacheFile(this, "user");
 			}
 		}
 	}

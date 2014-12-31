@@ -56,7 +56,11 @@ public class UserActivity extends ActionBarActivity
 			}
 		});
 	}
-
+	public void logout(View v)
+	{
+		this.setResult(RESULT_CANCELED);
+		this.finish();
+	}
 	public void openKinteraPage(String url)
 	{
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
