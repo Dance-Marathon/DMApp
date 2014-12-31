@@ -25,4 +25,10 @@ public class MtkProfile extends Fragment
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.fragment_mtk_profile, container, false);
 	}
+	
+	public static MtkProfile newInstance()
+	{
+		MtkProfile f = new MtkProfile();
+		return f;
+	}
 }
