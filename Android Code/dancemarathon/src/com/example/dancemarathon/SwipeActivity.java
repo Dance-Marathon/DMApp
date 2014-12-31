@@ -48,7 +48,7 @@ public class SwipeActivity extends ActionBarActivity
 	ListView mDrawerList;
 	KinteraUser user;
 	private String[] mOtherOptions;
-	static final int GET_USER_REQUEST = 1;
+    static final int GET_USER_REQUEST = 1;
 	
 	//These methods allow us to maintain the state of the user//
 	public void onSaveInstanceState(Bundle savedInstanceState)
@@ -64,7 +64,6 @@ public class SwipeActivity extends ActionBarActivity
 		user = savedInstanceState.getParcelable("user");
 	}
 	//
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -76,7 +75,7 @@ public class SwipeActivity extends ActionBarActivity
 		
 		setUpPagers();
 		setUpNavDrawer();
-		
+		user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
 
 			@Override
@@ -214,18 +213,18 @@ public class SwipeActivity extends ActionBarActivity
 	 */
 	private void openFundraisingActivity()
 	{
-		if(user == null)
-		{
-			Intent intent = new Intent(this, LoginActivity.class);
-			startActivityForResult(intent, GET_USER_REQUEST);
-		}
-		else
+		if(user instanceof KinteraUser)
 		{
 			Intent intent = new Intent(this, UserActivity.class);
 			Bundle b = new Bundle();
 			b.putParcelable("user", user);
 			intent.putExtras(b);
 			startActivity(intent);
+		}
+		else
+		{
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivityForResult(intent, GET_USER_REQUEST);
 		}
 	}
 	
@@ -260,7 +259,7 @@ public class SwipeActivity extends ActionBarActivity
 			{
 			case 0:return new Fragment(); //Return blank fragment because this will be covered by nav drawer
 			case 1:return HomeFragment.newInstance();
-			case 2:return TimelineFragment.newInstance();
+			case 2:return TimelineFragment.newInstance(SwipeActivity.this);
 			case 3:return MtkFragment.newInstance();
 			}
 			return null;

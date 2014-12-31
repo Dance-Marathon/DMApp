@@ -1,5 +1,7 @@
 package com.example.dancemarathon;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,8 +9,12 @@ import android.os.Parcelable;
  * @author Chris
  * This class represents the kintera user
  */
-public class KinteraUser implements Parcelable
+public class KinteraUser implements Parcelable, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String userName;
 	public String realName;
 	public String pageURL;
