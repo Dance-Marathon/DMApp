@@ -25,10 +25,11 @@ Populate user activity with kintera data 							 D  	Chris
 Create fundraising thermometer view									 NC     Chris
 Make individual event activity prettier 							 NC		----
 Add state preservation of user data by using cache files			 D  	Chris
-Add state preservation of timeline data with cache					 NC	    ----
+Add state preservation of timeline data with cache					 D	    Chris
+Add logout button on user activity									 NC		----
 Enable users to send add an event to their device calendar           NC     Chris
-Delete events that have already occurred from the timeline			 NC		----
 Add sponsor list activity											 NC     Zach
+Make everything their proper fonts									 NC		----
 Implement google analytics											 NC		----
 Add social media activity											 NC 	----
 Possibly reduce size of image assests using png compressor   		 NC 	----

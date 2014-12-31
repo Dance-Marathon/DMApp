@@ -254,7 +254,7 @@ public class SwipeActivity extends ActionBarActivity
 			{
 			case 0:return new Fragment(); //Return blank fragment because this will be covered by nav drawer
 			case 1:return HomeFragment.newInstance();
-			case 2:return TimelineFragment.newInstance();
+			case 2:return TimelineFragment.newInstance(SwipeActivity.this);
 			case 3:return MtkFragment.newInstance();
 			}
 			return null;

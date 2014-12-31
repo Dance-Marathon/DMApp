@@ -1,17 +1,24 @@
 package com.example.dancemarathon;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.util.Log;
+
 /**
  * @author Chris Whitten
  * This class represents a DM event.
  */
-public class Event
+public class Event implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	/**
 	 * The title of the event
@@ -236,19 +243,19 @@ public class Event
 		
 		switch(month)
 		{
-		case 1: return "Jan";
-		case 2: return "Feb";
-		case 3: return "Mar";
-		case 4: return "Apr";
-		case 5: return "May";
-		case 6: return "Jun";
-		case 7: return "Jul";
-		case 8: return "Aug";
-		case 9: return "Sep";
-		case 10: return "Oct";
-		case 11: return "Nov";
-		case 12: return "Dec";
-		default: return "Nul";
+		case Calendar.JANUARY:	return "Jan";
+		case Calendar.FEBRUARY:	return "Feb";
+		case Calendar.MARCH:    return "Mar";
+		case Calendar.APRIL: 	return "Apr";
+		case Calendar.MAY: 		return "May";
+		case Calendar.JUNE:		return "Jun";
+		case Calendar.JULY: 	return "Jul";
+		case Calendar.AUGUST: 	return "Aug";
+		case Calendar.SEPTEMBER:return "Sep";
+		case Calendar.OCTOBER: 	return "Oct";
+		case Calendar.NOVEMBER: return "Nov";
+		case Calendar.DECEMBER: return "Dec";
+		default: Log.d("bad month", Integer.toString(month));return "Nul";
 		}
 	}
 	
