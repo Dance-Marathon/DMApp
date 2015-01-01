@@ -234,7 +234,6 @@ public class SwipeActivity extends ActionBarActivity
 			else if(resultCode == RESULT_CANCELED)
 			{
 				user = null;
-				CacheManager.clearCacheFile(this, "user");
 			}
 		}
 	}

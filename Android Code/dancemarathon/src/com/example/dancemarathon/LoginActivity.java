@@ -50,7 +50,7 @@ public class LoginActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 	
-	protected void onActivityResult(int requestCode, int resultCode)
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if(requestCode == LoginFragment.IS_USER_STILL_LOGGED_IN)
 		{
@@ -58,6 +58,12 @@ public class LoginActivity extends ActionBarActivity
 			{
 				setResult(Activity.RESULT_CANCELED, new Intent());
 			}
+			else if(resultCode == Activity.RESULT_OK)
+			{
+				setResult(Activity.RESULT_OK, data);
+			}
+			
+			this.finish();
 		}
 	}
 }

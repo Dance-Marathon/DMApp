@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -215,10 +216,7 @@ public class LoginFragment extends Fragment
 				b.putParcelable("user", user);
 				intent.putExtras(b);
 				startActivityForResult(intent, LoginFragment.IS_USER_STILL_LOGGED_IN);
-				
-				//Pass back user data
-				getActivity().setResult(Activity.RESULT_OK, intent);
-				
+			
 				//Write user data to cache
 				CacheManager.clearCacheFile(getActivity(), "user");
 				CacheManager.writeObjectToCacheFile(getActivity(), user, "user");
@@ -246,7 +244,7 @@ public class LoginFragment extends Fragment
 			double fundGoal = Double.parseDouble(o.getString("PersonalGoal"));
 			double fundRaised = Double.parseDouble(o.getString("PersonalRaised"));
 			
-			KinteraUser user = new KinteraUser(username, realName, fundGoal, fundRaised, pageURL);
+			KinteraUser user = new KinteraUser(username, password, realName, fundGoal, fundRaised, pageURL);
 			return user;
 		}
 	}
