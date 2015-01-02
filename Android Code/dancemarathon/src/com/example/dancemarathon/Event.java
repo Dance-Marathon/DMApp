@@ -13,7 +13,7 @@ import android.util.Log;
  * @author Chris Whitten
  * This class represents a DM event.
  */
-public class Event implements Serializable
+public class Event implements Serializable, Comparable<Event>
 {
 	/**
 	 * 
@@ -354,5 +354,16 @@ public class Event implements Serializable
 	protected void setLastMod(Date lastMod)
 	{
 		this.lastMod = lastMod;
+	}
+
+	@Override
+	public int compareTo(Event another)
+	{
+		if(this.startDate.getTime() < another.getStartDate().getTime())
+			return -1;
+		else if(this.startDate.getTime() < another.getStartDate().getTime())
+			return 1;
+		else
+			return 0;
 	}
 }

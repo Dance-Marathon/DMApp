@@ -168,7 +168,7 @@ public class TimelineFragment extends Fragment
 				Bundle args = new Bundle();
 				
 				//Get formatted times
-				String displayFormat = "hh:mm aa";
+				String displayFormat = "hh:mm aa   MM/dd/yyyy";
 		        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
 		        String stimeText = df.format(e.getStartDate());
 				String etimeText = df.format(e.getEndDate());

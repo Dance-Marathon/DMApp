@@ -2,6 +2,9 @@ package com.example.dancemarathon;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Locale;
 
 import android.content.Context;
@@ -26,7 +29,25 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 		super(c, R.layout.timeline_item_view, events);
 		
 		this.context = c;
+		events = removeOldEvents(events);
+		Collections.sort(events);
 		this.events = events;
+		
+		//sortEvents();
+	}
+	
+	private ArrayList<Event> removeOldEvents(ArrayList<Event> events)
+	{
+		ArrayList<Event> newEvents = new ArrayList<Event>(events);
+		Iterator<Event> i = events.iterator();
+		while(i.hasNext())
+		{
+			Event e = i.next();
+			//If the event has already passed, remove it from the list
+			if(e.getStartDate().getTime() < Calendar.getInstance().getTimeInMillis())
+				newEvents.remove(e);
+		}
+		return newEvents;
 	}
 	@Override
 	public int getCount()
@@ -68,7 +89,10 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         }
         //Else we can use the recycled view passed in as convertView
         else
+        {
         	itemView = convertView;
+        	setItemView(itemView, position); //We must set the recycled view with the new information
+        }
 
         return itemView;
 	}
@@ -93,12 +117,10 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         
         //Set title
         String titleText = e.getTitle();
-        if(titleText.length() > 22)
-        	titleText = titleText.substring(0, 21);
-        title.setText(titleText);
+        title.setText(makeCondensedString(titleText, 17));
         
         //Set location
-        location.setText("Location: " + e.getLocation());
+        location.setText("Location: " + makeCondensedString(e.getLocation(), 17));
         
         //Set time
         String displayFormat = "hh:mm aa";
@@ -114,6 +136,28 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         String dayText = Integer.toString(e.getDay(true));
         day.setText(dayText);
         
+	}
+	
+	/**
+	 * This method returns a string with as many words as can fit in the
+	 * input number of characters 
+	 * @param rawString The unformatted string
+	 * @param maxCharacters The maximum number of characters
+	 * @return The new string
+	 */
+	private String makeCondensedString(String rawString, int maxCharacters)
+	{
+		String[] words = rawString.split(" ");
+		String newString ="";
+		for(int i = 0; i < words.length; i++)
+		{
+			String nextWord = words[i];
+			if(newString.length() + nextWord.length() > maxCharacters)
+				break;
+			else
+				newString+=" " + nextWord;
+		}
+		return newString;
 	}
 
 }
