@@ -173,6 +173,10 @@ public class TimelineFragment extends Fragment
 		        String stimeText = df.format(e.getStartDate());
 				String etimeText = df.format(e.getEndDate());
 				
+				//Get rid of leading zeros
+				//stimeText=Integer.toString(Integer.parseInt(stimeText.substring(0, 2)));
+				//etimeText=Integer.toString(Integer.parseInt(etimeText.substring(0,2)));
+				
 				//Add event information to bundle
 				args.putString("e_title", e.getTitle());
 				args.putString("e_desc", e.getDescription());

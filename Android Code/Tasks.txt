@@ -28,7 +28,7 @@ Add state preservation of user data by using cache files			 D  	Chris
 Add state preservation of timeline data with cache					 D	    Chris
 Allow users to refresh timeline data								 D 		Chris
 Add logout button on user activity									 D		Chris
-Allow users to refresh kintera data									 NC  	Chris
+Allow users to refresh kintera data									 D  	Chris
 Create service to send notifications when events happen	             NC     Chris
 Add sponsor list activity											 NC     Zach
 Make everything their proper fonts									 NC		----
