@@ -113,8 +113,13 @@ public class SwipeActivity extends ActionBarActivity
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
+<<<<<<< Updated upstream
 		// Set the ViewPager to Home
 		mViewPager.setCurrentItem(1, false);
+=======
+		// Set the ViewPager to the left
+		mViewPager.setCurrentItem(0, false);
+>>>>>>> Stashed changes
 		
 		// Change PagerTabStrip spacing
 		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
@@ -268,7 +273,7 @@ public class SwipeActivity extends ActionBarActivity
 		public int getCount()
 		{
 			// Get total number of pages
-			return 4;
+			return 3;
 		}
 
 		@Override

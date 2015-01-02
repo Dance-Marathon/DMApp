@@ -64,16 +64,28 @@ public class ImageAdapter extends BaseAdapter
 	}
 	
 	private Integer[] imageIds = {
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
-			R.drawable.placeholder_pic, R.drawable.placeholder_pic,
+			R.drawable.aleahn, 		R.drawable.alisonj,
+			R.drawable.alysiag, 	R.drawable.alyssama,
+			R.drawable.alyssamu,	R.drawable.annarose,
+			R.drawable.avam, 		R.drawable.aydenm,
+			R.drawable.baileyw, 	R.drawable.brightfamily,
+			R.drawable.caitlynd,	R.drawable.camdena,
+			R.drawable.catherinem, 	R.drawable.catrionac,
+			R.drawable.cierrak, 	R.drawable.garrettl,
+			R.drawable.geoffreyp, 	R.drawable.hylam,
+			R.drawable.izabellan, 	R.drawable.jackm,
+			R.drawable.jakec,		R.drawable.jennad,
+			R.drawable.joshuaw,		R.drawable.kaedynb,
+			R.drawable.kaseyv,		R.drawable.kayleee,
+			R.drawable.kendalll,	R.drawable.madisong,
+			R.drawable.masonh,		R.drawable.mattewc,
+			R.drawable.michaels,	R.drawable.mirandal,
+			R.drawable.nathanf,		R.drawable.nathanw,
+			R.drawable.nickm,		R.drawable.randyg,
+			R.drawable.ryant,		R.drawable.sagep,
+			R.drawable.samn,		R.drawable.tylerp,
+			R.drawable.tylers,		R.drawable.williamc,
+			R.drawable.wyattt,		R.drawable.zanderw
 	};
 	
 }

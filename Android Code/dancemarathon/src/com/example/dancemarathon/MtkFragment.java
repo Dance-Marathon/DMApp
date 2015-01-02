@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +29,12 @@ public class MtkFragment extends Fragment
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
 	    gridview.setAdapter(new ImageAdapter(this.getActivity()));
+	    
+	    gridView.setOnItemClickListener(new OnItemClickListener() {
+	        @Override
+	        public void onItemClick(AdapterView<?> parent, View v,
+	                int position, long id) {
+	    
 		// Inflate the layout for this fragment
 		return v;
 	}
