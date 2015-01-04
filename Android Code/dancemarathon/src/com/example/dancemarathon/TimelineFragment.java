@@ -10,13 +10,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +33,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A {@link Fragment} subclass which is responsible for displaying the timeline information. It uses
@@ -35,6 +42,7 @@ import android.widget.TextView;
  */
 public class TimelineFragment extends Fragment
 {
+	private Context c;
 	/**
 	 * The list of Events
 	 */
@@ -44,15 +52,68 @@ public class TimelineFragment extends Fragment
 	 */
 	private boolean loadSuccessful;
 	/**
+	 * Flag stating whether or not the event load from the cache was successful
+	 */
+	private boolean cacheLoadSuccessful;
+	/**
+	 * Flag stating whether or not the event list is currently in the refresh process
+	 */
+	private boolean isRefreshing;
+	/**
 	 * The loader which performs the async load operation.
 	 */
 	private EventLoader loader;
-
+	
+	
 	public TimelineFragment()
 	{
 		// Required empty public constructor
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		// Inflate the layout for this fragment
+		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
+		 
+		 if(cacheLoadSuccessful && events.size() > 0)
+			 showEventList(v, events);
+		 return v;
+	}
+	
+	/**
+	 * This method is necessary because an empty, no argument constructor must be provided
+	 * for a fragment in Android
+	 * @return A new instance of timeline fragment that is executing the load operation
+	 */
+	@SuppressWarnings("unchecked")
+	public static TimelineFragment newInstance(Context c)
+	{
+		TimelineFragment f = new TimelineFragment();
+		f.c = c;
+		f.loadSuccessful = false;
+		f.isRefreshing = false;
+		f.resetLoader();
+		
+		//Read data from cache
+		Object o = CacheManager.readObjectFromCacheFile(c , "events");
+		if(o == null)
+		{
+			f.forceEventListUpdate();
+			f.cacheLoadSuccessful = false;
+			Log.d("Event Load", "internet");
+		}
+		else
+		{
+			f.cacheLoadSuccessful = true;
+			f.events = (ArrayList<Event>) o;
+			Log.d("Event Load", "cache");
+		}
+		
+		return f;
+	}
+	
 	/**
 	 * Reset the loader so we can do another load operation.
 	 * An instance of async task may only be executed once
@@ -62,44 +123,12 @@ public class TimelineFragment extends Fragment
 	{
 		loader = new EventLoader();
 	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
-	{
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_timeline, container, false);
-	}
 	
-	/**
-	 * This method is necessary because an empty, no argument constructor must be provided
-	 * for a fragment in Android
-	 * @return A new instance of timeline fragment that is executing the load operation
-	 */
-	public static TimelineFragment newInstance()
+	public void forceEventListUpdate()
 	{
-		TimelineFragment f = new TimelineFragment();
-		f.loadSuccessful = false;
-		f.resetLoader();
-		f.loader.execute(); //Perform the load operation
-		return f;
+		resetLoader();
+		loader.execute();
 	}
-	
-	/**
-	 * @return the events
-	 */
-	public ArrayList<Event> getEvents()
-	{
-		return events;
-	}
-
-	/**
-	 * @param events the events to set
-	 */
-	public void setEvents(ArrayList<Event> events)
-	{
-		this.events = events;
-	}
-
 	
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.Fragment#onStop()
@@ -109,8 +138,144 @@ public class TimelineFragment extends Fragment
 	{
 		super.onStop();
 		loader.cancel(true);
+		
 	}
 	
+	/**
+	 * Show the event list on the view and hide the progress wheel
+	 * @param v The view to modify
+	 * @param events The events to show
+	 */
+	private void showEventList(final View v, ArrayList<Event> events)
+	{
+		//Populate list view
+		final TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
+		final ListView eventList = (ListView) v.findViewById(R.id.event_list); //Get the list view
+		
+		eventList.setAdapter(listAdapter);
+		//Set click listener which will replace this fragment with the event fragment on click
+		OnItemClickListener oc = new OnItemClickListener()
+		{
+
+			@Override
+			//On item click, we start the individual event activity
+			public void onItemClick(AdapterView<?> parent,
+					View selectedView, int position, long selectedViewId)
+			{
+				Event e = listAdapter.getItem(position);
+				Intent intent = new Intent(getActivity(), EventActivity.class);
+				Bundle args = new Bundle();
+				
+				//Get formatted times
+				String displayFormat = "hh:mm aa";
+		        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
+		        String stimeText = df.format(e.getStartDate());
+				String etimeText = df.format(e.getEndDate());
+				
+				//Add event information to bundle
+				args.putString("e_title", e.getTitle());
+				args.putString("e_desc", e.getDescription());
+				args.putString("e_stime", stimeText);
+				args.putString("e_etime", etimeText);
+				args.putString("e_loc", e.getLocation());
+				
+				//Add bundle to intent
+				intent.putExtras(args);
+				startActivity(intent);
+			}
+			
+		};
+		
+		//Add listener to listview
+		eventList.setOnItemClickListener(oc);
+		
+		//Show list
+		SwipeRefreshLayout listLayout = (SwipeRefreshLayout) v.findViewById(R.id.event_list_container);
+		listLayout.setVisibility(View.VISIBLE);
+		
+		//Hide progress wheel
+		ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
+		bar.setVisibility(View.GONE);
+		
+		//Set refresh layout action
+		listLayout.setOnRefreshListener(new OnRefreshListener(){
+			@Override
+			public void onRefresh()
+			{
+				eventList.setEnabled(false);
+				isRefreshing = true;
+				forceEventListUpdate();
+				showHazyForeground(v);
+			}
+		});
+		
+		//Set refresh layout colors
+		listLayout.setColorSchemeResources(R.color.dm_orange_primary, R.color.dm_blue_secondary, R.color.GreenYellow);
+	}
+	
+	/**
+	 * Show a load error page 
+	 * @param v The view to show it on
+	 */
+	private void showLoadErrorPage(View v)
+	{
+		//Show error textview
+		final TextView errorView = (TextView) v.findViewById(R.id.tline_load_error);
+		errorView.setVisibility(View.VISIBLE);
+		
+		//Hide progress wheel
+		final ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
+		bar.setVisibility(View.GONE);
+		
+		//Hide listview
+		v.findViewById(R.id.event_list_container).setVisibility(View.GONE);
+		
+		//Show retry button
+		final Button retry = (Button) v.findViewById(R.id.retry_button);
+		//If button is clicked, try the load again
+		retry.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v)
+			{
+				//Hide error textview
+				errorView.setVisibility(View.GONE);
+				//Hide retry button
+				retry.setVisibility(View.GONE);
+				
+				//Show progress wheel animation
+				bar.setVisibility(View.VISIBLE);
+				
+				//Execute load again
+				loader = new EventLoader();
+				loader.execute();
+			}
+			
+		});
+		retry.setVisibility(View.VISIBLE);	
+	}
+	
+	/**
+	 * Show a toast if the refresh operation fails
+	 */
+	private void showRefreshErrorToast()
+	{
+		Toast toast = Toast.makeText(c, "Could not refresh data", Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 40);
+		toast.show();
+	}
+	
+	private void showHazyForeground(View v)
+	{
+		View hazyView = v.findViewById(R.id.hazy_foreground);
+		hazyView.setVisibility(View.VISIBLE);
+		hazyView.bringToFront();
+	}
+	private void removeHazyForeground(View v)
+	{
+		View hazyView = v.findViewById(R.id.hazy_foreground);
+		hazyView.setVisibility(View.GONE);
+	}
 	/**
 	 * This class is responsible for loading the events. It is necessary because Android
 	 * does not allow you to have loading operations on the same thread as the UI.
@@ -137,6 +302,9 @@ public class TimelineFragment extends Fragment
 				//Log.d("json", eventsJSON);
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
+				
+				//Write data to cache
+				CacheManager.writeObjectToCacheFile(getActivity(), events, "events");
 				
 				//Set success flag to true
 				loadSuccessful = true;
@@ -170,93 +338,36 @@ public class TimelineFragment extends Fragment
 		//This method will update the UI after the load is finished.
 		protected void onPostExecute(ArrayList<Event> events)
 		{
+			final SwipeRefreshLayout l = (SwipeRefreshLayout) getView().findViewById(R.id.event_list_container);
+			final ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 			if(loadSuccessful)
 			{	
 				Log.d("load", "successful");
 				
-				//Populate list view
-				final TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
-				ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
+				showEventList(getView(), events);
 				
-				eventList.setAdapter(listAdapter);
-				
-				//Set click listener which will replace this fragment with the event fragment on click
-				OnItemClickListener oc = new OnItemClickListener()
+				//Change the flag once we are done with the load operation
+				if(isRefreshing)
 				{
-
-					@Override
-					//On item click, we start the individual event activity
-					public void onItemClick(AdapterView<?> parent,
-							View selectedView, int position, long selectedViewId)
-					{
-						Event e = listAdapter.getItem(position);
-						Intent intent = new Intent(getActivity(), EventActivity.class);
-						Bundle args = new Bundle();
-						
-						//Get formatted times
-						String displayFormat = "hh:mm aa";
-				        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
-				        String stimeText = df.format(e.getStartDate());
-						String etimeText = df.format(e.getEndDate());
-						
-						//Add event information to bundle
-						args.putString("e_title", e.getTitle());
-						args.putString("e_desc", e.getDescription());
-						args.putString("e_stime", stimeText);
-						args.putString("e_etime", etimeText);
-						args.putString("e_loc", e.getLocation());
-						
-						//Add bundle to intent
-						intent.putExtras(args);
-						startActivity(intent);
-					}
-					
-				};
-				
-				//Add listener to listview
-				eventList.setOnItemClickListener(oc);
-				//Hide progress wheel
-				ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
-				bar.setVisibility(View.GONE);
+					isRefreshing = false;
+					l.setRefreshing(false);
+					removeHazyForeground(getView());
+					eventList.setEnabled(true);
+				}
 			}
 			else
 			{
 				Log.d("load", "unsuccessful");
-				//Show error textview
-				final TextView errorView = (TextView) getView().findViewById(R.id.tline_load_error);
-				errorView.setVisibility(View.VISIBLE);
-				
-				//Hide progress wheel
-				final ProgressBar bar = (ProgressBar) getView().findViewById(R.id.progress_wheel);
-				bar.setVisibility(View.GONE);
-				
-				//Hide listview
-				ListView eventList = (ListView) getView().findViewById(R.id.event_list);
-				eventList.setVisibility(View.GONE);
-				
-				//Show retry button
-				final Button retry = (Button) getView().findViewById(R.id.retry_button);
-				//If button is clicked, try the load again
-				retry.setOnClickListener(new OnClickListener(){
-
-					@Override
-					public void onClick(View v)
-					{
-						//Hide error textview
-						errorView.setVisibility(View.GONE);
-						//Hide retry button
-						retry.setVisibility(View.GONE);
-						
-						//Show progress wheel animation
-						bar.setVisibility(View.VISIBLE);
-						
-						//Execute load again
-						loader = new EventLoader();
-						loader.execute();
-					}
-					
-				});
-				retry.setVisibility(View.VISIBLE);	
+				if(isRefreshing)
+				{
+					showRefreshErrorToast();
+					isRefreshing = false;
+					l.setRefreshing(false);
+					removeHazyForeground(getView());
+					eventList.setEnabled(true);
+				}
+				else
+					showLoadErrorPage(getView());
 			}
 				
 		}
@@ -294,6 +405,22 @@ public class TimelineFragment extends Fragment
 				loadSuccessful = false; //Loading nothing does not qualify as a "successful" load operation
 			return events; 
 		}
+	}
+
+	/**
+	 * @return the events
+	 */
+	public ArrayList<Event> getEvents()
+	{
+		return events;
+	}
+
+	/**
+	 * @param events the events to set
+	 */
+	public void setEvents(ArrayList<Event> events)
+	{
+		this.events = events;
 	}
 
 }
