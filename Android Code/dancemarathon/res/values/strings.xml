@@ -23,18 +23,11 @@
     <string name="title_activity_event">EventActivity</string>
 
     <!-- User progress strings -->
-<<<<<<< HEAD
-    <string name="goal_label">Goal</string>
-    <string name="raised_label">Raised</string>
-    <string name="progress_label">Progress</string>
-
-=======
 	<string name="goal_label">Goal</string>
 	<string name="raised_label">Raised</string>
 	<string name="progress_label">Progress</string>
 	<string name="page_button_text">My Kintera Page</string>
-	
->>>>>>> FETCH_HEAD
+
     <!-- Homepage Strings -->
     <string name="dance_marathon">Dance Marathon!</string>
     <string name="game">Game</string>

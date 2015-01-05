@@ -29,7 +29,6 @@ public class MtkFragment extends Fragment
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
 		ImageAdapter adapter = new ImageAdapter(this.getActivity());
-		adapter.test();
 	    gridview.setAdapter(adapter);
 	    
 	    

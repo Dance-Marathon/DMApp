@@ -6,13 +6,15 @@ public class Kids
 	private int age;
 	private String story;
 	private String image_name;
+	private String thumb;
 	
-	public Kids(String name, int age, String story, String image_name)
+	public Kids(String name, int age, String story, String image_name, String thumb)
 	{
 		this.name = name;
 		this.age = age;
 		this.story = story;
 		this.image_name = image_name;
+		this.thumb = thumb;
 	}
 	
 	public Kids()
