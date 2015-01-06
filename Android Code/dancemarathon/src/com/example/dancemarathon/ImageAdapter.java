@@ -1,15 +1,16 @@
 package com.example.dancemarathon;
 
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Locale;
 
-import xmlwise.Plist;
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.content.Context;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 public class ImageAdapter extends BaseAdapter
 {
 	private Context mContext;
-	private ArrayList<Kids> kidIds = new ArrayList<Kids>();
 	
 	public ImageAdapter(Context c)
 	{
@@ -50,22 +50,83 @@ public class ImageAdapter extends BaseAdapter
 		// TODO Auto-generated method stub
 		return imageIds[position];
 	}
+	
+	public String loadJSONFromAsset() throws IOException
+	{
+	    String json = null;
+	    try {
+
+	        InputStream is = mContext.getAssets().open("data.json");
+
+	        int size = is.available();
+
+	        byte[] buffer = new byte[size];
+
+	        is.read(buffer);
+
+	        is.close();
+
+	        json = new String(buffer, "UTF-8");
+
+
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	        return null;
+	    }
+	    return json;
+
+	}
+	
+	private ArrayList<Kids> createArray()
+	{
+		ArrayList<Kids> kids_data = new ArrayList<Kids>();
+		try{
+			JSONArray data_arr = new JSONArray(loadJSONFromAsset());
+
+			for(int i = 0; i < data_arr.length(); i++)
+			{
+				String image_name = data_arr.getJSONObject(i).getString("image");
+				String story = data_arr.getJSONObject(i).getString("story");
+				String name = data_arr.getJSONObject(i).getString("name");
+				int age = Integer.parseInt(data_arr.getJSONObject(i).getString("ageYear"));
+				
+				try
+				{
+					Kids k = new Kids(name, age, story, image_name);
+					kids_data.add(k);
+				} 
+				catch (ParseException e)
+				{
+					//Must remove this before release
+					Log.d("Event Parsing", "Failed to parse event" + name);
+				}
+	       }
+		}
+		catch (IOException e)
+		{
+	        e.printStackTrace();
+		}
+		catch (JSONException e) {
+	        e.printStackTrace();
+		}
+		
+		return kids_data;
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
-	{	
-		// Initialize arraylist of plist information
-		kidIds = createArray();
-		
+	{
+		ArrayList<Kids> kids = createArray();
+
 		// Get kid's name 
-		//String name = kidIds.get(position).getName();
+		String name = kids.get(position).getName();
 		
-		// Get name of image from plist and adjust it to match the drawable name
-		//String image_name = kidIds.get(position).getImage_name().toLowerCase(Locale.ENGLISH);
-		//image_name = image_name.replace(".png", "");
+		// Get name of image for kid and adjust it to match the drawable name
+		String image_name = kids.get(position).getImage_name().toLowerCase(Locale.ENGLISH);
+		image_name = image_name.replace(".png", "");
 		
 		// Create ID of image
-		//int imageID = mContext.getResources().getIdentifier(image_name, "drawable", "com.example.dancemarathon");
+		int imageID = mContext.getResources().getIdentifier(image_name, "drawable", "com.example.dancemarathon");
 		
 		// LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		// View rowView = inflater.inflate(R.layout.fragment_mtk, null);
@@ -75,7 +136,7 @@ public class ImageAdapter extends BaseAdapter
 		
         if (convertView == null) 
         {  // if it's not recycled, initialize some attributes
-            textView.setText("Name" + position);
+            textView.setText(name);
         	
         	imageView = new CircleView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(100, 100));
@@ -89,7 +150,7 @@ public class ImageAdapter extends BaseAdapter
         }
         
         // Set imageView content
-        imageView.setImageResource(imageIds[position]);
+        imageView.setImageResource(imageID);
         
         
         // Set orange border for even positions, blue for odd
@@ -104,51 +165,6 @@ public class ImageAdapter extends BaseAdapter
        
         return imageView;
 	}
-	
-	private ArrayList<Kids> createArray()
-	{
-		Map<String, Object> kid = null;
-		try
-		{
-			InputStream inputStream = mContext.getResources().openRawResource(R.raw.kids);
-			BufferedReader br = null;
-			try	
-			{
-				br = new BufferedReader(new InputStreamReader(inputStream));
-				StringBuilder sb = new StringBuilder();
-				String line;
-				while ((line = br.readLine()) != null) 
-				{
-					sb.append(line);
-				}
-				
-				kid = Plist.fromXml(sb.toString());
-				
-				for (Map.Entry<String, Object> entry : kid.entrySet()) 
-				{
-					Log.d("map", (String) entry.getValue());
-					kidIds.add((Kids)entry.getValue());
-				}
-				
-			} 
-			catch (Exception e) 
-			{
-				e.printStackTrace();
-			} 
-			finally 
-			{
-				br.close();
-			}
-		} 
-		catch (Exception ex) 
-		{
-			ex.printStackTrace();
-		}
-		
-		return kidIds;
-	}
-	
-	
 	
 	private Integer[] imageIds = {
 			R.drawable.aleahn, 		R.drawable.alisonj,

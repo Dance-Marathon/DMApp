@@ -1,20 +1,20 @@
 package com.example.dancemarathon;
 
+import java.text.ParseException;
+
 public class Kids
 {
 	private String name;
 	private int age;
 	private String story;
 	private String image_name;
-	private String thumb;
 	
-	public Kids(String name, int age, String story, String image_name, String thumb)
+	public Kids(String name, int age, String story, String image_name) throws ParseException 
 	{
 		this.name = name;
 		this.age = age;
 		this.story = story;
 		this.image_name = image_name;
-		this.thumb = thumb;
 	}
 	
 	public Kids()
