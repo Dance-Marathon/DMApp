@@ -82,33 +82,27 @@ public class SwipeActivity extends ActionBarActivity
 		setUpNavDrawer();
 		user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
+			int currPos = 0;
 			@Override
 			public void onPageScrollStateChanged(int arg0)
 			{
-				
+				//If page has settled
+				if(arg0 == ViewPager.SCROLL_STATE_IDLE)
+				{
+					int statePos = mViewPager.getCurrentItem();
+					//If the page settled on a different page
+					if(currPos != statePos)
+					{
+						//Send tracking event and update current position
+						sendTrackingView(statePos);
+						currPos = statePos;
+					}
+				}
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2)
 			{
-				int nextPage = arg0 +1;
-				if(arg1 > .95)
-				{
-					if(trackEnabled)
-					{
-						String logString = "";
-						String sendString = "";
-						switch(nextPage)
-						{
-						case 0: logString="NavDrawer"; sendString="Navigation Drawer";break;
-						case 1: logString="HomeFragment"; sendString="Home Swipe Screen";break;
-						case 2: logString="TimelineFragment"; sendString="Timeline Swipe Screen";break;
-						case 3: logString="MTKFragment"; sendString="MTK Swipe Screen";break;
-						}
-						Log.d("Tracking", logString);
-						TrackerManager.sendScreenView((MyApplication)getApplication(), sendString);
-					}
-				}
 				// TODO Auto-generated method stub
 			
 			}
@@ -119,6 +113,24 @@ public class SwipeActivity extends ActionBarActivity
 				//Open the navigation drawer
 				if(pos == 0)
 					mDrawerLayout.openDrawer(Gravity.START);
+			}
+			
+			private void sendTrackingView(int page)
+			{
+				if(trackEnabled)
+				{
+					String logString = "";
+					String sendString = "";
+					switch(page)
+					{
+					case 0: logString="NavDrawer"; sendString="Navigation Drawer";break;
+					case 1: logString="HomeFragment"; sendString="Home Swipe Screen";break;
+					case 2: logString="TimelineFragment"; sendString="Timeline Swipe Screen";break;
+					case 3: logString="MTKFragment"; sendString="MTK Swipe Screen";break;
+					}
+					Log.d("Tracking", logString);
+					TrackerManager.sendScreenView((MyApplication)getApplication(), sendString);
+				}
 			}
 			
 		});
