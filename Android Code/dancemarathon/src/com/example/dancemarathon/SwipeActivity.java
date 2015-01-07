@@ -268,7 +268,7 @@ public class SwipeActivity extends ActionBarActivity
 		public int getCount()
 		{
 			// Get total number of pages
-			return 3;
+			return 4;
 		}
 
 		@Override
