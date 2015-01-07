@@ -9,13 +9,13 @@ Finished	  - (D)
 							Task								 | Status | Owner |
 -----------------------------------------------------------------------------------
 Get rid of military time in timeline times						     D		Chris
-Get the proper image resources in MTK gridview					     D     Zach
+Get the proper image resources in MTK gridview					     D      Zach
 Create activity for individual events that are shown on timeline     D      Chris
 Add backward navigation from individual event page					 D		Chris
 Add retry button if loading timeline fails 							 D 		Chris
-Create activity to display the individual miracle stories			 NC     Zach
-Add backward navigation from individual miracle story page			 NC     Zach
-Create class representing miracle child								 NC     Zach
+Create activity to display the individual miracle stories			 D      Zach
+Add backward navigation from individual miracle story page			 D      Zach
+Create class representing miracle child								 D      Zach
 Change background color of app to white								 D		Chris
 Create "user" activity which shows user kintera info				 D   	Chris
 Create "login" fragment which allows user to login					 D		Chris
@@ -31,9 +31,11 @@ Add logout button on user activity									 D		Chris
 Allow users to refresh kintera data									 D  	Chris
 Create service to send notifications when events happen	             NC     Chris
 Add sponsor list activity											 NC     Zach
-Make everything their proper fonts									 NC		----
-Implement google analytics											 NC		----
-Add construction fragment											 NC     ----
-Add announcements listview											 NC     ----
-Add social media activity											 NC 	----
-Possibly reduce size of image assests using png compressor   		 NC 	----
+Make everything their proper fonts									 NC		Zach
+Implement google analytics											 NC		Chris
+Add announcements listview											 NC     Zach
+Add social media activity											 NC 	Chris
+Change app icon to new one from DM final graphics					 NC     Zach
+Countdown thing on homepage											 NC     Zach
+Resize images for MTK circles									     NC     Zach
+Possibly reduce size of image assests using png compressor   		 NC 	Zach
