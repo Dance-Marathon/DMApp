@@ -30,6 +30,7 @@ import android.widget.Toast;
 public class UserActivity extends ActionBarActivity
 {
 	KinteraUser user;
+	UserLoader loader;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -54,6 +55,14 @@ public class UserActivity extends ActionBarActivity
 		
 		//Set result of this activity to the user
 		setActivityResult(user);
+		
+		//Instantiate loader to prevent null
+		loader = new UserLoader();
+	}
+	protected void onStop()
+	{
+		if(loader != null)
+			loader.cancel(true);
 	}
 	public void logout(View v)
 	{
@@ -73,7 +82,8 @@ public class UserActivity extends ActionBarActivity
 	public void refreshUser(String username, String password)
 	{
 		findViewById(R.id.user_loading_overlay).setVisibility(View.VISIBLE);
-		new UserLoader().execute(username, password);
+		loader = new UserLoader();
+		loader.execute(username, password);
 	}
 	private void setFields(final KinteraUser user)
 	{

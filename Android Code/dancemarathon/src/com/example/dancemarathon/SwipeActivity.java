@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -29,6 +30,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class SwipeActivity extends ActionBarActivity
 {
@@ -100,6 +104,18 @@ public class SwipeActivity extends ActionBarActivity
 			}
 			
 		});
+	}
+	
+	protected void onStart()
+	{
+		super.onStart();
+		//Start google analytics
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "SwipeActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
+		}
 	}
 	
 	private void setUpPagers()
