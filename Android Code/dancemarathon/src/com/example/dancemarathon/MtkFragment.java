@@ -29,24 +29,17 @@ public class MtkFragment extends Fragment
 		
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
-	    gridview.setAdapter(new ImageAdapter(this.getActivity()));
+		ImageAdapter adapter = new ImageAdapter(this.getActivity());
+	    gridview.setAdapter(adapter);
 	    
-	    gridview.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id)
-			{
-				// TODO Auto-generated method stub
-				
-			}
-	    });
 		// Inflate the layout for this fragment
 		return v;
 	}
+	        
+	 public static MtkFragment newInstance()
+	 {
+		 MtkFragment f = new MtkFragment();
+		 return f;
+	 }	        
 	
-	public static MtkFragment newInstance()
-	{
-		MtkFragment f = new MtkFragment();
-		return f;
-	}
 }

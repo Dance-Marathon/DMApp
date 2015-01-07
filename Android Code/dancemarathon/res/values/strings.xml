@@ -21,13 +21,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_event">EventActivity</string>
-    
+
     <!-- User progress strings -->
 	<string name="goal_label">Goal</string>
 	<string name="raised_label">Raised</string>
 	<string name="progress_label">Progress</string>
 	<string name="page_button_text">My Kintera Page</string>
 	<string name="logout">Logout</string>
+
     <!-- Homepage Strings -->
     <string name="dance_marathon">Dance Marathon!</string>
     <string name="game">Game</string>
@@ -59,5 +60,7 @@
     </string-array>
 
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_kid">Kid</string>
+    <string name="title_activity_xml_map_parser">XmlMapParser</string>
 
 </resources>
