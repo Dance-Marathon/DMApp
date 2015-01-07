@@ -30,11 +30,11 @@ Allow users to refresh timeline data								 D 		Chris
 Add logout button on user activity									 D		Chris
 Allow users to refresh kintera data									 D  	Chris
 Create service to send notifications when events happen	             NC     Chris
-Add sponsor list activity											 NC     Zach
-Make everything their proper fonts									 NC		Zach
 Implement google analytics											 NC		Chris
+Add sponsor list activity											 NC     Chris
+Make everything their proper fonts									 NC		Zach
 Add announcements listview											 NC     Zach
-Add social media activity											 NC 	Chris
+Add social media activity											 NC 	Zach
 Change app icon to new one from DM final graphics					 NC     Zach
 Countdown thing on homepage											 NC     Zach
 Resize images for MTK circles									     NC     Zach
