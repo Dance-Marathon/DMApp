@@ -23,11 +23,11 @@
     <string name="title_activity_event">EventActivity</string>
 
     <!-- User progress strings -->
-	<string name="goal_label">Goal</string>
-	<string name="raised_label">Raised</string>
-	<string name="progress_label">Progress</string>
-	<string name="page_button_text">My Kintera Page</string>
-	<string name="logout">Logout</string>
+    <string name="goal_label">Goal</string>
+    <string name="raised_label">Raised</string>
+    <string name="progress_label">Progress</string>
+    <string name="page_button_text">My Kintera Page</string>
+    <string name="logout">Logout</string>
 
     <!-- Homepage Strings -->
     <string name="dance_marathon">Dance Marathon!</string>
@@ -63,5 +63,7 @@
     <string name="title_activity_kid">Kid</string>
     <string name="title_activity_xml_map_parser">XmlMapParser</string>
     <string name="construction_fragment_string">This Page Is Under Construction!</string>
+    <string name="title_activity_sponsor">SponsorActivity</string>
+    <string name="title_activity_daf">DafActivity</string>
 
 </resources>

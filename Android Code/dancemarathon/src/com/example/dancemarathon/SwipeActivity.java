@@ -157,7 +157,8 @@ public class SwipeActivity extends ActionBarActivity
 				// TODO Auto-generated method stub
 				switch(position)
 				{
-				case 2:openFundraisingActivity();
+				case 0:openSponsorActivity();break;
+				case 2:openFundraisingActivity();break;
 				}
 				
 			}
@@ -239,6 +240,14 @@ public class SwipeActivity extends ActionBarActivity
 		}
 	}
 	
+	/**
+	 * This method handles opening the sponsor activity
+	 */
+	private void openSponsorActivity()
+	{
+		Intent intent = new Intent(this, SponsorActivity.class);
+		startActivity(intent);
+	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if(requestCode == GET_USER_REQUEST)
