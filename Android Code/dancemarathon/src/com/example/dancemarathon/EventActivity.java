@@ -1,9 +1,13 @@
 package com.example.dancemarathon;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 public class EventActivity extends ActionBarActivity
 {
 
+	private String eventTitle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -41,8 +46,23 @@ public class EventActivity extends ActionBarActivity
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
 		
+		//Set event title
+		eventTitle = b.getString("e_title");
+		
 	}
-
+	
+	protected void onStart()
+	{
+		super.onStart();
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "EventActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Event: " + eventTitle);
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

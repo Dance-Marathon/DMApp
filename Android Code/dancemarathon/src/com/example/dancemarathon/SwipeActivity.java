@@ -52,6 +52,7 @@ public class SwipeActivity extends ActionBarActivity
 	ListView mDrawerList;
 	KinteraUser user;
 	private String[] mOtherOptions;
+	boolean trackEnabled = false;
     static final int GET_USER_REQUEST = 1;
 	
 	//These methods allow us to maintain the state of the user//
@@ -81,29 +82,47 @@ public class SwipeActivity extends ActionBarActivity
 		setUpNavDrawer();
 		user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
-
 			@Override
 			public void onPageScrollStateChanged(int arg0)
 			{
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2)
 			{
+				int nextPage = arg0 +1;
+				if(arg1 > .95)
+				{
+					if(trackEnabled)
+					{
+						String logString = "";
+						String sendString = "";
+						switch(nextPage)
+						{
+						case 0: logString="NavDrawer"; sendString="Navigation Drawer";break;
+						case 1: logString="HomeFragment"; sendString="Home Swipe Screen";break;
+						case 2: logString="TimelineFragment"; sendString="Timeline Swipe Screen";break;
+						case 3: logString="MTKFragment"; sendString="MTK Swipe Screen";break;
+						}
+						Log.d("Tracking", logString);
+						TrackerManager.sendScreenView((MyApplication)getApplication(), sendString);
+					}
+				}
 				// TODO Auto-generated method stub
-				
+			
 			}
 
 			@Override
 			public void onPageSelected(int pos)
 			{
+				//Open the navigation drawer
 				if(pos == 0)
 					mDrawerLayout.openDrawer(Gravity.START);
 			}
 			
 		});
+
 	}
 	
 	protected void onStart()
@@ -115,6 +134,7 @@ public class SwipeActivity extends ActionBarActivity
 		{
 			Log.d("Tracking", "SwipeActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
+			trackEnabled = true;
 		}
 	}
 	

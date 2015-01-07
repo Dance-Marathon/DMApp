@@ -14,6 +14,9 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -141,6 +144,7 @@ public class TimelineFragment extends Fragment
 		removeHazyForeground(getView());
 		((SwipeRefreshLayout) getView().findViewById(R.id.event_list_container)).setRefreshing(false);
 	}
+	
 	
 	/**
 	 * Show the event list on the view and hide the progress wheel

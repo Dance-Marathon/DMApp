@@ -10,6 +10,9 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -63,6 +66,17 @@ public class UserActivity extends ActionBarActivity
 	{
 		if(loader != null)
 			loader.cancel(true);
+	}
+	protected void onStart()
+	{
+		super.onStart();
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "UserActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "User Screen");
+		}
 	}
 	public void logout(View v)
 	{
