@@ -9,10 +9,10 @@
     <ImageView android:id="@+id/dance_marathon_header"
         android:src="@drawable/countdown"
         android:contentDescription="@string/dance_marathon"
-        android:layout_width="325dp"
-        android:layout_height="200dp" 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="-25dp"
+        android:layout_marginTop="-360dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
         android:gravity="top|center"/>

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -85,7 +87,8 @@ public class ImageAdapter extends BaseAdapter {
 		try {
 			JSONArray data_arr = new JSONArray(loadJSONFromAsset());
 
-			for (int i = 0; i < data_arr.length(); i++) {
+			for (int i = 0; i < data_arr.length(); i++) 
+			{
 				String image_name = data_arr.getJSONObject(i)
 						.getString("image");
 				String story = data_arr.getJSONObject(i).getString("story");
@@ -93,15 +96,21 @@ public class ImageAdapter extends BaseAdapter {
 				int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
 						"ageYear"));
 
-				try {
+				try
+				{
 					Kids k = new Kids(name, age, story, image_name);
 					kids_read.add(k);
-				} 
-				catch (ParseException e) {
+				}
+				catch (ParseException e)
+				{
 					// Must remove this before release
 					Log.d("Event Parsing", "Failed to parse event" + name);
 				}
 			}
+		
+			// Alphabetizes arraylist by name if wanted
+			// Collections.sort(kids_read, Kids.COMPARE_BY_NAME);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JSONException e) {
@@ -138,7 +147,7 @@ public class ImageAdapter extends BaseAdapter {
 
 			imageView = new CircleView(mContext);
 			imageView.setLayoutParams(new GridView.LayoutParams(140, 140));
-			imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+			//imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 			imageView.setPadding(1, 1, 1, 1);
 		}
 
@@ -157,5 +166,12 @@ public class ImageAdapter extends BaseAdapter {
 		}
 
 		return imageView;
+	}
+	
+	public class CustomComparator implements Comparator<Kids> {
+	    @Override
+	    public int compare(Kids o1, Kids o2) {
+	        return o1.getName().compareTo(o2.getName());
+	    }
 	}
 }
