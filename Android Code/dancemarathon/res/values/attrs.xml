@@ -4,5 +4,6 @@
         <attr name="maxValue" format="float"/>
         <attr name="fillColor" format="color"/>
         <attr name="outlineColor" format="color"/>
+        <attr name="outlineWidth" format="integer"/>
     </declare-styleable>
 </resources>

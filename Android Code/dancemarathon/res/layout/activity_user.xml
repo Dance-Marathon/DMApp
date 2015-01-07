@@ -1,18 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:custom="http://schemas.android.com/apk/res/com.example.dancemarathon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dancemarathon.UserActivity" >
     
-     <!-- Thermometer View -->
-    <com.example.dancemarathon.ThermometerView
-        android:id="@+id/thermometer_view"
-        android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
-	    android:layout_centerVertical="true"
-	    custom:fillColor="@color/dm_blue_secondary"/>
     <!-- Main user view -->
 	<RelativeLayout
 	    android:layout_width="match_parent"

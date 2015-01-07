@@ -117,10 +117,10 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         
         //Set title
         String titleText = e.getTitle();
-        title.setText(makeCondensedString(titleText, 17));
+        title.setText(makeCondensedString(titleText, 25));
         
         //Set location
-        location.setText("Location: " + makeCondensedString(e.getLocation(), 17));
+        location.setText("Location: " + makeCondensedString(e.getLocation(), 20));
         
         //Set time
         String displayFormat = "hh:mm aa";

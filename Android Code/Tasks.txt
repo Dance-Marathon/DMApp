@@ -9,7 +9,7 @@ Finished	  - (D)
 							Task								 | Status | Owner |
 -----------------------------------------------------------------------------------
 Get rid of military time in timeline times						     D		Chris
-Get the proper image resources in MTK gridview					     NC     Zach
+Get the proper image resources in MTK gridview					     D     Zach
 Create activity for individual events that are shown on timeline     D      Chris
 Add backward navigation from individual event page					 D		Chris
 Add retry button if loading timeline fails 							 D 		Chris
@@ -22,8 +22,8 @@ Create "login" fragment which allows user to login					 D		Chris
 Add navigation drawer for other options					  			 D      Chris
 Add check to see if login info is empty								 D		Chris
 Populate user activity with kintera data 							 D  	Chris
-Create fundraising thermometer view									 NC     Chris
-Make individual event activity prettier 							 NC		----
+Create fundraising thermometer view									 IP     Chris
+Make individual event activity prettier 							 D		Chris
 Add state preservation of user data by using cache files			 D  	Chris
 Add state preservation of timeline data with cache					 D	    Chris
 Allow users to refresh timeline data								 D 		Chris
@@ -33,5 +33,7 @@ Create service to send notifications when events happen	             NC     Chri
 Add sponsor list activity											 NC     Zach
 Make everything their proper fonts									 NC		----
 Implement google analytics											 NC		----
+Add construction fragment											 NC     ----
+Add announcements listview											 NC     ----
 Add social media activity											 NC 	----
 Possibly reduce size of image assests using png compressor   		 NC 	----
