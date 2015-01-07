@@ -1,9 +1,13 @@
 package com.example.dancemarathon;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,6 +30,18 @@ public class SponsorActivity extends ActionBarActivity {
 			return;
 		
 		manager.beginTransaction().add(R.id.sponsor_activity, new ConstructionFragment()).commit();
+	}
+	
+	protected void onStart()
+	{
+		super.onStart();
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "SponsorActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Sponsor Screen");
+		}
 	}
 
 	@Override

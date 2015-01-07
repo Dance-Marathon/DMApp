@@ -1,10 +1,14 @@
 package com.example.dancemarathon;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,7 +31,19 @@ public class LoginActivity extends ActionBarActivity
 		
 		manager.beginTransaction().add(R.id.kintera_container, LoginFragment.newInstance()).commit();
 	}
-
+	
+	protected void onStart()
+	{
+		super.onStart();
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "LoginActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Login Screen");
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

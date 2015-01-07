@@ -109,7 +109,7 @@ public class SwipeActivity extends ActionBarActivity
 	protected void onStart()
 	{
 		super.onStart();
-		//Start google analytics
+		//Register google analytics page hit
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
