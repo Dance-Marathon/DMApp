@@ -14,9 +14,6 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -66,6 +63,8 @@ public class TimelineFragment extends Fragment
 	 * The loader which performs the async load operation.
 	 */
 	private EventLoader loader;
+	
+	private static final String eventWebServicePath = "http://dev.floridadm.org/app/events.php";
 	
 	
 	public TimelineFragment()
@@ -306,7 +305,7 @@ public class TimelineFragment extends Fragment
 			ArrayList<Event> events = new ArrayList<Event>();
 			try
 			{	
-				URL url = new URL("http://104.236.1.77/app/events.php"); //The path to the webservice 
+				URL url = new URL(eventWebServicePath); //The path to the webservice 
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				
