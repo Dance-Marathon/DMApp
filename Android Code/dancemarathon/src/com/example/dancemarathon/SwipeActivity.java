@@ -155,10 +155,12 @@ public class SwipeActivity extends ActionBarActivity
 		super.onResume();
 		//Don't show notifications if user is in-app
 		stopService(new Intent(this, NotificationService.class));
+		//If this activity was started from the service, go to timeline
+		mViewPager.setCurrentItem(2);
 	}
-	protected void onDestroy()
+	protected void onStop()
 	{
-		super.onDestroy();
+		super.onStop();
 		//Show notifications if user exits out of app
 		startService(new Intent(this, NotificationService.class));
 	}

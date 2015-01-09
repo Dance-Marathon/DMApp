@@ -29,9 +29,9 @@ Add state preservation of timeline data with cache					 D	    Chris
 Allow users to refresh timeline data								 D 		Chris
 Add logout button on user activity									 D		Chris
 Allow users to refresh kintera data									 D  	Chris
-Create service to send notifications when events happen	             NC     Chris
-Implement google analytics											 NC		Chris
-Add sponsor list activity											 NC     Chris
+Create service to send notifications when events happen	             D      Chris
+Implement google analytics											 D		Chris
+Add sponsor list activity											 D      Chris
 Make everything their proper fonts									 NC		Zach
 Add announcements listview											 NC     Zach
 Add social media activity											 NC 	Zach

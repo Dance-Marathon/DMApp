@@ -2,59 +2,81 @@ package com.example.dancemarathon;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Iterator;
 
-import android.app.IntentService;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import android.util.SparseArray;
 
 /**
  * @author Chris
- * This class is responsible for sending notifications to the user
+ * This service is responsible for sending notifications to the user
  * when DM events are close at hand.
  */
-public class NotificationService extends IntentService {
+public class NotificationService extends Service {
 	
 	/**
 	 * The lesser proximity to judge events by
 	 */
 	private static int eventProx1 = 5;
-	
 	/**
 	 * The greater proximity to judge events by
 	 */
 	private static int eventProx2 = 15;
 	
+	/**
+	 * Keeps track of the number of notifications this service has published
+	 */
+	private int numActiveNotifications;
+	
+	//Set up receiver to receive TIME_TICK intents
+	private BroadcastReceiver receiver = new BroadcastReceiver(){
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			//The time ticks every minute
+			testNotification("In on receiver");
+			Log.d("Notifications", "In on receive");
+			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
+			{
+				setupEventNotifications();
+				Log.d("Notifications", "Done with event notification setup");
+			}
+			
+			//Recreate the service and delete the old one
+			context.startService(new Intent(context, NotificationService.class));
+			NotificationService.this.stopSelf();
+		}
+		
+	};;
+	
 	public NotificationService() {
-		super("NotificationService");
+		super();
 	}
 
 	@Override
-	protected void onHandleIntent(Intent intent) {
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		super.onStartCommand(intent, flags, startId);
 		// TODO Auto-generated method stub
-		
-		//Set up receiver to recieve TIME_TICK intents
-		BroadcastReceiver receiver = new BroadcastReceiver(){
-
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				// TODO Auto-generated method stub
-				//The time ticks every minute
-				if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
-				{
-					setupEventNotifications();
-				}
-			}
-			
-		};
-		
-		this.registerReceiver(receiver, new IntentFilter());
+		numActiveNotifications = 0;
+		Log.d("Notification", "Registering receiver");
+		this.registerReceiver(receiver, new IntentFilter(Intent.ACTION_TIME_TICK));
+		return Service.START_STICKY;
+	}
+	
+	public void onDestroy()
+	{
+		this.unregisterReceiver(receiver);
 	}
 	
 	/**
@@ -99,7 +121,8 @@ public class NotificationService extends IntentService {
 		while(i.hasNext())
 		{
 			Event e = i.next();
-			createEventNotification(e, proximity);
+			numActiveNotifications++;
+			createEventNotification(e, proximity, numActiveNotifications);
 		}
 	}
 	
@@ -108,19 +131,23 @@ public class NotificationService extends IntentService {
 	 * @param e The event
 	 * @param proximity Minutes until the event starts
 	 */
-	private void createEventNotification(Event e, int proximity)
+	private void createEventNotification(Event e, int proximity, int mId)
 	{
+		//Set the pending intent for when the user clicks the notification
+		PendingIntent pIntent = getMainPendingIntent();
+				
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(this)
 		        .setSmallIcon(R.drawable.launcher_icon)
 		        .setContentTitle("Event: " + e.getTitle())
 		        .setContentText("Happening in " + proximity + " minutes!")
-		        .setAutoCancel(true);
+		        .setAutoCancel(true)
+		        .setContentIntent(pIntent);
 			
 			NotificationManager mNotificationManager =
 				    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 				// mId allows you to update the notification later on.
-				mNotificationManager.notify(1, mBuilder.build());
+				mNotificationManager.notify(mId, mBuilder.build());
 	}
 	
 	
@@ -151,18 +178,39 @@ public class NotificationService extends IntentService {
 		
 	}
 	
+	/**
+	 * This method creates a pending intent to open the SwipeActivity when
+	 * the notification is pressed.
+	 * @return The pending intent to use
+	 */
+	private PendingIntent getMainPendingIntent()
+	{
+		Intent intent = new Intent(this, SwipeActivity.class);
+		intent.putExtra("start_source", "Service");
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(SwipeActivity.class);
+		stackBuilder.addNextIntent(intent);
+		PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		return pIntent;
+	}
 	
 	/**
-	 * This method just produces a basic test notification
+	* This method just produces a basic test notification
 	 */
-	private void testNotification()
+	private void testNotification(String title)
 	{
+		//Set the pending intent for when the user clicks the notification
+		PendingIntent pIntent = getMainPendingIntent();
+		
+		//Create notification
 		NotificationCompat.Builder mBuilder =
 	        new NotificationCompat.Builder(this)
 	        .setSmallIcon(R.drawable.launcher_icon)
-	        .setContentTitle("My notification")
+	        .setContentTitle(title)
 	        .setContentText("Hello World!")
-	        .setAutoCancel(true);
+	        .setAutoCancel(true)
+	        .setContentIntent(pIntent);
 		
 		NotificationManager mNotificationManager =
 			    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -187,6 +235,16 @@ public class NotificationService extends IntentService {
 		
 		return true;
 	}
+
+	
+	@Override
+	//This method is a required override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	
 	
 
