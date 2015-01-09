@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,12 +30,44 @@ public class HomeFragment extends Fragment
 			Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_home, container, false);
+		View v = inflater.inflate(R.layout.fragment_home, container, false);
+		
+		setButtonListeners(v);
+		return v;
 	}
 	
 	public static HomeFragment newInstance()
 	{
 		HomeFragment f = new HomeFragment();
 		return f;
+	}
+	
+	private void setButtonListeners(View v)
+	{
+		Button gameButton = (Button) v.findViewById(R.id.game);
+		Button websiteButton = (Button) v.findViewById(R.id.website);
+		Button donateButton = (Button) v.findViewById(R.id.donate);
+		
+		setButtonTracker(gameButton);
+		setButtonTracker(websiteButton);
+		setButtonTracker(donateButton);
+	}
+	private void setButtonTracker(final Button b)
+	{
+		b.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String buttonName = b.getText().toString();
+				int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
+				if(canTrack == ConnectionResult.SUCCESS)
+				{
+					Log.d("Tracking", "SwipeActivity");
+					TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
+				}
+			}
+			
+		});
 	}
 }
