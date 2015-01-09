@@ -149,7 +149,19 @@ public class SwipeActivity extends ActionBarActivity
 			trackEnabled = true;
 		}
 	}
-	
+
+	protected void onResume()
+	{
+		super.onResume();
+		//Don't show notifications if user is in-app
+		stopService(new Intent(this, NotificationService.class));
+	}
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		//Show notifications if user exits out of app
+		startService(new Intent(this, NotificationService.class));
+	}
 	private void setUpPagers()
 	{
 		// Create the adapter that will return a fragment for each of the three

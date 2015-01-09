@@ -67,6 +67,12 @@
             android:name=".SponsorActivity"
             android:label="@string/title_activity_sponsor" >
         </activity>
+
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
