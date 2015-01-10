@@ -1,12 +1,11 @@
 package com.example.dancemarathon;
 
-<<<<<<< HEAD
-import android.content.Intent;
-=======
+
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
->>>>>>> FETCH_HEAD
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -47,7 +46,7 @@ public class MtkFragment extends Fragment
             {
             	Intent intent = new Intent(v.getContext(), MtkProfile.class);
             	Bundle b = new Bundle();
-            	b.putParcelable("kid", parent.getKid(position));
+            	b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
             	intent.putExtra("position", position);
             	startActivityForResult(intent, 0);
             }

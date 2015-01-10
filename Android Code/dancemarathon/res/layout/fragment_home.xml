@@ -9,20 +9,12 @@
     <ImageView android:id="@+id/dance_marathon_header_image"
         android:src="@drawable/countdown"
         android:contentDescription="@string/dance_marathon"
-<<<<<<< HEAD
-        android:layout_marginTop="-40dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       	android:layout_alignParentTop="true"
-       	android:layout_centerHorizontal="true" />
-=======
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="-25dp"
         android:layout_marginBottom="-25dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
->>>>>>> FETCH_HEAD
     
     <!-- Header Text -->
     <TextView
@@ -34,33 +26,18 @@
         android:textColor="@color/dm_blue_primary"
         android:layout_below="@+id/dance_marathon_header_image"
         android:layout_marginLeft="50dp"
-<<<<<<< HEAD
-        android:layout_marginTop="160dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="0dp"
-        android:layout_centerHorizontal="true" />
-=======
         android:layout_marginTop="@dimen/headertext_margin_top"
         android:layout_marginRight="50dp" 
         android:layout_centerHorizontal="true"/>
->>>>>>> FETCH_HEAD
 
     <!-- Announcements -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-	    android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dip"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="210dp"
-=======
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/header_text"
         android:layout_marginTop="10dp"
->>>>>>> FETCH_HEAD
         android:text="@string/announcements"
         android:textColor="@color/dm_orange_primary"
         android:textSize="22sp"
@@ -70,18 +47,6 @@
 	<Button android:id="@+id/website"
 	    android:background="@color/dm_blue_primary"
 	    android:textColor="@color/White"
-<<<<<<< HEAD
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/website"
-	    android:textSize="14sp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="10dp"
-	    android:layout_centerHorizontal="true"
-	    android:layout_alignParentBottom="true"
-=======
 	    android:layout_width="@dimen/homepage_button_width"
         android:layout_height="@dimen/homepage_button_height"
 	    android:text="@string/website"
@@ -89,36 +54,22 @@
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
->>>>>>> FETCH_HEAD
         android:tag="http://www.floridadm.org/"
         android:onClick="openLink" /> 
 
     <!-- Game Button -->
     <Button android:id="@+id/game"
         android:background="@color/dm_blue_primary"
-<<<<<<< HEAD
-       android:textColor="@color/White"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/game"
-        android:textSize="14sp"
-=======
         android:textColor="@color/White"
         android:layout_width="@dimen/homepage_button_width"
         android:layout_height="@dimen/homepage_button_height"
         android:text="@string/game"
         android:textSize="@dimen/homepage_button_textsize"
->>>>>>> FETCH_HEAD
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-<<<<<<< HEAD
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentBottom="true"
-=======
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
->>>>>>> FETCH_HEAD
         android:tag="http://www.google.com/"
         android:onClick="openLink" />
 
@@ -126,27 +77,15 @@
     <Button android:id="@+id/donate"
         android:background="@color/dm_blue_primary"
         android:textColor="@color/White"
-<<<<<<< HEAD
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/donate"
-        android:textSize="14sp"
-=======
         android:layout_width="@dimen/homepage_button_width"
         android:layout_height="@dimen/homepage_button_height"
         android:text="@string/donate"
         android:textSize="@dimen/homepage_button_textsize"
->>>>>>> FETCH_HEAD
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-<<<<<<< HEAD
-       	android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true"
-=======
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
->>>>>>> FETCH_HEAD
         android:tag="http://www.google.com"
         android:onClick="openLink" />
         

@@ -61,13 +61,8 @@
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_kid">Kid</string>
-<<<<<<< HEAD
     <string name="title_activity_profile">Mtkprofile</string>
-=======
     <string name="title_activity_xml_map_parser">XmlMapParser</string>
     <string name="construction_fragment_string">This Page Is Under Construction!</string>
     <string name="title_activity_sponsor">SponsorActivity</string>
-    <string name="title_activity_daf">DafActivity</string>
->>>>>>> FETCH_HEAD
-
 </resources>
