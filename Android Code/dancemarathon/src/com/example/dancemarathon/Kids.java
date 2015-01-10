@@ -33,6 +33,8 @@ public class Kids implements Parcelable
 		return 0;
 	}
 	
+	// Methods to make this class Parcelable //
+	
 	@Override
 	public void writeToParcel(Parcel dest, int flags)
 	{
@@ -40,8 +42,31 @@ public class Kids implements Parcelable
 		dest.writeString(this.name);
 		dest.writeInt(this.age);
 		dest.writeString(this.story);
+		dest.writeString(this.image_name);
 	}
 	
+	private Kids(Parcel in)
+	{
+		name = in.readString();
+		age = in.readInt();
+		story = in.readString();
+		image_name = in.readString();
+	}
+	
+
+	public static final Parcelable.Creator<Kids> CREATOR
+    		= new Parcelable.Creator<Kids>() {
+		
+		public Kids createFromParcel(Parcel in) {
+		    return new Kids(in);
+		}
+		
+		public Kids[] newArray(int size) {
+		    return new Kids[size];
+		}
+	};
+	
+	//------------------------------//
 	protected String getName()
 	{
 		return name;
