@@ -28,14 +28,20 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 		//Must make call to the parent constructor
 		super(c, R.layout.timeline_item_view, events);
 		
-		this.context = c;
+		//Remove events that have passed and sort from closest to furthest away.
 		events = removeOldEvents(events);
 		Collections.sort(events);
-		this.events = events;
 		
-		//sortEvents();
+		this.events = events;
+		this.context = c;
 	}
 	
+	/**
+	 * This method is responsible for removing events that have already
+	 * occurred from the input array.
+	 * @param events The events
+	 * @return The events that have yet to pass
+	 */
 	private ArrayList<Event> removeOldEvents(ArrayList<Event> events)
 	{
 		ArrayList<Event> newEvents = new ArrayList<Event>(events);

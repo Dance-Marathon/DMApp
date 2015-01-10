@@ -29,9 +29,9 @@ Add state preservation of timeline data with cache					 D	    Chris
 Allow users to refresh timeline data								 D 		Chris
 Add logout button on user activity									 D		Chris
 Allow users to refresh kintera data									 D  	Chris
-Create service to send notifications when events happen	             NC     Chris
-Implement google analytics											 NC		Chris
-Add sponsor list activity											 NC     Chris
+Create service to send notifications when events happen	             D      Chris
+Implement google analytics											 D		Chris
+Add sponsor list activity											 D      Chris
 Make everything their proper fonts									 NC		Zach
 Add announcements listview											 NC     Zach
 Add social media activity											 NC 	Zach
@@ -39,3 +39,7 @@ Change app icon to new one from DM final graphics					 NC     Zach
 Countdown thing on homepage											 NC     Zach
 Resize images for MTK circles									     NC     Zach
 Possibly reduce size of image assests using png compressor   		 NC 	Zach
+Try to make app support multiple screen sizes 						 NC     ----
+Implement password hashing											 NC  	Chris
+Make navigation drawer prettier 									 NC 	Chris
+Remove all Log statements											 NC 	Both

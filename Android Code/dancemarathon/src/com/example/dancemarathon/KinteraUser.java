@@ -7,13 +7,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * @author Chris
+ * @author Chris Whitten
  * This class represents the kintera user
  */
 public class KinteraUser implements Parcelable, Serializable
 {
 	/**
-	 * 
+	 * This ID is important to keep KinteraUser serializable
 	 */
 	private static final long serialVersionUID = 2L;
 	public String userName;
@@ -38,6 +38,8 @@ public class KinteraUser implements Parcelable, Serializable
 		// TODO Auto-generated constructor stub
 	}
 
+	//Methods to make this class Parcelable//
+	
 	@Override
 	public int describeContents()
 	{
@@ -57,22 +59,6 @@ public class KinteraUser implements Parcelable, Serializable
 		dest.writeDouble(fundRaised);
 	}
 	
-	/**
-	 * @return the password
-	 */
-	public String getPassword()
-	{
-		return password;
-	}
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-
 	private KinteraUser(Parcel in)
 	{
 		this.userName = in.readString();
@@ -93,6 +79,25 @@ public class KinteraUser implements Parcelable, Serializable
 		public KinteraUser[] newArray(int size) {
 		    return new KinteraUser[size];
 		}
-};
+	};
+	
+	//----------------------//
+	
+	/**
+	 * @return the password
+	 */
+	public String getPassword()
+	{
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
 	
 }

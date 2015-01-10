@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -29,6 +30,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class SwipeActivity extends ActionBarActivity
 {
@@ -48,6 +52,7 @@ public class SwipeActivity extends ActionBarActivity
 	ListView mDrawerList;
 	KinteraUser user;
 	private String[] mOtherOptions;
+	boolean trackEnabled = false;
     static final int GET_USER_REQUEST = 1;
 	
 	//These methods allow us to maintain the state of the user//
@@ -64,6 +69,7 @@ public class SwipeActivity extends ActionBarActivity
 		user = savedInstanceState.getParcelable("user");
 	}
 	//
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -76,35 +82,104 @@ public class SwipeActivity extends ActionBarActivity
 		setUpPagers();
 		setUpNavDrawer();
 		user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
+		
+		//Set on page change listener to implement google analytics
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
-
+			int currPos = 0;
 			@Override
 			public void onPageScrollStateChanged(int arg0)
 			{
-				// TODO Auto-generated method stub
-				
+				//If page has settled
+				if(arg0 == ViewPager.SCROLL_STATE_IDLE)
+				{
+					int statePos = mViewPager.getCurrentItem();
+					//If the page settled on a different page
+					if(currPos != statePos)
+					{
+						//Send tracking event and update current position
+						sendTrackingView(statePos);
+						currPos = statePos;
+					}
+				}
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2)
 			{
 				// TODO Auto-generated method stub
-				
+			
 			}
 
 			@Override
 			public void onPageSelected(int pos)
 			{
+				//Open the navigation drawer
 				if(pos == 0)
 					mDrawerLayout.openDrawer(Gravity.START);
 			}
 			
+			private void sendTrackingView(int page)
+			{
+				if(trackEnabled)
+				{
+					String logString = "";
+					String sendString = "";
+					switch(page)
+					{
+					case 0: logString="NavDrawer"; sendString="Navigation Drawer";break;
+					case 1: logString="HomeFragment"; sendString="Home Swipe Screen";break;
+					case 2: logString="TimelineFragment"; sendString="Timeline Swipe Screen";break;
+					case 3: logString="MTKFragment"; sendString="MTK Swipe Screen";break;
+					}
+					Log.d("Tracking", logString);
+					TrackerManager.sendScreenView((MyApplication)getApplication(), sendString);
+				}
+			}
+			
 		});
+
 	}
 	
+	protected void onStart()
+	{
+		super.onStart();
+		
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "SwipeActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
+			trackEnabled = true;
+		}
+	}
+
+	protected void onResume()
+	{
+		super.onResume();
+		
+		//Don't show notifications if user is in-app
+		stopService(new Intent(this, NotificationService.class));
+		
+		//If this activity was started from the service, go to timeline
+		mViewPager.setCurrentItem(2);
+	}
+	
+	protected void onStop()
+	{
+		super.onStop();
+		//Show notifications if user exits out of app
+		//Could not use onDestroy because it is not always called
+		startService(new Intent(this, NotificationService.class));
+	}
+	
+	/**
+	 * This method handles the initializations for all the 
+	 * {@link ViewPager}/{@link PagerTabStrip} stuff
+	 */
 	private void setUpPagers()
 	{
-		// Create the adapter that will return a fragment for each of the three
+		// Create the adapter that will return a fragment for each of the 
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
@@ -122,6 +197,9 @@ public class SwipeActivity extends ActionBarActivity
 		tabStrip.setTextSize(TypedValue.COMPLEX_UNIT_PT, 7);
 	}
 	
+	/**
+	 * This method handles the initializations for the navigation drawer
+	 */
 	private void setUpNavDrawer()
 	{
 		 mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -141,7 +219,8 @@ public class SwipeActivity extends ActionBarActivity
 				// TODO Auto-generated method stub
 				switch(position)
 				{
-				case 2:openFundraisingActivity();
+				case 0:openSponsorActivity();break;
+				case 2:openFundraisingActivity();break;
 				}
 				
 			}
@@ -182,8 +261,6 @@ public class SwipeActivity extends ActionBarActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.swipe, menu);
 		return true;
 	}
 
@@ -193,12 +270,7 @@ public class SwipeActivity extends ActionBarActivity
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings)
-		{
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		return true;
 	}
 
 	/**
@@ -223,6 +295,20 @@ public class SwipeActivity extends ActionBarActivity
 		}
 	}
 	
+	/**
+	 * This method handles opening the sponsor activity
+	 */
+	private void openSponsorActivity()
+	{
+		Intent intent = new Intent(this, SponsorActivity.class);
+		startActivity(intent);
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int, android.content.Intent)
+	 * The current implementation allows the user data to be passed back from the login activity
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if(requestCode == GET_USER_REQUEST)
@@ -237,6 +323,7 @@ public class SwipeActivity extends ActionBarActivity
 			}
 		}
 	}
+	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.

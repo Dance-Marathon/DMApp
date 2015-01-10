@@ -6,12 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.RectF;
-import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * This class is a work in progress. The goal is to display a fundraising thermometer.
+ * @author Chris Whitten
+ *
+ */
 public class ThermometerView extends View
 {
 

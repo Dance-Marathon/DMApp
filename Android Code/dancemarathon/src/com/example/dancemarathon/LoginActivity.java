@@ -1,18 +1,26 @@
 package com.example.dancemarathon;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class LoginActivity extends ActionBarActivity
 {
+	/**
+	 * Flag used to pass back user to SwipeActivity.
+	 */
 	public static int IS_USER_STILL_LOGGED_IN = 5;
-	@Override
+	
+	@Override	
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -22,12 +30,26 @@ public class LoginActivity extends ActionBarActivity
 		getSupportActionBar().hide();
 				
 		FragmentManager manager = getSupportFragmentManager();
+		
+		//We don't want duplicate fragments on top of each other
 		if(savedInstanceState != null)
 			return;
 		
 		manager.beginTransaction().add(R.id.kintera_container, LoginFragment.newInstance()).commit();
 	}
-
+	
+	protected void onStart()
+	{
+		super.onStart();
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "LoginActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Login Screen");
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -50,6 +72,7 @@ public class LoginActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 	
+	//This method handles passing the user object back
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if(requestCode == LoginFragment.IS_USER_STILL_LOGGED_IN)

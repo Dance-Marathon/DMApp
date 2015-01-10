@@ -10,6 +10,9 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -30,21 +33,14 @@ import android.widget.Toast;
 public class UserActivity extends ActionBarActivity
 {
 	KinteraUser user;
+	UserLoader loader;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user);
 		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle("Fundraising Progress");
-		
-		int color = getResources().getColor(R.color.dm_orange_primary);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
-		
+		//Get user from intent
 		KinteraUser user = getIntent().getExtras().getParcelable("user");
 		this.user = user;
 		//Log.d("User", user.realName);
@@ -54,27 +50,43 @@ public class UserActivity extends ActionBarActivity
 		
 		//Set result of this activity to the user
 		setActivityResult(user);
-	}
-	public void logout(View v)
-	{
-		this.setResult(RESULT_CANCELED);
-		CacheManager.clearCacheFile(this, "user");
-		this.finish();
+		
+		//Instantiate loader to prevent null
+		loader = new UserLoader();
+		
+		//Set action bar title and color
+		ActionBar bar = getSupportActionBar();
+		bar.setTitle("Fundraising Progress");
+		
+		int color = getResources().getColor(R.color.dm_orange_primary);
+		ColorDrawable cd = new ColorDrawable();
+		cd.setColor(color);
+		bar.setBackgroundDrawable(cd);
 	}
 	
-	public void setActivityResult(KinteraUser user)
+	protected void onStop()
 	{
-		Intent i = new Intent();
-		Bundle b = new Bundle();
-		b.putParcelable("user", user);
-		i.putExtras(b);
-		setResult(RESULT_OK, i);
+		//If a loader exists, cancel its execution
+		if(loader != null)
+			loader.cancel(true);
 	}
-	public void refreshUser(String username, String password)
+	
+	protected void onStart()
 	{
-		findViewById(R.id.user_loading_overlay).setVisibility(View.VISIBLE);
-		new UserLoader().execute(username, password);
+		super.onStart();
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "UserActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "User Screen");
+		}
 	}
+	
+	/**
+	 * Set all the important data fields for this view
+	 * @param user The user
+	 */
 	private void setFields(final KinteraUser user)
 	{
 		//Set textviews
@@ -100,11 +112,53 @@ public class UserActivity extends ActionBarActivity
 			}
 		});
 	}
+	
+	/**
+	 * Clears the user cache file and exits this activity
+	 * @param v The logout button view
+	 */
+	public void logout(View v)
+	{
+		this.setResult(RESULT_CANCELED);
+		CacheManager.clearCacheFile(this, "user");
+		this.finish();
+	}
+	
+	/**
+	 * This method sets the result of this activity with the input user
+	 * @param user The user to report
+	 */
+	public void setActivityResult(KinteraUser user)
+	{
+		Intent i = new Intent();
+		Bundle b = new Bundle();
+		b.putParcelable("user", user);
+		i.putExtras(b);
+		setResult(RESULT_OK, i);
+	}
+	
+	/**
+	 * Refresh the user information
+	 * @param username The username to use
+	 * @param password The password to use
+	 */
+	public void refreshUser(String username, String password)
+	{
+		findViewById(R.id.user_loading_overlay).setVisibility(View.VISIBLE);
+		loader = new UserLoader();
+		loader.execute(username, password);
+	}
+	
+	/**
+	 * Open the user's kintera page in the browser
+	 * @param url
+	 */
 	public void openKinteraPage(String url)
 	{
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		startActivity(browserIntent);
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
