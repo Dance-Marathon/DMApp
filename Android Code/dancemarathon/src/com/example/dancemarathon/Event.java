@@ -17,7 +17,7 @@ import android.util.Log;
 public class Event implements Serializable, Comparable<Event>
 {
 	/**
-	 * 
+	 * This ID is important when it comes to keeping event serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;

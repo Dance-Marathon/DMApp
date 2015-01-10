@@ -120,6 +120,7 @@ public class LoginFragment extends Fragment
 			    Activity.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 	}
+	
 	/**
 	 * This method shows a toast with the given message
 	 * @param message The message to show
@@ -206,6 +207,7 @@ public class LoginFragment extends Fragment
 		{
 			makeToast(params[0]);
 		}
+		
 		protected void onPostExecute(KinteraUser user)
 		{	
 			//If the load was successful, start the user activity

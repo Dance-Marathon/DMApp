@@ -64,6 +64,9 @@ public class TimelineFragment extends Fragment
 	 */
 	private EventLoader loader;
 	
+	/**
+	 * The path to the event webservice on the server
+	 */
 	private static final String eventWebServicePath = "http://dev.floridadm.org/app/events.php";
 	
 	
@@ -126,6 +129,9 @@ public class TimelineFragment extends Fragment
 		loader = new EventLoader();
 	}
 	
+	/**
+	 * This method is used to force the timeline to update
+	 */
 	public void forceEventListUpdate()
 	{
 		resetLoader();
@@ -283,11 +289,17 @@ public class TimelineFragment extends Fragment
 		hazyView.setVisibility(View.VISIBLE);
 		hazyView.bringToFront();
 	}
+	
+	/**
+	 * Removes the hazy view over all other views, if one exists
+	 * @param v The main view
+	 */
 	private void removeHazyForeground(View v)
 	{
 		View hazyView = v.findViewById(R.id.hazy_foreground);
 		hazyView.setVisibility(View.GONE);
 	}
+	
 	/**
 	 * This class is responsible for loading the events. It is necessary because Android
 	 * does not allow you to have loading operations on the same thread as the UI.
@@ -342,8 +354,7 @@ public class TimelineFragment extends Fragment
 			return events;
 		}
 		
-		
-		
+			
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 		 */
@@ -408,7 +419,6 @@ public class TimelineFragment extends Fragment
 					events.add(e);
 				} catch (ParseException e)
 				{
-					//Must remove this before release
 					Log.d("Event Parsing", "Failed to parse event" + title);
 				}
 			}

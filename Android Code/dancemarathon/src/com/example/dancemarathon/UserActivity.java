@@ -40,15 +40,7 @@ public class UserActivity extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user);
 		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle("Fundraising Progress");
-		
-		int color = getResources().getColor(R.color.dm_orange_primary);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
-		
+		//Get user from intent
 		KinteraUser user = getIntent().getExtras().getParcelable("user");
 		this.user = user;
 		//Log.d("User", user.realName);
@@ -61,12 +53,24 @@ public class UserActivity extends ActionBarActivity
 		
 		//Instantiate loader to prevent null
 		loader = new UserLoader();
+		
+		//Set action bar title and color
+		ActionBar bar = getSupportActionBar();
+		bar.setTitle("Fundraising Progress");
+		
+		int color = getResources().getColor(R.color.dm_orange_primary);
+		ColorDrawable cd = new ColorDrawable();
+		cd.setColor(color);
+		bar.setBackgroundDrawable(cd);
 	}
+	
 	protected void onStop()
 	{
+		//If a loader exists, cancel its execution
 		if(loader != null)
 			loader.cancel(true);
 	}
+	
 	protected void onStart()
 	{
 		super.onStart();
@@ -78,27 +82,11 @@ public class UserActivity extends ActionBarActivity
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "User Screen");
 		}
 	}
-	public void logout(View v)
-	{
-		this.setResult(RESULT_CANCELED);
-		CacheManager.clearCacheFile(this, "user");
-		this.finish();
-	}
 	
-	public void setActivityResult(KinteraUser user)
-	{
-		Intent i = new Intent();
-		Bundle b = new Bundle();
-		b.putParcelable("user", user);
-		i.putExtras(b);
-		setResult(RESULT_OK, i);
-	}
-	public void refreshUser(String username, String password)
-	{
-		findViewById(R.id.user_loading_overlay).setVisibility(View.VISIBLE);
-		loader = new UserLoader();
-		loader.execute(username, password);
-	}
+	/**
+	 * Set all the important data fields for this view
+	 * @param user The user
+	 */
 	private void setFields(final KinteraUser user)
 	{
 		//Set textviews
@@ -124,11 +112,53 @@ public class UserActivity extends ActionBarActivity
 			}
 		});
 	}
+	
+	/**
+	 * Clears the user cache file and exits this activity
+	 * @param v The logout button view
+	 */
+	public void logout(View v)
+	{
+		this.setResult(RESULT_CANCELED);
+		CacheManager.clearCacheFile(this, "user");
+		this.finish();
+	}
+	
+	/**
+	 * This method sets the result of this activity with the input user
+	 * @param user The user to report
+	 */
+	public void setActivityResult(KinteraUser user)
+	{
+		Intent i = new Intent();
+		Bundle b = new Bundle();
+		b.putParcelable("user", user);
+		i.putExtras(b);
+		setResult(RESULT_OK, i);
+	}
+	
+	/**
+	 * Refresh the user information
+	 * @param username The username to use
+	 * @param password The password to use
+	 */
+	public void refreshUser(String username, String password)
+	{
+		findViewById(R.id.user_loading_overlay).setVisibility(View.VISIBLE);
+		loader = new UserLoader();
+		loader.execute(username, password);
+	}
+	
+	/**
+	 * Open the user's kintera page in the browser
+	 * @param url
+	 */
 	public void openKinteraPage(String url)
 	{
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		startActivity(browserIntent);
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

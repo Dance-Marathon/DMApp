@@ -51,6 +51,12 @@ public class CacheManager
 		}
 	}
 	
+	/**
+	 * This method will read the first object in the cache file
+	 * @param c The context to use
+	 * @param fileName The cache file name
+	 * @return The object
+	 */
 	public static Object readObjectFromCacheFile(Context c, String fileName)
 	{
 		File f =  new File(c.getCacheDir(), fileName);
@@ -83,7 +89,8 @@ public class CacheManager
 			return null;
 		}
 	}
-	/**
+	
+	/** 
 	 * Clear the cache file
 	 * @param c the context to use
 	 * @param fileName The name of the cache file

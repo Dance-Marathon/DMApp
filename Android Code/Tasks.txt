@@ -39,3 +39,7 @@ Change app icon to new one from DM final graphics					 NC     Zach
 Countdown thing on homepage											 NC     Zach
 Resize images for MTK circles									     NC     Zach
 Possibly reduce size of image assests using png compressor   		 NC 	Zach
+Try to make app support multiple screen sizes 						 NC     ----
+Implement password hashing											 NC  	Chris
+Make navigation drawer prettier 									 NC 	Chris
+Remove all Log statements											 NC 	Both

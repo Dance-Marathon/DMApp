@@ -69,6 +69,7 @@ public class SwipeActivity extends ActionBarActivity
 		user = savedInstanceState.getParcelable("user");
 	}
 	//
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -81,6 +82,8 @@ public class SwipeActivity extends ActionBarActivity
 		setUpPagers();
 		setUpNavDrawer();
 		user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
+		
+		//Set on page change listener to implement google analytics
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener(){
 			int currPos = 0;
 			@Override
@@ -140,6 +143,7 @@ public class SwipeActivity extends ActionBarActivity
 	protected void onStart()
 	{
 		super.onStart();
+		
 		//Register google analytics page hit
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
@@ -153,20 +157,29 @@ public class SwipeActivity extends ActionBarActivity
 	protected void onResume()
 	{
 		super.onResume();
+		
 		//Don't show notifications if user is in-app
 		stopService(new Intent(this, NotificationService.class));
+		
 		//If this activity was started from the service, go to timeline
 		mViewPager.setCurrentItem(2);
 	}
+	
 	protected void onStop()
 	{
 		super.onStop();
 		//Show notifications if user exits out of app
+		//Could not use onDestroy because it is not always called
 		startService(new Intent(this, NotificationService.class));
 	}
+	
+	/**
+	 * This method handles the initializations for all the 
+	 * {@link ViewPager}/{@link PagerTabStrip} stuff
+	 */
 	private void setUpPagers()
 	{
-		// Create the adapter that will return a fragment for each of the three
+		// Create the adapter that will return a fragment for each of the 
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
@@ -184,6 +197,9 @@ public class SwipeActivity extends ActionBarActivity
 		tabStrip.setTextSize(TypedValue.COMPLEX_UNIT_PT, 7);
 	}
 	
+	/**
+	 * This method handles the initializations for the navigation drawer
+	 */
 	private void setUpNavDrawer()
 	{
 		 mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -245,8 +261,6 @@ public class SwipeActivity extends ActionBarActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.swipe, menu);
 		return true;
 	}
 
@@ -256,12 +270,7 @@ public class SwipeActivity extends ActionBarActivity
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings)
-		{
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		return true;
 	}
 
 	/**
@@ -294,6 +303,12 @@ public class SwipeActivity extends ActionBarActivity
 		Intent intent = new Intent(this, SponsorActivity.class);
 		startActivity(intent);
 	}
+	
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int, android.content.Intent)
+	 * The current implementation allows the user data to be passed back from the login activity
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		if(requestCode == GET_USER_REQUEST)
@@ -308,6 +323,7 @@ public class SwipeActivity extends ActionBarActivity
 			}
 		}
 	}
+	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.

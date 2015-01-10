@@ -18,7 +18,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 /**
- * @author Chris
+ * @author Chris Whitten
  * This service is responsible for sending notifications to the user
  * when DM events are close at hand.
  */
@@ -44,8 +44,8 @@ public class NotificationService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
+			//testNotification("In on receiver");
 			//The time ticks every minute
-			testNotification("In on receiver");
 			Log.d("Notifications", "In on receive");
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{

@@ -7,6 +7,13 @@ import com.google.android.gms.analytics.Tracker;
 
 import android.app.Application;
 
+/**
+ * This class is necessary to implement google analytics.
+ * See <i>https://developers.google.com/analytics/devguides/collection/android/v4/</i>
+ * for more information.
+ * @author Chris Whitten
+ *
+ */
 public class MyApplication extends Application
 {
 	private static final String PROPERTY_ID = "UA-31255631-4";

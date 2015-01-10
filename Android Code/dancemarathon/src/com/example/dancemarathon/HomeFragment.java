@@ -19,7 +19,6 @@ import android.widget.Button;
 public class HomeFragment extends Fragment
 {
 
-	//Do not use in ViewPager
 	public HomeFragment()
 	{
 		// Required empty public constructor
@@ -42,6 +41,10 @@ public class HomeFragment extends Fragment
 		return f;
 	}
 	
+	/**
+	 * This method sets the listeners for the home screen's buttons
+	 * @param v The view the buttons belong to
+	 */
 	private void setButtonListeners(View v)
 	{
 		Button gameButton = (Button) v.findViewById(R.id.game);
@@ -52,6 +55,11 @@ public class HomeFragment extends Fragment
 		setButtonTracker(websiteButton);
 		setButtonTracker(donateButton);
 	}
+	
+	/**
+	 * This method implements google analytics to track the button clicks
+	 * @param b The button to track
+	 */
 	private void setButtonTracker(final Button b)
 	{
 		b.setOnClickListener(new OnClickListener(){
