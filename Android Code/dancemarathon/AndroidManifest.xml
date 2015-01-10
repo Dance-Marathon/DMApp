@@ -62,7 +62,7 @@
             android:label="@string/title_activity_kid" >
         </activity>
         <activity
-            android:name=".MtkProfiler"
+            android:name=".MtkProfile"
             android:label="@string/title_activity_profile" >
         </activity>
         <activity

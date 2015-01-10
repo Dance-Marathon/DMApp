@@ -33,7 +33,7 @@ public class MtkFragment extends Fragment
 		
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
-		CustomAdapter adapter = new CustomAdapter(this.getActivity());
+		final CustomAdapter adapter = new CustomAdapter(this.getActivity());
 	    gridview.setAdapter(adapter);
 	    gridview.setOnItemClickListener(new OnItemClickListener() 
 	    {
@@ -42,10 +42,15 @@ public class MtkFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View v, int position,
                     long id) 
             {
-            	Intent intent = new Intent(v.getContext(), MtkProfile.class);
+            	Intent intent = new Intent(getActivity(), MtkProfile.class);
             	Bundle b = new Bundle();
+<<<<<<< HEAD
             	b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
             	intent.putExtras(b);
+=======
+            	b.putParcelable("kid", (Kids)adapter.getItem(position));
+            	intent.putExtra("position", position);
+>>>>>>> master
             	startActivity(intent);
             }
 	    });
