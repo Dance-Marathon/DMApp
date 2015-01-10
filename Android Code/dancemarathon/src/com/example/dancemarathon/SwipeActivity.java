@@ -162,7 +162,11 @@ public class SwipeActivity extends ActionBarActivity
 		stopService(new Intent(this, NotificationService.class));
 		
 		//If this activity was started from the service, go to timeline
-		mViewPager.setCurrentItem(2);
+		if(this.getIntent().hasExtra("start_source"))
+		{
+			if(this.getIntent().getStringExtra("start_source").equals("Service"))
+				mViewPager.setCurrentItem(2);
+		}
 	}
 	
 	protected void onStop()
@@ -256,6 +260,7 @@ public class SwipeActivity extends ActionBarActivity
 			}
 	    	 
 	     });
+	
 	}
 	
 	@Override

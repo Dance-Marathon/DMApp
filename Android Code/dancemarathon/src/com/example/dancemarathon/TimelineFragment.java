@@ -163,7 +163,7 @@ public class TimelineFragment extends Fragment
 		final ListView eventList = (ListView) v.findViewById(R.id.event_list); //Get the list view
 		
 		eventList.setAdapter(listAdapter);
-		//Set click listener which will replace this fragment with the event fragment on click
+		//Set click listener which will open event activity
 		OnItemClickListener oc = new OnItemClickListener()
 		{
 
