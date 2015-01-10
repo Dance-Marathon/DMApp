@@ -61,6 +61,6 @@
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_kid">Kid</string>
-    <string name="title_activity_xml_map_parser">XmlMapParser</string>
+    <string name="title_activity_profile">Mtkprofile</string>
 
 </resources>

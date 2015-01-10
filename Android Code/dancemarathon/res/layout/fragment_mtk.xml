@@ -1,11 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
     tools:context="com.example.dancemarathon.MtkFragment" >
 
-	<GridView 
+	<GridView
 	    android:id="@+id/mtk_gridview"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
@@ -15,5 +15,5 @@
 	    android:horizontalSpacing="10dp"
 	    android:stretchMode="columnWidth"
 	    android:gravity="center" />
-
-</FrameLayout>
+	
+</RelativeLayout>

@@ -54,8 +54,8 @@
             android:label="@string/title_activity_kid" >
         </activity>
         <activity
-            android:name=".XmlMapParser"
-            android:label="@string/title_activity_xml_map_parser" >
+            android:name=".MtkProfiler"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 

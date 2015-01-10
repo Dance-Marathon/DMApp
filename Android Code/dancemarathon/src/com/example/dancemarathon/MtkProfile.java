@@ -2,28 +2,24 @@ package com.example.dancemarathon;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.ActionBarActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  * 
  */
-public class MtkProfile extends Fragment
+public class MtkProfile extends ActionBarActivity
 {
 
 	public MtkProfile()
 	{
 		// Required empty public constructor
 	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
+	
+	protected void onCreate(Bundle savedInstanceState)
 	{
-		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_mtk_profile, container, false);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fragment_mtk_profile);
 	}
 	
 	public static MtkProfile newInstance()

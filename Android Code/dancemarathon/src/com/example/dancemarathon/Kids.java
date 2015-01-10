@@ -3,7 +3,10 @@ package com.example.dancemarathon;
 import java.text.ParseException;
 import java.util.Comparator;
 
-public class Kids
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Kids implements Parcelable
 {
 	private String name;
 	private int age;
@@ -21,6 +24,22 @@ public class Kids
 	public Kids()
 	{
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public int describeContents()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags)
+	{
+		// TODO Auto-generated method stub
+		dest.writeString(this.name);
+		dest.writeInt(this.age);
+		dest.writeString(this.story);
 	}
 	
 	protected String getName()
