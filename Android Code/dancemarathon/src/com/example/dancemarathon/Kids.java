@@ -1,6 +1,7 @@
 package com.example.dancemarathon;
 
 import java.text.ParseException;
+import java.util.Comparator;
 
 public class Kids
 {
@@ -62,5 +63,10 @@ public class Kids
 		this.image_name = image_name;
 	}
 	
+	public static Comparator<Kids> COMPARE_BY_NAME = new Comparator<Kids>() {
+        public int compare(Kids one, Kids other) {
+            return one.getName().compareTo(other.getName());
+        }
+    };
 	
 }
