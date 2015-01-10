@@ -1,7 +1,5 @@
 package com.example.dancemarathon;
 
-
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -47,8 +45,8 @@ public class MtkFragment extends Fragment
             	Intent intent = new Intent(v.getContext(), MtkProfile.class);
             	Bundle b = new Bundle();
             	b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
-            	intent.putExtra("position", position);
-            	startActivityForResult(intent, 0);
+            	intent.putExtras(b);
+            	startActivity(intent);
             }
 	    });
 	    

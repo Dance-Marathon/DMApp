@@ -152,12 +152,14 @@ public class CustomAdapter extends BaseAdapter {
 			imageView.setLayoutParams(new GridView.LayoutParams(140, 140));
 			//imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 			imageView.setPadding(1, 1, 1, 1);
+			
 		}
 
 		else {
 			imageView = (CircleView) convertView;
+			
 		}
-
+		
 		// Set imageView content
 		imageView.setImageResource(imageID);
 
