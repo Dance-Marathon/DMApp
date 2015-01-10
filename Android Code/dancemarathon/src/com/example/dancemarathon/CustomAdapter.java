@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -17,18 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
  * @author Chris Whitten This class provides the image information to the mtk
  *         grid view. See the Android developer guide for more information.
  */
-public class ImageAdapter extends BaseAdapter {
+public class CustomAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kids> kids = new ArrayList<Kids>();
 
-	public ImageAdapter(Context c) {
+	public CustomAdapter (Context c) {
 		mContext = c;
 		kids = ParseTheKids();
 	}
@@ -42,7 +40,7 @@ public class ImageAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return kids.get(position);
 	}
 
 	@Override
@@ -109,7 +107,7 @@ public class ImageAdapter extends BaseAdapter {
 			}
 		
 			// Alphabetizes arraylist by name if wanted
-			// Collections.sort(kids_read, Kids.COMPARE_BY_NAME);
+			Collections.sort(kids_read, Kids.COMPARE_BY_NAME);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -119,7 +117,12 @@ public class ImageAdapter extends BaseAdapter {
 		
 		return kids_read;
 	}
-
+	
+	public Kids getKid(int position)
+	{
+		return this.kids.get(position);
+	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -160,18 +163,13 @@ public class ImageAdapter extends BaseAdapter {
 
 		// Set orange border for even positions, blue for odd
 		if (position % 2 == 0) {
-			imageView.setBorderColor(0x99F37021);
-		} else {
-			imageView.setBorderColor(0x99014083);
+			imageView.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_primary));
+		} 
+		else
+		{
+			imageView.setBorderColor(mContext.getResources().getColor(R.color.dm_blue_primary));
 		}
 
 		return imageView;
-	}
-	
-	public class CustomComparator implements Comparator<Kids> {
-	    @Override
-	    public int compare(Kids o1, Kids o2) {
-	        return o1.getName().compareTo(o2.getName());
-	    }
 	}
 }

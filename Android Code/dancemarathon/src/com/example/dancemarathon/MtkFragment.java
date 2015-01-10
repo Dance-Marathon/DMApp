@@ -1,8 +1,11 @@
 package com.example.dancemarathon;
 
+
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +22,6 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class MtkFragment extends Fragment
 {
-
 	public MtkFragment()
 	{
 		// Required empty public constructor
@@ -33,8 +35,22 @@ public class MtkFragment extends Fragment
 		
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
-		ImageAdapter adapter = new ImageAdapter(this.getActivity());
+		CustomAdapter adapter = new CustomAdapter(this.getActivity());
 	    gridview.setAdapter(adapter);
+	    gridview.setOnItemClickListener(new OnItemClickListener() 
+	    {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position,
+                    long id) 
+            {
+            	Intent intent = new Intent(v.getContext(), MtkProfile.class);
+            	Bundle b = new Bundle();
+            	b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
+            	intent.putExtra("position", position);
+            	startActivityForResult(intent, 0);
+            }
+	    });
 	    
 		// Inflate the layout for this fragment
 		return v;
@@ -45,6 +61,6 @@ public class MtkFragment extends Fragment
 	 {
 		 MtkFragment f = new MtkFragment();
 		 return f;
-	 }	        
+	 }
 	
 }
