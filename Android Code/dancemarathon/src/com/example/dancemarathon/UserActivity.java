@@ -66,6 +66,7 @@ public class UserActivity extends ActionBarActivity
 	
 	protected void onStop()
 	{
+		super.onStop();
 		//If a loader exists, cancel its execution
 		if(loader != null)
 			loader.cancel(true);

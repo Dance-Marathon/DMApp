@@ -145,7 +145,11 @@ public class TimelineFragment extends Fragment
 	public void onStop()
 	{
 		super.onStop();
-		loader.cancel(true);
+		//If a loader exists, cancel its execution
+		if(loader != null)
+			loader.cancel(true);
+		
+		//Remove any hazy foreground that may exist and set the refresh layout status to not refreshing
 		removeHazyForeground(getView());
 		((SwipeRefreshLayout) getView().findViewById(R.id.event_list_container)).setRefreshing(false);
 	}
