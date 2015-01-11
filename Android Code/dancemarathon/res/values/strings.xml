@@ -54,9 +54,13 @@
 
     <!-- Navigation Drawer List -->
     <string-array name="navList">
-        <item>Sponsors</item>
+        <item>FAQ</item>
         <item>Social Media</item>
+        <item>Sponsors</item>
         <item>My Fundraising Progress</item>
+        <item>About Dance Marathon</item>
+        <item>Contact Us!</item>
+        
     </string-array>
 
     <string name="title_activity_login">LoginActivity</string>
