@@ -35,7 +35,7 @@ Add sponsor list activity											 D      Chris
 Make everything their proper fonts									 NC		Zach
 Add announcements listview											 NC     Zach
 Add social media activity											 NC 	Zach
-Change app icon to new one from DM final graphics					 NC     Zach
+Change app icon to new one from DM final graphics					 D      Zach
 Countdown thing on homepage											 NC     Zach
 Resize images for MTK circles									     NC     Zach
 Possibly reduce size of image assests using png compressor   		 NC 	Zach
