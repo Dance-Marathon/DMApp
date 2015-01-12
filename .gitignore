@@ -36,3 +36,6 @@ Android Code/dancemarathon/project.properties
 *.classpath
 Android Code/dancemarathon/.classpath
 Android Code/dancemarathon/project.properties
+Android Code/dancemarathon/.settings/org.eclipse.ltk.core.refactoring.prefs
+Android Code/dancemarathon/.classpath
+Android Code/dancemarathon/project.properties
