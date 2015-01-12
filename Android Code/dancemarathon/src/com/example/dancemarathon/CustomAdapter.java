@@ -146,23 +146,8 @@ public class CustomAdapter extends BaseAdapter {
 	        holder = new ViewHolder();
 	        
 	        holder.name = (TextView) convertView.findViewById(R.id.grid_kid_name);
-			holder.name.setLayoutParams(new AbsListView.LayoutParams(10, 10));
-	        
 	        holder.pic = (CircleView) convertView.findViewById(R.id.grid_kid_pic);
-			holder.pic.setLayoutParams(new AbsListView.LayoutParams(140, 140));
-			holder.pic.setScaleType(ImageView.ScaleType.FIT_CENTER);
-			holder.pic.setPadding(1, 1, 1, 1);
-			holder.pic.setImageResource(imageId);
-
-	 		// Set orange border for even positions, blue for odd
-	 		if (position % 2 == 0) {
-	 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_primary));
-	 		} 
-	 		else
-	 		{
-	 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_blue_primary));
-	 		}
-	 		
+	        
 	 		convertView.setTag(holder);
 	    } 
 	    else 
@@ -170,8 +155,17 @@ public class CustomAdapter extends BaseAdapter {
 	    	holder = (ViewHolder) convertView.getTag();
 	    }
 	    
+	    holder.pic.setImageResource(imageId);
         holder.name.setText(this.kids.get(position).getName());
-        holder.pic.setBackgroundResource(imageId);
+        
+        // Set orange border for even positions, blue for odd
+ 		if (position % 2 == 0) {
+ 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_primary));
+ 		} 
+ 		else
+ 		{
+ 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_blue_primary));
+ 		}
 
 	    return convertView;
 	}
