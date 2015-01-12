@@ -12,10 +12,12 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -123,53 +125,48 @@ public class CustomAdapter extends BaseAdapter {
 		return this.kids.get(position);
 	}
 	
+    /*private view holder class*/
+    private class ViewHolder {
+        CircleView pic = new CircleView (mContext);
+        TextView name = new TextView(mContext);
+
+    }
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+    	ViewHolder holder = null;
+	    
+		String image_name = kids.get(position).getImage_name().toLowerCase(Locale.ENGLISH).replace(".png", "");
+		int imageId = mContext.getResources().getIdentifier(image_name,"drawable", "com.example.dancemarathon");
 
-		// Get kid's name
-		String name = this.kids.get(position).getName();
+	    if (convertView == null) 
+	    {	
+		    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	        convertView = inflater.inflate(R.layout.gridview_item, null);
+	        holder = new ViewHolder();
+	        
+	        holder.name = (TextView) convertView.findViewById(R.id.grid_kid_name);
+	        holder.pic = (CircleView) convertView.findViewById(R.id.grid_kid_pic);
+	        
+	 		convertView.setTag(holder);
+	    } 
+	    else 
+	    {
+	    	holder = (ViewHolder) convertView.getTag();
+	    }
+	    
+	    holder.pic.setImageResource(imageId);
+        holder.name.setText(this.kids.get(position).getName());
+        
+        // Set orange border for even positions, blue for odd
+ 		if (position % 2 == 0) {
+ 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_primary));
+ 		} 
+ 		else
+ 		{
+ 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_blue_primary));
+ 		}
 
-		// Get name of image for kid and adjust it to match the drawable name
-		String image_name = this.kids.get(position).getImage_name()
-				.toLowerCase(Locale.ENGLISH);
-		image_name = image_name.replace(".png", "");
-
-		// Create ID of image
-		int imageID = mContext.getResources().getIdentifier(image_name,
-				"drawable", "com.example.dancemarathon");
-
-		// LayoutInflater inflater = (LayoutInflater)
-		// mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		// View rowView = inflater.inflate(R.layout.fragment_mtk, null);
-		TextView textView = new TextView(mContext);
-		CircleView imageView;
-
-		if (convertView == null) { // if it's not recycled, initialize some
-									// attributes
-			textView.setText(name);
-
-			imageView = new CircleView(mContext);
-			imageView.setLayoutParams(new GridView.LayoutParams(140, 140));
-			//imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-			imageView.setPadding(1, 1, 1, 1);
-		}
-
-		else {
-			imageView = (CircleView) convertView;
-		}
-
-		// Set imageView content
-		imageView.setImageResource(imageID);
-
-		// Set orange border for even positions, blue for odd
-		if (position % 2 == 0) {
-			imageView.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_primary));
-		} 
-		else
-		{
-			imageView.setBorderColor(mContext.getResources().getColor(R.color.dm_blue_primary));
-		}
-
-		return imageView;
+	    return convertView;
 	}
 }
