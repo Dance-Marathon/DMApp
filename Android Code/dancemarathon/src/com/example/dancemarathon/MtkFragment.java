@@ -44,13 +44,8 @@ public class MtkFragment extends Fragment
             {
             	Intent intent = new Intent(getActivity(), MtkProfile.class);
             	Bundle b = new Bundle();
-<<<<<<< HEAD
-            	b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
-            	intent.putExtras(b);
-=======
             	b.putParcelable("kid", (Kids)adapter.getItem(position));
-            	intent.putExtra("position", position);
->>>>>>> master
+            	intent.putExtras(b);
             	startActivity(intent);
             }
 	    });

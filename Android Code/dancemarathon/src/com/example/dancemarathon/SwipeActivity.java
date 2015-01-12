@@ -377,7 +377,7 @@ public class SwipeActivity extends ActionBarActivity
 			Locale l = Locale.getDefault();
 			switch (position)
 			{
-			case 0: return sb;
+			case 0:return sb;
 			case 1:return getString(R.string.title_section1).toUpperCase(l);
 			case 2:return getString(R.string.title_section2).toUpperCase(l);
 			case 3:return getString(R.string.title_section3).toUpperCase(l);
