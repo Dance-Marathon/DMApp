@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="100dp"
+    android:paddingBottom="65dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="70dp"
-    android:background="@color/white"
+    android:paddingTop="45dp"
+    android:background="@color/White"
     tools:context="com.example.dancemarathon.SocialMedia" >
     
     <ImageView
