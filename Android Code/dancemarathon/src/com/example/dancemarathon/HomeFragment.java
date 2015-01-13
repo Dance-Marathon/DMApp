@@ -16,7 +16,11 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+<<<<<<< HEAD
 
+=======
+import android.util.Log;
+>>>>>>> FETCH_HEAD
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +41,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 public class HomeFragment extends Fragment
 {
 	private boolean loadSuccessful;
+	private AnnouncementsLoader loader;
 	/**
 	 * The path to the event webservice on the server
 	 */
@@ -71,7 +76,17 @@ public class HomeFragment extends Fragment
 		donate.setTypeface(button_font);
 		
 		setButtonListeners(v);
+		loader = new AnnouncementsLoader();
+		loader.execute();
+		
 		return v;
+	}
+	
+	public void onStop()
+	{
+		super.onStop();
+		if(loader != null)
+			loader.cancel(true);
 	}
 	
 	public static HomeFragment newInstance()
@@ -94,7 +109,7 @@ public class HomeFragment extends Fragment
 	 * This class is responsible for loading the events. It is necessary because Android
 	 * does not allow you to have loading operations on the same thread as the UI.
 	 */
-	private class EventLoader extends AsyncTask<Void, Double, ArrayList<Announcement>>
+	private class AnnouncementsLoader extends AsyncTask<Void, Double, ArrayList<Announcement>>
 	{
 		
 		/* (non-Javadoc)
@@ -158,6 +173,7 @@ public class HomeFragment extends Fragment
 				AnnouncementsAdapter adapter = new AnnouncementsAdapter(getActivity(), announcements);
 				list.setAdapter(adapter);
 				list.setClickable(false);
+				Log.d("load", announcements.get(0).text);
 			}
 			else
 			{

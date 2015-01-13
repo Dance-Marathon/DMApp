@@ -32,6 +32,7 @@
         android:layout_centerHorizontal="true"/>
 
     <!-- Announcements -->
+<<<<<<< HEAD
 
     <TextView
         android:id="@+id/announcement_header"
@@ -66,19 +67,63 @@
 
     <!-- Game Button -->
     <Button android:id="@+id/game"
+=======
+	<RelativeLayout
+	    android:id="@+id/announcements_section"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/header_text">
+	    <TextView
+	        android:id="@+id/announcements_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="10dp"
+	        android:text="@string/announcements"
+	        android:textColor="@color/dm_orange_primary"
+	        android:textSize="22sp"
+	        android:textStyle="bold" />  
+	    
+	    <ListView
+	       android:id="@+id/announcements_list"
+	       android:layout_width="wrap_content"
+	       android:layout_height="@dimen/announcements_list_height"
+	       android:layout_below="@+id/announcements_title"/>
+   </RelativeLayout>
+   
+   <!-- Game Button -->
+    <Button 
+        android:id="@+id/game"
+>>>>>>> FETCH_HEAD
         android:background="@color/dm_blue_primary"
         android:textColor="@color/White"
         android:layout_width="@dimen/homepage_button_width"
         android:layout_height="@dimen/homepage_button_height"
-        android:text="@string/game"
-        android:textSize="@dimen/homepage_button_textsize"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:text="@string/game"
+        android:textSize="@dimen/homepage_button_textsize"
         android:tag="http://www.google.com/"
         android:onClick="openLink" />
+    
+        <!-- DM Webpage Button -->
+	<Button 
+	    android:id="@+id/website"
+	    android:layout_width="@dimen/homepage_button_width"
+        android:layout_height="@dimen/homepage_button_height"
+        android:layout_marginBottom="10dp"
+        android:layout_alignTop="@+id/game"
+        android:layout_centerHorizontal="true"
+	    android:text="@string/website"
+	    android:textSize="@dimen/homepage_button_textsize"
+	    android:textColor="@color/White"
+	    android:background="@color/dm_blue_primary"
+        android:tag="http://www.floridadm.org/"
+        android:onClick="openLink" /> 
 
     <!-- Donate Button -->
     <Button android:id="@+id/donate"
@@ -86,13 +131,13 @@
         android:textColor="@color/White"
         android:layout_width="@dimen/homepage_button_width"
         android:layout_height="@dimen/homepage_button_height"
-        android:text="@string/donate"
-        android:textSize="@dimen/homepage_button_textsize"
+        android:layout_alignTop="@+id/game"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:text="@string/donate"
+        android:textSize="@dimen/homepage_button_textsize"
         android:tag="http://www.google.com"
         android:onClick="openLink" />
         
