@@ -18,7 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +44,7 @@ public class UserActivity extends ActionBarActivity
 		//Get user from intent
 		KinteraUser user = getIntent().getExtras().getParcelable("user");
 		this.user = user;
-		//Log.d("User", user.realName);
+		////Log.d("User", user.realName);
 		
 		//Populate all of the necessary fields
 		setFields(user);
@@ -80,7 +80,7 @@ public class UserActivity extends ActionBarActivity
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "UserActivity");
+			//Log.d("Tracking", "UserActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "User Screen");
 		}
 	}
@@ -117,7 +117,7 @@ public class UserActivity extends ActionBarActivity
 	
 	/**
 	 * Clears the user cache file and exits this activity
-	 * @param v The logout button view
+	 * @param v The //Logout button view
 	 */
 	public void logout(View v)
 	{
@@ -178,7 +178,7 @@ public class UserActivity extends ActionBarActivity
 		int id = item.getItemId();
 		if (id == R.id.action_refresh)
 		{
-			//Log.d("crendential", user.userName + user.getPassword());
+			////Log.d("crendential", user.userName + user.getPassword());
 			refreshUser(user.userName, user.getPassword());
 		}
 		return super.onOptionsItemSelected(item);

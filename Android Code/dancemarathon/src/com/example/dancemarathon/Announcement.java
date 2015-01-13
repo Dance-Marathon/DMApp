@@ -10,7 +10,7 @@ import java.util.Locale;
  * @author Chris Whitten
  *
  */
-public class Announcement 
+public class Announcement implements Comparable<Announcement>
 {
 	/**
 	 * The announcement text
@@ -47,6 +47,19 @@ public class Announcement
 	{
 		return date;
 	}
+
+	@Override
+	public int compareTo(Announcement another) {
+		
+		if(this.date.getTime() < another.date.getTime())
+			return -1;
+		else if(this.date.getTime() < another.date.getTime())
+			return 1;
+		else
+			return 0;
+	}
+
+	
 	
 	
 	

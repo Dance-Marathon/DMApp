@@ -7,7 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -58,7 +58,7 @@ public class EventActivity extends ActionBarActivity
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "EventActivity");
+			//Log.d("Tracking", "EventActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Event: " + eventTitle);
 		}
 	}

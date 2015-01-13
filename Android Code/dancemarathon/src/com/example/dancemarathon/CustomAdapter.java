@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +102,7 @@ public class CustomAdapter extends BaseAdapter {
 				catch (ParseException e)
 				{
 					// Must remove this before release
-					Log.d("Event Parsing", "Failed to parse event" + name);
+					//Log.d("Event Parsing", "Failed to parse event" + name);
 				}
 			}
 		

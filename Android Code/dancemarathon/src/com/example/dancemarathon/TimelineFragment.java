@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,13 +107,13 @@ public class TimelineFragment extends Fragment
 		{
 			f.forceEventListUpdate();
 			f.cacheLoadSuccessful = false;
-			Log.d("Event Load", "internet");
+			//Log.d("Event Load", "internet");
 		}
 		else
 		{
 			f.cacheLoadSuccessful = true;
 			f.events = (ArrayList<Event>) o;
-			Log.d("Event Load", "cache");
+			//Log.d("Event Load", "cache");
 		}
 		
 		return f;
@@ -327,7 +327,7 @@ public class TimelineFragment extends Fragment
 				
 				//Parse JSON response
 				String eventsJSON = reader.readLine();
-				// Log.d("json", eventsJSON);
+				// //Log.d("json", eventsJSON);
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
 				
@@ -369,7 +369,7 @@ public class TimelineFragment extends Fragment
 			final ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
 			if(loadSuccessful)
 			{	
-				Log.d("load", "successful");
+				//Log.d("load", "successful");
 				
 				showEventList(getView(), events);
 				
@@ -384,7 +384,7 @@ public class TimelineFragment extends Fragment
 			}
 			else
 			{
-				Log.d("load", "unsuccessful");
+				//Log.d("load", "unsuccessful");
 				if(isRefreshing)
 				{
 					showRefreshErrorToast();
@@ -423,7 +423,7 @@ public class TimelineFragment extends Fragment
 					events.add(e);
 				} catch (ParseException e)
 				{
-					Log.d("Event Parsing", "Failed to parse event" + title);
+					//Log.d("Event Parsing", "Failed to parse event" + title);
 				}
 			}
 			

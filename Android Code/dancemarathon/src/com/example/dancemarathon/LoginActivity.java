@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -45,8 +45,8 @@ public class LoginActivity extends ActionBarActivity
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "LoginActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "Login Screen");
+			//Log.d("Tracking", "//LoginActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "//Login Screen");
 		}
 	}
 	

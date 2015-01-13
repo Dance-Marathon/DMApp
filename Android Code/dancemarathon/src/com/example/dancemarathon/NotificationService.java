@@ -14,7 +14,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
+
 import android.util.SparseArray;
 
 /**
@@ -46,11 +46,11 @@ public class NotificationService extends Service {
 			// TODO Auto-generated method stub
 			//testNotification("In on receiver");
 			//The time ticks every minute
-			Log.d("Notifications", "In on receive");
+			//Log.d("Notifications", "In on receive");
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
 				setupEventNotifications();
-				Log.d("Notifications", "Done with event notification setup");
+				//Log.d("Notifications", "Done with event notification setup");
 			}
 			
 			//Recreate the service and delete the old one
@@ -69,7 +69,7 @@ public class NotificationService extends Service {
 		super.onStartCommand(intent, flags, startId);
 		// TODO Auto-generated method stub
 		numActiveNotifications = 0;
-		Log.d("Notification", "Registering receiver");
+		//Log.d("Notification", "Registering receiver");
 		this.registerReceiver(receiver, new IntentFilter(Intent.ACTION_TIME_TICK));
 		return Service.START_STICKY;
 	}

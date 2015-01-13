@@ -17,7 +17,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,7 +75,7 @@ public class FAQActivity extends ActionBarActivity {
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "FAQActivity");
+			//Log.d("Tracking", "FAQActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "FAQ Screen");
 		}
 	}
@@ -202,14 +202,14 @@ public class FAQActivity extends ActionBarActivity {
 		
 		if(json.length() > 1)
 		{
-			Log.d("q", "here");
+			//Log.d("q", "here");
 			JSONArray arr = new JSONArray(json);
 			for(int i=0; i < arr.length(); i++)
 			{
 				JSONObject o = (JSONObject) arr.get(i);
 				String question = o.getString("Question");
 				String answer = o.getString("Answer");
-				Log.d("q", question);
+				//Log.d("q", question);
 				faqs.add(new FAQ(question, answer));
 			}
 		}
