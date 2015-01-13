@@ -43,6 +43,11 @@
         android:textColor="@color/dm_orange_primary"
         android:textSize="22sp"
         android:textStyle="bold" />
+    
+   <ListView
+       android:id="@+id/announcements_list"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
         
         <!-- DM Webpage Button -->
 	<Button android:id="@+id/website"

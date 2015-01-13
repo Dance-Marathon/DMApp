@@ -40,7 +40,7 @@ public class CustomAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return kids.get(position);
+		return this.kids.get(position);
 	}
 
 	@Override
