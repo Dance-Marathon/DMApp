@@ -36,3 +36,5 @@ Android Code/dancemarathon/project.properties
 *.classpath
 Android Code/dancemarathon/.classpath
 Android Code/dancemarathon/project.properties
+
+Android Code/dancemarathon/src/com/example/dancemarathon/CustomAdapter.java
