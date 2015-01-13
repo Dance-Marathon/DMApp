@@ -312,9 +312,18 @@ public class SwipeActivity extends ActionBarActivity
 		startActivity(intent);
 	}
 	
+	/**
+	 * This method opens the FAQ activity
+	 */
+	private void openFAQActivity()
+	{
+		Intent intent = new Intent(this, FAQActivity.class);
+		startActivity(intent);
+	}
+	
 	// To Be Defined Methods //
 	private void openSocialMediaActivity(){}
-	private void openFAQActivity(){}
+	
 	private void openAboutDMActivity(){}
 	//-----------------------//
 	

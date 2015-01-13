@@ -67,7 +67,7 @@ public class TimelineFragment extends Fragment
 	/**
 	 * The path to the event webservice on the server
 	 */
-	private static final String eventWebServicePath = "http://dev.floridadm.org/app/events.php";
+	private static final String eventWebServicePath = "http://floridadm.org/app/events.php";
 	
 	
 	public TimelineFragment()

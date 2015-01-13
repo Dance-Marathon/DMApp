@@ -55,6 +55,8 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 		}
 		return newEvents;
 	}
+	
+	
 	@Override
 	public int getCount()
 	{
