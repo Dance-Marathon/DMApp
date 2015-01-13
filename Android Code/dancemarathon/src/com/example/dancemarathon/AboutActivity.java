@@ -7,17 +7,26 @@ import java.io.InputStreamReader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This activity displays the About Us information in a scrollable textview
+ * @author Chris Whitten
+ *
+ */
 public class AboutActivity extends ActionBarActivity {
 
 	@Override
@@ -46,6 +55,22 @@ public class AboutActivity extends ActionBarActivity {
 		bar.setBackgroundDrawable(cd);
 	}
 	
+	protected void onStart()
+	{
+		super.onStart();
+		
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "AboutActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "About Screen");
+		}
+	}
+	
+	/**
+	 * This method displays an error toast
+	 */
 	private void displayErrorToast()
 	{
 		Toast toast = Toast.makeText(this, "Could not display About Page Content", Toast.LENGTH_LONG);
@@ -53,6 +78,13 @@ public class AboutActivity extends ActionBarActivity {
 		toast.show();
 	}
 
+	/**
+	 * Parses the input filename looking for the about content
+	 * @param fileName The file to use
+	 * @return A string containing the content
+	 * @throws IOException
+	 * @throws JSONException
+	 */
 	private String parseJSONData(String fileName) throws IOException, JSONException
 	{
 		String json="";
@@ -66,6 +98,7 @@ public class AboutActivity extends ActionBarActivity {
 		JSONObject o = new JSONObject(json);
 		return o.getString("About");
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return true;

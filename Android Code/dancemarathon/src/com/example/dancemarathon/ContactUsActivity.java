@@ -1,12 +1,21 @@
 package com.example.dancemarathon;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * This activity displays basic contact information
+ * @author Chris Whitten
+ *
+ */
 public class ContactUsActivity extends ActionBarActivity {
 
 	@Override
@@ -22,6 +31,19 @@ public class ContactUsActivity extends ActionBarActivity {
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
+	}
+	
+	protected void onStart()
+	{
+		super.onStart();
+		
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "ContactUsActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "Contact Us Screen");
+		}
 	}
 
 	@Override

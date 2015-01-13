@@ -9,6 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -26,6 +29,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This activity shows FAQs in a listview
+ * @author Chris Whitten
+ *
+ */
 public class FAQActivity extends ActionBarActivity {
 
 	@Override
@@ -59,12 +67,29 @@ public class FAQActivity extends ActionBarActivity {
 		bar.setBackgroundDrawable(cd);
 	}
 
+	protected void onStart()
+	{
+		super.onStart();
+		
+		//Register google analytics page hit
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			Log.d("Tracking", "FAQActivity");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), "FAQ Screen");
+		}
+	}
+	
+	/**
+	 * This method displays an error toast
+	 */
 	private void displayErrorToast()
 	{
 		Toast toast = Toast.makeText(this, "Could not display FAQ Page", Toast.LENGTH_LONG);
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return true;
@@ -78,6 +103,12 @@ public class FAQActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * This class serves as an adapter for FAQ objects. 
+	 * It is used to populate the listview.
+	 * @author Chris Whitten
+	 *
+	 */
 	private class faqAdapter extends ArrayAdapter<FAQ>
 	{
 		private Context c;
@@ -134,6 +165,11 @@ public class FAQActivity extends ActionBarActivity {
 			return convertView;
 		}
 		
+		/**
+		 * Set the textviews for the given view using the input FAQ object
+		 * @param v The view representing the entire item in the list
+		 * @param f The FAQ object
+		 */
 		private void setFAQDetails(View v, FAQ f)
 		{
 			TextView question = (TextView) v.findViewById(R.id.faq_item_question);
@@ -146,6 +182,13 @@ public class FAQActivity extends ActionBarActivity {
 	}
 	
 	
+	/**
+	 * Parses the given file for FAQ objects
+	 * @param fileName The file to use
+	 * @return The list of FAQ objects
+	 * @throws JSONException
+	 * @throws IOException
+	 */
 	private ArrayList<FAQ> parseJSONData(String fileName) throws JSONException, IOException
 	{
 		ArrayList<FAQ> faqs = new ArrayList<FAQ>();
@@ -174,6 +217,11 @@ public class FAQActivity extends ActionBarActivity {
 		return faqs;
 	}
 	
+	/**
+	 * This class represents an FAQ
+	 * @author Chris Whitten
+	 *
+	 */
 	private class FAQ {
 		public String question;
 		public String answer;
