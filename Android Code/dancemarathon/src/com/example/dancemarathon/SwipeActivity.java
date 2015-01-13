@@ -327,9 +327,11 @@ public class SwipeActivity extends ActionBarActivity
 		startActivity(intent);
 	}
 	
-	// To Be Defined Methods //
-	private void openSocialMediaActivity(){}
-	//-----------------------//
+	private void openSocialMediaActivity()
+	{
+		Intent intent = new Intent(this, SocialMedia.class);
+		startActivity(intent);
+	}
 	
 	/**
 	 * This method handles opening the sponsor activity
@@ -414,102 +416,6 @@ public class SwipeActivity extends ActionBarActivity
 			case 3:return getString(R.string.title_section3).toUpperCase(l);
 			}
 			return null;
-		}
-	}
-	
-	// onClick method to open links
-	public void openLink(View view)
-	{
-		// Get media type from tag
-	    String media = (String)view.getTag();
-
-	    Intent intent = new Intent();
-	    
-	    // Associate the respective intent with the social media
-	    if (media.equals("Facebook"))
-	    {
-	    	intent = getOpenFacebookIntent(this);	
-	    }
-	    else if (media.equals("Twitter"))
-	    {
-	    	intent = getOpenTwitterIntent(this);
-	    }
-	    else if (media.equals("Instagram"))
-	    {
-	    	intent = getOpenInstagramIntent(this);
-	    }
-	    else if (media.equals("YouTube"))
-	    {
-	    	intent = getOpenYouTubeIntent(this);
-	    }
-	    else
-	    {
-	    	intent = new Intent(Intent.ACTION_VIEW, Uri.parse(media));
-	    }
-	    startActivity(intent);
-	}
-
-	// Intent to open Facebook in either its respective app or the browser
-	public static Intent getOpenFacebookIntent(Context context)
-	{
-		// Open Facebook page in Facebook app
-		try
-		{
-			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/116374146706"));
-		}
-		// Open Facebook page in browser
-		catch (Exception e)
-		{
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/floridaDM"));
-		}
-	}
-	
-	// Intent to open Twitter in either its respective app or the browser
-	public static Intent getOpenTwitterIntent(Context context)
-	{
-		// Open Twitter profile in Twitter app
-		try
-		{
-		    context.getPackageManager().getPackageInfo("com.twitter.android", 0);
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=34755385"));
-		}
-		// Open Twitter profile in browser
-		catch (Exception e)
-		{
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.twitter.com/floridadm"));
-		}
-	}
-	
-	// Intent to open Instagram in either its respective app or the browser
-	public static Intent getOpenInstagramIntent(Context context)
-	{
-		// Open Instagram profile in Instagram app
-		try{
-			context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/dmatuf"));
-		}
-		// Open Instagram profile in browser
-		catch (Exception e)
-		{
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/dmatuf"));
-		}
-	}
-	
-	// Intent to open YouTube in either its respective app or the browser
-	public static Intent getOpenYouTubeIntent(Context context)
-	{
-		
-		// Open YouTube channel in YouTube app
-		try
-		{
-			context.getPackageManager().getPackageInfo("com.google.android.youtube", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"));
-		}
-		// Open YouTube channel in browser
-		catch (Exception e)
-		{
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/user/UFDanceMarathon"));
 		}
 	}
 }

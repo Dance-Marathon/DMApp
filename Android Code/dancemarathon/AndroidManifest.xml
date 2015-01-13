@@ -88,6 +88,10 @@
             android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name=".SocialMedia"
+            android:label="@string/title_activity_social_media" >
+        </activity>
     </application>
 
 </manifest>
