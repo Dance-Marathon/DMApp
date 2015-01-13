@@ -53,7 +53,7 @@ public class Announcement implements Comparable<Announcement>
 		
 		if(this.date.getTime() < another.date.getTime())
 			return -1;
-		else if(this.date.getTime() < another.date.getTime())
+		else if(this.date.getTime() > another.date.getTime())
 			return 1;
 		else
 			return 0;

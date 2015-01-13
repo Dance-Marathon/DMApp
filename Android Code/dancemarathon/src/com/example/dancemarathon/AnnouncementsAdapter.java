@@ -2,9 +2,7 @@ package com.example.dancemarathon;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Locale;
 
 import android.content.Context;
@@ -25,28 +23,12 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
 		//Must make call to the parent constructor
 		super(c, R.layout.announcements_item_view, announcements);
 		
-		announcements = removeOldAnnouncements(announcements);
 		Collections.sort(announcements);
 		
 		this.context = c;
 		this.announcements = announcements;
 	}
-	
-	private ArrayList<Announcement> removeOldAnnouncements(ArrayList<Announcement> announcements)
-	{
-		ArrayList<Announcement> newAnnouncements = new ArrayList<Announcement>(announcements);
-		Iterator<Announcement> i = announcements.iterator();
-		while(i.hasNext())
-		{
-			Announcement a = i.next();
-			//If the announcement has already passed, remove it from the list
-			// Change depending on Announcements class
-			if(a.getDate().getTime() < Calendar.getInstance().getTimeInMillis())
-				newAnnouncements.remove(a);
-		}
-		return newAnnouncements;
-	}
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -54,7 +36,7 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public Announcement getItem(int position) {
 		// TODO Auto-generated method stub
 		return this.announcements.get(position);
 	}
@@ -102,10 +84,10 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
         TextView date = (TextView) itemView.findViewById(R.id.announcements_date);
         
         //Set text views //
-       text_announce.setText(a.text);
+        text_announce.setText(a.text);
 
         //Set time
-        String displayFormat = "hh:mm aa";
+        String displayFormat = "hh:mm aa MM/dd/yyyy";
         SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
         String timeText = df.format(a.getDate());
         date.setText(timeText);

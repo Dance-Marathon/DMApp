@@ -364,7 +364,7 @@ public class Event implements Serializable, Comparable<Event>
 	{
 		if(this.startDate.getTime() < another.getStartDate().getTime())
 			return -1;
-		else if(this.startDate.getTime() < another.getStartDate().getTime())
+		else if(this.startDate.getTime() > another.getStartDate().getTime())
 			return 1;
 		else
 			return 0;
