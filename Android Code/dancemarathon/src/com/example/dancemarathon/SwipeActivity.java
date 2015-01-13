@@ -321,10 +321,14 @@ public class SwipeActivity extends ActionBarActivity
 		startActivity(intent);
 	}
 	
+	private void openAboutDMActivity()
+	{
+		Intent intent = new Intent(this, AboutActivity.class);
+		startActivity(intent);
+	}
+	
 	// To Be Defined Methods //
 	private void openSocialMediaActivity(){}
-	
-	private void openAboutDMActivity(){}
 	//-----------------------//
 	
 	/**

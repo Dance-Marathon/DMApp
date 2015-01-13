@@ -68,7 +68,7 @@
     <string name="title_activity_xml_map_parser">XmlMapParser</string>
     <string name="construction_fragment_string">This Page Is Under Construction!</string>
     <string name="title_activity_sponsor">SponsorActivity</string>
-
+	<string name="aboutus_title">UF Health Shands Children\'s Hospital</string>
     <!-- Contact Us Activity strings -->
     <string name="title_activity_contact_us">ContactUsActivity</string>
     <string name="cu_label1"><b>General\nQuestions</b></string>
@@ -79,6 +79,9 @@
     <string name="cu_content2">http://www.floridadm.org/overall</string>
     <string name="cu_content3">352&#8211;265&#8211;7237\nhttps://ufhealth.org/shands-hospital-children-uf</string>
     <string name="cu_content4"><i>DM at UF</i>, PO Box 100386\nGainesville, FL 32610</string>
+    
+    <!-- More Strings -->
     <string name="title_activity_faq">FAQActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
 
 </resources>
