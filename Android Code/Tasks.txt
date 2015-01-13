@@ -42,3 +42,4 @@ Possibly reduce size of image assests using png compressor   		 NC 	Zach
 Try to make app support multiple screen sizes 						 NC     ----
 Make navigation drawer prettier 									 D   	Chris
 Remove all Log statements											 NC 	Both
+Comment Resources files 											 NC 	----
