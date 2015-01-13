@@ -17,4 +17,8 @@
 	<dimen name="headertext_margin_top">45dp</dimen>
 	<dimen name="kidimage_height">96dp</dimen>
 	<dimen name="kidimage_width">96dp</dimen>
+	
+	<!-- Contact Us Dimensions -->
+	<dimen name="cu_textMargin">15dp</dimen>
+	<dimen name="cu_sectionMarginVertical">15dp</dimen>
 </resources>

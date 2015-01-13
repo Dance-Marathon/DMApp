@@ -24,6 +24,7 @@
         android:text="@string/header"
         android:textSize="16sp"
         android:textColor="@color/dm_blue_primary"
+        android:gravity="center"
         android:layout_below="@+id/dance_marathon_header_image"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="@dimen/headertext_margin_top"

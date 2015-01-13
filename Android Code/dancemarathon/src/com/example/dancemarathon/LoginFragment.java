@@ -152,7 +152,7 @@ public class LoginFragment extends Fragment
 			try
 			{
 				//Get username and password from params
-				username = params[0];
+				username = params[0].trim();
 				password = params[1];
 				
 				//Set path

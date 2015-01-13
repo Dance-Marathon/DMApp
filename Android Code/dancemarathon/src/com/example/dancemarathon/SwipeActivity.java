@@ -223,8 +223,12 @@ public class SwipeActivity extends ActionBarActivity
 				// TODO Auto-generated method stub
 				switch(position)
 				{
-				case 0:openSponsorActivity();break;
-				case 2:openFundraisingActivity();break;
+				case 0: openFAQActivity();break;
+				case 1: openSocialMediaActivity();break;
+				case 2: openSponsorActivity();break;
+				case 3: openFundraisingActivity();break;
+				case 4: openAboutDMActivity();break;
+				case 5: openContactUsActivity();break;
 				}
 				
 			}
@@ -260,7 +264,6 @@ public class SwipeActivity extends ActionBarActivity
 			}
 	    	 
 	     });
-	
 	}
 	
 	@Override
@@ -299,6 +302,34 @@ public class SwipeActivity extends ActionBarActivity
 			startActivityForResult(intent, GET_USER_REQUEST);
 		}
 	}
+	
+	/**
+	 * This method opens the FAQ activity
+	 */
+	private void openContactUsActivity()
+	{
+		Intent intent = new Intent(this, ContactUsActivity.class);
+		startActivity(intent);
+	}
+	
+	/**
+	 * This method opens the FAQ activity
+	 */
+	private void openFAQActivity()
+	{
+		Intent intent = new Intent(this, FAQActivity.class);
+		startActivity(intent);
+	}
+	
+	private void openAboutDMActivity()
+	{
+		Intent intent = new Intent(this, AboutActivity.class);
+		startActivity(intent);
+	}
+	
+	// To Be Defined Methods //
+	private void openSocialMediaActivity(){}
+	//-----------------------//
 	
 	/**
 	 * This method handles opening the sponsor activity

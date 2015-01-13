@@ -34,7 +34,7 @@
     <string name="game">Game</string>
     <string name="donate">Donate</string>
     <string name="website">DMatUF</string>
-    <string name="header">Join us on March 14 \- 15, 2015 at the O\'Connell Center at UF</string>
+    <string name="header">Join us on <b>March 14 &#8211; 15, 2015</b> at the O\'Connell Center at UF</string>
     <string name="facebook">Facebook</string>
     <string name="instagram">Instagram</string>
     <string name="twitter">Twitter</string>
@@ -54,9 +54,12 @@
 
     <!-- Navigation Drawer List -->
     <string-array name="navList">
-        <item>Sponsors</item>
+        <item>FAQs</item>
         <item>Social Media</item>
+        <item>Sponsors</item>
         <item>My Fundraising Progress</item>
+        <item>About Dance Marathon</item>
+        <item>Contact Us!</item>
     </string-array>
 
     <string name="title_activity_login">LoginActivity</string>
@@ -65,4 +68,20 @@
     <string name="title_activity_xml_map_parser">XmlMapParser</string>
     <string name="construction_fragment_string">This Page Is Under Construction!</string>
     <string name="title_activity_sponsor">SponsorActivity</string>
+	<string name="aboutus_title">UF Health Shands Children\'s Hospital</string>
+    <!-- Contact Us Activity strings -->
+    <string name="title_activity_contact_us">ContactUsActivity</string>
+    <string name="cu_label1"><b>General\nQuestions</b></string>
+    <string name="cu_label2"><b>Overalls</b></string>
+    <string name="cu_label3"><b>UF &amp;\nShands OD</b></string>
+    <string name="cu_label4"><b>Check\nDonations</b></string>
+    <string name="cu_content1">floridadm@floridadm.org</string>
+    <string name="cu_content2">http://www.floridadm.org/overall</string>
+    <string name="cu_content3">352&#8211;265&#8211;7237\nhttps://ufhealth.org/shands-hospital-children-uf</string>
+    <string name="cu_content4"><i>DM at UF</i>, PO Box 100386\nGainesville, FL 32610</string>
+    
+    <!-- More Strings -->
+    <string name="title_activity_faq">FAQActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
 </resources>
