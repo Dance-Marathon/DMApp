@@ -298,7 +298,7 @@ public class SwipeActivity extends ActionBarActivity
 		}
 		else
 		{
-			Intent intent = new Intent(this, //LoginActivity.class);
+			Intent intent = new Intent(this, LoginActivity.class);
 			startActivityForResult(intent, GET_USER_REQUEST);
 		}
 	}

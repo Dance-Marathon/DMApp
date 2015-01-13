@@ -119,7 +119,7 @@ public class UserActivity extends ActionBarActivity
 	 * Clears the user cache file and exits this activity
 	 * @param v The //Logout button view
 	 */
-	public void //Logout(View v)
+	public void logout(View v)
 	{
 		this.setResult(RESULT_CANCELED);
 		CacheManager.clearCacheFile(this, "user");
