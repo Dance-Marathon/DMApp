@@ -16,11 +16,6 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-<<<<<<< HEAD
-
-=======
-import android.util.Log;
->>>>>>> FETCH_HEAD
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +59,7 @@ public class HomeFragment extends Fragment
 		Typeface button_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/AvenirLTStd-Light.ttf");
 		
 		TextView header = (TextView) v.findViewById(R.id.header_text);
-		TextView announcement_header = (TextView) v.findViewById(R.id.announcement_header);
+		TextView announcement_header = (TextView) v.findViewById(R.id.announcements_title);
 		TextView game_text = (TextView) v.findViewById(R.id.game);
 		TextView web_text = (TextView) v.findViewById(R.id.website);
 		TextView donate = (TextView) v.findViewById(R.id.donate);
@@ -173,7 +168,6 @@ public class HomeFragment extends Fragment
 				AnnouncementsAdapter adapter = new AnnouncementsAdapter(getActivity(), announcements);
 				list.setAdapter(adapter);
 				list.setClickable(false);
-				Log.d("load", announcements.get(0).text);
 			}
 			else
 			{

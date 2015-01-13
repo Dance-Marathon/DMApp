@@ -32,42 +32,6 @@
         android:layout_centerHorizontal="true"/>
 
     <!-- Announcements -->
-<<<<<<< HEAD
-
-    <TextView
-        android:id="@+id/announcement_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/header_text"
-        android:layout_marginTop="10dp"
-        android:text="@string/announcements"
-        android:textColor="@color/dm_orange_primary"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-    
-   <ListView
-       android:id="@+id/announcements_list"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" />
-        
-        <!-- DM Webpage Button -->
-	<Button android:id="@+id/website"
-	    android:background="@color/dm_blue_primary"
-	    android:textColor="@color/White"
-	    android:layout_width="@dimen/homepage_button_width"
-        android:layout_height="@dimen/homepage_button_height"
-	    android:text="@string/website"
-	    android:textSize="@dimen/homepage_button_textsize"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:tag="http://www.floridadm.org/"
-        android:onClick="openLink" /> 
-
-    <!-- Game Button -->
-    <Button android:id="@+id/game"
-=======
 	<RelativeLayout
 	    android:id="@+id/announcements_section"
 	    android:layout_width="match_parent"
@@ -94,7 +58,6 @@
    <!-- Game Button -->
     <Button 
         android:id="@+id/game"
->>>>>>> FETCH_HEAD
         android:background="@color/dm_blue_primary"
         android:textColor="@color/White"
         android:layout_width="@dimen/homepage_button_width"
