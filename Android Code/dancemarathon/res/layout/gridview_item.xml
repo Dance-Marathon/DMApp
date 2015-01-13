@@ -20,6 +20,6 @@
         android:layout_below="@+id/grid_kid_pic"
         android:layout_marginTop="2dp"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/dm_blue_primary"/>
+        android:textColor="@color/dm_blue_primary" />
     
 </RelativeLayout>

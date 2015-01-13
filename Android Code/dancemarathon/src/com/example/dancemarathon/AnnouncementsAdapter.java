@@ -54,7 +54,7 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public Announcement getItem(int position) {
 		// TODO Auto-generated method stub
 		return this.announcements.get(position);
 	}

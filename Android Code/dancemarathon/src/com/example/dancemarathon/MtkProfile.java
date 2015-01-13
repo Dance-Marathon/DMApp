@@ -36,7 +36,7 @@ public class MtkProfile extends ActionBarActivity
 		
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
-		bar.setTitle(kid.getName() + "  " + kid.getAge());
+		bar.setTitle(kid.getName());
 		
 		int color = getResources().getColor(R.color.dm_orange_primary);
 		ColorDrawable cd = new ColorDrawable();

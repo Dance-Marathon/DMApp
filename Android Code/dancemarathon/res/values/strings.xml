@@ -39,10 +39,6 @@
     <string name="instagram">Instagram</string>
     <string name="twitter">Twitter</string>
     <string name="youtube">YouTube</string>
-    <string name="follow_facebook">Like us on Facebook!</string>
-    <string name="follow_instagram">Follow us on Instagram!</string>
-    <string name="follow_twitter">Follow us on Twitter!</string>
-    <string name="subscribe">Subscribe to our channel!</string>
     <string name="announcements">Announcements</string>
     <string name="accouncements_content">Content</string>
     <string name="login_title">Login to See Progress!</string>
@@ -51,6 +47,7 @@
     <string name="login_button_text">Login</string>
     <string name="title_activity_web_view">WebView</string>
     <string name="title_activity_web">WebActivity</string>
+    <string name="balloon">balloon</string>
 
     <!-- Navigation Drawer List -->
     <string-array name="navList">

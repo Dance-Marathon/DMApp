@@ -12,21 +12,19 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-<<<<<<< HEAD
-import android.util.Log;
-import android.view.Gravity;
-=======
 
->>>>>>> FETCH_HEAD
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -55,6 +53,22 @@ public class HomeFragment extends Fragment
 	{
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
+		
+		Typeface header_font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/AGBookRouCFFReg.otf");
+		Typeface announcement_font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/AGBookRouCFFBol.otf");
+		Typeface button_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/AvenirLTStd-Light.ttf");
+		
+		TextView header = (TextView) v.findViewById(R.id.header_text);
+		TextView announcement_header = (TextView) v.findViewById(R.id.announcement_header);
+		TextView game_text = (TextView) v.findViewById(R.id.game);
+		TextView web_text = (TextView) v.findViewById(R.id.website);
+		TextView donate = (TextView) v.findViewById(R.id.donate);
+		
+		header.setTypeface(header_font);
+		announcement_header.setTypeface(announcement_font);
+		game_text.setTypeface(button_font);
+		web_text.setTypeface(button_font);
+		donate.setTypeface(button_font);
 		
 		setButtonListeners(v);
 		return v;
