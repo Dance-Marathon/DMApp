@@ -2,7 +2,7 @@ package com.example.dancemarathon;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment
 				int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
 				if(canTrack == ConnectionResult.SUCCESS)
 				{
-					Log.d("Tracking", "SwipeActivity");
+					//Log.d("Tracking", "SwipeActivity");
 					TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
 				}
 			}

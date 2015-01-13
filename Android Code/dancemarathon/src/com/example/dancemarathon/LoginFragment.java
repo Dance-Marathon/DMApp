@@ -15,7 +15,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment
 			
 		});
 		
-		//Set the actions to perform if login button is clicked
+		//Set the actions to perform if //Login button is clicked
 		v.findViewById(R.id.login_button).setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -73,7 +73,7 @@ public class LoginFragment extends Fragment
 				hideKeyboard();
 				if(isFormFilled())
 				{
-					//Get the username and password from the login form
+					//Get the username and password from the //Login form
 					EditText usernameF = (EditText) getView().findViewById(R.id.username_field);
 					EditText passwordF = (EditText) getView().findViewById(R.id.password_field);
 					String username = usernameF.getText().toString();

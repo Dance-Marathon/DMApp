@@ -15,7 +15,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,7 +63,7 @@ public class AboutActivity extends ActionBarActivity {
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "AboutActivity");
+			////Log.d("Tracking", "AboutActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "About Screen");
 		}
 	}

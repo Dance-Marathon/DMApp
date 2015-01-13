@@ -20,7 +20,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -122,16 +121,17 @@ public class SwipeActivity extends ActionBarActivity
 			{
 				if(trackEnabled)
 				{
-					String logString = "";
+					@SuppressWarnings("unused")
+					String LogString = "";
 					String sendString = "";
 					switch(page)
 					{
-					case 0: logString="NavDrawer"; sendString="Navigation Drawer";break;
-					case 1: logString="HomeFragment"; sendString="Home Swipe Screen";break;
-					case 2: logString="TimelineFragment"; sendString="Timeline Swipe Screen";break;
-					case 3: logString="MTKFragment"; sendString="MTK Swipe Screen";break;
+					case 0: LogString="NavDrawer"; sendString="Navigation Drawer";break;
+					case 1: LogString="HomeFragment"; sendString="Home Swipe Screen";break;
+					case 2: LogString="TimelineFragment"; sendString="Timeline Swipe Screen";break;
+					case 3: LogString="MTKFragment"; sendString="MTK Swipe Screen";break;
 					}
-					Log.d("Tracking", logString);
+					//Log.d("Tracking", LogString);
 					TrackerManager.sendScreenView((MyApplication)getApplication(), sendString);
 				}
 			}
@@ -148,7 +148,7 @@ public class SwipeActivity extends ActionBarActivity
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "SwipeActivity");
+			//Log.d("Tracking", "SwipeActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
 			trackEnabled = true;
 		}
@@ -284,7 +284,7 @@ public class SwipeActivity extends ActionBarActivity
 	/**
 	 * This method handles opening of the my fundraising progress activity.
 	 * If a user has been defined so far, then we open the user activity.
-	 * Else, the login activity is opened
+	 * Else, the //Login activity is opened
 	 */
 	private void openFundraisingActivity()
 	{
@@ -298,7 +298,7 @@ public class SwipeActivity extends ActionBarActivity
 		}
 		else
 		{
-			Intent intent = new Intent(this, LoginActivity.class);
+			Intent intent = new Intent(this, //LoginActivity.class);
 			startActivityForResult(intent, GET_USER_REQUEST);
 		}
 	}
@@ -345,7 +345,7 @@ public class SwipeActivity extends ActionBarActivity
 
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int, android.content.Intent)
-	 * The current implementation allows the user data to be passed back from the login activity
+	 * The current implementation allows the user data to be passed back from the //Login activity
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{

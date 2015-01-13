@@ -2,18 +2,18 @@ package com.example.dancemarathon;
 
 import java.io.Serializable;
 import java.text.ParseException;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import android.util.Log;
+
 
 /**
  * @author Chris Whitten
  * This class represents a DM event.
  */
+@SuppressWarnings("unused")
 public class Event implements Serializable, Comparable<Event>
 {
 	/**
@@ -256,7 +256,9 @@ public class Event implements Serializable, Comparable<Event>
 		case Calendar.OCTOBER: 	return "Oct";
 		case Calendar.NOVEMBER: return "Nov";
 		case Calendar.DECEMBER: return "Dec";
-		default: Log.d("bad month", Integer.toString(month));return "Nul";
+		default: {//Log.d("bad month", Integer.toString(month));
+					return "Nul";
+				}
 		}
 	}
 	

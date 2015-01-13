@@ -7,7 +7,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,7 +42,7 @@ public class ContactUsActivity extends ActionBarActivity {
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			Log.d("Tracking", "ContactUsActivity");
+			//Log.d("Tracking", "ContactUsActivity");
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Contact Us Screen");
 		}
 	}
