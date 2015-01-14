@@ -5,9 +5,17 @@
     android:paddingBottom="65dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="45dp"
+    android:paddingTop="30dp"
     android:background="@color/White"
     tools:context="com.example.dancemarathon.SocialMedia" >
+    
+    <TextView
+        android:id="@+id/follow_fb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/follow_facebook" />
     
     <ImageView
         android:id="@+id/facebook"
@@ -21,6 +29,14 @@
         android:tag="@string/facebook"
         android:onClick="openLink" />
     
+    <TextView
+        android:id="@+id/follow_twt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/follow_twitter" />
+    
     <ImageView
         android:id="@+id/twitter"
         android:layout_width = "125dp"
@@ -32,6 +48,16 @@
         android:contentDescription="@string/twitter"
         android:tag="@string/twitter"
         android:onClick="openLink" />
+    
+    <TextView
+        android:id="@+id/follow_insta"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="125dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:text="@string/follow_instagram" />
         
     <ImageView
         android:id="@+id/instagram"
@@ -43,6 +69,19 @@
         android:contentDescription="@string/instagram"
         android:tag="@string/instagram"
         android:onClick="openLink" />
+    
+    <TextView
+        android:id="@+id/follow_yt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="50dp"
+        android:layout_marginBottom="125dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/follow_insta"
+        android:text="@string/subscribe" />
             
     <ImageView
         android:id="@+id/youtube"
