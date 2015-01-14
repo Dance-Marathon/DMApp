@@ -138,8 +138,8 @@ public class CustomAdapter extends BaseAdapter {
     	ViewHolder holder = null;
     	
 		String image_name = kids.get(position).getImage_name().toLowerCase(Locale.ENGLISH).replace(".png", "");
-		int imageId = mContext.getResources().getIdentifier(image_name,"drawable", "com.example.dancemarathon");
-
+		int imageId = mContext.getResources().getIdentifier(image_name,"drawable", mContext.getPackageName());
+		
 	    if (convertView == null) 
 	    {	
 		    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
