@@ -55,7 +55,7 @@ public class NotificationService extends Service {
 				currentTime = Calendar.getInstance().getTimeInMillis() - 3000; //Subract 3s to account for processing delay
 				setupEventNotifications();
 				
-				//Log.d("Notifications", "Done with event notification setup");
+				////Log.d("Notifications", "Done with event notification setup");
 			}
 			
 			//Recreate the service and delete the old one
@@ -75,7 +75,7 @@ public class NotificationService extends Service {
 		super.onStartCommand(intent, flags, startId);
 		// TODO Auto-generated method stub
 		numActiveNotifications = 0;
-		//Log.d("Notification", "Registering receiver");
+		////Log.d("Notification", "Registering receiver");
 		this.registerReceiver(receiver, new IntentFilter(Intent.ACTION_TIME_TICK));
 		return Service.START_STICKY;
 	}
@@ -97,10 +97,10 @@ public class NotificationService extends Service {
 			this.stopSelf();
 		else
 		{
-			Log.d("debug", "In else");
+			//Log.d("debug", "In else");
 			//if(verifyEventArrayList((ArrayList<?>) o))
 			{
-				//Log.d("debug", "In if");
+				////Log.d("debug", "In if");
 				ArrayList<Event> allEvents = (ArrayList<Event>) o;
 				SparseArray<ArrayList<Event>> upcomingEvents = new SparseArray<ArrayList<Event>>();
 				
@@ -113,7 +113,7 @@ public class NotificationService extends Service {
 					//createEventNotification(t1, 5, 1);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				
 				
@@ -142,7 +142,7 @@ public class NotificationService extends Service {
 		{
 			Event e = i.next();
 			numActiveNotifications++;
-			Log.d("debug", "Creating " + e.getTitle());
+			//Log.d("debug", "Creating " + e.getTitle());
 			createEventNotification(e, proximity, numActiveNotifications);
 		}
 	}
@@ -196,15 +196,15 @@ public class NotificationService extends Service {
 			
 			long millsInMin = 1 * 60 * 1000;
 			long timeUntil = (e.getStartDate().getTime() - currentTime) / (millsInMin);
-			//Log.d("Up", String.valueOf(timeUntil));
+			////Log.d("Up", String.valueOf(timeUntil));
 			if(startTime > currentTime && timeUntil == timeProximity)
 			{
 				upcoming.add(e);
-				Log.d("Upcoming", e.getTitle());
+				//Log.d("Upcoming", e.getTitle());
 			}
 		}
 		
-		Log.d("Upcoming", String.valueOf(upcoming.size()));
+		//Log.d("Upcoming", String.valueOf(upcoming.size()));
 		return upcoming;
 		
 	}

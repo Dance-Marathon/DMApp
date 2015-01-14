@@ -55,7 +55,7 @@ public class FAQActivity extends ActionBarActivity {
 			// TODO Auto-generated catch block
 			displayErrorToast();
 			list.setVisibility(View.GONE);
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		//Set action bar title and color

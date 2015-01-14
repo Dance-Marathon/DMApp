@@ -251,17 +251,17 @@ public class UserActivity extends ActionBarActivity
 			{
 				// TODO Auto-generated catch block
 				publishProgress("Sorry, we are currently experiencing technical problems!");
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (IOException e)
 			{
 				// TODO Auto-generated catch block
 				publishProgress("Could not load user data! Check internet connection.");
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (JSONException e)
 			{
 				// TODO Auto-generated catch block
 				publishProgress("Sorry, we are currently experiencing technical problems!");
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			
 			return user;

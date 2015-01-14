@@ -41,12 +41,12 @@ public class CacheManager
 			
 		} catch (FileNotFoundException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 	}
@@ -70,22 +70,22 @@ public class CacheManager
 		} catch (StreamCorruptedException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		} catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		} catch (ClassNotFoundException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 	}
@@ -113,12 +113,12 @@ public class CacheManager
 			
 		} catch (FileNotFoundException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			return false;
 		}
 	}

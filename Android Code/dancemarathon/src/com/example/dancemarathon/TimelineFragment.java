@@ -343,17 +343,17 @@ public class TimelineFragment extends Fragment
 			} catch (MalformedURLException e)
 			{
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 				loadSuccessful = false;
 			} catch (IOException e)
 			{
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 				loadSuccessful = false;
 			} catch (JSONException e)
 			{
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 				loadSuccessful = false;
 			}
 			

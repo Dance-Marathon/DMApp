@@ -112,9 +112,9 @@ public class CustomAdapter extends BaseAdapter {
 			Collections.sort(kids_read, Kids.COMPARE_BY_NAME);
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (JSONException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return kids_read;

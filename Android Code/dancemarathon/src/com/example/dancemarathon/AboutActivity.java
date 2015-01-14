@@ -50,7 +50,7 @@ public class AboutActivity extends ActionBarActivity {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			displayErrorToast();
-			e.printStackTrace();
+			//e.printStackTrace();
 		} 
 		
 		//Set action bar title and color
