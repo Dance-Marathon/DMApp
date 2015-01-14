@@ -32,14 +32,14 @@ Allow users to refresh kintera data									 D  	Chris
 Create service to send notifications when events happen	             D      Chris
 Implement google analytics											 D		Chris
 Add sponsor list activity											 D      Chris
-Make everything their proper fonts									 NC		Zach
-Add announcements listview											 NC     Zach
-Add social media activity											 NC 	Zach
+Make everything their proper fonts									 D		Zach
+Add announcements listview											 D      Zach
+Add social media activity											 D 	    Zach
 Change app icon to new one from DM final graphics					 D      Zach
-Countdown thing on homepage											 NC     Zach
-Resize images for MTK circles									     NC     Zach
+Change homepage banner												 NC     Zach
+Add social media text												 NC 	Zach
+New images for MTK circles										     NC     Zach
 Possibly reduce size of image assests using png compressor   		 NC 	Zach
 Try to make app support multiple screen sizes 						 NC     ----
-Make navigation drawer prettier 									 D   	Chris
 Remove all Log statements and e.printstacktrace						 NC 	Both
 Comment Resources files 											 NC 	----
