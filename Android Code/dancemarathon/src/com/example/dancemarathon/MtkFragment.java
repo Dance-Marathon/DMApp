@@ -42,11 +42,14 @@ public class MtkFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View v, int position,
                     long id) 
             {
-            	Intent intent = new Intent(getActivity(), MtkProfile.class);
-            	Bundle b = new Bundle();
-            	b.putParcelable("kid", (Kids)adapter.getItem(position));
-            	intent.putExtras(b);
-            	startActivity(intent);
+            	if(((Kids) adapter.getItem(position)).getStory() != null)
+            	{           	
+            		Intent intent = new Intent(getActivity(), MtkProfile.class);
+            		Bundle b = new Bundle();
+            		b.putParcelable("kid", (Kids)adapter.getItem(position));
+            		intent.putExtras(b);
+            		startActivity(intent);
+            	}
             }
 	    });
 	    
