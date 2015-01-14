@@ -43,3 +43,4 @@ Comment Resources files 											 NC 	----
 Possibly reduce size of image assests using png compressor   		 NC 	Zach
 Try to make app support multiple screen sizes 						 NC     ----
 Create fundraising thermometer view									 IP     Chris
+Change version # to 1.1								
