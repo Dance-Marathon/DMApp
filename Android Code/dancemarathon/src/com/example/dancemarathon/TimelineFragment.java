@@ -139,6 +139,15 @@ public class TimelineFragment extends Fragment
 		loader.execute();
 	}
 	
+	/**
+	 * This method is used to reload the events from a button click
+	 * @param v
+	 */
+	public void retryLoad(View v)
+	{
+		forceEventListUpdate();
+	}
+	
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.Fragment#onStop()
 	 */

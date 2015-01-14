@@ -39,7 +39,6 @@
 	        android:layout_marginBottom="@dimen/user_title_vertical_margin"
 	        android:layout_marginTop="@dimen/user_title_vertical_margin"
 	        android:layout_below="@+id/logout_button"
-	        android:text="Christopher Whitten"
 	        android:textSize="20sp"
 	        android:textColor="@color/dm_blue_primary"/>
 	    
