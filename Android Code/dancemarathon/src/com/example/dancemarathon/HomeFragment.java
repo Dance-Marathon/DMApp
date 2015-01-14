@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -61,9 +63,8 @@ public class HomeFragment extends Fragment
 		TextView web_text = (TextView) v.findViewById(R.id.website);
 		TextView donate = (TextView) v.findViewById(R.id.donate);
 		
-		FontSetter.setFont(getActivity(), fontName.AGBReg, header_text);
+		FontSetter.setFont(getActivity(), fontName.AGBReg, header_text, game_text, web_text, donate);
 		FontSetter.setFont(getActivity(), fontName.AGBBol, announcement_header);
-		FontSetter.setFont(getActivity(), fontName.ALTL, game_text, web_text, donate);
 		
 		setButtonListeners(v);
 		loader = new AnnouncementsLoader();
@@ -238,5 +239,15 @@ public class HomeFragment extends Fragment
 		});
 	}
 	
+	// onClick method to open links
+		public void openLink(View view)
+		{
+			// Get media type from tag
+		    String media = (String)view.getTag();
+		
+		    Intent intent = new Intent();
+		    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(media));
+		    startActivity(intent);
+		}
 	
 }

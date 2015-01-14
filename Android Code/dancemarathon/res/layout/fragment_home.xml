@@ -55,7 +55,7 @@
 	       android:layout_below="@+id/announcements_title"/>
    </RelativeLayout>
    
-   <!-- Game Button -->
+   <!-- Game Button UPDATE THE ANDROID:TAG WITH THE ACTUAL GAME LINK-->
     <Button 
         android:id="@+id/game"
         android:background="@color/dm_blue_primary"
@@ -70,7 +70,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/game"
         android:textSize="@dimen/homepage_button_textsize"
-        android:tag="http://www.google.com/"
+        android:tag="@string/game_website"
         android:onClick="openLink" />
     
         <!-- DM Webpage Button -->
@@ -85,7 +85,7 @@
 	    android:textSize="@dimen/homepage_button_textsize"
 	    android:textColor="@color/White"
 	    android:background="@color/dm_blue_primary"
-        android:tag="http://www.floridadm.org/"
+        android:tag="@string/dm_website"
         android:onClick="openLink" /> 
 
     <!-- Donate Button -->
@@ -101,7 +101,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/donate"
         android:textSize="@dimen/homepage_button_textsize"
-        android:tag="http://www.google.com"
+        android:tag="@string/donate_website"
         android:onClick="openLink" />
         
 </RelativeLayout>
