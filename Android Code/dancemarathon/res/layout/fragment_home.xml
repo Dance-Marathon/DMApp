@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.example.dancemarathon.HomeFragment" >
+    tools:context="com.uf.dancemarathon.HomeFragment" >
     
     <!-- Heading -->
     <ImageView android:id="@+id/dance_marathon_header_image"

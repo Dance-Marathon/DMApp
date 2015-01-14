@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dancemarathon"
+    package="com.uf.dancemarathon"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.example.dancemarathon.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/dm_launcher"
         android:label="@string/app_name"
@@ -23,12 +23,12 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.example.dancemarathon.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.SwipeActivity"
+            android:name=".SwipeActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/compatLight" >
@@ -39,46 +39,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.dancemarathon.UserActivity"
+            android:name=".UserActivity"
             android:label="@string/title_activity_user" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.EventActivity"
+            android:name=".EventActivity"
             android:label="@string/title_activity_event" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.MtkProfile"
+            android:name=".MtkProfile"
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.SponsorActivity"
+            android:name=".SponsorActivity"
             android:label="@string/title_activity_sponsor" >
         </activity>
 
         <service
-            android:name="com.example.dancemarathon.NotificationService"
+            android:name=".NotificationService"
             android:enabled="true"
             android:exported="false" >
         </service>
 
         <activity
-            android:name="com.example.dancemarathon.ContactUsActivity"
+            android:name=".ContactUsActivity"
             android:label="@string/title_activity_contact_us" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.FAQActivity"
+            android:name=".FAQActivity"
             android:label="@string/title_activity_faq" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.AboutActivity"
+            android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
         <activity
-            android:name="com.example.dancemarathon.SocialMedia"
+            android:name=".SocialMedia"
             android:label="@string/title_activity_social_media" >
         </activity>
     </application>

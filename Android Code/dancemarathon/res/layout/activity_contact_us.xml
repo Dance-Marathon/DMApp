@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/White"
-    tools:context="com.example.dancemarathon.ContactUsActivity" >
+    tools:context="com.uf.dancemarathon.ContactUsActivity" >
 	
     <View 
 	    android:id="@+id/cu_divider1"

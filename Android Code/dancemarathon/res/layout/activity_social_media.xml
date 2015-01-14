@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="30dp"
     android:background="@color/White"
-    tools:context="com.example.dancemarathon.SocialMedia" >
+    tools:context="com.uf.dancemarathon.SocialMedia" >
     
     <TextView
         android:id="@+id/follow_fb"
