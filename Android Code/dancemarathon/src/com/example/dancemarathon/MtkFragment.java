@@ -42,7 +42,7 @@ public class MtkFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View v, int position,
                     long id) 
             {
-            	if(((Kids) adapter.getItem(position)).getStory() != null)
+            	if(((Kids) adapter.getItem(position)).getStory().length() > 10)
             	{           	
             		Intent intent = new Intent(getActivity(), MtkProfile.class);
             		Bundle b = new Bundle();
