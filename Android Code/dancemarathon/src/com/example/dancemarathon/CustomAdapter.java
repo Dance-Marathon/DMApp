@@ -10,6 +10,8 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import com.example.dancemarathon.FontSetter.fontName;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -133,7 +135,7 @@ public class CustomAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
     	ViewHolder holder = null;
-    	Typeface type = Typeface.createFromAsset(mContext.getAssets(),"fonts/Pacifico.ttf"); 
+    	
 		String image_name = kids.get(position).getImage_name().toLowerCase(Locale.ENGLISH).replace(".png", "");
 		int imageId = mContext.getResources().getIdentifier(image_name,"drawable", "com.example.dancemarathon");
 
@@ -155,7 +157,9 @@ public class CustomAdapter extends BaseAdapter {
 	    
 	    holder.pic.setImageResource(imageId);
         holder.name.setText(this.kids.get(position).getName());
-        holder.name.setTypeface(type);
+        
+        // Set font
+        FontSetter.setFont(mContext, fontName.P, holder.name);
         
         // Set orange border for even positions, blue for odd
  		if (position % 2 == 0) {

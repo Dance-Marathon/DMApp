@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
+import com.example.dancemarathon.FontSetter.fontName;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +93,9 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
         SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
         String timeText = df.format(a.getDate());
         date.setText(timeText);
+        
+        // Set font
+        FontSetter.setFont(context, fontName.AGBReg, text_announce, date);
 	}
 	
 }

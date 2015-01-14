@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.dancemarathon.FontSetter.fontName;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -174,6 +175,9 @@ public class FAQActivity extends ActionBarActivity {
 		{
 			TextView question = (TextView) v.findViewById(R.id.faq_item_question);
 			TextView answer = (TextView) v.findViewById(R.id.faq_item_answer);
+			
+			FontSetter.setFont(c, fontName.AGBMed, question);
+			FontSetter.setFont(c, fontName.AGBReg, answer);
 			
 			question.setText(f.question);
 			answer.setText(f.answer);

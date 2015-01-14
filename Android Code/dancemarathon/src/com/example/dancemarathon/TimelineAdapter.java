@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
 
+import com.example.dancemarathon.FontSetter.fontName;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -144,6 +146,8 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         String dayText = Integer.toString(e.getDay(true));
         day.setText(dayText);
         
+        // Set Fonts
+        FontSetter.setFont(context, fontName.AGBReg, title, location, time, month, day);
 	}
 	
 	/**

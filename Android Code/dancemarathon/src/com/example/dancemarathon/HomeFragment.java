@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dancemarathon.FontSetter.fontName;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -38,7 +39,7 @@ public class HomeFragment extends Fragment
 	private boolean loadSuccessful;
 	private AnnouncementsLoader loader;
 	/**
-	 * The path to the event webservice on the server
+	 * The path to the announcements webservice on the server
 	 */
 	private static final String announcementWebServicePath = "http://floridadm.org/app/announcements.php";
 	
@@ -50,25 +51,19 @@ public class HomeFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
-	{
+	{	
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
-		
-		Typeface header_font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/AGBookRouCFFReg.otf");
-		Typeface announcement_font = Typeface.createFromAsset(getActivity().getAssets(),"fonts/AGBookRouCFFBol.otf");
-		Typeface button_font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/AvenirLTStd-Light.ttf");
-		
-		TextView header = (TextView) v.findViewById(R.id.header_text);
+
+		TextView header_text = (TextView) v.findViewById(R.id.header_text);
 		TextView announcement_header = (TextView) v.findViewById(R.id.announcements_title);
 		TextView game_text = (TextView) v.findViewById(R.id.game);
 		TextView web_text = (TextView) v.findViewById(R.id.website);
 		TextView donate = (TextView) v.findViewById(R.id.donate);
 		
-		header.setTypeface(header_font);
-		announcement_header.setTypeface(announcement_font);
-		game_text.setTypeface(button_font);
-		web_text.setTypeface(button_font);
-		donate.setTypeface(button_font);
+		FontSetter.setFont(getActivity(), fontName.AGBReg, header_text);
+		FontSetter.setFont(getActivity(), fontName.AGBBol, announcement_header);
+		FontSetter.setFont(getActivity(), fontName.ALTL, game_text, web_text, donate);
 		
 		setButtonListeners(v);
 		loader = new AnnouncementsLoader();

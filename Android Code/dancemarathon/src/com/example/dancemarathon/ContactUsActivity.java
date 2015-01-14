@@ -1,16 +1,16 @@
 package com.example.dancemarathon;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-
-
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.example.dancemarathon.FontSetter.fontName;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * This activity displays basic contact information
@@ -32,6 +32,21 @@ public class ContactUsActivity extends ActionBarActivity {
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
+		
+		// Set font of textviews
+		
+		TextView cu_label1 = (TextView) findViewById(R.id.cu_label1);
+		TextView cu_content1 = (TextView) findViewById(R.id.cu_content1);
+		TextView cu_label2 = (TextView) findViewById(R.id.cu_label2);
+		TextView cu_content2 = (TextView) findViewById(R.id.cu_content2);
+		TextView cu_label3 = (TextView) findViewById(R.id.cu_label3);
+		TextView cu_content3 = (TextView) findViewById(R.id.cu_content3);
+		TextView cu_label4 = (TextView) findViewById(R.id.cu_label4);
+		TextView cu_content4 = (TextView) findViewById(R.id.cu_content4);
+		
+		FontSetter.setFont(this, fontName.AGBMed, cu_label1, cu_label2, cu_label3, cu_label4);
+		FontSetter.setFont(this, fontName.AGBReg, cu_content1, cu_content2, cu_content3, cu_content4);
+		
 	}
 	
 	protected void onStart()

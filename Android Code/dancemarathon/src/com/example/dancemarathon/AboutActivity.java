@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.dancemarathon.FontSetter.fontName;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -37,6 +38,7 @@ public class AboutActivity extends ActionBarActivity {
 		try {
 			String aboutContent = parseJSONData("about.json");
 			TextView contentView = (TextView) findViewById(R.id.aboutus_content);
+			FontSetter.setFont(this, fontName.AGBReg, contentView);
 			contentView.setText(aboutContent);
 			contentView.setMovementMethod(new ScrollingMovementMethod());
 		} catch (Exception e) {
