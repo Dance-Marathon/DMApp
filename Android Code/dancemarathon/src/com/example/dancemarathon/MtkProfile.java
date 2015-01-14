@@ -2,6 +2,8 @@ package com.example.dancemarathon;
 
 import java.util.Locale;
 
+import com.example.dancemarathon.FontSetter.fontName;
+
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -62,5 +64,7 @@ public class MtkProfile extends ActionBarActivity
 
 		pic.setImageResource(imageId);
 		story.setText(kid.getStory());
+		
+		FontSetter.setFont(this, fontName.AGBReg, story);
 	}
 }

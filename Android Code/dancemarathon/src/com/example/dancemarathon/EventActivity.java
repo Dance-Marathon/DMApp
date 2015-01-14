@@ -1,5 +1,6 @@
 package com.example.dancemarathon;
 
+import com.example.dancemarathon.FontSetter.fontName;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -28,6 +29,10 @@ public class EventActivity extends ActionBarActivity
 		TextView stime = (TextView) findViewById(R.id.event_page_stime);
 		TextView etime = (TextView) findViewById(R.id.event_page_etime);
 		TextView location = (TextView) findViewById(R.id.event_page_loc);
+		
+		// Set fonts
+		FontSetter.setFont(this, fontName.AGBMed, title);
+		FontSetter.setFont(this, fontName.AGBReg, desc, stime, etime, location);
 		
 		//Set the textviews
 		Bundle b = getIntent().getExtras();

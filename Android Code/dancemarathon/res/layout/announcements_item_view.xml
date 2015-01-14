@@ -8,19 +8,28 @@
     <ImageView
         android:id="@+id/balloon"
         android:contentDescription="@string/balloon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/balloon" />
     
     <TextView
         android:id="@+id/announcements_text"
-        android:layout_width="@dimen/kidimage_width" 
-        android:layout_height="@dimen/kidimage_height" />
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="80dp"
+        android:layout_centerVertical="true" />
 
 	<TextView
         android:id="@+id/announcements_date" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:textSize="10sp"
+        android:layout_centerVertical="true"
         android:textColor="@color/dm_blue_primary"/>
     
 </RelativeLayout>
