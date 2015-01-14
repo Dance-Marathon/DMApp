@@ -39,6 +39,8 @@ public class NotificationService extends Service {
 	 */
 	private int numActiveNotifications;
 	
+	private long currentTime;
+	
 	//Set up receiver to receive TIME_TICK intents
 	private BroadcastReceiver receiver = new BroadcastReceiver(){
 		
@@ -47,9 +49,10 @@ public class NotificationService extends Service {
 			// TODO Auto-generated method stub
 			//testNotification("In on receiver");
 			//The time ticks every minute
-			//Log.d("Notifications", "In on receive");
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
+				//Update current time
+				currentTime = Calendar.getInstance().getTimeInMillis() - 3000; //Subract 3s to account for processing delay
 				setupEventNotifications();
 				
 				//Log.d("Notifications", "Done with event notification setup");
@@ -103,8 +106,10 @@ public class NotificationService extends Service {
 				
 				//Test Events
 				try {
-					Event t1 = new Event("1","Test Event", "blah", "2015-01-13 19:54:00", "2015-01-13 19:54:00", "2015-01-13 06:00:00", "blah");
+					Event t1 = new Event("1","Test Event", "blah", "2015-01-13 23:22:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-14 23:22:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
 					allEvents.add(t1);
+					allEvents.add(t2);
 					//createEventNotification(t1, 5, 1);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -168,7 +173,7 @@ public class NotificationService extends Service {
 	
 	
 	/**
-	 * This method checks for events which are within the designated time proximity
+	 * This method checks for events which are within the designated time proximity.
 	 * @param events The list of events
 	 * @param timeProximity The proximity an event must be to be considered upcoming
 	 * @return The list of upcoming events
@@ -177,21 +182,22 @@ public class NotificationService extends Service {
 	{
 		ArrayList<Event> upcoming = new ArrayList<Event>();
 		
+		//Set calendar
+		Calendar c =  Calendar.getInstance();
+		
 		Iterator<Event> i = events.iterator();
 		while(i.hasNext())
 		{
 			Event e = i.next();
 			
-			//Get current time
-			Calendar c =  Calendar.getInstance();
-			int currentTimeInMins = c.get(Calendar.MINUTE);
-			
 			//Get event time
 			c.setTime(e.getStartDate());
-			int startDateInMins = c.get(Calendar.MINUTE);
+			long startTime = c.getTimeInMillis();
 			
-			int timeUntil = startDateInMins - currentTimeInMins;
-			if(startDateInMins > currentTimeInMins && timeUntil == timeProximity)
+			long millsInMin = 1 * 60 * 1000;
+			long timeUntil = (e.getStartDate().getTime() - currentTime) / (millsInMin);
+			//Log.d("Up", String.valueOf(timeUntil));
+			if(startTime > currentTime && timeUntil == timeProximity)
 			{
 				upcoming.add(e);
 				Log.d("Upcoming", e.getTitle());
