@@ -22,7 +22,6 @@ Create "login" fragment which allows user to login					 D		Chris
 Add navigation drawer for other options					  			 D      Chris
 Add check to see if login info is empty								 D		Chris
 Populate user activity with kintera data 							 D  	Chris
-Create fundraising thermometer view									 IP     Chris
 Make individual event activity prettier 							 D		Chris
 Add state preservation of user data by using cache files			 D  	Chris
 Add state preservation of timeline data with cache					 D	    Chris
@@ -36,10 +35,11 @@ Make everything their proper fonts									 D		Zach
 Add announcements listview											 D      Zach
 Add social media activity											 D 	    Zach
 Change app icon to new one from DM final graphics					 D      Zach
+Add social media text												 D  	Zach
+New images for MTK circles										     D      Zach
+Remove all Log statements and e.printstacktrace						 D  	Both
 Change homepage banner												 NC     Zach
-Add social media text												 NC 	Zach
-New images for MTK circles										     NC     Zach
+Comment Resources files 											 NC 	----
 Possibly reduce size of image assests using png compressor   		 NC 	Zach
 Try to make app support multiple screen sizes 						 NC     ----
-Remove all Log statements and e.printstacktrace						 NC 	Both
-Comment Resources files 											 NC 	----
+Create fundraising thermometer view									 IP     Chris
