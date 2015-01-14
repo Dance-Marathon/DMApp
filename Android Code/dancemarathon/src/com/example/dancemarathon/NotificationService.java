@@ -3,6 +3,7 @@ package com.example.dancemarathon;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import android.app.NotificationManager;
@@ -15,7 +16,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
+//import android.util.Log;
 import android.util.SparseArray;
 
 /**
@@ -106,8 +107,8 @@ public class NotificationService extends Service {
 				
 				//Test Events
 				try {
-					Event t1 = new Event("1","Test Event", "blah", "2015-01-13 23:22:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
-					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-14 23:22:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t1 = new Event("1","Test Event", "blah", "2015-01-13 00:00:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-14 00:00:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
 					allEvents.add(t1);
 					allEvents.add(t2);
 					//createEventNotification(t1, 5, 1);
@@ -184,6 +185,7 @@ public class NotificationService extends Service {
 		
 		//Set calendar
 		Calendar c =  Calendar.getInstance();
+		long millsInMin = 1 * 60 * 1000;
 		
 		Iterator<Event> i = events.iterator();
 		while(i.hasNext())
@@ -192,12 +194,19 @@ public class NotificationService extends Service {
 			
 			//Get event time
 			c.setTime(e.getStartDate());
-			long startTime = c.getTimeInMillis();
+			int startYear = c.get(Calendar.YEAR);
+			int startDay = c.get(Calendar.DAY_OF_YEAR);
+			int startHour = c.get(Calendar.HOUR_OF_DAY);
+			int startMin = c.get(Calendar.MINUTE);
 			
-			long millsInMin = 1 * 60 * 1000;
-			long timeUntil = (e.getStartDate().getTime() - currentTime) / (millsInMin);
-			////Log.d("Up", String.valueOf(timeUntil));
-			if(startTime > currentTime && timeUntil == timeProximity)
+			//Get current time
+			c.setTime(new Date(currentTime));
+			int currYear = c.get(Calendar.YEAR);
+			int currDay = c.get(Calendar.DAY_OF_YEAR);
+			int currHour = c.get(Calendar.HOUR_OF_DAY);
+			int currMin = c.get(Calendar.MINUTE);
+			
+			if(startYear == currYear && startDay == currDay && startHour == currHour && startMin == currMin)
 			{
 				upcoming.add(e);
 				//Log.d("Upcoming", e.getTitle());
