@@ -53,7 +53,7 @@ public class NotificationService extends Service {
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
 				//Update current time
-				currentTime = Calendar.getInstance().getTimeInMillis() - 3000; //Subract 3s to account for processing delay
+				currentTime = Calendar.getInstance().getTimeInMillis();
 				setupEventNotifications();
 				
 				////Log.d("Notifications", "Done with event notification setup");
@@ -105,17 +105,17 @@ public class NotificationService extends Service {
 				ArrayList<Event> allEvents = (ArrayList<Event>) o;
 				SparseArray<ArrayList<Event>> upcomingEvents = new SparseArray<ArrayList<Event>>();
 				
-				//Test Events
+				/*//Test Events
 				try {
-					Event t1 = new Event("1","Test Event", "blah", "2015-01-13 00:00:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
-					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-14 00:00:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t1 = new Event("1","Test Event", "blah", "2015-01-14 12:31:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-15 12:31:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
 					allEvents.add(t1);
 					allEvents.add(t2);
 					//createEventNotification(t1, 5, 1);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();
-				}
+				}*/
 				
 				
 				//Add events that are 5 and 15 mins away to the hashmap
@@ -206,7 +206,9 @@ public class NotificationService extends Service {
 			int currHour = c.get(Calendar.HOUR_OF_DAY);
 			int currMin = c.get(Calendar.MINUTE);
 			
-			if(startYear == currYear && startDay == currDay && startHour == currHour && startMin == currMin)
+			int timeDiff = startMin - currMin;
+			
+			if(startYear == currYear && startDay == currDay && startHour == currHour && timeDiff == timeProximity)
 			{
 				upcoming.add(e);
 				//Log.d("Upcoming", e.getTitle());
