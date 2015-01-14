@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+
 /**
  * This class is a work in progress. The goal is to display a fundraising thermometer.
  * @author Chris Whitten

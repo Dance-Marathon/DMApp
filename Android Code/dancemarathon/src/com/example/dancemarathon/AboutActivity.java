@@ -3,10 +3,8 @@ package com.example.dancemarathon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.example.dancemarathon.FontSetter.fontName;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -16,7 +14,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
-
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;

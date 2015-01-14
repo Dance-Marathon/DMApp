@@ -6,10 +6,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import com.example.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;

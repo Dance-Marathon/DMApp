@@ -8,10 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -27,10 +25,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.dancemarathon.FontSetter.fontName;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 
 /**
  * A simple {@link Fragment} subclass.

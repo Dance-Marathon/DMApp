@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Locale;
-
 import com.example.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;

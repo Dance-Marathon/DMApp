@@ -2,10 +2,8 @@ package com.example.dancemarathon;
 
 import java.util.Locale;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -335,6 +333,7 @@ public class SwipeActivity extends ActionBarActivity
 	/**
 	 * This method handles opening the sponsor activity
 	 */
+	@SuppressWarnings("unused")
 	private void openSponsorActivity()
 	{
 		Intent intent = new Intent(this, SponsorActivity.class);

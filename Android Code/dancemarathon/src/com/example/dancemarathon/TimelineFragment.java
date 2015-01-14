@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -35,6 +33,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 /**
  * A {@link Fragment} subclass which is responsible for displaying the timeline information. It uses

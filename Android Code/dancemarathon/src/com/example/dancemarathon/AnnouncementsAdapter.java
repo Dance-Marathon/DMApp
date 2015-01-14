@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
-
 import com.example.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;

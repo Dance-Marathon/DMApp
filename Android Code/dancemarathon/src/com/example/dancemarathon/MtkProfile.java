@@ -1,7 +1,6 @@
 package com.example.dancemarathon;
 
 import java.util.Locale;
-
 import com.example.dancemarathon.FontSetter.fontName;
 
 import android.graphics.drawable.ColorDrawable;
