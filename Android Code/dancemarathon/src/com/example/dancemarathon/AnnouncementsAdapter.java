@@ -89,7 +89,7 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
         text_announce.setText(a.text);
 
         //Set time
-        String displayFormat = "hh:mm aa MM/dd/yyyy";
+        String displayFormat = "MM/dd  hh:mm aa";
         SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
         String timeText = df.format(a.getDate());
         date.setText(timeText);

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
     
     <!-- Icon Section -->
     
     <RelativeLayout
    	    android:id="@+id/tlineitem_calIcon"
-   	    android:layout_width="50dp"
-   	    android:layout_height="50dp"
+   	    android:layout_width="60dp"
+   	    android:layout_height="60dp"
    	    android:layout_alignParentLeft="true"
    	    android:layout_alignParentStart="true"
-   	    android:layout_marginLeft="7dp"
+   	    android:layout_marginLeft="4dp"
    	    android:layout_marginStart="7dp"
    	    android:layout_marginRight="2dp"
     	android:layout_marginEnd="2dp"
-    	android:layout_marginTop="2dp"
-    	android:layout_marginBottom="2dp"
    	    android:background="@drawable/calendar_icon">
    	    
         <TextView 
@@ -24,9 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"
-            android:paddingTop="12dp"
+            android:paddingTop="15dp"
             android:gravity="center_horizontal|bottom"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="@color/Black"/>
         
          <TextView 
@@ -36,7 +36,7 @@
             android:layout_below="@+id/tlineitem_month"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal|top"
-            android:textSize="9sp"
+            android:textSize="12sp"
             android:textColor="@color/Black"/>
  
    	</RelativeLayout>
@@ -59,7 +59,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentTop="true"
-	        android:textSize="14sp"
+	        android:textSize="17sp"
 	        android:textColor="@color/Black"/>
         
     	<TextView
@@ -69,7 +69,7 @@
 	        android:layout_toRightOf="@+id/tlineitem_locIcon"
     	    android:layout_toEndOf="@+id/tlineitem_locIcon"
     	    android:layout_alignBottom="@+id/tlineitem_locIcon"
-	        android:textSize="12sp"/>
+	        android:textSize="13sp"/>
     	
     	<ImageView
     	    android:id="@+id/tlineitem_locIcon"
@@ -92,7 +92,7 @@
    	    android:paddingEnd="7dp"
    	    android:paddingLeft="2dp"
     	android:paddingStart="2dp"
-   	    android:textSize="12sp"
-   	    android:textColor="@color/Blue"/>
+   	    android:textSize="14sp"
+   	    android:textColor="@color/dm_blue_primary"/>
     
 </RelativeLayout>

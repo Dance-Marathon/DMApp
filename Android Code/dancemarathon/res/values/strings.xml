@@ -15,7 +15,7 @@
     <string name="timeline_load_error">Failed to Load Timeline</string>
     <string name="start_time_label">Starts: </string>
     <string name="end_time_label">Ends: </string>
-    <string name="location_label">Location: </string>
+    <string name="location_label">Location:</string>
     <string name="description_label">Description: </string>
     <string name="retry">Retry</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -53,7 +53,6 @@
     <string-array name="navList">
         <item>FAQs</item>
         <item>Social Media</item>
-        <item>Sponsors</item>
         <item>My Fundraising Progress</item>
         <item>About Dance Marathon</item>
         <item>Contact Us!</item>

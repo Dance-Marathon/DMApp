@@ -37,10 +37,16 @@ public class AboutActivity extends ActionBarActivity {
 		
 		try {
 			String aboutContent = parseJSONData("about.json");
+			
+			//Set content
 			TextView contentView = (TextView) findViewById(R.id.aboutus_content);
 			FontSetter.setFont(this, fontName.AGBReg, contentView);
 			contentView.setText(aboutContent);
 			contentView.setMovementMethod(new ScrollingMovementMethod());
+			
+			//Set title
+			TextView aboutTitle = (TextView) findViewById(R.id.aboutus_title);
+			FontSetter.setFont(this, fontName.AGBBol, aboutTitle);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			displayErrorToast();

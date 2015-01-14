@@ -225,10 +225,9 @@ public class SwipeActivity extends ActionBarActivity
 				{
 				case 0: openFAQActivity();break;
 				case 1: openSocialMediaActivity();break;
-				case 2: openSponsorActivity();break;
-				case 3: openFundraisingActivity();break;
-				case 4: openAboutDMActivity();break;
-				case 5: openContactUsActivity();break;
+				case 2: openFundraisingActivity();break;
+				case 3: openAboutDMActivity();break;
+				case 4: openContactUsActivity();break;
 				}
 				
 			}

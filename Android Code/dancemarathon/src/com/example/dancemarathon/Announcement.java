@@ -53,9 +53,9 @@ public class Announcement implements Comparable<Announcement>, Serializable
 	public int compareTo(Announcement another) {
 		
 		if(this.date.getTime() < another.date.getTime())
-			return -1;
-		else if(this.date.getTime() > another.date.getTime())
 			return 1;
+		else if(this.date.getTime() > another.date.getTime())
+			return -1;
 		else
 			return 0;
 	}

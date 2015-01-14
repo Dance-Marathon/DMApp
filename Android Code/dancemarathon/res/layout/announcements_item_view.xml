@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="5dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
     android:background="@color/White" >
 
     <ImageView
@@ -11,25 +12,32 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:src="@drawable/balloon" />
-    
-    <TextView
+	
+	<TextView
         android:id="@+id/announcements_text"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="80dp"
-        android:layout_centerVertical="true" />
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/balloon"
+        android:layout_toEndOf="@+id/balloon"
+        android:layout_toStartOf="@+id/announcements_date"
+        android:layout_toLeftOf="@+id/announcements_date"
+        android:textSize="16sp"
+        android:textColor="@color/Black"/>
+	
 	<TextView
         android:id="@+id/announcements_date" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:textSize="10sp"
         android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:textSize="12sp"
         android:textColor="@color/dm_blue_primary"/>
+	
     
 </RelativeLayout>
