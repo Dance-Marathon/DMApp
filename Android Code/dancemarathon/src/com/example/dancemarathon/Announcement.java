@@ -1,5 +1,6 @@
 package com.example.dancemarathon;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Locale;
  * @author Chris Whitten
  *
  */
-public class Announcement implements Comparable<Announcement>
+public class Announcement implements Comparable<Announcement>, Serializable
 {
 	/**
 	 * The announcement text

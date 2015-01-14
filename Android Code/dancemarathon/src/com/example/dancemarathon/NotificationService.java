@@ -1,5 +1,6 @@
 package com.example.dancemarathon;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-
+import android.util.Log;
 import android.util.SparseArray;
 
 /**
@@ -50,12 +51,14 @@ public class NotificationService extends Service {
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
 				setupEventNotifications();
+				
 				//Log.d("Notifications", "Done with event notification setup");
 			}
 			
 			//Recreate the service and delete the old one
-			context.startService(new Intent(context, NotificationService.class));
 			NotificationService.this.stopSelf();
+			context.startService(new Intent(context, NotificationService.class));
+			
 		}
 		
 	};;
@@ -87,15 +90,27 @@ public class NotificationService extends Service {
 	{
 		Object o = CacheManager.readObjectFromCacheFile(this, "events");
 		//Stop this service if there is no event cache file
-		
-		if(o != null)
+		if(o == null)
 			this.stopSelf();
 		else
 		{
-			if(verifyEventArrayList((ArrayList<?>) o))
+			Log.d("debug", "In else");
+			//if(verifyEventArrayList((ArrayList<?>) o))
 			{
+				//Log.d("debug", "In if");
 				ArrayList<Event> allEvents = (ArrayList<Event>) o;
 				SparseArray<ArrayList<Event>> upcomingEvents = new SparseArray<ArrayList<Event>>();
+				
+				//Test Events
+				try {
+					Event t1 = new Event("1","Test Event", "blah", "2015-01-13 19:54:00", "2015-01-13 19:54:00", "2015-01-13 06:00:00", "blah");
+					allEvents.add(t1);
+					//createEventNotification(t1, 5, 1);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				
 				//Add events that are 5 and 15 mins away to the hashmap
 				upcomingEvents.put(eventProx1, checkForUpcomingEvents(allEvents,eventProx1));
@@ -122,6 +137,7 @@ public class NotificationService extends Service {
 		{
 			Event e = i.next();
 			numActiveNotifications++;
+			Log.d("debug", "Creating " + e.getTitle());
 			createEventNotification(e, proximity, numActiveNotifications);
 		}
 	}
@@ -165,15 +181,24 @@ public class NotificationService extends Service {
 		while(i.hasNext())
 		{
 			Event e = i.next();
-			int startDateInMins = (int) (e.getStartDate().getTime() / Calendar.MINUTE);
-			int currentTimeInMins = (int) (Calendar.getInstance().getTime().getTime() / Calendar.MINUTE);
 			
-			if((startDateInMins + timeProximity) == currentTimeInMins)
+			//Get current time
+			Calendar c =  Calendar.getInstance();
+			int currentTimeInMins = c.get(Calendar.MINUTE);
+			
+			//Get event time
+			c.setTime(e.getStartDate());
+			int startDateInMins = c.get(Calendar.MINUTE);
+			
+			int timeUntil = startDateInMins - currentTimeInMins;
+			if(startDateInMins > currentTimeInMins && timeUntil == timeProximity)
 			{
 				upcoming.add(e);
+				Log.d("Upcoming", e.getTitle());
 			}
 		}
 		
+		Log.d("Upcoming", String.valueOf(upcoming.size()));
 		return upcoming;
 		
 	}

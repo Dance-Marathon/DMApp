@@ -9,6 +9,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Locale;
 
 import org.json.JSONArray;
@@ -21,7 +23,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -330,6 +331,7 @@ public class TimelineFragment extends Fragment
 				// //Log.d("json", eventsJSON);
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
+				events = removeOldEvents(events);
 				
 				//Write data to cache
 				CacheManager.writeObjectToCacheFile(getActivity(), events, "events");
@@ -430,6 +432,26 @@ public class TimelineFragment extends Fragment
 			if(events.size() <= 0)
 				loadSuccessful = false; //Loading nothing does not qualify as a "successful" load operation
 			return events; 
+		}
+	
+		/**
+		 * This method is responsible for removing events that have already
+		 * occurred from the input array.
+		 * @param events The events
+		 * @return The events that have yet to pass
+		 */
+		private ArrayList<Event> removeOldEvents(ArrayList<Event> events)
+		{
+			ArrayList<Event> newEvents = new ArrayList<Event>(events);
+			Iterator<Event> i = events.iterator();
+			while(i.hasNext())
+			{
+				Event e = i.next();
+				//If the event has already passed, remove it from the list
+				if(e.getStartDate().getTime() < Calendar.getInstance().getTimeInMillis())
+					newEvents.remove(e);
+			}
+			return newEvents;
 		}
 	}
 

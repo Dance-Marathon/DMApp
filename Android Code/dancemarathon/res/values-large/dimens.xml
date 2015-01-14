@@ -22,5 +22,5 @@
 	<dimen name="cu_textMargin">15dp</dimen>
 	<dimen name="cu_sectionMarginVertical">15dp</dimen>
 	
-	<dimen name="announcements_list_height">200dp</dimen>
+	<dimen name="announcements_list_height">150dp</dimen>
 </resources>
