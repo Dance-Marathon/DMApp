@@ -13,7 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;

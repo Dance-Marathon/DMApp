@@ -13,7 +13,6 @@ import java.util.Locale;
  * @author Chris Whitten
  * This class represents a DM event.
  */
-@SuppressWarnings("unused")
 public class Event implements Serializable, Comparable<Event>
 {
 	/**

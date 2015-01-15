@@ -1,6 +1,5 @@
 package com.uf.dancemarathon;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -186,7 +185,6 @@ public class NotificationService extends Service {
 		
 		//Set calendar
 		Calendar c =  Calendar.getInstance();
-		long millsInMin = 1 * 60 * 1000;
 		
 		Iterator<Event> i = events.iterator();
 		while(i.hasNext())

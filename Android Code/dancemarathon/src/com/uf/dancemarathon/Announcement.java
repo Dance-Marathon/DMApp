@@ -14,6 +14,10 @@ import java.util.Locale;
 public class Announcement implements Comparable<Announcement>, Serializable
 {
 	/**
+	 * First serializable id
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * The announcement text
 	 */
 	public String text;
