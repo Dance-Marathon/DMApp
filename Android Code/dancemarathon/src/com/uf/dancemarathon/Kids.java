@@ -2,7 +2,9 @@ package com.uf.dancemarathon;
 
 import java.text.ParseException;
 import java.util.Comparator;
+import java.util.Locale;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -26,14 +28,20 @@ public class Kids implements Parcelable
 		// TODO Auto-generated constructor stub
 	}
 	
+	protected int getImageId(Context c)
+	{
+		String image_name = this.image_name.toLowerCase(Locale.ENGLISH).replace(".png", "");
+		int imageId = c.getResources().getIdentifier(image_name,"drawable", c.getPackageName());
+		return imageId;
+	}
+	
+	// Methods to make this class Parcelable //
 	@Override
 	public int describeContents()
 	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	// Methods to make this class Parcelable //
 	
 	@Override
 	public void writeToParcel(Parcel dest, int flags)

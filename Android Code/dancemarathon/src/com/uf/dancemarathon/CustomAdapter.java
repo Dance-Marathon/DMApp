@@ -14,7 +14,6 @@ import com.uf.dancemarathon.R;
 import com.uf.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,8 +136,8 @@ public class CustomAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
     	ViewHolder holder = null;
     	
-		String image_name = kids.get(position).getImage_name().toLowerCase(Locale.ENGLISH).replace(".png", "");
-		int imageId = mContext.getResources().getIdentifier(image_name,"drawable", mContext.getPackageName());
+    	Kids currKid = kids.get(position);
+		int imageId = currKid.getImageId(mContext);
 		
 	    if (convertView == null) 
 	    {	

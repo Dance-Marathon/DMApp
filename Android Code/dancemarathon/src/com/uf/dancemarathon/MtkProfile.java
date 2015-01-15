@@ -1,10 +1,5 @@
 package com.uf.dancemarathon;
 
-import java.util.Locale;
-
-import com.uf.dancemarathon.R;
-import com.uf.dancemarathon.FontSetter.fontName;
-
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,13 +54,10 @@ public class MtkProfile extends ActionBarActivity
 	{
 		ImageView pic  = (ImageView) findViewById(R.id.kid_pic);
 		TextView story = (TextView) findViewById(R.id.kid_story);
-		
-		String image_name = kid.getImage_name().toLowerCase(Locale.ENGLISH).replace(".png", "");
-		int imageId = getResources().getIdentifier(image_name,"drawable", "com.example.dancemarathon");
 
-		pic.setImageResource(imageId);
+		pic.setImageResource(kid.getImageId(this));
 		story.setText(kid.getStory());
 		
-		FontSetter.setFont(this, fontName.AGBReg, story);
+		FontSetter.setFont(this, FontSetter.fontName.AGBReg, story);
 	}
 }
