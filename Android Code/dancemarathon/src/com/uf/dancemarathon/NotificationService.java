@@ -3,9 +3,7 @@ package com.uf.dancemarathon;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
-
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -16,7 +14,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-//import android.util.Log;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.uf.dancemarathon.R;
@@ -110,8 +108,8 @@ public class NotificationService extends Service {
 				
 				//Test Events
 				try {
-					Event t1 = new Event("1","Test Event", "blah", "2015-01-16 13:29:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
-					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-16 13:19:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t1 = new Event("1","Test Event", "blah", "2015-01-16 15:47:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-16 15:37:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
 					allEvents.add(t1);
 					allEvents.add(t2);
 					//createEventNotification(t1, 5, 1);
@@ -182,12 +180,10 @@ public class NotificationService extends Service {
 	 * @param timeProximity The proximity an event must be to be considered upcoming
 	 * @return The list of upcoming events
 	 */
-	private ArrayList<Event> checkForUpcomingEvents(ArrayList<Event> events, int timeProximity)
+	private ArrayList<Event> checkForUpcomingEvents(ArrayList<Event> events, double timeProximity)
 	{
 		ArrayList<Event> upcoming = new ArrayList<Event>();
-		
-		//Set calendar
-		Calendar c =  Calendar.getInstance();
+		double minInMillis = 1 * 60 * 1000;
 		
 		Iterator<Event> i = events.iterator();
 		while(i.hasNext())
@@ -199,9 +195,10 @@ public class NotificationService extends Service {
 			long timeDiff = eventTime - currentTime;
 			
 			//Get minute difference
-			c.setTime(new Date(timeDiff));
-			int minDiff = c.get(Calendar.MINUTE);
+			double minDiff = (long) Math.ceil(timeDiff / minInMillis); //Need to do ceil to account for off by 1 error
 			
+			String logString = "timeDiff: " + String.valueOf(timeDiff) + " minDiff: " + String.valueOf(minDiff);
+			Log.d("Upcoming", logString);
 			if(minDiff == timeProximity)
 			{
 				upcoming.add(e);
