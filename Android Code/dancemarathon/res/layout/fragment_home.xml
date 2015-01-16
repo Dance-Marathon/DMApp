@@ -70,7 +70,6 @@
         android:layout_marginBottom="10dp"
         android:text="@string/game"
         android:textSize="14sp"
-        android:textSize="@dimen/homepage_button_textsize"
         android:tag="@string/game_website"
         android:onClick="openLink" />
     
@@ -103,7 +102,6 @@
         android:layout_marginBottom="10dp"
         android:text="@string/donate"
         android:textSize="14sp"
-        android:textSize="@dimen/homepage_button_textsize"
         android:tag="@string/donate_website"
         android:onClick="openLink" />
         
