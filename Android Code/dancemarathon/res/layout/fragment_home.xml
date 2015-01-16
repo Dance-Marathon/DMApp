@@ -70,7 +70,6 @@
         android:layout_marginBottom="10dp"
         android:text="@string/game"
         android:textSize="14sp"
-        android:tag="@string/game_website"
         android:onClick="openLink" />
     
         <!-- DM Webpage Button -->
@@ -85,7 +84,6 @@
 	    android:textSize="14sp"
 	    android:textColor="@color/White"
 	    android:background="@color/dm_blue_primary"
-        android:tag="@string/dm_website"
         android:onClick="openLink" /> 
 
     <!-- Donate Button -->
@@ -101,7 +99,6 @@
         android:layout_marginBottom="10dp"
         android:text="@string/donate"
         android:textSize="14sp"
-        android:tag="@string/donate_website"
         android:onClick="openLink" />
         
 </RelativeLayout>
