@@ -44,3 +44,9 @@ Possibly reduce size of image assests using png compressor   		 NC 	Zach
 Try to make app support multiple screen sizes 						 NC     ----
 Create fundraising thermometer view									 IP     Chris
 Change version # to 1.1								
+Turn off landscape mode			
+Make all text bigger
+Debug pictures on MTK profile
+Set margin right on FAQ, About Us
+Set margin below on MTK profile
+Youtube crashes?
