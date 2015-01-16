@@ -15,6 +15,10 @@ import com.uf.dancemarathon.R;
 
 public class SocialMedia extends ActionBarActivity {
 
+	/**
+	 * This is the DM over the years video
+	 */
+	private static String defaultYoutubeVideoId = "ZRc6rjZleMs";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -130,7 +134,7 @@ public class SocialMedia extends ActionBarActivity {
 		try
 		{
 			context.getPackageManager().getPackageInfo("com.google.android.youtube", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + SocialMedia.defaultYoutubeVideoId));
 		}
 		// Open YouTube channel in browser
 		catch (Exception e)

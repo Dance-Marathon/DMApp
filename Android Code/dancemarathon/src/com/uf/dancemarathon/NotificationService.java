@@ -197,8 +197,8 @@ public class NotificationService extends Service {
 			//Get minute difference
 			double minDiff = (long) Math.ceil(timeDiff / minInMillis); //Need to do ceil to account for off by 1 error
 			
-			String logString = "timeDiff: " + String.valueOf(timeDiff) + " minDiff: " + String.valueOf(minDiff);
-			Log.d("Upcoming", logString);
+			//String logString = "timeDiff: " + String.valueOf(timeDiff) + " minDiff: " + String.valueOf(minDiff);
+			//Log.d("Upcoming", logString);
 			if(minDiff == timeProximity)
 			{
 				upcoming.add(e);

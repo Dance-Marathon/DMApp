@@ -71,6 +71,24 @@ public class TimelineFragment extends Fragment
 	private static final String eventWebServicePath = "http://floridadm.org/app/events.php";
 	
 	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onSaveInstanceState(android.os.Bundle)
+	 */
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+	}
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onViewStateRestored(android.os.Bundle)
+	 */
+	@Override
+	public void onViewStateRestored(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onViewStateRestored(savedInstanceState);
+	}
+
 	public TimelineFragment()
 	{
 		// Required empty public constructor
