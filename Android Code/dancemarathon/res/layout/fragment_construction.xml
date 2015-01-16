@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Black"
-    tools:context="com.example.dancemarathon.ConstructionFragment" >
+    tools:context="com.uf.dancemarathon.ConstructionFragment" >
 
 	<ImageView
 	    android:id="@+id/construction_img"

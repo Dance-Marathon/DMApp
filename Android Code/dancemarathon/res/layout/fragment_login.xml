@@ -1,8 +1,8 @@
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.dancemarathon.LoginFragment"
-     android:background="@color/White"
+    tools:context="com.uf.dancemarathon.LoginFragment"
+    android:background="@color/White"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/login_margin_left"
@@ -43,6 +43,7 @@
         android:layout_alignStart="@+id/username_label"
         android:layout_below="@+id/username_label"
         android:textColor="@color/Black"
+        android:inputType="text"
         />
     
     <TextView 

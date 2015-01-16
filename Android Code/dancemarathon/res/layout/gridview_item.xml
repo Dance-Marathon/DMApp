@@ -5,7 +5,7 @@
     android:layout_marginTop="5dp"
     android:background="@color/White" >
 
-    <com.example.dancemarathon.CircleView
+    <com.uf.dancemarathon.CircleView
         android:id="@+id/grid_kid_pic"
         android:layout_width="@dimen/kidimage_width" 
         android:layout_height="@dimen/kidimage_height"

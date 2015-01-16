@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.example.dancemarathon.HomeFragment" >
+    tools:context="com.uf.dancemarathon.HomeFragment" >
     
     <!-- Heading -->
     <ImageView android:id="@+id/dance_marathon_header_image"
@@ -83,7 +83,6 @@
         android:layout_centerHorizontal="true"
 	    android:text="@string/website"
 	    android:textSize="14sp"
-	    android:textSize="@dimen/homepage_button_textsize"
 	    android:textColor="@color/White"
 	    android:background="@color/dm_blue_primary"
         android:tag="@string/dm_website"

@@ -36,11 +36,3 @@ Android Code/dancemarathon/project.properties
 *.classpath
 Android Code/dancemarathon/.classpath
 Android Code/dancemarathon/project.properties
-<<<<<<< HEAD
-
-Android Code/dancemarathon/src/com/example/dancemarathon/CustomAdapter.java
-=======
-Android Code/dancemarathon/.settings/org.eclipse.ltk.core.refactoring.prefs
-Android Code/dancemarathon/.classpath
-Android Code/dancemarathon/project.properties
->>>>>>> master
