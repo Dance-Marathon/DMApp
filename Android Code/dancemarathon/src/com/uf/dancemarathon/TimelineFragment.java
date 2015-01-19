@@ -9,15 +9,20 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -33,6 +38,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.uf.dancemarathon.R;
 
 
@@ -51,15 +57,15 @@ public class TimelineFragment extends Fragment
 	/**
 	 * Flag stating whether or not the load operation was successful
 	 */
-	private boolean loadSuccessful;
+	private boolean loadSuccessful = false;
 	/**
 	 * Flag stating whether or not the event load from the cache was successful
 	 */
-	private boolean cacheLoadSuccessful;
+	private boolean cacheLoadSuccessful = false;
 	/**
 	 * Flag stating whether or not the event list is currently in the refresh process
 	 */
-	private boolean isRefreshing;
+	private boolean isRefreshing = false;
 	/**
 	 * The loader which performs the async load operation.
 	 */
@@ -78,6 +84,9 @@ public class TimelineFragment extends Fragment
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
+		
+		//Save the events
+		outState.putParcelableArray("events", (Parcelable[]) events.toArray());
 	}
 
 	/* (non-Javadoc)
@@ -87,7 +96,12 @@ public class TimelineFragment extends Fragment
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onViewStateRestored(savedInstanceState);
-	}
+		
+		//Restore the events
+		events = new ArrayList<Event>();
+		Event[] savedEvents = (Event[]) savedInstanceState.getParcelableArray("events");
+		events.addAll((Collection<? extends Event>) Arrays.asList(savedEvents));
+	}			
 
 	public TimelineFragment()
 	{
