@@ -27,12 +27,15 @@ public class EventActivity extends ActionBarActivity
 		TextView title = (TextView) findViewById(R.id.event_page_title);
 		TextView desc = (TextView) findViewById(R.id.event_page_desc);
 		TextView stime = (TextView) findViewById(R.id.event_page_stime);
+		TextView stime_label = (TextView) findViewById(R.id.event_page_stime_label);
 		TextView etime = (TextView) findViewById(R.id.event_page_etime);
+		TextView etime_label = (TextView) findViewById(R.id.event_page_etime_label);
 		TextView location = (TextView) findViewById(R.id.event_page_loc);
+		TextView location_label = (TextView) findViewById(R.id.event_page_loc_label);
 		
 		// Set fonts
 		FontSetter.setFont(this, fontName.AGBMed, title);
-		FontSetter.setFont(this, fontName.AGBReg, desc, stime, etime, location);
+		FontSetter.setFont(this, fontName.AGBReg, desc, stime, etime, location, stime_label, etime_label, location_label);
 		
 		//Set the textviews
 		Bundle b = getIntent().getExtras();
