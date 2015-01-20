@@ -462,7 +462,7 @@ public class TimelineFragment extends Fragment
 			{
 				Event e = i.next();
 				//If the event has already passed, remove it from the list
-				if(e.getStartDate().getTime() < Calendar.getInstance().getTimeInMillis())
+				if(e.getEndDate().getTime() < Calendar.getInstance().getTimeInMillis())
 					newEvents.remove(e);
 			}
 			return newEvents;
