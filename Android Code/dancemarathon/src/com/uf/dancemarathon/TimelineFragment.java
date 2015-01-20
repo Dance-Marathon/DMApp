@@ -74,37 +74,7 @@ public class TimelineFragment extends Fragment
 	/**
 	 * The path to the event webservice on the server
 	 */
-	private static final String eventWebServicePath = "http://floridadm.org/app/events.php";
-	
-	
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.Fragment#onSaveInstanceState(android.os.Bundle)
-	 */
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
-		super.onSaveInstanceState(outState);
-		
-		//Save the events
-		outState.putParcelableArray("events", (Parcelable[]) events.toArray());
-	}
-
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.Fragment#onViewStateRestored(android.os.Bundle)
-	 */
-	@Override
-	public void onViewStateRestored(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onViewStateRestored(savedInstanceState);
-		
-		//Restore the events
-		events = new ArrayList<Event>();
-		Event[] savedEvents = (Event[]) savedInstanceState.getParcelableArray("events");
-		events.addAll((Collection<? extends Event>) Arrays.asList(savedEvents));
-		
-		//Show event list
-		this.showEventList(getView(), events);
-	}			
+	private static final String eventWebServicePath = "http://floridadm.org/app/events.php";		
 
 	public TimelineFragment()
 	{
@@ -120,6 +90,9 @@ public class TimelineFragment extends Fragment
 		 
 		 if(cacheLoadSuccessful && events.size() > 0)
 			 showEventList(v, events);
+		 else
+			 forceEventListUpdate();
+		 
 		 return v;
 	}
 	
