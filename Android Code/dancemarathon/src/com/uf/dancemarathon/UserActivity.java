@@ -218,7 +218,7 @@ public class UserActivity extends ActionBarActivity
 				password = params[1];
 				
 				//Set path
-				String path = kinteraWebServicePath;
+				String path = new ConfigFileReader(UserActivity.this).getSetting("kinteraPath");
 				path += "?username=" + username;
 				path += "&password=" + password;
 				

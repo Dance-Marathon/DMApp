@@ -336,7 +336,8 @@ public class TimelineFragment extends Fragment
 			ArrayList<Event> events = new ArrayList<Event>();
 			try
 			{	
-				URL url = new URL(eventWebServicePath); //The path to the webservice 
+				String path = new ConfigFileReader(getActivity()).getSetting("eventsPath");
+				URL url = new URL(path); //The path to the webservice 
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				
