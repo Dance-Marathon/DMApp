@@ -67,7 +67,7 @@ public class Event implements Serializable, Comparable<Event>
 	{
 		this.id = id;
 		this.title = title;
-		this.location = location;
+		setLocation(location);
 		this.t_startDate = t_startDate;
 		this.t_endDate = t_endDate;
 		this.t_lastMod = t_lastMod;
@@ -174,7 +174,10 @@ public class Event implements Serializable, Comparable<Event>
 	 */
 	protected void setLocation(String location)
 	{
-		this.location = location;
+		if(location.trim().length() > 0)
+			this.location = location;
+		else
+			this.location = "No Location";
 	}
 
 

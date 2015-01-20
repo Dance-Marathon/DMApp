@@ -106,7 +106,7 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         title.setText(makeCondensedString(titleText, 25));
         
         //Set location
-        location.setText("Location: " + makeCondensedString(e.getLocation(), 20));
+        location.setText(makeCondensedString(e.getLocation(), 30));
         
         //Set time
         String displayFormat = "hh:mm aa";
@@ -145,7 +145,7 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 			else
 				newString+=" " + nextWord;
 		}
-		return newString;
+		return newString.trim();
 	}
 
 }
