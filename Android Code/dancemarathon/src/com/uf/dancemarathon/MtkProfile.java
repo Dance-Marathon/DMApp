@@ -24,7 +24,7 @@ public class MtkProfile extends ActionBarActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_mtk_profile);
+		setContentView(R.layout.activity_mtk_profile);
 		
 		//Get user from intent
 		Kids kid = getIntent().getExtras().getParcelable("kid");
