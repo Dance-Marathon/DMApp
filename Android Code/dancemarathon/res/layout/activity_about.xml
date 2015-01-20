@@ -28,6 +28,7 @@
         android:layout_marginTop="7dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:paddingEnd="5dp"
         android:textSize="18sp"
         android:textColor="@color/Black"
         android:maxLines = "30"
