@@ -101,6 +101,9 @@ public class TimelineFragment extends Fragment
 		events = new ArrayList<Event>();
 		Event[] savedEvents = (Event[]) savedInstanceState.getParcelableArray("events");
 		events.addAll((Collection<? extends Event>) Arrays.asList(savedEvents));
+		
+		//Show event list
+		this.showEventList(getView(), events);
 	}			
 
 	public TimelineFragment()
