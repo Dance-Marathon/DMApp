@@ -15,16 +15,6 @@
 	<dimen name="login_margin_right">20dp</dimen>
 	<dimen name="login_margin_left">20dp</dimen>
 	<dimen name="login_margin_bottom">20dp</dimen>
-<<<<<<< HEAD
-=======
-	
-	<!-- Home Fragment -->
-	<dimen name="homepage_button_height">40dp</dimen>
-	<dimen name="homepage_button_width">80dp</dimen>
-	<dimen name="homepage_button_textsize">12sp</dimen>
->>>>>>> origin/chris
-	<dimen name="headertext_margin_top">20dp</dimen>
-	<dimen name="announcements_list_height">200dp</dimen>
 	
 	<!-- MTK Fragment -->
 	<dimen name="kidimage_height">64dp</dimen>
@@ -52,10 +42,4 @@
 	<dimen name="cu_textMargin">15dp</dimen>
 	<dimen name="cu_sectionMarginVertical">15dp</dimen>
 	
-<<<<<<< HEAD
-
-=======
-	<!-- More Dimensions -->
-	
->>>>>>> origin/chris
 </resources>

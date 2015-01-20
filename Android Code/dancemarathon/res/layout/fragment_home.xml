@@ -69,12 +69,8 @@
         android:layout_marginRight="@dimen/homepage_button_margin_arb"
         android:layout_marginBottom="@dimen/homepage_button_margin_arb"
         android:text="@string/game"
-<<<<<<< HEAD
         android:textSize="@dimen/homepage_button_textsize"
         android:tag="@string/game_website"
-=======
-        android:textSize="14sp"
->>>>>>> origin/chris
         android:onClick="openLink" />
     
         <!-- DM Webpage Button -->
@@ -103,12 +99,8 @@
         android:layout_marginRight="@dimen/homepage_button_margin_arb"
         android:layout_marginBottom="@dimen/homepage_button_margin_arb"
         android:text="@string/donate"
-<<<<<<< HEAD
         android:textSize="@dimen/homepage_button_textsize"
         android:tag="@string/donate_website"
-=======
-        android:textSize="14sp"
->>>>>>> origin/chris
         android:onClick="openLink" />
         
 </RelativeLayout>
