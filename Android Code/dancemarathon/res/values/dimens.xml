@@ -3,15 +3,30 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- User Activity -->
 	<dimen name="user_title_horizontal_margin">16dp</dimen>
 	<dimen name="user_title_vertical_margin">25dp</dimen>
 	<dimen name="fundraising_field_vertical_margin">16dp</dimen>
 	<dimen name="fundraising_field_horizontal_margin">16dp</dimen>
+	
+	<!-- Login Activity -->
 	<dimen name="login_margin_top">30dp</dimen>
 	<dimen name="login_margin_right">20dp</dimen>
 	<dimen name="login_margin_left">20dp</dimen>
 	<dimen name="login_margin_bottom">20dp</dimen>
+<<<<<<< HEAD
+=======
+	
+	<!-- Home Fragment -->
+	<dimen name="homepage_button_height">40dp</dimen>
+	<dimen name="homepage_button_width">80dp</dimen>
+	<dimen name="homepage_button_textsize">12sp</dimen>
+>>>>>>> origin/chris
 	<dimen name="headertext_margin_top">20dp</dimen>
+	<dimen name="announcements_list_height">200dp</dimen>
+	
+	<!-- MTK Fragment -->
 	<dimen name="kidimage_height">64dp</dimen>
 	<dimen name="kidimage_width">64dp</dimen>
 	
@@ -37,5 +52,10 @@
 	<dimen name="cu_textMargin">15dp</dimen>
 	<dimen name="cu_sectionMarginVertical">15dp</dimen>
 	
+<<<<<<< HEAD
 
+=======
+	<!-- More Dimensions -->
+	
+>>>>>>> origin/chris
 </resources>

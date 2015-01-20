@@ -29,7 +29,8 @@
     	
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingEnd="5dp" >
     	
     		<TextView
         		android:id="@+id/kid_story"
@@ -40,7 +41,7 @@
         		android:layout_marginRight="@dimen/login_margin_right"
         		android:textSize="14sp"
         		android:textColor="@color/black" />
-    	
+   
     	</RelativeLayout>
 	</ScrollView>
     

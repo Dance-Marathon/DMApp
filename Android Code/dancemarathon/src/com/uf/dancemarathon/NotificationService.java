@@ -1,8 +1,8 @@
 package com.uf.dancemarathon;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,8 +14,9 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-//import android.util.Log;
+import android.util.Log;
 import android.util.SparseArray;
+
 import com.uf.dancemarathon.R;
 
 
@@ -105,17 +106,17 @@ public class NotificationService extends Service {
 				ArrayList<Event> allEvents = (ArrayList<Event>) o;
 				SparseArray<ArrayList<Event>> upcomingEvents = new SparseArray<ArrayList<Event>>();
 				
-				/*//Test Events
+				//Test Events
 				try {
-					Event t1 = new Event("1","Test Event", "blah", "2015-01-14 12:31:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
-					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-15 12:31:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t1 = new Event("1","Test Event", "blah", "2015-01-16 15:47:00", "2015-01-13 22:54:00", "2015-01-13 06:00:00", "blah");
+					Event t2 = new Event("2","Test Event 2", "blah", "2015-01-16 15:37:00", "2015-01-14 22:54:00", "2015-01-13 06:00:00", "blah");
 					allEvents.add(t1);
 					allEvents.add(t2);
 					//createEventNotification(t1, 5, 1);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();
-				}*/
+				}
 				
 				
 				//Add events that are 5 and 15 mins away to the hashmap
@@ -179,35 +180,26 @@ public class NotificationService extends Service {
 	 * @param timeProximity The proximity an event must be to be considered upcoming
 	 * @return The list of upcoming events
 	 */
-	private ArrayList<Event> checkForUpcomingEvents(ArrayList<Event> events, int timeProximity)
+	private ArrayList<Event> checkForUpcomingEvents(ArrayList<Event> events, double timeProximity)
 	{
 		ArrayList<Event> upcoming = new ArrayList<Event>();
-		
-		//Set calendar
-		Calendar c =  Calendar.getInstance();
+		double minInMillis = 1 * 60 * 1000;
 		
 		Iterator<Event> i = events.iterator();
 		while(i.hasNext())
 		{
 			Event e = i.next();
 			
-			//Get event time
-			c.setTime(e.getStartDate());
-			int startYear = c.get(Calendar.YEAR);
-			int startDay = c.get(Calendar.DAY_OF_YEAR);
-			int startHour = c.get(Calendar.HOUR_OF_DAY);
-			int startMin = c.get(Calendar.MINUTE);
+			//Get time difference
+			long eventTime = e.getStartDate().getTime();
+			long timeDiff = eventTime - currentTime;
 			
-			//Get current time
-			c.setTime(new Date(currentTime));
-			int currYear = c.get(Calendar.YEAR);
-			int currDay = c.get(Calendar.DAY_OF_YEAR);
-			int currHour = c.get(Calendar.HOUR_OF_DAY);
-			int currMin = c.get(Calendar.MINUTE);
+			//Get minute difference
+			double minDiff = (long) Math.ceil(timeDiff / minInMillis); //Need to do ceil to account for off by 1 error
 			
-			int timeDiff = startMin - currMin;
-			
-			if(startYear == currYear && startDay == currDay && startHour == currHour && timeDiff == timeProximity)
+			//String logString = "timeDiff: " + String.valueOf(timeDiff) + " minDiff: " + String.valueOf(minDiff);
+			//Log.d("Upcoming", logString);
+			if(minDiff == timeProximity)
 			{
 				upcoming.add(e);
 				//Log.d("Upcoming", e.getTitle());

@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.uf.dancemarathon.R;
 import com.uf.dancemarathon.FontSetter.fontName;
 
 
@@ -45,6 +45,12 @@ public class HomeFragment extends Fragment
 	 * The path to the announcements webservice on the server
 	 */
 	private static final String announcementWebServicePath = "http://floridadm.org/app/announcements.php";
+	
+	//Website Paths//
+	private static final String gameLink = "http://www.google.com";
+	private static final String websiteLink = "http://www.floridadm.org/";
+	private static final String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
+	
 	
 	public HomeFragment()
 	{
@@ -208,47 +214,83 @@ public class HomeFragment extends Fragment
 	 */
 	private void setButtonListeners(View v)
 	{
-		Button gameButton = (Button) v.findViewById(R.id.game);
-		Button websiteButton = (Button) v.findViewById(R.id.website);
-		Button donateButton = (Button) v.findViewById(R.id.donate);
+		final Button gameButton = (Button) v.findViewById(R.id.game);
+		final Button websiteButton = (Button) v.findViewById(R.id.website);
+		final Button donateButton = (Button) v.findViewById(R.id.donate);
 		
-		setButtonTracker(gameButton);
-		setButtonTracker(websiteButton);
-		setButtonTracker(donateButton);
+		gameButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendButtonHit(gameButton);
+				openLink(gameButton);
+			}
+		});
+		
+		websiteButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendButtonHit(websiteButton);
+				openLink(websiteButton);
+			}
+		});
+		
+		donateButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendButtonHit(donateButton);
+				openLink(donateButton);
+			}
+		});
 	}
 	
 	/**
 	 * This method implements google analytics to track the button clicks
 	 * @param b The button to track
 	 */
-	private void setButtonTracker(final Button b)
+	private void sendButtonHit(final Button b)
 	{
-		b.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String buttonName = b.getText().toString();
-				int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
-				if(canTrack == ConnectionResult.SUCCESS)
-				{
-					//Log.d("Tracking", "SwipeActivity");
-					TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
-				}
-			}
-			
-		});
+		// TODO Auto-generated method stub
+		String buttonName = b.getText().toString();
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			//Log.d("Tracking", "SwipeActivity");
+			TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
+		}
 	}
 	
-	// onClick method to open links
-		public void openLink(View view)
-		{
-			// Get media type from tag
-		    String media = (String)view.getTag();
-		
-		    Intent intent = new Intent();
-		    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(media));
-		    startActivity(intent);
-		}
 	
+	/**
+	 * Called by the buttons to open browser webpages.
+	 * @param view The button which called this method
+	 */
+	public void openLink(View view)
+	{
+		Log.d("Link", "In open link");
+		int id = view.getId();
+		if(id == R.id.game)
+			openWebsite(gameLink);
+		else if(id == R.id.website)
+			openWebsite(websiteLink);
+		else if(id == R.id.donate)
+			openWebsite(donateLink);
+		else
+		{
+		}
+			
+	}
+	
+	public void openWebsite(String link)
+	{
+		Log.d("link", link);
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+		startActivity(intent);
+	}
+
 }

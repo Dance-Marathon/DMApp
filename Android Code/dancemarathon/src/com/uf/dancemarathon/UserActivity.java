@@ -30,8 +30,9 @@ import com.uf.dancemarathon.R;
 
 public class UserActivity extends ActionBarActivity
 {
-	KinteraUser user;
-	UserLoader loader;
+	private KinteraUser user;
+	private UserLoader loader;
+	private final String kinteraWebServicePath = "http://dev.floridadm.org/app/kintera.php?";
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -217,7 +218,7 @@ public class UserActivity extends ActionBarActivity
 				password = params[1];
 				
 				//Set path
-				String path = "http://mickmaccallum.com/ian/kintera.php?";
+				String path = kinteraWebServicePath;
 				path += "username=" + username;
 				path += "&password=" + password;
 				
