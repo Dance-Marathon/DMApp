@@ -32,7 +32,7 @@ public class UserActivity extends ActionBarActivity
 {
 	private KinteraUser user;
 	private UserLoader loader;
-	private final String kinteraWebServicePath = "http://dev.floridadm.org/app/kintera.php?";
+	private final String kinteraWebServicePath = "http://dev.floridadm.org/app/kintera.php";
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -219,7 +219,7 @@ public class UserActivity extends ActionBarActivity
 				
 				//Set path
 				String path = kinteraWebServicePath;
-				path += "username=" + username;
+				path += "?username=" + username;
 				path += "&password=" + password;
 				
 				//Connect to the webservice

@@ -29,7 +29,7 @@ public class MtkFragment extends Fragment
 		
 		//Set gridview adapter
 		GridView gridview = (GridView) v.findViewById(R.id.mtk_gridview);
-		final CustomAdapter adapter = new CustomAdapter(this.getActivity());
+		final MtkAdapter adapter = new MtkAdapter(this.getActivity());
 	    gridview.setAdapter(adapter);
 	    gridview.setOnItemClickListener(new OnItemClickListener() 
 	    {

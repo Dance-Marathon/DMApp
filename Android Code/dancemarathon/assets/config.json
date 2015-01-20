@@ -1,0 +1,15 @@
+{
+	"eventsPath":			"http://floridadm.org/app/events.php",
+
+	"kinteraPath":			"http://dev.floridadm.org/app/kintera.php",
+
+	"announcementsPath":	"http://floridadm.org/app/announcements.php",
+
+	"websitePath":			"http://www.floridadm.org/",
+
+	"donatePath":			"http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2",
+	
+	"gamePath":				"http://www.google.com",
+
+	"DMEventStartDate":		"2015-03-14 12:00:00"
+}
