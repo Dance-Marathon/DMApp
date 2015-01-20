@@ -43,7 +43,7 @@
         		android:layout_centerHorizontal="true"
         		android:layout_marginLeft="@dimen/login_margin_left"
         		android:layout_marginRight="@dimen/login_margin_right"
-        		android:textSize="14sp"
+        		android:textSize="18sp"
         		android:textColor="@color/black" />
    
     	</RelativeLayout>
