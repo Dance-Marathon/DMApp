@@ -2,7 +2,7 @@ package com.uf.dancemarathon;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.uf.dancemarathon.R;
+
 import com.uf.dancemarathon.FontSetter.fontName;
 
 import android.graphics.drawable.ColorDrawable;

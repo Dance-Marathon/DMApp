@@ -2,7 +2,7 @@ package com.uf.dancemarathon;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.uf.dancemarathon.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

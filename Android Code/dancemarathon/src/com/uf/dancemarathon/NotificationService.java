@@ -17,7 +17,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.uf.dancemarathon.R;
+
 
 
 /**

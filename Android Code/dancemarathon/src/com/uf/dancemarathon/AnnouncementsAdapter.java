@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-import com.uf.dancemarathon.R;
+
 import com.uf.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;

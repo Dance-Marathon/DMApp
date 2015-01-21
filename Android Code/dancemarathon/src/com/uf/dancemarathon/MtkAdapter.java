@@ -10,7 +10,7 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.uf.dancemarathon.R;
+
 import com.uf.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;
