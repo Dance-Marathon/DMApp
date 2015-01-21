@@ -19,6 +19,10 @@ public class SocialMedia extends ActionBarActivity {
 	 * This is the DM over the years video
 	 */
 	private static String defaultYoutubeVideoId = "ZRc6rjZleMs";
+	private static String twitter_Id = "twitter://user?user_id=34755385";
+	private static String facebook_Id = "fb://page/116374146706";
+	private static String instagram_Id = "http://instagram.com/dmatuf";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,7 +90,7 @@ public class SocialMedia extends ActionBarActivity {
 		try
 		{
 			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/116374146706"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMedia.facebook_Id));
 		}
 		// Open Facebook page in browser
 		catch (Exception e)
@@ -102,7 +106,7 @@ public class SocialMedia extends ActionBarActivity {
 		try
 		{
 		    context.getPackageManager().getPackageInfo("com.twitter.android", 0);
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=34755385"));
+		    return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMedia.twitter_Id));
 		}
 		// Open Twitter profile in browser
 		catch (Exception e)
@@ -117,7 +121,7 @@ public class SocialMedia extends ActionBarActivity {
 		// Open Instagram profile in Instagram app
 		try{
 			context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/dmatuf"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMedia.instagram_Id));
 		}
 		// Open Instagram profile in browser
 		catch (Exception e)

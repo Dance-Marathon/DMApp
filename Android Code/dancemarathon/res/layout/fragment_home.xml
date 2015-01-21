@@ -10,9 +10,9 @@
         android:src="@drawable/countdown"
         android:contentDescription="@string/dance_marathon"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="-25dp"
-        android:layout_marginBottom="-25dp"
+        android:layout_height="@dimen/heading_pic_height"
+        android:layout_marginTop="@dimen/heading_pic_margin_top"
+        android:layout_marginBottom="@dimen/heading_pic_margin_bottom"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
     
@@ -22,13 +22,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/header"
-        android:textSize="16sp"
+        android:textSize="@dimen/header_text_textsize"
         android:textColor="@color/dm_blue_primary"
         android:gravity="center"
         android:layout_below="@+id/dance_marathon_header_image"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="40dp" 
+        android:layout_marginLeft="@dimen/header_text_margin_left"
+        android:layout_marginTop="@dimen/header_text_margin_top"
+        android:layout_marginRight="@dimen/header_text_margin_right" 
         android:layout_centerHorizontal="true"/>
 
     <!-- Announcements -->
@@ -42,11 +42,11 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="10dp"
+	        android:layout_marginTop="@dimen/announcements_text_margin_top"
 	        android:text="@string/announcements"
 	        android:textColor="@color/dm_orange_primary"
-	        android:textSize="22sp"
-	        android:textStyle="bold" />  
+	        android:textSize="@dimen/announcements_textsize"
+	        android:textStyle="@string/announcements_textsyle" />  
 	    
 	    <ListView
 	       android:id="@+id/announcements_list"
@@ -64,12 +64,13 @@
         android:layout_height="@dimen/homepage_button_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/homepage_button_margin_arb"
+        android:layout_marginLeft="@dimen/homepage_button_margin_arb"
+        android:layout_marginRight="@dimen/homepage_button_margin_arb"
+        android:layout_marginBottom="@dimen/homepage_button_margin_arb"
         android:text="@string/game"
-        android:textSize="14sp"
+        android:textSize="@dimen/homepage_button_textsize"
+        android:tag="@string/game_website"
         android:onClick="openLink" />
     
         <!-- DM Webpage Button -->
@@ -77,11 +78,11 @@
 	    android:id="@+id/website"
 	    android:layout_width="@dimen/homepage_button_width"
         android:layout_height="@dimen/homepage_button_height"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/homepage_button_margin_arb"
         android:layout_alignTop="@+id/game"
         android:layout_centerHorizontal="true"
 	    android:text="@string/website"
-	    android:textSize="14sp"
+	    android:textSize="@dimen/homepage_button_textsize"
 	    android:textColor="@color/White"
 	    android:background="@color/dm_blue_primary"
         android:onClick="openLink" /> 
@@ -94,11 +95,12 @@
         android:layout_height="@dimen/homepage_button_height"
         android:layout_alignTop="@+id/game"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/homepage_button_margin_arb"
+        android:layout_marginRight="@dimen/homepage_button_margin_arb"
+        android:layout_marginBottom="@dimen/homepage_button_margin_arb"
         android:text="@string/donate"
-        android:textSize="14sp"
+        android:textSize="@dimen/homepage_button_textsize"
+        android:tag="@string/donate_website"
         android:onClick="openLink" />
         
 </RelativeLayout>
