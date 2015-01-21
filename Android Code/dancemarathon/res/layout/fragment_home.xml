@@ -46,7 +46,7 @@
 	        android:text="@string/announcements"
 	        android:textColor="@color/dm_orange_primary"
 	        android:textSize="@dimen/announcements_textsize"
-	        android:textStyle="@string/announcements_textsyle" />  
+	        android:textStyle="bold" />  
 	    
 	    <ListView
 	       android:id="@+id/announcements_list"
