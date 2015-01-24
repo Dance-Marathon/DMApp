@@ -9,7 +9,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
-import com.uf.dancemarathon.R;
+
 
 
 /**

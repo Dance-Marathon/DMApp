@@ -10,7 +10,7 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.uf.dancemarathon.R;
+
 import com.uf.dancemarathon.FontSetter.fontName;
 
 import android.content.Context;
@@ -24,11 +24,11 @@ import android.widget.TextView;
  * @author Chris Whitten This class provides the image information to the mtk
  *         grid view. See the Android developer guide for more information.
  */
-public class CustomAdapter extends BaseAdapter {
+public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kids> kids = new ArrayList<Kids>();
 
-	public CustomAdapter (Context c) {
+	public MtkAdapter (Context c) {
 		mContext = c;
 		kids = ParseTheKids();
 	}

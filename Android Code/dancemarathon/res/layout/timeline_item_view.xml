@@ -76,6 +76,7 @@
     	    android:layout_width="14dp"
     	    android:layout_height="14dp"
     	    android:layout_below="@+id/tlineitem_title"
+    	    android:layout_marginTop="3dp"
     	    android:src="@android:drawable/ic_menu_mylocation"/>
     </RelativeLayout>
     

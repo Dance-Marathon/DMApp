@@ -53,7 +53,6 @@
 	<string name="donate_website">http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2</string>
 	<string name="dm_website">http://www.floridadm.org/</string>
 	<string name="game_website">http://www.google.com</string>
-	<string name="announcements_textsyle">bold</string>
     
     <!-- Navigation Drawer List -->
     <string-array name="navList">
@@ -73,7 +72,7 @@
     <string name="cu_content1">floridadm@floridadm.org</string>
     <string name="cu_content2">http://www.floridadm.org/overall</string>
     <string name="cu_content3">352&#8211;265&#8211;7237\nhttps://ufhealth.org/shands-hospital-children-uf</string>
-    <string name="cu_content4"><i>DM at UF</i>, PO Box 100386\nGainesville, FL 32610</string>
+    <string name="cu_content4"><i>330C J. Wayne Reitz Union</i>, PO Box 11805\nGainesville, FL 32611</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_faq">FAQActivity</string>

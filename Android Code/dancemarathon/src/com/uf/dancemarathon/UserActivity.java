@@ -25,14 +25,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.uf.dancemarathon.R;
+
 
 
 public class UserActivity extends ActionBarActivity
 {
 	private KinteraUser user;
 	private UserLoader loader;
-	private final String kinteraWebServicePath = "http://dev.floridadm.org/app/kintera.php?";
+	private final String kinteraWebServicePath = "http://dev.floridadm.org/app/kintera.php";
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -218,8 +218,8 @@ public class UserActivity extends ActionBarActivity
 				password = params[1];
 				
 				//Set path
-				String path = kinteraWebServicePath;
-				path += "username=" + username;
+				String path = new ConfigFileReader(UserActivity.this).getSetting("kinteraPath");
+				path += "?username=" + username;
 				path += "&password=" + password;
 				
 				//Connect to the webservice

@@ -10,7 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.uf.dancemarathon.R;
+
 
 
 public class SocialMedia extends ActionBarActivity {

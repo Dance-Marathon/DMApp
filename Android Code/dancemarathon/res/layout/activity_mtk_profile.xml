@@ -13,6 +13,7 @@
     	android:layout_marginTop="@dimen/login_margin_top"
   		android:scaleType="fitCenter" />
     
+    <!-- Unused -->
     <TextView
         android:id="@+id/kid_age"
         android:layout_width="wrap_content"
@@ -20,12 +21,15 @@
         android:layout_alignParentRight="true"
         android:textSize="14sp"
         android:textColor="@color/black"/>
+    <!-- -->
     
     <ScrollView
    		android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:layout_below="@+id/kid_pic"
     	android:fillViewport="true"
-    	android:layout_marginTop="150dp" >
+    	android:layout_marginTop="25dp"
+    	android:paddingBottom="25dp">
     	
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,7 +43,7 @@
         		android:layout_centerHorizontal="true"
         		android:layout_marginLeft="@dimen/login_margin_left"
         		android:layout_marginRight="@dimen/login_margin_right"
-        		android:textSize="14sp"
+        		android:textSize="18sp"
         		android:textColor="@color/black" />
    
     	</RelativeLayout>

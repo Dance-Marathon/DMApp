@@ -41,15 +41,11 @@ public class HomeFragment extends Fragment
 {
 	private boolean loadSuccessful;
 	private AnnouncementsLoader loader;
-	/**
-	 * The path to the announcements webservice on the server
-	 */
-	private static final String announcementWebServicePath = "http://floridadm.org/app/announcements.php";
 	
-	//Website Paths//
-	private static final String gameLink = "http://www.google.com";
-	private static final String websiteLink = "http://www.floridadm.org/";
-	private static final String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
+	//Website Paths that will be used if config file read fails//
+	private String gameLink = "http://www.google.com";
+	private String websiteLink = "http://www.floridadm.org/";
+	private String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
 	
 	
 	public HomeFragment()
@@ -104,6 +100,63 @@ public class HomeFragment extends Fragment
 	}
 	
 	/**
+	 * This method sets the listeners for the home screen's buttons
+	 * @param v The view the buttons belong to
+	 */
+	private void setButtonListeners(View v)
+	{
+		final Button gameButton = (Button) v.findViewById(R.id.game);
+		final Button websiteButton = (Button) v.findViewById(R.id.website);
+		final Button donateButton = (Button) v.findViewById(R.id.donate);
+		
+		gameButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendButtonHit(gameButton);
+				openLink(gameButton);
+			}
+		});
+		
+		websiteButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendButtonHit(websiteButton);
+				openLink(websiteButton);
+			}
+		});
+		
+		donateButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendButtonHit(donateButton);
+				openLink(donateButton);
+			}
+		});
+	}
+	
+	/**
+	 * This method implements google analytics to track the button clicks
+	 * @param b The button to track
+	 */
+	private void sendButtonHit(final Button b)
+	{
+		// TODO Auto-generated method stub
+		String buttonName = b.getText().toString();
+		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
+		if(canTrack == ConnectionResult.SUCCESS)
+		{
+			//Log.d("Tracking", "SwipeActivity");
+			TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
+		}
+	}
+	
+	/**
 	 * This class is responsible for loading the events. It is necessary because Android
 	 * does not allow you to have loading operations on the same thread as the UI.
 	 */
@@ -120,7 +173,8 @@ public class HomeFragment extends Fragment
 			ArrayList<Announcement> announcements = new ArrayList<Announcement>();
 			try
 			{	
-				URL url = new URL(announcementWebServicePath); //The path to the webservice 
+				String path = new ConfigFileReader(getActivity()).getSetting("announcementsPath");
+				URL url = new URL(path); //The path to the webservice 
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				
@@ -209,70 +263,26 @@ public class HomeFragment extends Fragment
 
 	
 	/**
-	 * This method sets the listeners for the home screen's buttons
-	 * @param v The view the buttons belong to
-	 */
-	private void setButtonListeners(View v)
-	{
-		final Button gameButton = (Button) v.findViewById(R.id.game);
-		final Button websiteButton = (Button) v.findViewById(R.id.website);
-		final Button donateButton = (Button) v.findViewById(R.id.donate);
-		
-		gameButton.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sendButtonHit(gameButton);
-				openLink(gameButton);
-			}
-		});
-		
-		websiteButton.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sendButtonHit(websiteButton);
-				openLink(websiteButton);
-			}
-		});
-		
-		donateButton.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				sendButtonHit(donateButton);
-				openLink(donateButton);
-			}
-		});
-	}
-	
-	/**
-	 * This method implements google analytics to track the button clicks
-	 * @param b The button to track
-	 */
-	private void sendButtonHit(final Button b)
-	{
-		// TODO Auto-generated method stub
-		String buttonName = b.getText().toString();
-		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
-		if(canTrack == ConnectionResult.SUCCESS)
-		{
-			//Log.d("Tracking", "SwipeActivity");
-			TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
-		}
-	}
-	
-	
-	/**
 	 * Called by the buttons to open browser webpages.
 	 * @param view The button which called this method
 	 */
 	public void openLink(View view)
 	{
-		Log.d("Link", "In open link");
+		//Try to get settings
+		try {
+			ConfigFileReader cReader = new ConfigFileReader(getActivity());
+			gameLink = cReader.getSetting("gamePath");
+			websiteLink = cReader.getSetting("websitePath");
+			donateLink = cReader.getSetting("donatePath");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Open the links
 		int id = view.getId();
 		if(id == R.id.game)
 			openWebsite(gameLink);

@@ -28,7 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.uf.dancemarathon.R;
+
 
 public class SwipeActivity extends ActionBarActivity
 {
