@@ -15,7 +15,8 @@
     <string name="description_label">Description: </string>
     <string name="retry">Retry</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-  
+  	<string name="addToCal_buttontext">Add Event to Calendar</string>
+    
     <!-- Login Activity strings -->
     <string name="login_title">Login to See Progress!</string>
     <string name="username_field">Username</string>

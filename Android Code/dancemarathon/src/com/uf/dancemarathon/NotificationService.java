@@ -49,11 +49,11 @@ public class NotificationService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			//testNotification("In on receiver");
+			
 			//The time ticks every minute
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
-				testNotification("Test");
+				//testNotification("Test");
 				//Update current time
 				currentTime = Calendar.getInstance().getTimeInMillis();
 				setupEventNotifications();
