@@ -115,7 +115,9 @@ public class HomeFragment extends Fragment
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				sendButtonHit(gameButton);
-				openLink(gameButton);
+				//Start game activity
+				Intent intent = new Intent(getActivity(), GameActivity.class);
+				startActivity(intent);
 			}
 		});
 		
