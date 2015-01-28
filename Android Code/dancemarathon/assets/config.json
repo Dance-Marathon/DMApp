@@ -1,9 +1,9 @@
 {
-	"eventsPath":			"http://floridadm.org/app/events.php",
+	"eventsPath":			"http://dev.floridadm.org/app/events.php",
 
 	"kinteraPath":			"http://dev.floridadm.org/app/kintera.php",
 
-	"announcementsPath":	"http://floridadm.org/app/announcements.php",
+	"announcementsPath":	"http://dev.floridadm.org/app/announcements.php",
 
 	"websitePath":			"http://www.floridadm.org/",
 
