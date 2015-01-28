@@ -7,10 +7,13 @@ import org.json.JSONException;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class GameActivity extends ActionBarActivity {
 
@@ -22,11 +25,12 @@ public class GameActivity extends ActionBarActivity {
 		//Hide action bar
 		getSupportActionBar().hide();
 		
-		//Get webview
+		//Set webview
 		WebView gameView = (WebView) findViewById(R.id.game_view);
-		gameView.getSettings().setJavaScriptEnabled(true);
-		gameView.getSettings().setSupportMultipleWindows(true);
-		gameView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+		WebSettings settings = gameView.getSettings();
+		settings.setJavaScriptEnabled(true);
+		settings.setSupportMultipleWindows(true);
+		settings.setJavaScriptCanOpenWindowsAutomatically(true);
 		gameView.setWebChromeClient(new WebChromeClient(){
 
 			/* (non-Javadoc)
@@ -36,7 +40,7 @@ public class GameActivity extends ActionBarActivity {
 			public boolean onCreateWindow(WebView view, boolean isDialog,
 					boolean isUserGesture, Message resultMsg) {
 				// TODO Auto-generated method stub
-				
+				//Log.d("Creating window","create");
 				//Send new window back to the same webview in our app
 				//The game uses new windows to refresh the cards
 				WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
@@ -47,6 +51,8 @@ public class GameActivity extends ActionBarActivity {
 			}
 			
 		});
+
+		gameView.setWebViewClient(new WebViewClient());
 		
 		//Attempt to load game
 		String gameURL;
