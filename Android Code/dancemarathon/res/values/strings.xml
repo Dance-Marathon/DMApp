@@ -98,5 +98,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="event_in_progress">In Progress</string>
 
 </resources>
