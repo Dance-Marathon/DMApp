@@ -7,12 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.Locale;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -20,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -68,10 +66,6 @@ public class TimelineFragment extends Fragment
 	 */
 	private EventLoader loader;
 	
-	/**
-	 * The path to the event webservice on the server
-	 */
-	private static final String eventWebServicePath = "http://floridadm.org/app/events.php";		
 
 	public TimelineFragment()
 	{
@@ -195,22 +189,16 @@ public class TimelineFragment extends Fragment
 				Intent intent = new Intent(getActivity(), EventActivity.class);
 				Bundle args = new Bundle();
 				
-				//Get formatted times
+				/*Get rid of leading zeros
 				String displayFormat = "hh:mm aa   MM/dd/yyyy";
-		        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
+				SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
 		        String stimeText = df.format(e.getStartDate());
 				String etimeText = df.format(e.getEndDate());
-				
-				//Get rid of leading zeros
-				//stimeText=Integer.toString(Integer.parseInt(stimeText.substring(0, 2)));
-				//etimeText=Integer.toString(Integer.parseInt(etimeText.substring(0,2)));
+				stimeText=Integer.toString(Integer.parseInt(stimeText.substring(0, 2)));
+				etimeText=Integer.toString(Integer.parseInt(etimeText.substring(0,2)));*/
 				
 				//Add event information to bundle
-				args.putString("e_title", e.getTitle());
-				args.putString("e_desc", e.getDescription());
-				args.putString("e_stime", stimeText);
-				args.putString("e_etime", etimeText);
-				args.putString("e_loc", e.getLocation());
+				args.putParcelable("event", (Parcelable) e);
 				
 				//Add bundle to intent
 				intent.putExtras(args);
