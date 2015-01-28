@@ -361,6 +361,31 @@ public class Event implements Serializable, Comparable<Event>
 		this.lastMod = lastMod;
 	}
 
+	/**
+	 * Get the start date in the specified format.
+	 * @param format The format to use. See {@link SimpleDateFormat}
+	 * @return The formatted string
+	 */
+	protected String getFormattedStartDate(String format)
+	{
+        SimpleDateFormat df = new SimpleDateFormat(format, Locale.US);
+        String stimeText = df.format(startDate);
+		
+        return stimeText;
+	}
+	
+	/**
+	 * Get the end date in the specified format.
+	 * @param format The format to use. See {@link SimpleDateFormat}
+	 * @return The formatted string
+	 */
+	protected String getFormattedEndDate(String format)
+	{
+        SimpleDateFormat df = new SimpleDateFormat(format, Locale.US);
+        String etimeText = df.format(endDate);
+		
+        return etimeText;
+	}
 	@Override
 	public int compareTo(Event another)
 	{
