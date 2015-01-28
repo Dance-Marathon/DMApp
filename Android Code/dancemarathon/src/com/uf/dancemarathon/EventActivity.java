@@ -1,7 +1,10 @@
 package com.uf.dancemarathon;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -46,7 +49,7 @@ public class EventActivity extends ActionBarActivity
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				set
+				addEventToCalendar();
 			}
 			
 		});
@@ -71,9 +74,21 @@ public class EventActivity extends ActionBarActivity
 		bar.setBackgroundDrawable(cd);
 	}
 	
+	/**
+	 * Adds the event to the user's calendar
+	 */
 	private void addEventToCalendar()
 	{
-		
+		Intent intent = new Intent(Intent.ACTION_INSERT)
+        .setData(Events.CONTENT_URI)
+        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.getStartDate().getTime())
+        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.getEndDate().getTime())
+        .putExtra(Events.TITLE, event.getTitle())
+        .putExtra(Events.DESCRIPTION, event.getDescription())
+        .putExtra(Events.EVENT_LOCATION, event.getLocation())
+        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+        .putExtra(Events.HAS_ALARM, true);
+		startActivity(intent);
 	}
 	
 	protected void onStart()

@@ -7,13 +7,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 
 
 /**
  * @author Chris Whitten
  * This class represents a DM event.
  */
-public class Event implements Serializable, Comparable<Event>
+public class Event implements Serializable, Comparable<Event>, Parcelable
 {
 	/**
 	 * This ID is important when it comes to keeping event serializable
@@ -396,4 +399,54 @@ public class Event implements Serializable, Comparable<Event>
 		else
 			return 0;
 	}
+
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		dest.writeString(id);
+		dest.writeString(title);
+		dest.writeString(location);
+		dest.writeString(t_startDate);
+		dest.writeString(t_endDate);
+		dest.writeString(t_lastMod);
+		dest.writeString(description);
+	}
+	
+	private Event(Parcel in)
+	{
+		id = in.readString();
+		title = in.readString();
+		location = in.readString();
+		t_startDate = in.readString();
+		t_endDate = in.readString();
+		t_lastMod = in.readString();
+		description = in.readString();
+		
+		try {
+			parseTimeStamps();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			throw new ClassCastException();
+		}
+	}
+	
+
+	public static final Parcelable.Creator<Event> CREATOR
+    		= new Parcelable.Creator<Event>() {
+		
+		public Event createFromParcel(Parcel in) {
+		    return new Event(in);
+		}
+		
+		public Event[] newArray(int size) {
+		    return new Event[size];
+		}
+	};
 }
