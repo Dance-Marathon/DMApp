@@ -27,7 +27,7 @@
         android:layout_height="wrap_content" 
         android:layout_below="@+id/event_page_title"
         android:layout_marginTop="25dp"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textColor="@color/Black"
         android:text=""/>
     
@@ -108,7 +108,7 @@
         android:text=""
         android:textColor="@color/Black"/>
 	 
-	 <!-- Add to Calendar -->
+	 <!-- Add to Calendar
 	 <Button
 	     android:id="@+id/addToCalendar_button"
 	     android:layout_width="wrap_content"
@@ -121,6 +121,6 @@
        	 android:textSize="18sp"
        	 android:textColor="@color/White"
        	 android:text="@string/addToCal_buttontext"
-       	 android:background="@drawable/blue_rounded_button"/>
+       	 android:background="@drawable/blue_rounded_button"/> -->
 	 
 </RelativeLayout>
