@@ -68,6 +68,18 @@ public class AnnouncementService extends Service {
 		return Service.START_STICKY;
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see android.app.Service#onDestroy()
+	 */
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		this.unregisterReceiver(receiver);
+	}
+
+
 	@SuppressWarnings("unchecked")
 	private ArrayList<Announcement> readCache()
 	{

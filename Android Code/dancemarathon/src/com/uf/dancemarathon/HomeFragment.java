@@ -71,16 +71,9 @@ public class HomeFragment extends Fragment
 		
 		setButtonListeners(v);
 		
-		//See if cache has values
-		Object o = CacheManager.readObjectFromCacheFile(getActivity(), "announcements");
-		if(o == null)
-		{
-			loader = new AnnouncementsLoader();
-			loader.execute();
-		}
-		else
-			showAnnouncements((ArrayList<Announcement>) o, v);
-			
+		loader = new AnnouncementsLoader();
+		loader.execute();
+
 		return v;
 	}
 	
