@@ -49,13 +49,10 @@ public class TimelineFragment extends Fragment
 	 * The list of Events
 	 */
 	private ArrayList<Event> events;
-	/**
-	 * Flag stating whether or not the load operation was successful
-	 */
-	private boolean loadSuccessful = false;
 	
 	/**
-	 * Flag stating whether or not the event list is currently in the refresh process
+	 * Flag stating whether or not the event list is currently in the refresh process.
+	 * Useful so we know in the async task whether a refresh or initial request was made.
 	 */
 	private boolean isRefreshing = false;
 	/**
@@ -101,12 +98,10 @@ public class TimelineFragment extends Fragment
 	 * for a fragment in Android
 	 * @return A new instance of timeline fragment that is executing the load operation
 	 */
-	@SuppressWarnings("unchecked")
 	public static TimelineFragment newInstance(Context c)
 	{
 		TimelineFragment f = new TimelineFragment();
 		f.c = c;
-		f.loadSuccessful = false;
 		f.isRefreshing = false;
 		f.resetLoader();
 		
@@ -307,6 +302,10 @@ public class TimelineFragment extends Fragment
 	 */
 	private class EventLoader extends AsyncTask<Void, Double, ArrayList<Event>>
 	{
+		/**
+		 * Flag stating whether or not the load operation was successful
+		 */
+		private boolean loadSuccessful = false;
 		
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])

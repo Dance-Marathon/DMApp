@@ -39,7 +39,7 @@ public class AnnouncementService extends Service {
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
 				minuteCounter++;
-				if(minuteCounter == 1)
+				if(minuteCounter == 3)
 				{
 					minuteCounter = 0;
 					new AnnouncementsLoader().execute();
@@ -52,7 +52,6 @@ public class AnnouncementService extends Service {
 	public AnnouncementService() {
 		super();
 	}
-	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Service#onStartCommand(android.content.Intent, int, int)
@@ -88,6 +87,10 @@ public class AnnouncementService extends Service {
 			return new ArrayList<Announcement>();
 	}
 	
+	/**
+	 * Get announcements and write to cache. 
+	 * @return true if there are new announcements
+	 */
 	private boolean getNewAnnouncements()
 	{
 		ArrayList<Announcement> announcements = new ArrayList<Announcement>();
@@ -153,29 +156,7 @@ public class AnnouncementService extends Service {
 		
 		return announcements; 
 	}
-	
-	private void notifyUser(int mId)
-	{
-		//Set vibration pattern
-		long[] pattern = {1, 1000};
-		
-		//Set the pending intent for when the user clicks the notification
-		PendingIntent pIntent = getMainPendingIntent();
-				
-		NotificationCompat.Builder mBuilder =
-		        new NotificationCompat.Builder(this)
-		        .setSmallIcon(R.drawable.launcher_icon)
-		        .setContentTitle("New Announcements Available!")
-		        .setContentText("Click to see new announcements")
-		        .setAutoCancel(true)
-		        .setVibrate(pattern)
-		        .setContentIntent(pIntent);
-			
-			NotificationManager mNotificationManager =
-				    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-				// mId allows you to update the notification later on.
-				mNotificationManager.notify(mId, mBuilder.build());
-	}
+
 	
 	/**
 	 * This method creates a pending intent to open the SwipeActivity when
@@ -193,12 +174,16 @@ public class AnnouncementService extends Service {
 		
 		return pIntent;
 	}
-	@Override
+	
+	@Override	
 	public IBinder onBind(Intent intent) {
 		// TODO: Return the communication channel to the service.
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
+	/**
+	 * This class handles loading announcements and notifying the user if there are new announcements.
+	 */
 	private class AnnouncementsLoader extends AsyncTask<Void, Double, Boolean>
 	{
 		
@@ -220,6 +205,29 @@ public class AnnouncementService extends Service {
 			// TODO Auto-generated method stub
 			if(newAnnouncementsExist)
 				notifyUser(18);
+		}
+		
+		private void notifyUser(int mId)
+		{
+			//Set vibration pattern
+			long[] pattern = {1, 1000};
+			
+			//Set the pending intent for when the user clicks the notification
+			PendingIntent pIntent = getMainPendingIntent();
+					
+			NotificationCompat.Builder mBuilder =
+			        new NotificationCompat.Builder(AnnouncementService.this)
+			        .setSmallIcon(R.drawable.launcher_icon)
+			        .setContentTitle("New Announcements Available!")
+			        .setContentText("Click to see new announcements")
+			        .setAutoCancel(true)
+			        .setVibrate(pattern)
+			        .setContentIntent(pIntent);
+				
+				NotificationManager mNotificationManager =
+					    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+					// mId allows you to update the notification later on.
+					mNotificationManager.notify(mId, mBuilder.build());
 		}
 		
 		
