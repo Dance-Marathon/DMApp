@@ -137,10 +137,10 @@ public class SwipeActivity extends ActionBarActivity
 
 	}
 	
+	
 	protected void onStart()
 	{
 		super.onStart();
-		
 		//Register google analytics page hit
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
@@ -149,32 +149,36 @@ public class SwipeActivity extends ActionBarActivity
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
 			trackEnabled = true;
 		}
-		
-		//Start the announcements service
-		startService(new Intent(this, AnnouncementService.class));
 	}
 
 	protected void onResume()
 	{
 		super.onResume();
 		
-		//Don't show event notifications if user is in-app
+		//Don't show notifications if user is in-app
 		stopService(new Intent(this, NotificationService.class));
+		stopService(new Intent(this, AnnouncementService.class));
 		
 		//If this activity was started from the service, go to timeline
 		if(this.getIntent().hasExtra("start_source"))
 		{
 			if(this.getIntent().getStringExtra("start_source").equals("Service"))
 				mViewPager.setCurrentItem(2);
+			else if(this.getIntent().getStringExtra("start_source").equals("ments_Service"))
+				mViewPager.setCurrentItem(1);
 		}
 	}
 	
 	protected void onStop()
 	{
 		super.onStop();
-		//Show notifications if user exits out of app
+		
 		//Could not use onDestroy because it is not always called
+		
+		//Start event notification service
 		startService(new Intent(this, NotificationService.class));
+		//Start the announcements service
+		startService(new Intent(this, AnnouncementService.class));
 	}
 	
 	/**
@@ -382,7 +386,7 @@ public class SwipeActivity extends ActionBarActivity
 			switch (position)
 			{
 			case 0:return new Fragment(); //Return blank fragment because this will be covered by nav drawer
-			case 1:return HomeFragment.newInstance();
+			case 1:return HomeFragment.newInstance(SwipeActivity.this);
 			case 2:return TimelineFragment.newInstance(SwipeActivity.this);
 			case 3:return MtkFragment.newInstance();
 			}

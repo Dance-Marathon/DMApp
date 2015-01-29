@@ -53,10 +53,7 @@ public class TimelineFragment extends Fragment
 	 * Flag stating whether or not the load operation was successful
 	 */
 	private boolean loadSuccessful = false;
-	/**
-	 * Flag stating whether or not the event load from the cache was successful
-	 */
-	private boolean cacheLoadSuccessful = false;
+	
 	/**
 	 * Flag stating whether or not the event list is currently in the refresh process
 	 */
@@ -79,11 +76,23 @@ public class TimelineFragment extends Fragment
 		// Inflate the layout for this fragment
 		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
 		 
-		 if(cacheLoadSuccessful && events.size() > 0)
-			 showEventList(v, events);
-		 else
-			 forceEventListUpdate();
-		 
+		//Try to read data from cache
+		 Object o = CacheManager.readObjectFromCacheFile(c , "events");
+		 //If failed, force update
+		if(o == null)
+		{
+			forceEventListUpdate();
+		}
+		//Else show cache events
+		else
+		{
+			events = (ArrayList<Event>) o;
+			if(events.size() > 0)
+				 showEventList(v, events);
+			else
+				 forceEventListUpdate();
+		}
+			
 		 return v;
 	}
 	
@@ -100,21 +109,6 @@ public class TimelineFragment extends Fragment
 		f.loadSuccessful = false;
 		f.isRefreshing = false;
 		f.resetLoader();
-		
-		//Read data from cache
-		Object o = CacheManager.readObjectFromCacheFile(c , "events");
-		if(o == null)
-		{
-			f.forceEventListUpdate();
-			f.cacheLoadSuccessful = false;
-			//Log.d("Event Load", "internet");
-		}
-		else
-		{
-			f.cacheLoadSuccessful = true;
-			f.events = (ArrayList<Event>) o;
-			//Log.d("Event Load", "cache");
-		}
 		
 		return f;
 	}

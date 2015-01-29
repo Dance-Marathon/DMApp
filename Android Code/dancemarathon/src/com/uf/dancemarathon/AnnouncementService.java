@@ -18,6 +18,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -41,10 +42,7 @@ public class AnnouncementService extends Service {
 				if(minuteCounter == 1)
 				{
 					minuteCounter = 0;
-					if(getNewAnnouncements())
-					{
-						notifyUser(18); //Notify user new announcements are ready. 18 is random id.
-					}
+					new AnnouncementsLoader().execute();
 				}
 			}
 		}
@@ -187,7 +185,7 @@ public class AnnouncementService extends Service {
 	private PendingIntent getMainPendingIntent()
 	{
 		Intent intent = new Intent(this, SwipeActivity.class);
-		intent.putExtra("start_source", "Service");
+		intent.putExtra("start_source", "ments_Service");
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		stackBuilder.addParentStack(SwipeActivity.class);
 		stackBuilder.addNextIntent(intent);
@@ -200,4 +198,31 @@ public class AnnouncementService extends Service {
 		// TODO: Return the communication channel to the service.
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
+
+	private class AnnouncementsLoader extends AsyncTask<Void, Double, Boolean>
+	{
+		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		//This method will perform the request to the web service and try to obtain the events
+		@Override
+		protected Boolean doInBackground(Void... params)
+		{
+			return getNewAnnouncements();
+		}
+
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(Boolean newAnnouncementsExist) {
+			// TODO Auto-generated method stub
+			if(newAnnouncementsExist)
+				notifyUser(18);
+		}
+		
+		
+	}
+
 }

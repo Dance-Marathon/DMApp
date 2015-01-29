@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -39,6 +40,7 @@ import com.uf.dancemarathon.FontSetter.fontName;
  */
 public class HomeFragment extends Fragment
 {
+	private Context c;
 	private boolean loadSuccessful;
 	private AnnouncementsLoader loader;
 	
@@ -71,9 +73,27 @@ public class HomeFragment extends Fragment
 		
 		setButtonListeners(v);
 		
-		loader = new AnnouncementsLoader();
-		loader.execute();
-
+		//Try to read data from cache
+		 Object o = CacheManager.readObjectFromCacheFile(c , "announcements");
+		 //If failed, force update
+		if(o == null)
+		{
+			loader = new AnnouncementsLoader();
+			loader.execute();
+		}
+		//Else show cache events
+		else
+		{
+			ArrayList<Announcement> ments = (ArrayList<Announcement>) o;
+			if(ments.size() > 0)
+				 showAnnouncements(ments, v);
+			else
+			 {
+				loader = new AnnouncementsLoader();
+				loader.execute();
+			 }
+		}
+		
 		return v;
 	}
 	
@@ -84,9 +104,10 @@ public class HomeFragment extends Fragment
 			loader.cancel(true);
 	}
 	
-	public static HomeFragment newInstance()
+	public static HomeFragment newInstance(Context c)
 	{
 		HomeFragment f = new HomeFragment();
+		f.c = c;
 		return f;
 	}
 	
