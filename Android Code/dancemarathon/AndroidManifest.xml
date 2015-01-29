@@ -82,6 +82,12 @@
             android:name=".GameActivity"
             android:label="@string/title_activity_game" >
         </activity>
+
+        <service
+            android:name=".AnnouncementService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

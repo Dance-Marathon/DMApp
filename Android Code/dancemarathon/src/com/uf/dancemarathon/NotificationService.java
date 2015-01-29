@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -85,6 +86,7 @@ public class NotificationService extends Service {
 	
 	public void onDestroy()
 	{
+		super.onDestroy();
 		this.unregisterReceiver(receiver);
 	}
 	
@@ -283,7 +285,7 @@ public class NotificationService extends Service {
 	//This method is a required override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 

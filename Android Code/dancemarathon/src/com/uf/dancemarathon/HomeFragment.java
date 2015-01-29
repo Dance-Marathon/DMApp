@@ -70,9 +70,17 @@ public class HomeFragment extends Fragment
 		FontSetter.setFont(getActivity(), fontName.AGBBol, announcement_header);
 		
 		setButtonListeners(v);
-		loader = new AnnouncementsLoader();
-		loader.execute();
 		
+		//See if cache has values
+		Object o = CacheManager.readObjectFromCacheFile(getActivity(), "announcements");
+		if(o == null)
+		{
+			loader = new AnnouncementsLoader();
+			loader.execute();
+		}
+		else
+			showAnnouncements((ArrayList<Announcement>) o, v);
+			
 		return v;
 	}
 	
@@ -99,6 +107,13 @@ public class HomeFragment extends Fragment
 		toast.show();
 	}
 	
+	private void showAnnouncements(ArrayList<Announcement> ments, View v)
+	{
+		final ListView list = (ListView) v.findViewById(R.id.announcements_list);
+		AnnouncementsAdapter adapter = new AnnouncementsAdapter(getActivity(),ments);
+		list.setAdapter(adapter);
+		list.setClickable(false);
+	}
 	/**
 	 * This method sets the listeners for the home screen's buttons
 	 * @param v The view the buttons belong to
@@ -220,18 +235,10 @@ public class HomeFragment extends Fragment
 		//This method will update the UI after the load is finished.
 		protected void onPostExecute(ArrayList<Announcement> announcements)
 		{
-			final ListView list = (ListView) getView().findViewById(R.id.announcements_list);
-			
 			if(loadSuccessful)
-			{
-				AnnouncementsAdapter adapter = new AnnouncementsAdapter(getActivity(), announcements);
-				list.setAdapter(adapter);
-				list.setClickable(false);
-			}
+				showAnnouncements(announcements, getView());
 			else
-			{
 				displayErrorToast();
-			}
 		}
 		
 		/**
