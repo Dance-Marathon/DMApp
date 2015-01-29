@@ -22,11 +22,11 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 
 public class AnnouncementService extends Service {
 	
-	private static int minuteCounter = 0;
-	private ArrayList<Announcement> ments = new ArrayList<Announcement>();
+	private int lastSize;
 	
 	//Set up receiver to receive TIME_TICK intents
 	private BroadcastReceiver receiver = new BroadcastReceiver(){
@@ -38,12 +38,7 @@ public class AnnouncementService extends Service {
 			//The time ticks every minute
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
-				minuteCounter++;
-				if(minuteCounter == 3)
-				{
-					minuteCounter = 0;
-					new AnnouncementsLoader().execute();
-				}
+				new AnnouncementsLoader().execute();
 			}
 		}
 		
@@ -61,7 +56,8 @@ public class AnnouncementService extends Service {
 		// TODO Auto-generated method stub
 		super.onStartCommand(intent, flags, startId);
 		this.registerReceiver(receiver, new IntentFilter(Intent.ACTION_TIME_TICK));
-		ments = readCache();
+		lastSize = readCache().size();
+		//Log.d("service","in start");
 		return Service.START_STICKY;
 	}
 
@@ -77,6 +73,11 @@ public class AnnouncementService extends Service {
 	}
 
 
+	
+	/**
+	 * Read the cache for announcements
+	 * @return The cache announcements if they exist. New arraylist otherwise.
+	 */
 	@SuppressWarnings("unchecked")
 	private ArrayList<Announcement> readCache()
 	{
@@ -94,7 +95,7 @@ public class AnnouncementService extends Service {
 	private boolean getNewAnnouncements()
 	{
 		ArrayList<Announcement> announcements = new ArrayList<Announcement>();
-		
+		boolean isNew = false;
 		String path;
 		try {
 			path = new ConfigFileReader(this).getSetting("announcementsPath");
@@ -108,13 +109,14 @@ public class AnnouncementService extends Service {
 			JSONArray arr = new JSONArray(announcementsJSON);
 			announcements = parseAnnouncementsJSON(arr);
 			
+			//Log.d("service", String.valueOf(lastSize));
 			//If new announcements have been found, update ments and cache
-			if(announcements.size() > ments.size())
+			if(announcements.size() > lastSize)
 			{
-				ments = announcements;
-				CacheManager.writeObjectToCacheFile(this, ments, "announcements");
-				return true;
+				CacheManager.writeObjectToCacheFile(this, announcements, "announcements");
+				isNew = true;
 			}	
+			lastSize = announcements.size();
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -126,7 +128,7 @@ public class AnnouncementService extends Service {
 			
 		}
 		
-		return false;
+		return isNew;
 			
 		
 	}
