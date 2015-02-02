@@ -149,11 +149,6 @@ public class SwipeActivity extends ActionBarActivity
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
 			trackEnabled = true;
 		}
-	}
-
-	protected void onResume()
-	{
-		super.onResume();
 		
 		//Don't show notifications if user is in-app
 		stopService(new Intent(this, NotificationService.class));
