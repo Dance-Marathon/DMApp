@@ -31,6 +31,10 @@ public class GameActivity extends ActionBarActivity {
 		settings.setJavaScriptEnabled(true);
 		settings.setSupportMultipleWindows(true);
 		settings.setJavaScriptCanOpenWindowsAutomatically(true);
+		
+		//Necessary to make the webview load the newest version of the game from the server
+		gameView.clearCache(true);
+				
 		gameView.setWebChromeClient(new WebChromeClient(){
 
 			/* (non-Javadoc)
@@ -66,7 +70,6 @@ public class GameActivity extends ActionBarActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 	}
 	

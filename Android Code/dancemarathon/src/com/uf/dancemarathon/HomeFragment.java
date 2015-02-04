@@ -151,13 +151,13 @@ public class HomeFragment extends Fragment
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/*sendButtonHit(gameButton);
+				sendButtonHit(gameButton);
 				//Start game activity
 				Intent intent = new Intent(getActivity(), GameActivity.class);
-				startActivity(intent);*/
-				Toast toast = Toast.makeText(getActivity(), "Game coming soon!", Toast.LENGTH_SHORT);
+				startActivity(intent);
+				/*Toast toast = Toast.makeText(getActivity(), "Game coming soon!", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
+				toast.show();*/
 			}
 		});
 		
