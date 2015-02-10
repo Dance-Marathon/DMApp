@@ -65,7 +65,10 @@ public class TimelineFragment extends Fragment
 	
 	private AlertDialog mFilterDialog;
 	private Button mFilterButton;
-
+	private ListView mEventListView;
+	private TimelineAdapter mEventAdapter;
+	private SwipeRefreshLayout mListLayout;
+	
 	public TimelineFragment()
 	{
 		// Required empty public constructor
@@ -83,6 +86,8 @@ public class TimelineFragment extends Fragment
 		f.isRefreshing = false;
 		f.resetLoader();
 		
+		f.events = new ArrayList<Event>();
+		
 		return f;
 	}
 	
@@ -94,12 +99,14 @@ public class TimelineFragment extends Fragment
 		// Inflate the layout for this fragment
 		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
 		 
+		 initializeEventListViews(v);
+		 
 		 //Load events
 		 ArrayList<Event> cacheEvents = forceCacheRead();
 		 if(cacheEvents != null)
 		 {
 			 events = cacheEvents;
-			 showEventList(v, events);
+			 showEventList(v);
 		 }
 		 else
 			 forceEventListUpdate();
@@ -121,6 +128,52 @@ public class TimelineFragment extends Fragment
 		 return v;
 	}
 	
+	private void initializeEventListViews(View v)
+	{
+		//Populate list view
+		mEventAdapter = new TimelineAdapter(getActivity(), events);								 
+		mEventListView = (ListView) v.findViewById(R.id.event_list); //Get the list view
+		
+		mEventListView.setAdapter(mEventAdapter);
+		
+		//Set click listener which will open event activity
+		OnItemClickListener oc = new OnItemClickListener()
+		{
+			@Override
+			//On item click, we start the individual event activity
+			public void onItemClick(AdapterView<?> parent,
+					View selectedView, int position, long selectedViewId)
+			{
+				Event e = mEventAdapter.getItem(position);
+				Intent intent = new Intent(getActivity(), EventActivity.class);
+				Bundle args = new Bundle();
+				
+				//Add event information to bundle
+				args.putParcelable("event", (Parcelable) e);
+				
+				//Add bundle to intent
+				intent.putExtras(args);
+				startActivity(intent);
+			}
+			
+		};
+		mEventListView.setOnItemClickListener(oc);
+		
+		//Initialize Refresh layout
+		mListLayout = (SwipeRefreshLayout) v.findViewById(R.id.event_list_container);
+		
+		mListLayout.setOnRefreshListener(new OnRefreshListener(){
+			@Override
+			public void onRefresh()
+			{
+				isRefreshing = true;
+				forceEventListUpdate();
+			}
+		});
+		
+		//Set refresh layout colors
+		mListLayout.setColorSchemeResources(R.color.dm_orange_primary, R.color.dm_blue_secondary, R.color.GreenYellow);
+	}
 	/**
 	 * This method initializes the dialog that will be used to allow users to filter
 	 * events by type.
@@ -157,74 +210,33 @@ public class TimelineFragment extends Fragment
 		((SwipeRefreshLayout) getView().findViewById(R.id.event_list_container)).setRefreshing(false);
 	}
 	
+	private void disableViewClicking()
+	{
+		this.getView().setClickable(false);
+	}
+	
+	private void enableViewClicking()
+	{
+		this.getView().setClickable(true);
+	}
 	
 	/**
 	 * Show the event list on the view and hide the progress wheel
 	 * @param v The view to modify
 	 * @param events The events to show
 	 */
-	private void showEventList(final View v, ArrayList<Event> events)
+	private void showEventList(final View v)
 	{
-		//Populate list view
-		final TimelineAdapter listAdapter = new TimelineAdapter(getActivity(), events);								 
-		final ListView eventList = (ListView) v.findViewById(R.id.event_list); //Get the list view
-		
-		eventList.setAdapter(listAdapter);
-		//Set click listener which will open event activity
-		OnItemClickListener oc = new OnItemClickListener()
-		{
-
-			@Override
-			//On item click, we start the individual event activity
-			public void onItemClick(AdapterView<?> parent,
-					View selectedView, int position, long selectedViewId)
-			{
-				Event e = listAdapter.getItem(position);
-				Intent intent = new Intent(getActivity(), EventActivity.class);
-				Bundle args = new Bundle();
-				
-				/*Get rid of leading zeros
-				String displayFormat = "hh:mm aa   MM/dd/yyyy";
-				SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
-		        String stimeText = df.format(e.getStartDate());
-				String etimeText = df.format(e.getEndDate());
-				stimeText=Integer.toString(Integer.parseInt(stimeText.substring(0, 2)));
-				etimeText=Integer.toString(Integer.parseInt(etimeText.substring(0,2)));*/
-				
-				//Add event information to bundle
-				args.putParcelable("event", (Parcelable) e);
-				
-				//Add bundle to intent
-				intent.putExtras(args);
-				startActivity(intent);
-			}
-			
-		};
-		
-		//Add listener to listview
-		eventList.setOnItemClickListener(oc);
-		
-		//Show list
-		SwipeRefreshLayout listLayout = (SwipeRefreshLayout) v.findViewById(R.id.event_list_container);
-		listLayout.setVisibility(View.VISIBLE);
+		mEventAdapter.clear();
+		mEventAdapter.addAll(events);
+		mEventAdapter.notifyDataSetChanged();
+		mListLayout.setVisibility(View.VISIBLE);
 		
 		//Hide progress wheel
 		ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
 		bar.setVisibility(View.GONE);
 		
-		//Set refresh layout action
-		listLayout.setOnRefreshListener(new OnRefreshListener(){
-			@Override
-			public void onRefresh()
-			{
-				eventList.setEnabled(false);
-				isRefreshing = true;
-				forceEventListUpdate();
-				showHazyForeground(v);
-			}
-		});
-		//Set refresh layout colors
-		listLayout.setColorSchemeResources(R.color.dm_orange_primary, R.color.dm_blue_secondary, R.color.GreenYellow);
+		
 	}
 	
 	/**
@@ -269,6 +281,12 @@ public class TimelineFragment extends Fragment
 		retry.setVisibility(View.VISIBLE);	
 	}
 	
+	private void showLoadErrorToast()
+	{
+		Toast toast = Toast.makeText(c, "Could not load data\nSwipe down to refresh", Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+	}
 	/**
 	 * Show a toast if the refresh operation fails
 	 */
@@ -278,6 +296,7 @@ public class TimelineFragment extends Fragment
 		toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 40);
 		toast.show();
 	}
+	
 	
 	/**
 	 * Shows a hazy view over all the other views
@@ -354,6 +373,21 @@ public class TimelineFragment extends Fragment
 		 */
 		private boolean loadSuccessful = false;
 		
+		
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPreExecute()
+		 */
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			if(isRefreshing)
+			{
+				disableViewClicking();
+				showHazyForeground(getView());
+			}
+		}
+
+
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
 		 */
@@ -375,6 +409,8 @@ public class TimelineFragment extends Fragment
 				JSONArray arr = new JSONArray(eventsJSON);
 				events = parseEventJSON(arr);
 				events = removeOldEvents(events);
+				
+				setEvents(events);
 				
 				//Write data to cache
 				CacheManager.writeObjectToCacheFile(getActivity(), events, "events");
@@ -411,20 +447,20 @@ public class TimelineFragment extends Fragment
 		protected void onPostExecute(ArrayList<Event> events)
 		{
 			final SwipeRefreshLayout l = (SwipeRefreshLayout) getView().findViewById(R.id.event_list_container);
-			final ListView eventList = (ListView) getView().findViewById(R.id.event_list); //Get the list view
+			
 			if(loadSuccessful)
 			{	
 				//Log.d("load", "successful");
 				
-				showEventList(getView(), events);
+				showEventList(getView());
 				
-				//Change the flag once we are done with the load operation
+				//We need to do special layout things if the update was from a refresh
 				if(isRefreshing)
 				{
 					isRefreshing = false;
 					l.setRefreshing(false);
 					removeHazyForeground(getView());
-					eventList.setEnabled(true); //Enable eventlist
+					enableViewClicking();
 				}
 			}
 			else
@@ -436,10 +472,10 @@ public class TimelineFragment extends Fragment
 					isRefreshing = false;
 					l.setRefreshing(false);
 					removeHazyForeground(getView());
-					eventList.setEnabled(true);// Enable eventlist
+					enableViewClicking();
 				}
 				else
-					showLoadErrorPage(getView());
+					showLoadErrorToast();
 			}
 				
 		}
