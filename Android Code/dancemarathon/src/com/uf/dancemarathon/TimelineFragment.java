@@ -10,9 +10,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -60,6 +62,7 @@ public class TimelineFragment extends Fragment
 	 */
 	private EventLoader loader;
 	
+	private AlertDialog mFilterDialog;
 
 	public TimelineFragment()
 	{
@@ -73,23 +76,12 @@ public class TimelineFragment extends Fragment
 		// Inflate the layout for this fragment
 		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
 		 
-		//Try to read data from cache
-		 Object o = CacheManager.readObjectFromCacheFile(c , "events");
-		 //If failed, force update
-		if(o == null)
-		{
-			forceEventListUpdate();
-		}
-		//Else show cache events
-		else
-		{
-			events = (ArrayList<Event>) o;
-			if(events.size() > 0)
-				 showEventList(v, events);
-			else
-				 forceEventListUpdate();
-		}
-			
+		 ArrayList<Event> cacheEvents = forceCacheRead();
+		 if(cacheEvents != null)
+			 events = cacheEvents;
+		 else
+			 forceEventListUpdate();
+		 
 		 return v;
 	}
 	
@@ -127,6 +119,21 @@ public class TimelineFragment extends Fragment
 		loader.execute();
 	}
 	
+	
+	/**
+	 * Forces a read from cache
+	 * @param v T
+	 */
+	public ArrayList<Event> forceCacheRead()
+	{
+		//Try to read data from cache
+		 Object o = CacheManager.readObjectFromCacheFile(c , "events");
+		 
+		if(o != null)
+			return (ArrayList<Event>) o;
+		else
+			return null;
+	}
 	/**
 	 * This method is used to reload the events from a button click
 	 * @param v
