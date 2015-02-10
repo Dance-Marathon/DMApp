@@ -230,7 +230,10 @@ public class TimelineFragment extends Fragment
 		mEventAdapter.clear();
 		mEventAdapter.addAll(events);
 		mEventAdapter.notifyDataSetChanged();
+		
+		//Set visibility in case they have been hidden
 		mListLayout.setVisibility(View.VISIBLE);
+		mFilterButton.setVisibility(View.VISIBLE);
 		
 		//Hide progress wheel
 		ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
@@ -254,7 +257,8 @@ public class TimelineFragment extends Fragment
 		bar.setVisibility(View.GONE);
 		
 		//Hide listview
-		v.findViewById(R.id.event_list_container).setVisibility(View.GONE);
+		mListLayout.setVisibility(View.GONE);
+		mFilterButton.setVisibility(View.GONE);
 		
 		//Show retry button
 		final Button retry = (Button) v.findViewById(R.id.retry_button);
@@ -451,31 +455,24 @@ public class TimelineFragment extends Fragment
 			if(loadSuccessful)
 			{	
 				//Log.d("load", "successful");
-				
 				showEventList(getView());
-				
-				//We need to do special layout things if the update was from a refresh
-				if(isRefreshing)
-				{
-					isRefreshing = false;
-					l.setRefreshing(false);
-					removeHazyForeground(getView());
-					enableViewClicking();
-				}
 			}
 			else
 			{
 				//Log.d("load", "unsuccessful");
 				if(isRefreshing)
-				{
 					showRefreshErrorToast();
-					isRefreshing = false;
-					l.setRefreshing(false);
-					removeHazyForeground(getView());
-					enableViewClicking();
-				}
 				else
-					showLoadErrorToast();
+					showLoadErrorPage(getView());
+			}
+			
+			//We need to do special layout things if the update was from a refresh
+			if(isRefreshing)
+			{
+				isRefreshing = false;
+				l.setRefreshing(false);
+				removeHazyForeground(getView());
+				enableViewClicking();
 			}
 				
 		}
