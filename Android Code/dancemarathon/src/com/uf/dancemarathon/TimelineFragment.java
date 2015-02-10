@@ -231,6 +231,54 @@ public class TimelineFragment extends Fragment
 		mEventAdapter.addAll(events);
 		mEventAdapter.notifyDataSetChanged();
 		mListLayout.setVisibility(View.VISIBLE);
+		
+		//Hide progress wheel
+		ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
+		bar.setVisibility(View.GONE);
+		
+		
+	}
+	
+	/**
+	 * Show a load error page 
+	 * @param v The view to show it on
+	 */
+	private void showLoadErrorPage(View v)
+	{
+		//Show error textview
+		final TextView errorView = (TextView) v.findViewById(R.id.tline_load_error);
+		errorView.setVisibility(View.VISIBLE);
+		
+		//Hide progress wheel
+		final ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
+		bar.setVisibility(View.GONE);
+		
+		//Hide listview
+		v.findViewById(R.id.event_list_container).setVisibility(View.GONE);
+		
+		//Show retry button
+		final Button retry = (Button) v.findViewById(R.id.retry_button);
+		//If button is clicked, try the load again
+		retry.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v)
+			{
+				//Hide error textview
+				errorView.setVisibility(View.GONE);
+				//Hide retry button
+				retry.setVisibility(View.GONE);
+				
+				//Show progress wheel animation
+				bar.setVisibility(View.VISIBLE);
+				
+				//Execute load again
+				loader = new EventLoader();
+				loader.execute();
+			}
+			
+		});
+		retry.setVisibility(View.VISIBLE);	
 	}
 	
 	private void showLoadErrorToast()

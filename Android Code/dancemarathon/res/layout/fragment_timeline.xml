@@ -5,6 +5,39 @@
     android:background="@color/White"
     tools:context="com.uf.dancemarathon.TimelineFragment" >
     
+    
+    <!--  Error message to show -->
+    <TextView
+        android:id="@+id/tline_load_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/timeline_load_error" 
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    
+    <Button
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_below="@+id/tline_load_error"
+        android:layout_centerHorizontal="true"
+        android:text="@string/retry"
+        android:textColor="@color/White"
+        android:textSize="12sp"
+        android:background="@drawable/orange_rounded_button"
+        android:visibility="gone"
+        android:onClick="retryLoad"/>
+    
+    <!-- Progress wheel and List of events -->
+    <ProgressBar 
+        android:id="@+id/progress_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="true"
+        android:layout_centerInParent="true"
+        android:visibility="visible"/>
+    
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/event_list_container"
         android:layout_width="match_parent"
