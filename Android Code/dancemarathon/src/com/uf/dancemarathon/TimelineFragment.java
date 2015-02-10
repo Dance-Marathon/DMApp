@@ -285,12 +285,6 @@ public class TimelineFragment extends Fragment
 		retry.setVisibility(View.VISIBLE);	
 	}
 	
-	private void showLoadErrorToast()
-	{
-		Toast toast = Toast.makeText(c, "Could not load data\nSwipe down to refresh", Toast.LENGTH_LONG);
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.show();
-	}
 	/**
 	 * Show a toast if the refresh operation fails
 	 */
