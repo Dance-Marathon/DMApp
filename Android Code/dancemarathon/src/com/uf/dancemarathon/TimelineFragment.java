@@ -16,6 +16,7 @@ import org.json.JSONException;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -69,22 +70,6 @@ public class TimelineFragment extends Fragment
 		// Required empty public constructor
 	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState)
-	{
-		// Inflate the layout for this fragment
-		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
-		 
-		 ArrayList<Event> cacheEvents = forceCacheRead();
-		 if(cacheEvents != null)
-			 events = cacheEvents;
-		 else
-			 forceEventListUpdate();
-		 
-		 return v;
-	}
-	
 	/**
 	 * This method is necessary because an empty, no argument constructor must be provided
 	 * for a fragment in Android
@@ -100,47 +85,44 @@ public class TimelineFragment extends Fragment
 		return f;
 	}
 	
-	/**
-	 * Reset the loader so we can do another load operation.
-	 * An instance of async task may only be executed once
-	 * so we re-instantiate the loader.
-	 */
-	public void resetLoader()
-	{
-		loader = new EventLoader();
-	}
 	
-	/**
-	 * This method is used to force the timeline to update
-	 */
-	public void forceEventListUpdate()
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
 	{
-		resetLoader();
-		loader.execute();
-	}
-	
-	
-	/**
-	 * Forces a read from cache
-	 * @param v T
-	 */
-	public ArrayList<Event> forceCacheRead()
-	{
-		//Try to read data from cache
-		 Object o = CacheManager.readObjectFromCacheFile(c , "events");
+		// Inflate the layout for this fragment
+		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
 		 
-		if(o != null)
-			return (ArrayList<Event>) o;
-		else
-			return null;
+		 //Load events
+		 ArrayList<Event> cacheEvents = forceCacheRead();
+		 if(cacheEvents != null)
+			 events = cacheEvents;
+		 else
+			 forceEventListUpdate();
+		 
+		 initializeFilterDialog();
+		 mFilterDialog.show();
+		 return v;
 	}
+	
 	/**
-	 * This method is used to reload the events from a button click
-	 * @param v
+	 * This method initializes the dialog that will be used to allow users to filter
+	 * events by type.
 	 */
-	public void retryLoad(View v)
+	private void initializeFilterDialog()
 	{
-		forceEventListUpdate();
+		 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		 builder.setTitle(R.string.filter_dialog_title)
+		 		.setItems(R.array.filter_dialog_options, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+		 
+		 mFilterDialog = builder.create();
 	}
 	
 	/* (non-Javadoc)
@@ -301,6 +283,49 @@ public class TimelineFragment extends Fragment
 	{
 		View hazyView = v.findViewById(R.id.hazy_foreground);
 		hazyView.setVisibility(View.GONE);
+	}
+	
+	/**
+	 * This method is used to reload the events from a button click
+	 * @param v
+	 */
+	public void retryLoad(View v)
+	{
+		forceEventListUpdate();
+	}
+	
+	/**
+	 * Reset the loader so we can do another load operation.
+	 * An instance of async task may only be executed once
+	 * so we re-instantiate the loader.
+	 */
+	public void resetLoader()
+	{
+		loader = new EventLoader();
+	}
+	
+	/**
+	 * This method is used to force the timeline to update
+	 */
+	public void forceEventListUpdate()
+	{
+		resetLoader();
+		loader.execute();
+	}
+	
+	/**
+	 * Forces a read from cache
+	 * @param v T
+	 */
+	public ArrayList<Event> forceCacheRead()
+	{
+		//Try to read data from cache
+		 Object o = CacheManager.readObjectFromCacheFile(c , "events");
+		 
+		if(o != null)
+			return (ArrayList<Event>) o;
+		else
+			return null;
 	}
 	
 	/**
