@@ -96,7 +96,10 @@ public class TimelineFragment extends Fragment
 		 //Load events
 		 ArrayList<Event> cacheEvents = forceCacheRead();
 		 if(cacheEvents != null)
+		 {
 			 events = cacheEvents;
+			 showEventList(v, events);
+		 }
 		 else
 			 forceEventListUpdate();
 		 
