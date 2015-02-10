@@ -48,7 +48,19 @@
 	        android:layout_height="wrap_content"
 	        android:footerDividersEnabled="true"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-
+	
+    <!-- Filter button -->
+    <Button
+        android:id="@+id/timeline_filter_button"
+        android:layout_width="wrap_content"
+      	android:layout_height="wrap_content"
+      	android:layout_alignParentBottom="true"
+      	android:layout_alignParentEnd="true"
+      	android:textColor="@color/White"
+      	android:text="@string/filter_button_text"
+      	android:background="@color/transBlack"/>
+    
+    <!-- Hazy foregroud for loading operations -->
     <View 
         android:id="@+id/hazy_foreground"
         android:layout_width="match_parent"

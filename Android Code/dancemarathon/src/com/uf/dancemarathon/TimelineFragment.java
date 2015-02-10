@@ -64,6 +64,7 @@ public class TimelineFragment extends Fragment
 	private EventLoader loader;
 	
 	private AlertDialog mFilterDialog;
+	private Button mFilterButton;
 
 	public TimelineFragment()
 	{
@@ -104,7 +105,19 @@ public class TimelineFragment extends Fragment
 			 forceEventListUpdate();
 		 
 		 initializeFilterDialog();
-		 mFilterDialog.show();
+		 
+		 //Initialize filter button
+		 mFilterButton = (Button) v.findViewById(R.id.timeline_filter_button);
+		 mFilterButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mFilterDialog.show();
+			}
+			 
+		 });
+		 
 		 return v;
 	}
 	
@@ -210,7 +223,6 @@ public class TimelineFragment extends Fragment
 				showHazyForeground(v);
 			}
 		});
-		
 		//Set refresh layout colors
 		listLayout.setColorSchemeResources(R.color.dm_orange_primary, R.color.dm_blue_secondary, R.color.GreenYellow);
 	}

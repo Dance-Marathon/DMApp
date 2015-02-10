@@ -5,7 +5,7 @@
      <color name="dm_blue_primary">#014083</color>
      <color name="dm_orange_secondary">#F79B63</color>
      <color name="dm_blue_secondary">#617BA6</color>
-     
+    
     <!-- Basic Colors -->
      <color name="yellow">#FFFF00</color>
      <color name="red">#FF0000</color> 
@@ -24,7 +24,7 @@
 	 <color name="black">#000000</color>
 	 
 	<!-- Advanced Colors -->
-	 <color name="transBlack">#6A111111</color>
+	 <color name="transBlack">#Ac000000</color>
 	 <color name="White">#FFFFFF</color>
 	 <color name="Ivory">#FFFFF0</color>
 	 <color name="LightYellow">#FFFFE0</color>

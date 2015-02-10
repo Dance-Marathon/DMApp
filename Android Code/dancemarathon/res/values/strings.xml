@@ -23,6 +23,7 @@
         <item>C</item>
         <item>D</item>
     </string-array>
+    <string name="filter_button_text">Filter</string>
     
     <!-- Login Activity strings -->
     <string name="login_title">Login to See Progress!</string>
