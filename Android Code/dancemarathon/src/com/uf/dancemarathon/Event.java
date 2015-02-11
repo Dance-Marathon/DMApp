@@ -54,7 +54,10 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 * A description of the event
 	 */
 	private String description; 
-
+	/**
+	 * The type of event it is (i.e. check-ins, hospitality night)
+	 */
+	private String category;
 	/**
 	 * @param id The event id as specified on the server
 	 * @param title The title of the event
@@ -75,6 +78,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		this.t_endDate = t_endDate;
 		this.t_lastMod = t_lastMod;
 		this.description = description;
+		this.category = null;
 		
 		parseTimeStamps();
 	}
@@ -389,6 +393,20 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		
         return etimeText;
 	}
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Override
 	public int compareTo(Event another)
 	{

@@ -119,12 +119,14 @@ public class TimelineFragment extends Fragment
 		 if(cacheEvents != null)
 		 {
 			 events = cacheEvents;
-			 showEventList(v);
+			 String[] filterArray = getEventCategories(events);
+			 createFilterDialog(filterArray);
+			 showEventList(v, events);
 		 }
 		 else
 			 forceEventListUpdate();
 		 
-		 initializeFilterDialog();
+		 
 		 
 		 return v;
 	}
@@ -175,20 +177,30 @@ public class TimelineFragment extends Fragment
 		//Set refresh layout colors
 		mListLayout.setColorSchemeResources(R.color.dm_orange_primary, R.color.dm_blue_secondary, R.color.GreenYellow);
 	}
+	
 	/**
 	 * This method initializes the dialog that will be used to allow users to filter
 	 * events by type.
 	 */
-	private void initializeFilterDialog()
+	private void createFilterDialog(final String[] items)
 	{
 		 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		 builder.setTitle(R.string.filter_dialog_title)
-		 		.setItems(R.array.filter_dialog_options, new DialogInterface.OnClickListener() {
+		 		.setItems(items, new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
+						String category = items[which];
 						
+						ArrayList<Event> newList;
+						if(!category.equals("All"))
+							newList = filterEvents(events, category);
+						else
+							newList = events;
+						
+						
+						showEventList(getView(), newList);
 					}
 				});
 		 
@@ -222,11 +234,58 @@ public class TimelineFragment extends Fragment
 	}
 	
 	/**
+	 * Get the unique categories
+	 * @return A string array with the category names
+	 */
+	private String[] getEventCategories(ArrayList<Event> events){
+		ArrayList<String> categories = new ArrayList<String>();
+		categories.add("All");
+		for(int i = 0; i < events.size(); i++)
+		{
+			Event e = events.get(i);
+			String cat = e.getCategory();
+			if(cat == null || categories.contains(cat))
+			{
+			}
+			else
+				categories.add(cat);
+		}
+		
+		return categories.toArray(new String[categories.size()]);
+	}
+	
+	/**
+	 * Filter the events by a certain category
+	 * @param events The events to filter
+	 * @param category The category to filter by
+	 * @return A new arraylist with the filtered events
+	 */
+	private ArrayList<Event> filterEvents(ArrayList<Event> events, String category)
+	{
+		ArrayList<Event> newList = new ArrayList<Event>();
+		for(int i = 0; i < events.size(); i++)
+		{
+			Event e = events.get(i);
+			String cat = e.getCategory();
+		    if(cat != null)
+		    {
+		    	if(cat.equals(category))
+		    		newList.add(e);
+		    }
+			else
+			{
+			}
+		}
+		
+		return newList;
+	}
+	
+	/**
 	 * Show the event list on the view and hide the progress wheel
 	 * @param v The view to modify
 	 * @param events The events to show
 	 */
-	private void showEventList(final View v)
+	private void showEventList(final View v, ArrayList<Event> events)
 	{
 		mEventAdapter.clear();
 		mEventAdapter.addAll(events);
@@ -295,7 +354,6 @@ public class TimelineFragment extends Fragment
 		toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 40);
 		toast.show();
 	}
-	
 	
 	/**
 	 * Shows a hazy view over all the other views
@@ -450,7 +508,10 @@ public class TimelineFragment extends Fragment
 			if(loadSuccessful)
 			{	
 				//Log.d("load", "successful");
-				showEventList(getView());
+				showEventList(getView(), events);
+				
+				//Update filter categories
+				createFilterDialog(getEventCategories(events));
 			}
 			else
 			{
@@ -489,10 +550,14 @@ public class TimelineFragment extends Fragment
 				String startDate = arr.getJSONObject(i).getString("startDate").trim();
 				String endDate = arr.getJSONObject(i).getString("endDate").trim();
 				String lastModified = arr.getJSONObject(i).getString("lastModified").trim();
-				
+				String category = arr.getJSONObject(i).getString("category");
 				try
 				{
 					Event e = new Event(id, title, location, startDate, endDate, lastModified, description);
+					
+					if(!(category.equals("null")))
+						e.setCategory(category.trim());
+					
 					events.add(e);
 				} catch (ParseException e)
 				{
@@ -500,8 +565,6 @@ public class TimelineFragment extends Fragment
 				}
 			}
 			
-			if(events.size() <= 0)
-				loadSuccessful = false; //Loading nothing does not qualify as a "successful" load operation
 			return events; 
 		}
 	
