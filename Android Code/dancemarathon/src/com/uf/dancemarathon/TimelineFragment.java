@@ -101,18 +101,6 @@ public class TimelineFragment extends Fragment
 		 
 		 initializeEventListViews(v);
 		 
-		 //Load events
-		 ArrayList<Event> cacheEvents = forceCacheRead();
-		 if(cacheEvents != null)
-		 {
-			 events = cacheEvents;
-			 showEventList(v);
-		 }
-		 else
-			 forceEventListUpdate();
-		 
-		 initializeFilterDialog();
-		 
 		 //Initialize filter button
 		 mFilterButton = (Button) v.findViewById(R.id.timeline_filter_button);
 		 mFilterButton.setOnClickListener(new OnClickListener(){
@@ -124,6 +112,19 @@ public class TimelineFragment extends Fragment
 			}
 			 
 		 });
+		 
+		 
+		 //Load events
+		 ArrayList<Event> cacheEvents = forceCacheRead();
+		 if(cacheEvents != null)
+		 {
+			 events = cacheEvents;
+			 showEventList(v);
+		 }
+		 else
+			 forceEventListUpdate();
+		 
+		 initializeFilterDialog();
 		 
 		 return v;
 	}
