@@ -17,14 +17,16 @@
 
     <!-- Timeline Activity strings -->
     <string name="filter_dialog_title">Filter By:</string>
+
     <string-array name="filter_dialog_options">
         <item>A</item>
         <item>B</item>
         <item>C</item>
         <item>D</item>
     </string-array>
+
     <string name="filter_button_text">Filter</string>
-    
+
     <!-- Login Activity strings -->
     <string name="login_title">Login to See Progress!</string>
     <string name="username_field">Username</string>
@@ -111,5 +113,6 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="event_in_progress">In Progress</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

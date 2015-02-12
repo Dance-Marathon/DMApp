@@ -88,6 +88,12 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map" 
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
