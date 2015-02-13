@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.json.JSONArray;
@@ -602,6 +603,7 @@ public class TimelineFragment extends Fragment
 	 */
 	public void setEvents(ArrayList<Event> events)
 	{
+		Collections.sort(events);
 		this.events = events;
 	}
 
