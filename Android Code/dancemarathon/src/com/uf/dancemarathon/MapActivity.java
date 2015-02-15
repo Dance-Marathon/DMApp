@@ -16,9 +16,7 @@ public class MapActivity extends Activity {
 
 	private FramedImageView mMap;
 	private ArrayList<ImageFrame> frames;
-	private Matrix matrix = new Matrix();
-	private float scale = 1f;
-	private ScaleGestureDetector SGD;
+	
 	   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +27,6 @@ public class MapActivity extends Activity {
 		
 		initFrames();
 		mMap.setFrames(frames);
-		
-		//Used to handle pinch zoom
-		SGD = new ScaleGestureDetector(this, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
-			   public boolean onScale(ScaleGestureDetector detector) {
-			      scale *= detector.getScaleFactor();
-			      scale = Math.max(0.1f, Math.min(scale, 5.0f));
-			      matrix.setScale(scale, scale);
-			      mMap.setImageMatrix(matrix);
-			      return true;
-			   }
-			});
 		
 	}
 		
@@ -69,15 +56,6 @@ public class MapActivity extends Activity {
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onTouchEvent(android.view.MotionEvent)
-	 */
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		// TODO Auto-generated method stub
-		SGD.onTouchEvent(event);
-		return true;
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
