@@ -8,12 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/White"
     tools:context="com.uf.dancemarathon.MapActivity" >
-
-    <ImageView
+	
+    <com.uf.dancemarathon.FramedImageView
         android:id="@+id/map_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/map"
-        android:scaleType="fitCenter"/>
+        android:scaleType="matrix"/>
 
 </RelativeLayout>
