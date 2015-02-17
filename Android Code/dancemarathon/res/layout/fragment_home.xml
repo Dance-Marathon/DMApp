@@ -6,7 +6,7 @@
     tools:context="com.uf.dancemarathon.HomeFragment" >
     
     <!-- Heading -->
-    <ImageView android:id="@+id/dance_marathon_header_image"
+    <!-- <ImageView android:id="@+id/dance_marathon_header_image"
         android:src="@drawable/countdown"
         android:contentDescription="@string/dance_marathon"
         android:layout_width="match_parent"
@@ -14,7 +14,64 @@
         android:layout_marginTop="@dimen/heading_pic_margin_top"
         android:layout_marginBottom="@dimen/heading_pic_margin_bottom"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"/> -->
+    
+    <!-- Countdown -->
+    <TextView
+        android:id="@+id/days_hundreds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" 
+	     android:layout_marginTop="300dp"
+         android:layout_marginLeft="300dp"/>
+    
+    <TextView
+        android:id="@+id/days_tens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/days_ones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/hours_tens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/hours_ones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/minutes_tens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/minutes_ones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/seconds_tens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
+    
+    <TextView
+        android:id="@+id/seconds_ones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
     
     <!-- Header Text -->
     <TextView
@@ -25,7 +82,6 @@
         android:textSize="@dimen/header_text_textsize"
         android:textColor="@color/dm_blue_primary"
         android:gravity="center"
-        android:layout_below="@+id/dance_marathon_header_image"
         android:layout_marginLeft="@dimen/header_text_margin_left"
         android:layout_marginTop="@dimen/header_text_margin_top"
         android:layout_marginRight="@dimen/header_text_margin_right" 
@@ -72,7 +128,7 @@
         android:textSize="@dimen/homepage_button_textsize"
         android:onClick="openLink" />
     
-        <!-- DM Webpage Button -->
+     <!-- DM Webpage Button -->
 	<Button 
 	    android:id="@+id/website"
 	    android:layout_width="@dimen/homepage_button_width"

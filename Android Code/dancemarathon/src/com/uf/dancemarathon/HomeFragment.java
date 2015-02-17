@@ -16,7 +16,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -47,6 +49,22 @@ public class HomeFragment extends Fragment
 	private String websiteLink = "http://www.floridadm.org/";
 	private String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
 	
+	private int second_dm = 0;
+	private int minute_dm = 0;
+	private int hour_dm = 12;
+	private int day_dm = 14;
+	private int month_dm = 3;
+	private int year_dm = 2015;
+	
+    private TextView text_days_h;
+    private TextView text_days_t;
+    private TextView text_days_o;
+    private TextView text_hours_t;
+    private TextView text_hours_o;
+    private TextView text_minutes_t;
+    private TextView text_minutes_o;
+    private TextView text_seconds_t;
+    private TextView text_seconds_o;
 	
 	public HomeFragment()
 	{
@@ -60,6 +78,8 @@ public class HomeFragment extends Fragment
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+		set_timer_DM(v);
+		
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
 		TextView announcement_header = (TextView) v.findViewById(R.id.announcements_title);
 		TextView game_text = (TextView) v.findViewById(R.id.game);
@@ -303,4 +323,82 @@ public class HomeFragment extends Fragment
 		startActivity(intent);
 	}
 
+	public void set_timer_DM(View v)
+	{	
+		
+		Time timerSet = new Time(Time.getCurrentTimezone());
+        timerSet.set(second_dm, minute_dm, hour_dm, day_dm, month_dm, year_dm); //day month year
+        timerSet.normalize(true);
+        long dmMillis = timerSet.toMillis(true);
+
+        Time TimeNow = new Time(Time.getCurrentTimezone());
+        TimeNow.setToNow(); // set the date to Current Time
+        TimeNow.normalize(true);
+        long nowMillis = TimeNow.toMillis(true);
+
+        long milliDiff= dmMillis - nowMillis; //subtract current from future to set the time remaining
+
+        text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
+        text_days_t = (TextView) v.findViewById(R.id.days_tens);
+        text_days_o = (TextView) v.findViewById(R.id.days_ones);
+        text_hours_t = (TextView) v.findViewById(R.id.hours_tens);
+        text_hours_o = (TextView) v.findViewById(R.id.hours_ones);
+        text_minutes_t = (TextView) v.findViewById(R.id.minutes_tens);
+        text_minutes_o = (TextView) v.findViewById(R.id.minutes_ones);
+        text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
+        text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
+        
+        new CountDownTimer(milliDiff, 1000)
+        {
+        	@Override	
+            public void onTick(long millisUntilFinished)
+            {
+            	
+                // decompose difference into days, hours, minutes and seconds 
+                int days = (int) ((millisUntilFinished / 1000) / 86400);
+                int hours = (int) (((millisUntilFinished / 1000) - (days * 86400)) / 3600);
+                int minutes = (int) (((millisUntilFinished / 1000) - ((days * 86400) + (hours * 3600))) / 60);
+                int seconds = (int) ((millisUntilFinished / 1000) % 60);
+
+                // Filter time
+                int days_hundreds = days % 100;
+                int days_tens = (days - days_hundreds * 100) % 10;
+                int days_ones = (days - days_hundreds * 100 - days_tens * 10);
+                
+                int hours_tens = hours % 10;
+                int hours_ones = hours - hours % 10;
+                
+                int minutes_tens = minutes % 10;
+                int minutes_ones = minutes - minutes_tens * 10;
+                
+                int seconds_tens = seconds % 10;
+                int seconds_ones = seconds - seconds_tens * 10;
+
+                
+                text_days_h.setText(Integer.toString(days_hundreds));
+                text_days_t.setText(Integer.toString(days_tens));
+                text_days_o.setText(Integer.toString(days_ones));
+                text_hours_t.setText(Integer.toString(hours_tens));
+                text_hours_o.setText(Integer.toString(hours_ones));
+                text_minutes_t.setText(Integer.toString(minutes_tens));
+                text_minutes_o.setText(Integer.toString(minutes_ones));
+                text_seconds_t.setText(Integer.toString(seconds_tens));
+                text_seconds_o.setText(Integer.toString(seconds_ones));
+            }
+            
+            @Override
+            public void onFinish()
+            {
+            	text_days_h.setText("S");
+                text_days_t.setText("T");
+                text_days_o.setText("A");
+                text_hours_t.setText("N");
+                text_hours_o.setText("D");
+                text_minutes_t.setText("↑");
+                text_minutes_o.setText("4");
+                text_seconds_t.setText("THE");
+                text_seconds_o.setText("KIDS!");
+            }
+        };
+	}
 }
