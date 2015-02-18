@@ -39,7 +39,7 @@ public class MapActivity extends Activity {
 	
 	private void makeFrameToast()
 	{
-		Toast t = Toast.makeText(this, "IT WORKED!!", Toast.LENGTH_LONG);
+		Toast t = Toast.makeText(this, "IT WORKED!!", Toast.LENGTH_SHORT);
 		t.show();
 	}
 
@@ -93,4 +93,6 @@ public class MapActivity extends Activity {
 		}
 		
 	}
+	
+	
 }
