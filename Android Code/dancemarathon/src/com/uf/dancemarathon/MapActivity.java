@@ -78,17 +78,32 @@ public class MapActivity extends Activity {
 	
 	private class MyTouchListener implements View.OnTouchListener{
 
+		boolean inGesture = false;
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
+			
+			int ptrCount = event.getPointerCount();
+			
+			if(ptrCount > 1)
+				inGesture = true;
+			
+			//If event is releasing finger off screen
 			if(event.getAction() == MotionEvent.ACTION_UP)
 			{
-				float imgH = v.getHeight();
-				float imgW = v.getWidth();
-				float x = event.getX();
-				float y = event.getY();
-				
-				handleTouchesForFrames(x, y, imgW, imgH);
+				if(!inGesture)
+				{
+					float imgH = v.getHeight();
+					float imgW = v.getWidth();
+					float x = event.getX();
+					float y = event.getY();
+					
+					handleTouchesForFrames(x, y, imgW, imgH);
+				}
+				//No longer in gesture if the only pointer left is the one which just got released
+				else if(event.getPointerCount() == 1)
+					inGesture = false;
 			}
+		
 			return true;
 		}
 		

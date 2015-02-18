@@ -222,11 +222,12 @@ public class SwipeActivity extends ActionBarActivity
 				// TODO Auto-generated method stub
 				switch(position)
 				{
-				case 0: openFAQActivity();break;
-				case 1: openSocialMediaActivity();break;
-				case 2: openFundraisingActivity();break;
-				case 3: openAboutDMActivity();break;
-				case 4: openContactUsActivity();break;
+				case 0: openMapActivity();break;
+				case 1: openFAQActivity();break;
+				case 2: openSocialMediaActivity();break;
+				case 3: openFundraisingActivity();break;
+				case 4: openAboutDMActivity();break;
+				case 5: openContactUsActivity();break;
 				}
 				
 			}
@@ -278,7 +279,15 @@ public class SwipeActivity extends ActionBarActivity
 		// as you specify a parent activity in AndroidManifest.xml.
 		return true;
 	}
-
+	
+	/**
+	 * Opens the O'Dome map activity
+	 */
+	private void openMapActivity()
+	{
+		Intent intent = new Intent(this, MapActivity.class);
+		startActivity(intent);
+	}
 	/**
 	 * This method handles opening of the my fundraising progress activity.
 	 * If a user has been defined so far, then we open the user activity.
