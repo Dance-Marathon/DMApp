@@ -10,16 +10,6 @@ public class TouchFrame extends ImageFrame implements OnFrameTouchListener{
 		super(min_X, min_Y, max_X, max_Y);
 		// TODO Auto-generated constructor stub
 		
-		//Default listener does nothing
-		listener = new OnFrameTouchListener(){
-
-			@Override
-			public void onFrameTouch(View v) {
-				// TODO Auto-generated method stub
-				return;
-			}
-			
-		};
 	}
 	
 	protected void setOnFrameTouchListener(OnFrameTouchListener l)
@@ -30,7 +20,8 @@ public class TouchFrame extends ImageFrame implements OnFrameTouchListener{
 	@Override
 	public void onFrameTouch(View v) {
 		// TODO Auto-generated method stub
-		listener.onFrameTouch(v);
+		if(listener!=null)
+			listener.onFrameTouch(v);
 	}
 
 }
