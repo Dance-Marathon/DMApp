@@ -52,7 +52,7 @@ public class FramedImageView extends ImageView{
 		{
 			float x = event.getX();
 			float y = event.getY();
-			Log.d("touch", String.valueOf(x)+ String.valueOf(y));
+			
 			handleTouchesForFrames(x, y);
 		}
 		
