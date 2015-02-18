@@ -9,11 +9,10 @@
     android:background="@color/White"
     tools:context="com.uf.dancemarathon.MapActivity" >
 	
-    <com.uf.dancemarathon.FramedImageView
+    <com.uf.dancemarathon.TouchImageView
         android:id="@+id/map_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/map"
-        android:scaleType="matrix"/>
+        android:src="@drawable/map"/>
 
 </RelativeLayout>
