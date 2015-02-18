@@ -2,7 +2,7 @@ package com.uf.dancemarathon;
 
 import android.view.View;
 
-public class TouchFrame extends ImageFrame{
+public class TouchFrame extends ImageFrame implements OnFrameTouchListener{
 
 	private OnFrameTouchListener listener;
 	
@@ -22,14 +22,15 @@ public class TouchFrame extends ImageFrame{
 		};
 	}
 	
-	protected void onTouch(View v)
-	{
-		listener.onFrameTouch(v);
-	}
-	
 	protected void setOnFrameTouchListener(OnFrameTouchListener l)
 	{
 		listener = l;
+	}
+
+	@Override
+	public void onFrameTouch(View v) {
+		// TODO Auto-generated method stub
+		listener.onFrameTouch(v);
 	}
 
 }

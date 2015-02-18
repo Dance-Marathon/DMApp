@@ -48,7 +48,7 @@ public class FramedImageView extends ImageView{
 		// TODO Auto-generated method stub
 		boolean handled = super.onTouchEvent(event);
 		
-		if(event.getAction() == MotionEvent.ACTION_DOWN)
+		if(event.getAction() == MotionEvent.ACTION_UP)
 		{
 			float x = event.getX();
 			float y = event.getY();
@@ -59,6 +59,7 @@ public class FramedImageView extends ImageView{
 		
 		return handled;
 	}
+	
 
 	private void handleTouchesForFrames(float x, float y)
 	{
@@ -66,12 +67,12 @@ public class FramedImageView extends ImageView{
 		{
 			ImageFrame f = frames.get(i);
 			
-			if(f instanceof TouchFrame)
+			if(f instanceof OnFrameTouchListener)
 			{
 				Bitmap bp = ((BitmapDrawable)this.getDrawable()).getBitmap();
 
 				if(f.isPointInFrame(x, y, bp.getWidth(), bp.getHeight()))
-					((TouchFrame) f).onTouch(this);
+					((OnFrameTouchListener) f).onFrameTouch(this);
 			}
 		}
 	}
