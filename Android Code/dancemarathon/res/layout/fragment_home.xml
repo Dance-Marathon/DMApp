@@ -22,56 +22,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp" 
-	     android:layout_marginTop="300dp"
-         android:layout_marginLeft="300dp"/>
+	    android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"/>
     
     <TextView
         android:id="@+id/days_tens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/days_hundreds" />
     
     <TextView
         android:id="@+id/days_ones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/days_tens" />
     
     <TextView
         android:id="@+id/hours_tens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/days_ones" />
     
     <TextView
         android:id="@+id/hours_ones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/hours_tens" />
     
     <TextView
         android:id="@+id/minutes_tens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/hours_ones" />
     
     <TextView
         android:id="@+id/minutes_ones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/minutes_tens" />
     
     <TextView
         android:id="@+id/seconds_tens"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/minutes_ones" />
     
     <TextView
         android:id="@+id/seconds_ones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_toRightOf="@+id/seconds_tens" />
     
     <!-- Header Text -->
     <TextView

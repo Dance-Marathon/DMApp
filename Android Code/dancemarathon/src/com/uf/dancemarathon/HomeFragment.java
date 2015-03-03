@@ -7,7 +7,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -330,13 +334,25 @@ public class HomeFragment extends Fragment
         timerSet.set(second_dm, minute_dm, hour_dm, day_dm, month_dm, year_dm); //day month year
         timerSet.normalize(true);
         long dmMillis = timerSet.toMillis(true);
-
+        Date date = new Date();
+        
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+        try {
+			date = df.parse("2015-03-14 12:00:00");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        
         Time TimeNow = new Time(Time.getCurrentTimezone());
         TimeNow.setToNow(); // set the date to Current Time
         TimeNow.normalize(true);
         long nowMillis = TimeNow.toMillis(true);
 
-        long milliDiff= dmMillis - nowMillis; //subtract current from future to set the time remaining
+        long milliDiff = date.getTime() - Calendar.getInstance(Locale.US).getTimeInMillis(); 
+        // long milliDiff = dmMillis - nowMillis; //subtract current from future to set the time remaining
 
         text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
         text_days_t = (TextView) v.findViewById(R.id.days_tens);
@@ -353,37 +369,45 @@ public class HomeFragment extends Fragment
         	@Override	
             public void onTick(long millisUntilFinished)
             {
+            	Calendar cal = Calendar.getInstance(Locale.US);
+            	cal.setTimeInMillis(millisUntilFinished);
             	
-                // decompose difference into days, hours, minutes and seconds 
+            	int days = cal.get(Calendar.DAY_OF_YEAR);
+            	int hours = cal.get(Calendar.HOUR_OF_DAY);
+            	int minutes = cal.get(Calendar.MINUTE);
+            	int seconds = cal.get(Calendar.SECOND);
+                /* decompose difference into days, hours, minutes and seconds 
                 int days = (int) ((millisUntilFinished / 1000) / 86400);
                 int hours = (int) (((millisUntilFinished / 1000) - (days * 86400)) / 3600);
                 int minutes = (int) (((millisUntilFinished / 1000) - ((days * 86400) + (hours * 3600))) / 60);
-                int seconds = (int) ((millisUntilFinished / 1000) % 60);
+                int seconds = (int) ((millisUntilFinished / 1000) % 60);*/
 
                 // Filter time
-                int days_hundreds = days % 100;
-                int days_tens = (days - days_hundreds * 100) % 10;
+                int days_hundreds = days / 100;
+                int days_tens = (days - days_hundreds * 100) / 10;
                 int days_ones = (days - days_hundreds * 100 - days_tens * 10);
                 
-                int hours_tens = hours % 10;
-                int hours_ones = hours - hours % 10;
+                int hours_tens = hours / 10;
+                int hours_ones = hours - hours / 10;
                 
-                int minutes_tens = minutes % 10;
+                int minutes_tens = minutes / 10;
                 int minutes_ones = minutes - minutes_tens * 10;
                 
-                int seconds_tens = seconds % 10;
+                int seconds_tens = seconds / 10;
                 int seconds_ones = seconds - seconds_tens * 10;
 
                 
                 text_days_h.setText(Integer.toString(days_hundreds));
                 text_days_t.setText(Integer.toString(days_tens));
-                text_days_o.setText(Integer.toString(days_ones));
+                text_days_o.setText(Integer.toString(days_ones) + " ");
                 text_hours_t.setText(Integer.toString(hours_tens));
-                text_hours_o.setText(Integer.toString(hours_ones));
+                text_hours_o.setText(Integer.toString(hours_ones) + " ");
                 text_minutes_t.setText(Integer.toString(minutes_tens));
-                text_minutes_o.setText(Integer.toString(minutes_ones));
+                text_minutes_o.setText(Integer.toString(minutes_ones) + " ");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
+                
+                Log.d("Time",Integer.toString((int) ((millisUntilFinished / 1000))));
             }
             
             @Override
@@ -399,6 +423,6 @@ public class HomeFragment extends Fragment
                 text_seconds_t.setText("THE");
                 text_seconds_o.setText("KIDS!");
             }
-        };
+        }.start();
 	}
 }
