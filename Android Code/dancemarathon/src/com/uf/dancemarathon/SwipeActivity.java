@@ -137,10 +137,10 @@ public class SwipeActivity extends ActionBarActivity
 
 	}
 	
+	
 	protected void onStart()
 	{
 		super.onStart();
-		
 		//Register google analytics page hit
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
@@ -149,29 +149,31 @@ public class SwipeActivity extends ActionBarActivity
 			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
 			trackEnabled = true;
 		}
-	}
-
-	protected void onResume()
-	{
-		super.onResume();
 		
 		//Don't show notifications if user is in-app
 		stopService(new Intent(this, NotificationService.class));
+		stopService(new Intent(this, AnnouncementService.class));
 		
 		//If this activity was started from the service, go to timeline
 		if(this.getIntent().hasExtra("start_source"))
 		{
 			if(this.getIntent().getStringExtra("start_source").equals("Service"))
 				mViewPager.setCurrentItem(2);
+			else if(this.getIntent().getStringExtra("start_source").equals("ments_Service"))
+				mViewPager.setCurrentItem(1);
 		}
 	}
 	
 	protected void onStop()
 	{
 		super.onStop();
-		//Show notifications if user exits out of app
+		
 		//Could not use onDestroy because it is not always called
+		
+		//Start event notification service
 		startService(new Intent(this, NotificationService.class));
+		//Start the announcements service
+		startService(new Intent(this, AnnouncementService.class));
 	}
 	
 	/**
@@ -220,11 +222,12 @@ public class SwipeActivity extends ActionBarActivity
 				// TODO Auto-generated method stub
 				switch(position)
 				{
-				case 0: openFAQActivity();break;
-				case 1: openSocialMediaActivity();break;
-				case 2: openFundraisingActivity();break;
-				case 3: openAboutDMActivity();break;
-				case 4: openContactUsActivity();break;
+				case 0: openMapActivity();break;
+				case 1: openFAQActivity();break;
+				case 2: openSocialMediaActivity();break;
+				case 3: openFundraisingActivity();break;
+				case 4: openAboutDMActivity();break;
+				case 5: openContactUsActivity();break;
 				}
 				
 			}
@@ -276,7 +279,15 @@ public class SwipeActivity extends ActionBarActivity
 		// as you specify a parent activity in AndroidManifest.xml.
 		return true;
 	}
-
+	
+	/**
+	 * Opens the O'Dome map activity
+	 */
+	private void openMapActivity()
+	{
+		Intent intent = new Intent(this, MapActivity.class);
+		startActivity(intent);
+	}
 	/**
 	 * This method handles opening of the my fundraising progress activity.
 	 * If a user has been defined so far, then we open the user activity.
@@ -379,7 +390,7 @@ public class SwipeActivity extends ActionBarActivity
 			switch (position)
 			{
 			case 0:return new Fragment(); //Return blank fragment because this will be covered by nav drawer
-			case 1:return HomeFragment.newInstance();
+			case 1:return HomeFragment.newInstance(SwipeActivity.this);
 			case 2:return TimelineFragment.newInstance(SwipeActivity.this);
 			case 3:return MtkFragment.newInstance();
 			}

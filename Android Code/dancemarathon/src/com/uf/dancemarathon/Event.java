@@ -7,13 +7,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 
 
 /**
  * @author Chris Whitten
  * This class represents a DM event.
  */
-public class Event implements Serializable, Comparable<Event>
+public class Event implements Serializable, Comparable<Event>, Parcelable
 {
 	/**
 	 * This ID is important when it comes to keeping event serializable
@@ -51,7 +54,10 @@ public class Event implements Serializable, Comparable<Event>
 	 * A description of the event
 	 */
 	private String description; 
-
+	/**
+	 * The type of event it is (i.e. check-ins, hospitality night)
+	 */
+	private String category;
 	/**
 	 * @param id The event id as specified on the server
 	 * @param title The title of the event
@@ -72,6 +78,7 @@ public class Event implements Serializable, Comparable<Event>
 		this.t_endDate = t_endDate;
 		this.t_lastMod = t_lastMod;
 		this.description = description;
+		this.category = null;
 		
 		parseTimeStamps();
 	}
@@ -361,6 +368,45 @@ public class Event implements Serializable, Comparable<Event>
 		this.lastMod = lastMod;
 	}
 
+	/**
+	 * Get the start date in the specified format.
+	 * @param format The format to use. See {@link SimpleDateFormat}
+	 * @return The formatted string
+	 */
+	protected String getFormattedStartDate(String format)
+	{
+        SimpleDateFormat df = new SimpleDateFormat(format, Locale.US);
+        String stimeText = df.format(startDate);
+		
+        return stimeText;
+	}
+	
+	/**
+	 * Get the end date in the specified format.
+	 * @param format The format to use. See {@link SimpleDateFormat}
+	 * @return The formatted string
+	 */
+	protected String getFormattedEndDate(String format)
+	{
+        SimpleDateFormat df = new SimpleDateFormat(format, Locale.US);
+        String etimeText = df.format(endDate);
+		
+        return etimeText;
+	}
+	/**
+	 * @return the category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Override
 	public int compareTo(Event another)
 	{
@@ -371,4 +417,54 @@ public class Event implements Serializable, Comparable<Event>
 		else
 			return 0;
 	}
+
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		dest.writeString(id);
+		dest.writeString(title);
+		dest.writeString(location);
+		dest.writeString(t_startDate);
+		dest.writeString(t_endDate);
+		dest.writeString(t_lastMod);
+		dest.writeString(description);
+	}
+	
+	private Event(Parcel in)
+	{
+		id = in.readString();
+		title = in.readString();
+		location = in.readString();
+		t_startDate = in.readString();
+		t_endDate = in.readString();
+		t_lastMod = in.readString();
+		description = in.readString();
+		
+		try {
+			parseTimeStamps();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			throw new ClassCastException();
+		}
+	}
+	
+
+	public static final Parcelable.Creator<Event> CREATOR
+    		= new Parcelable.Creator<Event>() {
+		
+		public Event createFromParcel(Parcel in) {
+		    return new Event(in);
+		}
+		
+		public Event[] newArray(int size) {
+		    return new Event[size];
+		}
+	};
 }

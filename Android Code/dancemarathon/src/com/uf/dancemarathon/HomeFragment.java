@@ -16,6 +16,7 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -45,9 +46,10 @@ import com.uf.dancemarathon.FontSetter.fontName;
  */
 public class HomeFragment extends Fragment
 {
-	private boolean loadSuccessful;
+	private Context c;
 	private AnnouncementsLoader loader;
 	
+<<<<<<< HEAD
 	//Website Paths that will be used if config file read fails//
 	private String gameLink = "http://www.google.com";
 	private String websiteLink = "http://www.floridadm.org/";
@@ -70,11 +72,21 @@ public class HomeFragment extends Fragment
     private TextView text_seconds_t;
     private TextView text_seconds_o;
 	
+=======
+>>>>>>> origin/chris
 	public HomeFragment()
 	{
 		// Required empty public constructor
 	}
 
+	public static HomeFragment newInstance(Context c)
+	{
+		HomeFragment f = new HomeFragment();
+		f.c = c;
+		return f;
+	}
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -82,8 +94,12 @@ public class HomeFragment extends Fragment
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+<<<<<<< HEAD
 		set_timer_DM(v);
 		
+=======
+		//Get textviews and set fonts
+>>>>>>> origin/chris
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
 		TextView announcement_header = (TextView) v.findViewById(R.id.announcements_title);
 		TextView game_text = (TextView) v.findViewById(R.id.game);
@@ -93,9 +109,32 @@ public class HomeFragment extends Fragment
 		FontSetter.setFont(getActivity(), fontName.AGBReg, header_text, game_text, web_text, donate);
 		FontSetter.setFont(getActivity(), fontName.AGBBol, announcement_header);
 		
+		//Set button listeners
 		setButtonListeners(v);
-		loader = new AnnouncementsLoader();
-		loader.execute();
+		
+		
+		
+		//Try to read data from cache
+		 Object o = CacheManager.readObjectFromCacheFile(c , "announcements");
+		 //If failed, force update
+		if(o == null)
+		{
+			loader = new AnnouncementsLoader();
+			loader.execute();
+		}
+		//Else show cache events
+		else
+		{
+			ArrayList<Announcement> ments = (ArrayList<Announcement>) o;
+			//List must be greater than zero to show cache data
+			if(ments.size() > 0)
+				 showAnnouncements(ments, v);
+			else
+			 {
+				loader = new AnnouncementsLoader();
+				loader.execute();
+			 }
+		}
 		
 		return v;
 	}
@@ -106,11 +145,19 @@ public class HomeFragment extends Fragment
 		if(loader != null)
 			loader.cancel(true);
 	}
+
 	
-	public static HomeFragment newInstance()
+	/**
+	 * Update the announcements listview with the input arraylist
+	 * @param ments The new announcements
+	 * @param v The view containing the listview
+	 */
+	private void showAnnouncements(ArrayList<Announcement> ments, View v)
 	{
-		HomeFragment f = new HomeFragment();
-		return f;
+		final ListView list = (ListView) v.findViewById(R.id.announcements_list);
+		AnnouncementsAdapter adapter = new AnnouncementsAdapter(getActivity(),ments);
+		list.setAdapter(adapter);
+		list.setClickable(false);
 	}
 	
 	/**
@@ -123,6 +170,8 @@ public class HomeFragment extends Fragment
 		toast.show();
 	}
 	
+	
+	//Button Handling//
 	/**
 	 * This method sets the listeners for the home screen's buttons
 	 * @param v The view the buttons belong to
@@ -139,7 +188,12 @@ public class HomeFragment extends Fragment
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				sendButtonHit(gameButton);
-				openLink(gameButton);
+				//Start game activity
+				Intent intent = new Intent(getActivity(), GameActivity.class);
+				startActivity(intent);
+				/*Toast toast = Toast.makeText(getActivity(), "Game coming soon!", Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();*/
 			}
 		});
 		
@@ -181,12 +235,64 @@ public class HomeFragment extends Fragment
 	}
 	
 	/**
+	 * Called by the buttons to open browser webpages.
+	 * @param view The button which called this method
+	 */
+	public void openLink(View view)
+	{
+		//Website Paths that will be used if config file read fails//
+		String gameLink = "http://www.google.com";
+		String websiteLink = "http://www.floridadm.org/";
+		String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
+		
+		//Try to get settings
+		try {
+			ConfigFileReader cReader = new ConfigFileReader(getActivity());
+			gameLink = cReader.getSetting("gamePath");
+			websiteLink = cReader.getSetting("websitePath");
+			donateLink = cReader.getSetting("donatePath");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Open the links
+		int id = view.getId();
+		if(id == R.id.game)
+			openWebsite(gameLink);
+		else if(id == R.id.website)
+			openWebsite(websiteLink);
+		else if(id == R.id.donate)
+			openWebsite(donateLink);
+		else
+		{
+		}
+			
+	}
+	
+	/**
+	 * Starts the given url
+	 * @param link The url
+	 */
+	public void openWebsite(String link)
+	{
+		Log.d("link", link);
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+		startActivity(intent);
+	}
+
+	//-----------------//
+	
+	/**
 	 * This class is responsible for loading the events. It is necessary because Android
 	 * does not allow you to have loading operations on the same thread as the UI.
 	 */
 	private class AnnouncementsLoader extends AsyncTask<Void, Double, ArrayList<Announcement>>
 	{
-		
+		private boolean loadSuccessful;
 		/* (non-Javadoc)
 		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
 		 */
@@ -194,6 +300,7 @@ public class HomeFragment extends Fragment
 		@Override
 		protected ArrayList<Announcement> doInBackground(Void... params)
 		{
+			
 			ArrayList<Announcement> announcements = new ArrayList<Announcement>();
 			try
 			{	
@@ -242,18 +349,10 @@ public class HomeFragment extends Fragment
 		//This method will update the UI after the load is finished.
 		protected void onPostExecute(ArrayList<Announcement> announcements)
 		{
-			final ListView list = (ListView) getView().findViewById(R.id.announcements_list);
-			
 			if(loadSuccessful)
-			{
-				AnnouncementsAdapter adapter = new AnnouncementsAdapter(getActivity(), announcements);
-				list.setAdapter(adapter);
-				list.setClickable(false);
-			}
+				showAnnouncements(announcements, getView());
 			else
-			{
 				displayErrorToast();
-			}
 		}
 		
 		/**
@@ -285,6 +384,7 @@ public class HomeFragment extends Fragment
 		}
 	}
 
+<<<<<<< HEAD
 	
 	/**
 	 * Called by the buttons to open browser webpages.
@@ -425,4 +525,6 @@ public class HomeFragment extends Fragment
             }
         }.start();
 	}
+=======
+>>>>>>> origin/chris
 }

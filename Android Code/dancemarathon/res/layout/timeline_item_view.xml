@@ -11,11 +11,8 @@
    	    android:id="@+id/tlineitem_calIcon"
    	    android:layout_width="60dp"
    	    android:layout_height="60dp"
-   	    android:layout_alignParentLeft="true"
    	    android:layout_alignParentStart="true"
-   	    android:layout_marginLeft="4dp"
    	    android:layout_marginStart="7dp"
-   	    android:layout_marginRight="2dp"
     	android:layout_marginEnd="2dp"
    	    android:background="@drawable/calendar_icon">
    	    
@@ -45,13 +42,10 @@
     
     <RelativeLayout
         android:layout_centerInParent="true"
-        android:layout_toRightOf="@+id/tlineitem_calIcon"
         android:layout_toEndOf="@+id/tlineitem_calIcon"
         android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:paddingLeft="8dp"
    	    android:paddingStart="8dp"
-   	    android:paddingRight="2dp"
     	android:paddingEnd="2dp">
      	
         <TextView
@@ -66,7 +60,6 @@
     	    android:id="@+id/tlineitem_location"
        		android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/tlineitem_locIcon"
     	    android:layout_toEndOf="@+id/tlineitem_locIcon"
     	    android:layout_alignBottom="@+id/tlineitem_locIcon"
 	        android:textSize="13sp"/>
@@ -87,13 +80,11 @@
    	    android:layout_height="wrap_content"
    	    android:layout_width="wrap_content"
    	    android:layout_centerVertical="true"
-   	    android:layout_alignParentRight="true"
    	    android:layout_alignParentEnd="true"
-   	    android:paddingRight="7dp"
    	    android:paddingEnd="7dp"
-   	    android:paddingLeft="2dp"
     	android:paddingStart="2dp"
    	    android:textSize="14sp"
-   	    android:textColor="@color/dm_blue_primary"/>
+   	    android:textColor="@color/dm_blue_primary"
+   	    android:gravity="center"/>
     
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.uf.dancemarathon;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,15 +12,14 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-
-import com.uf.dancemarathon.FontSetter.fontName;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.uf.dancemarathon.FontSetter.fontName;
 
 /**
  * @author Chris Whitten This class provides the image information to the mtk
@@ -57,20 +58,16 @@ public class MtkAdapter extends BaseAdapter {
 	}
 
 	public String loadJSONFromAsset() throws IOException {
-		String json = null;
+		String json = "";
 		try {
 
 			InputStream is = mContext.getAssets().open("data.json");
 
-			int size = is.available();
-
-			byte[] buffer = new byte[size];
-
-			is.read(buffer);
-
-			is.close();
-
-			json = new String(buffer, "UTF-8");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+			String line = "";
+			while((line = reader.readLine()) != null)
+				json += line;
+			
 
 		} catch (IOException ex) {
 			ex.printStackTrace();

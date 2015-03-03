@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -41,7 +42,7 @@ public class NotificationService extends Service {
 	 */
 	private int numActiveNotifications;
 	
-	private long currentTime;
+	private long currentTime; 
 	
 	//Set up receiver to receive TIME_TICK intents
 	private BroadcastReceiver receiver = new BroadcastReceiver(){
@@ -49,10 +50,11 @@ public class NotificationService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
-			//testNotification("In on receiver");
+			
 			//The time ticks every minute
 			if(intent.getAction().equals(Intent.ACTION_TIME_TICK))
 			{
+				//testNotification("Test");
 				//Update current time
 				currentTime = Calendar.getInstance().getTimeInMillis();
 				setupEventNotifications();
@@ -84,6 +86,7 @@ public class NotificationService extends Service {
 	
 	public void onDestroy()
 	{
+		super.onDestroy();
 		this.unregisterReceiver(receiver);
 	}
 	
@@ -156,6 +159,9 @@ public class NotificationService extends Service {
 	 */
 	private void createEventNotification(Event e, int proximity, int mId)
 	{
+		//Set vibration pattern
+		long[] pattern = {1, 1000};
+		
 		//Set the pending intent for when the user clicks the notification
 		PendingIntent pIntent = getMainPendingIntent();
 				
@@ -165,6 +171,7 @@ public class NotificationService extends Service {
 		        .setContentTitle("Event: " + e.getTitle())
 		        .setContentText("Happening in " + proximity + " minutes!")
 		        .setAutoCancel(true)
+		        .setVibrate(pattern)
 		        .setContentIntent(pIntent);
 			
 			NotificationManager mNotificationManager =
@@ -233,6 +240,9 @@ public class NotificationService extends Service {
 	 */
 	private void testNotification(String title)
 	{
+		//Set vibration pattern
+		long[] pattern = {1, 750, 500, 750};
+				
 		//Set the pending intent for when the user clicks the notification
 		PendingIntent pIntent = getMainPendingIntent();
 		
@@ -243,6 +253,7 @@ public class NotificationService extends Service {
 	        .setContentTitle(title)
 	        .setContentText("Hello World!")
 	        .setAutoCancel(true)
+	        .setVibrate(pattern)
 	        .setContentIntent(pIntent);
 		
 		NotificationManager mNotificationManager =
@@ -274,7 +285,7 @@ public class NotificationService extends Service {
 	//This method is a required override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 

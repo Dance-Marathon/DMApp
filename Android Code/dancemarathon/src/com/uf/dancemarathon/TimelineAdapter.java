@@ -2,8 +2,10 @@ package com.uf.dancemarathon;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
+
 
 
 import com.uf.dancemarathon.FontSetter.fontName;
@@ -103,16 +105,13 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         
         //Set title
         String titleText = e.getTitle();
-        title.setText(makeCondensedString(titleText, 25));
+        title.setText(makeCondensedString(titleText, 24));
         
         //Set location
         location.setText(makeCondensedString(e.getLocation(), 30));
         
-        //Set time
-        String displayFormat = "hh:mm aa";
-        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
-        String timeText = df.format(e.getStartDate());
-        time.setText(timeText);
+        //Set start time
+        setStartTimeString(time, e);
         
         //Set month
         String monthText = e.getMonthText(true);
@@ -146,6 +145,30 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 				newString+=" " + nextWord;
 		}
 		return newString.trim();
+	}
+	
+	private void setStartTimeString(TextView view, Event e)
+	{
+		//Check to see if the event is happening now
+		long startTime = e.getStartDate().getTime() ;
+		long endTime = e.getEndDate().getTime();
+		long currentTime = Calendar.getInstance(Locale.US).getTimeInMillis();
+		
+		//If happening now, set to in progress text
+		if(startTime < currentTime && endTime > currentTime)
+		{
+			String display = context.getResources().getString(R.string.event_in_progress);
+			view.setText(display);
+		}
+		//Else set to event start date
+		else
+		{
+			//Set time
+	        String displayFormat = "hh:mm aa";
+	        SimpleDateFormat df = new SimpleDateFormat(displayFormat, Locale.US);
+	        String timeText = df.format(e.getStartDate());
+	        view.setText(timeText);
+		}
 	}
 
 }
