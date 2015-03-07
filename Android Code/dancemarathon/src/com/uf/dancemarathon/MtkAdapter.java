@@ -29,6 +29,7 @@ public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kids> kids = new ArrayList<Kids>();
 
+
 	public MtkAdapter (Context c) {
 		mContext = c;
 		kids = ParseTheKids();
@@ -126,7 +127,7 @@ public class MtkAdapter extends BaseAdapter {
     private class ViewHolder {
         CircleView pic = new CircleView (mContext);
         TextView name = new TextView(mContext);
-
+        TextView link = new TextView(mContext);
     }
 	
 	@Override
@@ -144,6 +145,7 @@ public class MtkAdapter extends BaseAdapter {
 	        
 	        holder.name = (TextView) convertView.findViewById(R.id.grid_kid_name);
 	        holder.pic = (CircleView) convertView.findViewById(R.id.grid_kid_pic);
+	        holder.link = (TextView) convertView.findViewById(R.id.milestone);
 	        
 	 		convertView.setTag(holder);
 	    } 

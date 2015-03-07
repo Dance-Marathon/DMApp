@@ -13,15 +13,13 @@
     	android:layout_marginTop="@dimen/login_margin_top"
   		android:scaleType="fitCenter" />
     
-    <!-- Unused -->
     <TextView
-        android:id="@+id/kid_age"
+        android:id="@+id/milestone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:textColor="@color/black"/>
-    <!-- -->
+        android:textColor="@color/dm_orange_primary"
+        android:onClick="openLink" />
     
     <ScrollView
    		android:layout_width="fill_parent"

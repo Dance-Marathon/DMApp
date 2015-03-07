@@ -49,18 +49,10 @@ public class HomeFragment extends Fragment
 	private Context c;
 	private AnnouncementsLoader loader;
 	
-<<<<<<< HEAD
 	//Website Paths that will be used if config file read fails//
 	private String gameLink = "http://www.google.com";
 	private String websiteLink = "http://www.floridadm.org/";
 	private String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
-	
-	private int second_dm = 0;
-	private int minute_dm = 0;
-	private int hour_dm = 12;
-	private int day_dm = 14;
-	private int month_dm = 3;
-	private int year_dm = 2015;
 	
     private TextView text_days_h;
     private TextView text_days_t;
@@ -71,9 +63,7 @@ public class HomeFragment extends Fragment
     private TextView text_minutes_o;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
-	
-=======
->>>>>>> origin/chris
+    
 	public HomeFragment()
 	{
 		// Required empty public constructor
@@ -93,13 +83,10 @@ public class HomeFragment extends Fragment
 	{	
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
-
-<<<<<<< HEAD
+		
 		set_timer_DM(v);
 		
-=======
 		//Get textviews and set fonts
->>>>>>> origin/chris
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
 		TextView announcement_header = (TextView) v.findViewById(R.id.announcements_title);
 		TextView game_text = (TextView) v.findViewById(R.id.game);
@@ -272,17 +259,6 @@ public class HomeFragment extends Fragment
 		}
 			
 	}
-	
-	/**
-	 * Starts the given url
-	 * @param link The url
-	 */
-	public void openWebsite(String link)
-	{
-		Log.d("link", link);
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-		startActivity(intent);
-	}
 
 	//-----------------//
 	
@@ -383,42 +359,11 @@ public class HomeFragment extends Fragment
 			return announcements; 
 		}
 	}
-
-<<<<<<< HEAD
 	
 	/**
 	 * Called by the buttons to open browser webpages.
 	 * @param view The button which called this method
 	 */
-	public void openLink(View view)
-	{
-		//Try to get settings
-		try {
-			ConfigFileReader cReader = new ConfigFileReader(getActivity());
-			gameLink = cReader.getSetting("gamePath");
-			websiteLink = cReader.getSetting("websitePath");
-			donateLink = cReader.getSetting("donatePath");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//Open the links
-		int id = view.getId();
-		if(id == R.id.game)
-			openWebsite(gameLink);
-		else if(id == R.id.website)
-			openWebsite(websiteLink);
-		else if(id == R.id.donate)
-			openWebsite(donateLink);
-		else
-		{
-		}
-			
-	}
 	
 	public void openWebsite(String link)
 	{
@@ -431,9 +376,6 @@ public class HomeFragment extends Fragment
 	{	
 		
 		Time timerSet = new Time(Time.getCurrentTimezone());
-        timerSet.set(second_dm, minute_dm, hour_dm, day_dm, month_dm, year_dm); //day month year
-        timerSet.normalize(true);
-        long dmMillis = timerSet.toMillis(true);
         Date date = new Date();
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -452,7 +394,6 @@ public class HomeFragment extends Fragment
         long nowMillis = TimeNow.toMillis(true);
 
         long milliDiff = date.getTime() - Calendar.getInstance(Locale.US).getTimeInMillis(); 
-        // long milliDiff = dmMillis - nowMillis; //subtract current from future to set the time remaining
 
         text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
         text_days_t = (TextView) v.findViewById(R.id.days_tens);
@@ -476,11 +417,6 @@ public class HomeFragment extends Fragment
             	int hours = cal.get(Calendar.HOUR_OF_DAY);
             	int minutes = cal.get(Calendar.MINUTE);
             	int seconds = cal.get(Calendar.SECOND);
-                /* decompose difference into days, hours, minutes and seconds 
-                int days = (int) ((millisUntilFinished / 1000) / 86400);
-                int hours = (int) (((millisUntilFinished / 1000) - (days * 86400)) / 3600);
-                int minutes = (int) (((millisUntilFinished / 1000) - ((days * 86400) + (hours * 3600))) / 60);
-                int seconds = (int) ((millisUntilFinished / 1000) % 60);*/
 
                 // Filter time
                 int days_hundreds = days / 100;
@@ -525,6 +461,4 @@ public class HomeFragment extends Fragment
             }
         }.start();
 	}
-=======
->>>>>>> origin/chris
 }
