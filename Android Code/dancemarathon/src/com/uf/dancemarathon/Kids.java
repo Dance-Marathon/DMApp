@@ -14,13 +14,15 @@ public class Kids implements Parcelable
 	private int age;
 	private String story;
 	private String image_name;
+	private String youtube_id;
 	
-	public Kids(String name, int age, String story, String image_name) throws ParseException 
+	public Kids(String name, int age, String story, String image_name, String youtube_id) throws ParseException 
 	{
 		this.name = name;
 		this.age = age;
 		this.story = story;
 		this.image_name = image_name;
+		this.youtube_id = youtube_id;
 	}
 	
 	public Kids()
@@ -51,6 +53,7 @@ public class Kids implements Parcelable
 		dest.writeInt(this.age);
 		dest.writeString(this.story);
 		dest.writeString(this.image_name);
+		dest.writeString(this.youtube_id);
 	}
 	
 	private Kids(Parcel in)
@@ -59,6 +62,7 @@ public class Kids implements Parcelable
 		age = in.readInt();
 		story = in.readString();
 		image_name = in.readString();
+		youtube_id = in.readString();
 	}
 	
 
@@ -95,6 +99,11 @@ public class Kids implements Parcelable
 		return image_name;
 	}
 	
+	protected String getYoutube_id()
+	{
+		return youtube_id;
+	}
+	
 	protected void setName(String name)
 	{
 		this.name = name;
@@ -113,6 +122,11 @@ public class Kids implements Parcelable
 	protected void setImage_name(String image_name)
 	{
 		this.image_name = image_name;
+	}
+	
+	protected void setYoutube_id(String youtube_id)
+	{
+		this.youtube_id = youtube_id;
 	}
 	
 	public static Comparator<Kids> COMPARE_BY_NAME = new Comparator<Kids>() {

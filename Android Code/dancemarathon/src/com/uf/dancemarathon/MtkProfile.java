@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,39 +20,6 @@ import android.widget.TextView;
 public class MtkProfile extends ActionBarActivity
 {
 	Kids kid;
-	
-	// Array of kids who have Milestones on YouTube
-	private String [] milestone_name = {
-			"Ayden M.", "Anna Rose", 
-			"Nathan F.", "Geoffrey P.", 
-			"Kasey V.", "Alyssa Mu.", 
-			"Hyla M.", "Ava M.", 
-			"Tyler P.", "Tyler S.",
-			"Catriona C.", "Jessica",
-			"Alyssa Ma.", "Zander W.",
-			"Michael S.", "Miranda L.",
-			"Nick M."};
-	
-	// Milestone YouTube IDs
-	private String[] milestone = {
-		"Iz_TYdJE-fM", // Ayden
-		"HGpu_SIposk", // Anna Rose
-		"W2IOh6_uqD0", // Nathan F
-		"Ae5pgULMCyw", // Geoffrey
-		"pQ15zlnb2ts", // Kasey
-		"X4aY3Zd_Iuw", // Alyssa Mu
-		"YFdlEa-t7kw", // Hyla
-		"H937Bdls_VE", // Ava
-		"46J9JKLYRT0", // Tyler P.
-		"DjkiKfeeIRY", // Tyler S.
-		"QgdWh9dOcLI", // Catriona 
-		"-0BwBQk4ZW4", // Jessica
-		"zaeB-IZTCg8", // Alyssa Ma
-		"tN_nf45CRUQ", // Zander
-		"VBiZWCsOQuA", // Michael S
-		"GZReuPztjUg", // Miranda L.
-		"Lahp4X1t6kI" // Nick M.
-	};
 	
 	public MtkProfile()
 	{
@@ -78,7 +46,6 @@ public class MtkProfile extends ActionBarActivity
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
 		
-		
 	}
 	
 	public static MtkProfile newInstance()
@@ -96,14 +63,10 @@ public class MtkProfile extends ActionBarActivity
 		pic.setImageResource(kid.getImageId(this));
 		story.setText(kid.getStory());
 		
-		for (int index = 0; index < milestone.length; index++)
+		if (kid.getYoutube_id().length() > 5)
 		{
-			if (kid.getName().equals(milestone_name[index]))
-			{
-				mile.setText("View " + kid.getName() + "'s Milestone");
-				mile.setTag(milestone[index]);
-				break;
-			}
+			mile.setTag(kid.getYoutube_id());
+			mile.setText("View " + kid.getName() + "'s Milestone");
 		}
 		
 		FontSetter.setFont(this, FontSetter.fontName.AGBReg, story);

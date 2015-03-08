@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,39 @@ import com.uf.dancemarathon.FontSetter.fontName;
 public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kids> kids = new ArrayList<Kids>();
+	
+	// Array of kids who have Milestones on YouTube
+	private String [] milestone_name = {
+			"Ayden M.", "Anna Rose", 
+			"Nathan F.", "Geoffrey P.", 
+			"Kasey V.", "Alyssa Mu.", 
+			"Hyla M.", "Ava M.", 
+			"Tyler P.", "Tyler S.",
+			"Catriona C.", "Jessica",
+			"Alyssa Ma.", "Zander W.",
+			"Michael S.", "Miranda L.",
+			"Nick M."};
+	
+	// Milestone YouTube IDs
+	private String[] milestone = {
+		"Iz_TYdJE-fM", // Ayden
+		"HGpu_SIposk", // Anna Rose
+		"W2IOh6_uqD0", // Nathan F
+		"Ae5pgULMCyw", // Geoffrey
+		"pQ15zlnb2ts", // Kasey
+		"X4aY3Zd_Iuw", // Alyssa Mu
+		"YFdlEa-t7kw", // Hyla
+		"H937Bdls_VE", // Ava
+		"46J9JKLYRT0", // Tyler P.
+		"DjkiKfeeIRY", // Tyler S.
+		"QgdWh9dOcLI", // Catriona 
+		"-0BwBQk4ZW4", // Jessica
+		"zaeB-IZTCg8", // Alyssa Ma
+		"tN_nf45CRUQ", // Zander
+		"VBiZWCsOQuA", // Michael S
+		"GZReuPztjUg", // Miranda L.
+		"Lahp4X1t6kI" // Nick M.
+	};
 
 
 	public MtkAdapter (Context c) {
@@ -93,10 +127,20 @@ public class MtkAdapter extends BaseAdapter {
 				String name = data_arr.getJSONObject(i).getString("name");
 				int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
 						"ageYear"));
+				String youtube_id = "";
+				
+				for(int j = 0; j < milestone_name.length; j++)
+				{
+					if (name.equals(milestone_name[j]))
+					{
+						youtube_id = milestone[j];
+						break;
+					}
+				}
 
 				try
 				{
-					Kids k = new Kids(name, age, story, image_name);
+					Kids k = new Kids(name, age, story, image_name, youtube_id);
 					kids_read.add(k);
 				}
 				catch (ParseException e)
@@ -127,7 +171,6 @@ public class MtkAdapter extends BaseAdapter {
     private class ViewHolder {
         CircleView pic = new CircleView (mContext);
         TextView name = new TextView(mContext);
-        TextView link = new TextView(mContext);
     }
 	
 	@Override
@@ -145,7 +188,6 @@ public class MtkAdapter extends BaseAdapter {
 	        
 	        holder.name = (TextView) convertView.findViewById(R.id.grid_kid_name);
 	        holder.pic = (CircleView) convertView.findViewById(R.id.grid_kid_pic);
-	        holder.link = (TextView) convertView.findViewById(R.id.milestone);
 	        
 	 		convertView.setTag(holder);
 	    } 

@@ -380,7 +380,7 @@ public class HomeFragment extends Fragment
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
-			date = df.parse("2015-03-14 12:00:00");
+			date = df.parse("2015-03-14 14:00:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -413,18 +413,20 @@ public class HomeFragment extends Fragment
             	Calendar cal = Calendar.getInstance(Locale.US);
             	cal.setTimeInMillis(millisUntilFinished);
             	
-            	int days = cal.get(Calendar.DAY_OF_YEAR);
-            	int hours = cal.get(Calendar.HOUR_OF_DAY);
+            	int time_left = (int) millisUntilFinished / 1000;
+            	
+            	int days = time_left / 86400;
+            	int hours = (time_left - days * 86400) / 3600;
             	int minutes = cal.get(Calendar.MINUTE);
             	int seconds = cal.get(Calendar.SECOND);
-
+            	
                 // Filter time
                 int days_hundreds = days / 100;
                 int days_tens = (days - days_hundreds * 100) / 10;
                 int days_ones = (days - days_hundreds * 100 - days_tens * 10);
                 
                 int hours_tens = hours / 10;
-                int hours_ones = hours - hours / 10;
+                int hours_ones = hours - hours_tens * 10;
                 
                 int minutes_tens = minutes / 10;
                 int minutes_ones = minutes - minutes_tens * 10;
