@@ -374,8 +374,6 @@ public class HomeFragment extends Fragment
 
 	public void set_timer_DM(View v)
 	{	
-		
-		Time timerSet = new Time(Time.getCurrentTimezone());
         Date date = new Date();
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -386,12 +384,6 @@ public class HomeFragment extends Fragment
 			e.printStackTrace();
 		}
         
-        
-        
-        Time TimeNow = new Time(Time.getCurrentTimezone());
-        TimeNow.setToNow(); // set the date to Current Time
-        TimeNow.normalize(true);
-        long nowMillis = TimeNow.toMillis(true);
 
         long milliDiff = date.getTime() - Calendar.getInstance(Locale.US).getTimeInMillis(); 
 
@@ -437,15 +429,13 @@ public class HomeFragment extends Fragment
                 
                 text_days_h.setText(Integer.toString(days_hundreds));
                 text_days_t.setText(Integer.toString(days_tens));
-                text_days_o.setText(Integer.toString(days_ones) + " ");
+                text_days_o.setText(Integer.toString(days_ones));
                 text_hours_t.setText(Integer.toString(hours_tens));
-                text_hours_o.setText(Integer.toString(hours_ones) + " ");
+                text_hours_o.setText(Integer.toString(hours_ones));
                 text_minutes_t.setText(Integer.toString(minutes_tens));
-                text_minutes_o.setText(Integer.toString(minutes_ones) + " ");
+                text_minutes_o.setText(Integer.toString(minutes_ones));
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
-                
-                Log.d("Time",Integer.toString((int) ((millisUntilFinished / 1000))));
             }
             
             @Override

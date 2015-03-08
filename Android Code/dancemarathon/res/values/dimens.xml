@@ -37,6 +37,7 @@
 	<dimen name="homepage_button_textsize">16sp</dimen>
 	<dimen name="homepage_button_margin_top">40dp</dimen>
 	<dimen name="homepage_button_margin_arb">10dp</dimen>
+	<dimen name="countdown_size">16sp</dimen>
 	
 	<!-- Contact Us Dimensions -->
 	<dimen name="cu_textMargin">15dp</dimen>
