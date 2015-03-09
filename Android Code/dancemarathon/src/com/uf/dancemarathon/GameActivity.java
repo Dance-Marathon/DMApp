@@ -7,9 +7,10 @@ import org.json.JSONException;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -27,6 +28,14 @@ public class GameActivity extends ActionBarActivity {
 		
 		//Set webview
 		WebView gameView = (WebView) findViewById(R.id.game_view);
+		 // disable scroll on touch
+		  gameView.setOnTouchListener(new View.OnTouchListener() {
+		    @Override
+		    public boolean onTouch(View v, MotionEvent event) {
+		      return (event.getAction() == MotionEvent.ACTION_MOVE);
+		    }
+		  });
+
 		WebSettings settings = gameView.getSettings();
 		settings.setJavaScriptEnabled(true);
 		settings.setSupportMultipleWindows(true);
