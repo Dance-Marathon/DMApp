@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,16 @@ public class MtkProfile extends ActionBarActivity
 		
 		setFields(kid);
 		
+		final TextView mile = (TextView) findViewById(R.id.milestone);
+		mile.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				openLink((String)mile.getTag());
+				
+			}
+			
+		});
+		
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle(kid.getName());
@@ -45,6 +56,9 @@ public class MtkProfile extends ActionBarActivity
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
+		
+		//Set milestone onclick
+		
 		
 	}
 	
@@ -72,10 +86,10 @@ public class MtkProfile extends ActionBarActivity
 		FontSetter.setFont(this, FontSetter.fontName.AGBReg, story);
 	}
 	
-	public void openLink(View view)
+	public void openLink(String youtubeId)
 	{
-	    String id = (String) view.getTag();
-	    Intent intent = getOpenYouTubeIntent(this, id);
+	    //Log.d("tag", youtubeId);
+	    Intent intent = getOpenYouTubeIntent(this, youtubeId);
 	    startActivity(intent);
 	}
 	
