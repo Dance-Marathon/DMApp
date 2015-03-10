@@ -58,12 +58,18 @@ public class HomeFragment extends Fragment
     private TextView text_days_h;
     private TextView text_days_t;
     private TextView text_days_o;
+    private TextView text_colon_1;
     private TextView text_hours_t;
     private TextView text_hours_o;
+    private TextView text_colon_2;
     private TextView text_minutes_t;
     private TextView text_minutes_o;
+    private TextView text_colon_3;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
+    private VerticalTextView text_vert_1;
+    private VerticalTextView text_vert_2;
+    private VerticalTextView text_vert_3;
     
     
 	public HomeFragment()
@@ -79,45 +85,6 @@ public class HomeFragment extends Fragment
 		
 	}
 	
-	private ArrayList<ImageFrame> setupTextFrames(ArrayList<TextView> views, double imgHeight, double imgWidth)
-	{
-		ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
-		frames.add(new ImageFrame(83, 150, 121, 198, 720, 340));
-		frames.add(new ImageFrame(120, 139, 157, 192, 720, 340));
-		frames.add(new ImageFrame(159, 148, 192, 199, 720, 340));
-		frames.add(new ImageFrame(196, 142, 230, 194, 720, 340));
-		frames.add(new ImageFrame(232, 149, 263, 202, 720, 340));
-		frames.add(new ImageFrame(264, 153, 298, 202, 720, 340));
-		frames.add(new ImageFrame(300, 140, 334, 193, 720, 340));
-		frames.add(new ImageFrame(340, 150, 376, 200, 720, 340));
-		frames.add(new ImageFrame(375, 162, 408, 212, 720, 340));
-		//frames.add(new ImageFrame(411, 146 447, 200, 720, 340));
-		//frames.add(new ImageFrame(448, 149, 478, 201, 720, 340));
-		//frames.add(new ImageFrame(480, 154, 513, 211, 720, 340));
-		//frames.add(new ImageFrame(515, 155, 550, 212, 720, 340));
-		//frames.add(new ImageFrame(552, 156, 590, 211, 720, 340));
-		//frames.add(new ImageFrame(590, 155, 625, 207, 720, 340));
-		
-		for(int i = 0; i < frames.size(); i++)
-		{
-			TextView view = views.get(i);
-			ImageFrame f = frames.get(i);
-			
-			view.setX((float) f.getMinXCoord(imgWidth));
-			view.setY((float) f.getMinYCoord(imgHeight));
-			
-			view.setWidth((int) f.getWidth(imgWidth));
-			view.setHeight((int) f.getHeight(imgHeight));
-			
-		}
-		
-		
-		return frames;
-		
-		
-	}
-	
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -127,8 +94,7 @@ public class HomeFragment extends Fragment
 		
 		//Setup countdown
 		ImageView banner = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
-		ArrayList<TextView> timerViews = set_timer_DM(v);
-		setupTextFrames(timerViews, banner.getHeight(), banner.getWidth() );
+		set_timer_DM(v);
 		
 		//Get textviews and set fonts
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
@@ -416,14 +382,14 @@ public class HomeFragment extends Fragment
 		startActivity(intent);
 	}
 
-	public ArrayList<TextView> set_timer_DM(View v)
+	public void set_timer_DM(View v)
 	{	
 		ArrayList<TextView> views = new ArrayList<TextView>();
         Date date = new Date();
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
-			date = df.parse("2015-03-14 1:00:00");
+			date = df.parse("2015-03-14 12:02:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -437,12 +403,18 @@ public class HomeFragment extends Fragment
         text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
         text_days_t = (TextView) v.findViewById(R.id.days_tens);
         text_days_o = (TextView) v.findViewById(R.id.days_ones);
+        text_colon_1 = (TextView) v.findViewById(R.id.colon_1);
         text_hours_t = (TextView) v.findViewById(R.id.hours_tens);
         text_hours_o = (TextView) v.findViewById(R.id.hours_ones);
+        text_colon_2 = (TextView) v.findViewById(R.id.colon_2);
         text_minutes_t = (TextView) v.findViewById(R.id.minutes_tens);
         text_minutes_o = (TextView) v.findViewById(R.id.minutes_ones);
+        text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
+        text_vert_1 = (VerticalTextView) v.findViewById(R.id.vert_1);
+        text_vert_2 = (VerticalTextView) v.findViewById(R.id.vert_2);
+        text_vert_3 = (VerticalTextView) v.findViewById(R.id.vert_3);
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -477,12 +449,18 @@ public class HomeFragment extends Fragment
                 text_days_h.setText(Integer.toString(days_hundreds));
                 text_days_t.setText(Integer.toString(days_tens));
                 text_days_o.setText(Integer.toString(days_ones));
+                text_colon_1.setText(":");
                 text_hours_t.setText(Integer.toString(hours_tens));
                 text_hours_o.setText(Integer.toString(hours_ones));
+                text_colon_2.setText(":");
                 text_minutes_t.setText(Integer.toString(minutes_tens));
                 text_minutes_o.setText(Integer.toString(minutes_ones));
+                text_colon_3.setText(":");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
+                text_vert_1.setText("DM");
+                text_vert_2.setText("at");
+                text_vert_3.setText("UF");
             }
             
             @Override
@@ -491,26 +469,69 @@ public class HomeFragment extends Fragment
             	text_days_h.setText("S");
                 text_days_t.setText("T");
                 text_days_o.setText("A");
-                text_hours_t.setText("N");
-                text_hours_o.setText("D");
-                text_minutes_t.setText("↑");
-                text_minutes_o.setText("4");
-                text_seconds_t.setText("THE");
-                text_seconds_o.setText("KIDS!");
+                text_colon_1.setText("N");
+                text_hours_t.setText("D");
+                text_hours_o.setText("U");
+                text_colon_2.setText("P");
+                text_minutes_t.setText("F");
+                text_minutes_o.setText("O");
+                text_colon_3.setText("T");
+                text_seconds_t.setText("H");
+                text_seconds_o.setText("E");
+                text_vert_1.setText("KIDS");
+                text_vert_2.setText("!");
+                text_vert_3.setText("!");
             }
         }.start();
         
         views.add(text_days_h);
         views.add(text_days_t);
         views.add(text_days_o);
+        views.add(text_colon_1);
         views.add(text_hours_t);
         views.add(text_hours_o);
+        views.add(text_colon_2);
         views.add(text_minutes_t);
         views.add(text_minutes_o);
+        views.add(text_colon_3);
         views.add(text_seconds_t);
         views.add(text_seconds_o);
-        
-        return views;
-        
-	}
+        views.add(text_vert_1);
+        views.add(text_vert_2);
+        views.add(text_vert_3);
+            
+        ImageView banner = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
+        int imgWidth = banner.getWidth();
+        int imgHeight = banner.getHeight();
+		
+    		ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
+    		frames.add(new ImageFrame(83, 150, 121, 198, 720, 340));
+    		frames.add(new ImageFrame(120, 139, 157, 192, 720, 340));
+    		frames.add(new ImageFrame(159, 148, 192, 199, 720, 340));
+    		frames.add(new ImageFrame(196, 142, 230, 194, 720, 340));
+    		frames.add(new ImageFrame(232, 149, 263, 202, 720, 340));
+    		frames.add(new ImageFrame(264, 153, 298, 202, 720, 340));
+    		frames.add(new ImageFrame(300, 140, 334, 193, 720, 340));
+    		frames.add(new ImageFrame(340, 150, 376, 200, 720, 340));
+    		frames.add(new ImageFrame(375, 162, 408, 212, 720, 340));
+    		frames.add(new ImageFrame(411, 146, 447, 200, 720, 340));
+    		frames.add(new ImageFrame(448, 149, 478, 201, 720, 340));
+    		frames.add(new ImageFrame(480, 154, 513, 211, 720, 340));
+    		frames.add(new ImageFrame(515, 155, 550, 212, 720, 340));
+    		frames.add(new ImageFrame(552, 156, 590, 211, 720, 340));
+    		frames.add(new ImageFrame(590, 155, 625, 207, 720, 340));
+    		
+    		/*for(int i = 0; i < frames.size(); i++)
+    		{
+    			ImageFrame f = frames.get(i);
+    			
+    			views.get(i).setX((float) f.getMinXCoord(imgWidth));
+    			views.get(i).setY((float) f.getMinYCoord(imgHeight));
+    			
+    			views.get(i).setWidth((int) f.getWidth(imgWidth));
+    			views.get(i).setHeight((int) f.getHeight(imgHeight));
+    		}*/
+    		
+    			
+	}		
 }
