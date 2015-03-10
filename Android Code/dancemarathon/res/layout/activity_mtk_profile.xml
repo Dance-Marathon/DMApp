@@ -20,8 +20,7 @@
         android:layout_below="@+id/kid_pic"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
-        android:textColor="@color/dm_orange_primary"
-        android:onClick="openLink" />
+        android:textColor="@color/dm_orange_primary"/>
     
     <ScrollView
    		android:layout_width="fill_parent"
