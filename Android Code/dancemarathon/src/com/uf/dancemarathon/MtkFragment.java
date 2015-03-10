@@ -38,14 +38,14 @@ public class MtkFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View v, int position,
                     long id) 
             {
-            	if (((Kids) adapter.getItem(position)).getStory().length() > 10 || ((Kids) adapter.getItem(position)).getYoutube_id().length() > 2)
-            	{           	
+            	//if (((Kids) adapter.getItem(position)).getStory().length() > 10 || ((Kids) adapter.getItem(position)).getYoutube_id().length() > 2)
+            	//{           	
             		Intent intent = new Intent(getActivity(), MtkProfile.class);
             		Bundle b = new Bundle();
             		b.putParcelable("kid", (Kids)adapter.getItem(position));
             		intent.putExtras(b);
             		startActivity(intent);
-            	}
+            	//}
             }
 	    });
 	    

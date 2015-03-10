@@ -378,12 +378,14 @@ public class HomeFragment extends Fragment
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
-			date = df.parse("2015-03-14 14:00:00");
+			date = df.parse("2015-03-14 1:00:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
+        // Stand up 12:02 p.m. 3/14/15
+        // Sit down 2:14 p.m. 3/15/15
 
         long milliDiff = date.getTime() - Calendar.getInstance(Locale.US).getTimeInMillis(); 
 

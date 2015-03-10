@@ -17,8 +17,9 @@
 	<dimen name="login_margin_bottom">20dp</dimen>
 	
 	<!-- MTK Fragment -->
-	<dimen name="kidimage_height">64dp</dimen>
-	<dimen name="kidimage_width">64dp</dimen>
+	<dimen name="kidimage_height">80dp</dimen>
+	<dimen name="kidimage_width">80dp</dimen>
+	<dimen name="mtk_text">14sp</dimen>
 	
 	<!-- Homepage Dimensions -->
 	<dimen name="heading_pic_height">200dp</dimen>

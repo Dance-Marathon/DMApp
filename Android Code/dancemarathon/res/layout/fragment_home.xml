@@ -163,6 +163,72 @@
         android:layout_marginLeft="7dp"
         android:layout_toRightOf="@+id/seconds_tens" />
     
+    <TextView 
+        android:id="@+id/d_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Green"
+        android:textStyle="bold"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/seconds_ones" />
+    
+    <TextView 
+        android:id="@+id/m_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/seconds_ones" />
+    
+    <TextView 
+        android:id="@+id/a_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/d_letter" />
+    
+    <TextView 
+        android:id="@+id/t_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/m_letter" />
+    
+    <TextView 
+        android:id="@+id/u_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/a_letter" />
+    
+    <TextView 
+        android:id="@+id/f_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/t_letter" />
+    
     <!-- Header Text -->
     <TextView
         android:id="@+id/header_text"
