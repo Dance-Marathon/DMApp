@@ -529,7 +529,7 @@ public class HomeFragment extends Fragment
     	
 		
 		
-		for(int i = 0; i < frames.size(); i++)
+		/*for(int i = 0; i < frames.size(); i++)
 		{
 			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) views.get(i).getLayoutParams();
 			params.setMargins(0, 0, 10, 0); //substitute parameters for left, top, right, bottom
@@ -541,6 +541,6 @@ public class HomeFragment extends Fragment
 			
 			views.get(i).setWidth((int) f.getWidth(imgWidth));
 			views.get(i).setHeight((int) f.getHeight(imgHeight));
-		}	
+		}*/	
 	}		
 }
