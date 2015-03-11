@@ -12,7 +12,9 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ import com.uf.dancemarathon.FontSetter.fontName;
 public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kids> kids = new ArrayList<Kids>();
+	public KidsLoader loader;
 	
 	// Array of kids who have Milestones on YouTube
 	private String [] milestone_name = {
@@ -66,7 +69,8 @@ public class MtkAdapter extends BaseAdapter {
 
 	public MtkAdapter (Context c) {
 		mContext = c;
-		kids = ParseTheKids();
+		loader= new KidsLoader();
+		loader.execute();
 	}
 
 	@Override
@@ -113,15 +117,14 @@ public class MtkAdapter extends BaseAdapter {
 
 	}
 
-	private ArrayList<Kids> ParseTheKids() {
-		
-		ArrayList<Kids> kids_read = new ArrayList<Kids>();
+	private void ParseTheKids() {
 		
 		try {
 			JSONArray data_arr = new JSONArray(loadJSONFromAsset());
 
 			for (int i = 0; i < data_arr.length(); i++) 
 			{
+				Thread.sleep(30);
 				String image_name = data_arr.getJSONObject(i)
 						.getString("image");
 				String story = data_arr.getJSONObject(i).getString("story");
@@ -147,7 +150,20 @@ public class MtkAdapter extends BaseAdapter {
 				try
 				{
 					Kids k = new Kids(name, age, story, image_name, youtube_id);
-					kids_read.add(k);
+					kids.add(k);
+					// Alphabetizes arraylist by name if wanted
+					//Collections.sort(kids, Kids.COMPARE_BY_NAME);
+					
+					
+					((Activity) mContext).runOnUiThread(new Runnable(){
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							MtkAdapter.this.notifyDataSetChanged();
+						}
+						
+					});
 				}
 				catch (ParseException e)
 				{
@@ -155,16 +171,17 @@ public class MtkAdapter extends BaseAdapter {
 				}
 			}
 		
-			// Alphabetizes arraylist by name if wanted
-			Collections.sort(kids_read, Kids.COMPARE_BY_NAME);
+			
 			
 		} catch (IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		} catch (JSONException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		
-		return kids_read;
 	}
 	
 	public Kids getKid(int position)
@@ -218,4 +235,24 @@ public class MtkAdapter extends BaseAdapter {
 
 	    return convertView;
 	}
+	
+	
+	private class KidsLoader extends AsyncTask<Void, Void, Void>
+	 {
+		@Override
+		protected Void doInBackground(Void... params) {
+			ParseTheKids();
+			return null;
+		}
+
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(Void result) {
+			
+			
+		}
+		
+	 }
 }
