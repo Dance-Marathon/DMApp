@@ -108,6 +108,7 @@ public class MtkAdapter extends BaseAdapter {
 			ex.printStackTrace();
 			return null;
 		}
+		
 		return json;
 
 	}
