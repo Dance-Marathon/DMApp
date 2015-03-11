@@ -23,7 +23,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,7 +94,6 @@ public class HomeFragment extends Fragment
 		
 		//Setup countdown
 		ImageView banner = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
-		set_timer_DM(v);
 		
 		//Get textviews and set fonts
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
@@ -134,6 +133,13 @@ public class HomeFragment extends Fragment
 		}
 		
 		return v;
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		set_timer_DM(getView());
 	}
 	
 	public void onStop()
@@ -504,34 +510,37 @@ public class HomeFragment extends Fragment
         int imgWidth = banner.getWidth();
         int imgHeight = banner.getHeight();
 		
-    		ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
-    		frames.add(new ImageFrame(83, 150, 121, 198, 720, 340));
-    		frames.add(new ImageFrame(120, 139, 157, 192, 720, 340));
-    		frames.add(new ImageFrame(159, 148, 192, 199, 720, 340));
-    		frames.add(new ImageFrame(196, 142, 230, 194, 720, 340));
-    		frames.add(new ImageFrame(232, 149, 263, 202, 720, 340));
-    		frames.add(new ImageFrame(264, 153, 298, 202, 720, 340));
-    		frames.add(new ImageFrame(300, 140, 334, 193, 720, 340));
-    		frames.add(new ImageFrame(340, 150, 376, 200, 720, 340));
-    		frames.add(new ImageFrame(375, 162, 408, 212, 720, 340));
-    		frames.add(new ImageFrame(411, 146, 447, 200, 720, 340));
-    		frames.add(new ImageFrame(448, 149, 478, 201, 720, 340));
-    		frames.add(new ImageFrame(480, 154, 513, 211, 720, 340));
-    		frames.add(new ImageFrame(515, 155, 550, 212, 720, 340));
-    		frames.add(new ImageFrame(552, 156, 590, 211, 720, 340));
-    		frames.add(new ImageFrame(590, 155, 625, 207, 720, 340));
-    		
-    		/*for(int i = 0; i < frames.size(); i++)
-    		{
-    			ImageFrame f = frames.get(i);
-    			
-    			views.get(i).setX((float) f.getMinXCoord(imgWidth));
-    			views.get(i).setY((float) f.getMinYCoord(imgHeight));
-    			
-    			views.get(i).setWidth((int) f.getWidth(imgWidth));
-    			views.get(i).setHeight((int) f.getHeight(imgHeight));
-    		}*/
-    		
-    			
+		ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
+		frames.add(new ImageFrame(83, 150, 121, 198, 720, 340));
+		frames.add(new ImageFrame(120, 139, 157, 192, 720, 340));
+		frames.add(new ImageFrame(159, 148, 192, 199, 720, 340));
+		frames.add(new ImageFrame(196, 142, 230, 194, 720, 340));
+		frames.add(new ImageFrame(232, 149, 263, 202, 720, 340));
+		frames.add(new ImageFrame(264, 153, 298, 202, 720, 340));
+		frames.add(new ImageFrame(300, 140, 334, 193, 720, 340));
+		frames.add(new ImageFrame(340, 150, 376, 200, 720, 340));
+		frames.add(new ImageFrame(375, 162, 408, 212, 720, 340));
+		frames.add(new ImageFrame(411, 146, 447, 200, 720, 340));
+		frames.add(new ImageFrame(448, 149, 478, 201, 720, 340));
+		frames.add(new ImageFrame(480, 154, 513, 211, 720, 340));
+		frames.add(new ImageFrame(515, 155, 550, 212, 720, 340));
+		frames.add(new ImageFrame(552, 156, 590, 211, 720, 340));
+		frames.add(new ImageFrame(590, 155, 625, 207, 720, 340));
+    	
+		
+		
+		for(int i = 0; i < frames.size(); i++)
+		{
+			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) views.get(i).getLayoutParams();
+			params.setMargins(0, 0, 10, 0); //substitute parameters for left, top, right, bottom
+			
+			ImageFrame f = frames.get(i);
+			
+			views.get(i).setX((float) f.getMinXCoord(imgWidth));
+			views.get(i).setY((float) f.getMinYCoord(imgHeight));
+			
+			views.get(i).setWidth((int) f.getWidth(imgWidth));
+			views.get(i).setHeight((int) f.getHeight(imgHeight));
+		}	
 	}		
 }
