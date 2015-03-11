@@ -160,18 +160,18 @@
         android:layout_marginLeft="7dp"
         android:layout_toRightOf="@+id/seconds_tens" />
     
-    <VerticalTextView 
+    <TextView 
         android:id="@+id/vert_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:textColor="@color/Green"
+        android:textColor="@color/Black"
         android:textStyle="bold"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="7dp"
         android:layout_toRightOf="@+id/seconds_ones" />
     
-    <VerticalTextView 
+    <TextView 
         android:id="@+id/vert_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
         android:layout_marginLeft="7dp"
         android:layout_toRightOf="@+id/vert_1" />
     
-    <VerticalTextView 
+    <TextView 
         android:id="@+id/vert_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

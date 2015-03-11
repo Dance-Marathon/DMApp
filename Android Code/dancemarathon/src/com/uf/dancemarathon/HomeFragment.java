@@ -18,12 +18,14 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,9 +69,9 @@ public class HomeFragment extends Fragment
     private TextView text_colon_3;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
-    private VerticalTextView text_vert_1;
-    private VerticalTextView text_vert_2;
-    private VerticalTextView text_vert_3;
+    private TextView text_vert_1;
+    private TextView text_vert_2;
+    private TextView text_vert_3;
     
     
 	public HomeFragment()
@@ -418,9 +420,9 @@ public class HomeFragment extends Fragment
         text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
-        text_vert_1 = (VerticalTextView) v.findViewById(R.id.vert_1);
-        text_vert_2 = (VerticalTextView) v.findViewById(R.id.vert_2);
-        text_vert_3 = (VerticalTextView) v.findViewById(R.id.vert_3);
+        text_vert_1 = (TextView) v.findViewById(R.id.vert_1);
+        text_vert_2 = (TextView) v.findViewById(R.id.vert_2);
+        text_vert_3 = (TextView) v.findViewById(R.id.vert_3);
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -464,9 +466,9 @@ public class HomeFragment extends Fragment
                 text_colon_3.setText(":");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
-                text_vert_1.setText("DM");
-                text_vert_2.setText("at");
-                text_vert_3.setText("UF");
+                text_vert_1.setText("D\nM");
+                text_vert_2.setText("a\nt");
+                text_vert_3.setText("U\nF");
             }
             
             @Override
@@ -484,7 +486,7 @@ public class HomeFragment extends Fragment
                 text_colon_3.setText("T");
                 text_seconds_t.setText("H");
                 text_seconds_o.setText("E");
-                text_vert_1.setText("KIDS");
+                text_vert_1.setText("K\nI\nD\nS");
                 text_vert_2.setText("!");
                 text_vert_3.setText("!");
             }
@@ -504,43 +506,41 @@ public class HomeFragment extends Fragment
         views.add(text_seconds_o);
         views.add(text_vert_1);
         views.add(text_vert_2);
-        views.add(text_vert_3);
-            
-        ImageView banner = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
-        int imgWidth = banner.getWidth();
-        int imgHeight = banner.getHeight();
+        views.add(text_vert_3);   
 		
-		ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
-		frames.add(new ImageFrame(83, 150, 121, 198, 720, 340));
-		frames.add(new ImageFrame(120, 139, 157, 192, 720, 340));
-		frames.add(new ImageFrame(159, 148, 192, 199, 720, 340));
-		frames.add(new ImageFrame(196, 142, 230, 194, 720, 340));
-		frames.add(new ImageFrame(232, 149, 263, 202, 720, 340));
-		frames.add(new ImageFrame(264, 153, 298, 202, 720, 340));
-		frames.add(new ImageFrame(300, 140, 334, 193, 720, 340));
-		frames.add(new ImageFrame(340, 150, 376, 200, 720, 340));
-		frames.add(new ImageFrame(375, 162, 408, 212, 720, 340));
-		frames.add(new ImageFrame(411, 146, 447, 200, 720, 340));
-		frames.add(new ImageFrame(448, 149, 478, 201, 720, 340));
-		frames.add(new ImageFrame(480, 154, 513, 211, 720, 340));
-		frames.add(new ImageFrame(515, 155, 550, 212, 720, 340));
-		frames.add(new ImageFrame(552, 156, 590, 211, 720, 340));
-		frames.add(new ImageFrame(590, 155, 625, 207, 720, 340));
-    	
+		ArrayList<double[]> margins = new ArrayList<double[]>();
+		margins.add(new double[]{39,65,0,0});
+		margins.add(new double[]{9,62,0,0});
+		margins.add(new double[]{7,65,0,0});
+		margins.add(new double[]{8,62,0,0});
+		margins.add(new double[]{9,66,0,0});
+		margins.add(new double[]{5,67,0,0});
+		margins.add(new double[]{9,61,0,0});
+		margins.add(new double[]{10,66,0,0});
+		margins.add(new double[]{6,71,0,0});
+		margins.add(new double[]{9,64,0,0});
+		margins.add(new double[]{7,65,0,0});
+		margins.add(new double[]{7,70,0,0});
+		margins.add(new double[]{7,70,0,0});
+		margins.add(new double[]{7,70,0,0});
+		margins.add(new double[]{7,70,0,0});
+
+		double emulator_width = 480;
+		double emulator_height = 800;
 		
+		Display mdisp = getActivity().getWindowManager().getDefaultDisplay();
+		Point mdispSize = new Point();
+		mdisp.getSize(mdispSize);
+		int maxX = mdispSize.x; 
+		int maxY = mdispSize.y;
 		
-		/*for(int i = 0; i < frames.size(); i++)
+		for(int i = 0; i < margins.size(); i++)
 		{
 			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) views.get(i).getLayoutParams();
-			params.setMargins(0, 0, 10, 0); //substitute parameters for left, top, right, bottom
 			
-			ImageFrame f = frames.get(i);
-			
-			views.get(i).setX((float) f.getMinXCoord(imgWidth));
-			views.get(i).setY((float) f.getMinYCoord(imgHeight));
-			
-			views.get(i).setWidth((int) f.getWidth(imgWidth));
-			views.get(i).setHeight((int) f.getHeight(imgHeight));
-		}*/	
+			double margin_left_ratio = margins.get(i)[0] / emulator_width;
+			double margin_top_ratio = margins.get(i)[1] / emulator_height;
+			params.setMargins((int) (margin_left_ratio * maxX), (int) (margin_top_ratio * maxY) , 0, 0); //substitute parameters for left, top, right, bottom
+		}	
 	}		
 }
