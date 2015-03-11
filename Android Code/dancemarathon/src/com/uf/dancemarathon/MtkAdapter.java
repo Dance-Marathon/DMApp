@@ -117,72 +117,6 @@ public class MtkAdapter extends BaseAdapter {
 
 	}
 
-	private void ParseTheKids() {
-		
-		try {
-			JSONArray data_arr = new JSONArray(loadJSONFromAsset());
-
-			for (int i = 0; i < data_arr.length(); i++) 
-			{
-				Thread.sleep(30);
-				String image_name = data_arr.getJSONObject(i)
-						.getString("image");
-				String story = data_arr.getJSONObject(i).getString("story");
-				String name = data_arr.getJSONObject(i).getString("name");
-				int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
-						"ageYear"));
-				String youtube_id = "";
-				
-				for(int j = 0; j < milestone_name.length; j++)
-				{
-					if (name.equals(milestone_name[j]))
-					{
-						youtube_id = milestone[j];
-						break;
-					}
-				}
-				
-				if (story.length() < 5)
-				{
-					story = "No story available.";
-				}
-
-				try
-				{
-					Kids k = new Kids(name, age, story, image_name, youtube_id);
-					kids.add(k);
-					// Alphabetizes arraylist by name if wanted
-					//Collections.sort(kids, Kids.COMPARE_BY_NAME);
-					
-					
-					((Activity) mContext).runOnUiThread(new Runnable(){
-
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							MtkAdapter.this.notifyDataSetChanged();
-						}
-						
-					});
-				}
-				catch (ParseException e)
-				{
-					e.printStackTrace();
-				}
-			}
-		
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-	}
 	
 	public Kids getKid(int position)
 	{
@@ -249,8 +183,82 @@ public class MtkAdapter extends BaseAdapter {
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 		 */
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(Void result) {	
 			
+		}
+		
+		private void ParseTheKids() {
+			
+			ArrayList<Kids> loadedKids = new ArrayList<Kids>();
+			try {
+				JSONArray data_arr = new JSONArray(loadJSONFromAsset());
+
+				for (int i = 0; i < data_arr.length(); i++) 
+				{
+					String image_name = data_arr.getJSONObject(i)
+							.getString("image");
+					String story = data_arr.getJSONObject(i).getString("story");
+					String name = data_arr.getJSONObject(i).getString("name");
+					int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
+							"ageYear"));
+					String youtube_id = "";
+					
+					for(int j = 0; j < milestone_name.length; j++)
+					{
+						if (name.equals(milestone_name[j]))
+						{
+							youtube_id = milestone[j];
+							break;
+						}
+					}
+					
+					if (story.length() < 5)
+					{
+						story = "No story available.";
+					}
+
+					
+					Kids k = new Kids(name, age, story, image_name, youtube_id);
+					loadedKids.add(k);
+					
+					
+				}
+				
+				// Alphabetizes arraylist by name 
+				Collections.sort(loadedKids, Kids.COMPARE_BY_NAME);
+				
+			
+				for(int i=0; i < loadedKids.size(); i++)
+				{
+					Thread.sleep(50);
+					kids.add(loadedKids.get(i));
+					
+					((Activity) mContext).runOnUiThread(new Runnable(){
+	
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							MtkAdapter.this.notifyDataSetChanged();
+						}
+						
+					});		
+				}
+				
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			} 
+			catch (JSONException e) {
+				e.printStackTrace();
+			} 
+			catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			catch (ParseException e)
+			{
+				e.printStackTrace();
+			}
 			
 		}
 		
