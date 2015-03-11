@@ -60,7 +60,6 @@
         android:textSize="@dimen/countdown_size"
         android:textColor="@color/Black"
         android:textStyle="bold"
-        android:text="@string/colon"
         android:layout_marginTop="62dp"
         android:layout_marginLeft="8dp"
         android:layout_toRightOf="@+id/days_ones" />
@@ -97,7 +96,6 @@
         android:textSize="@dimen/countdown_size"
         android:textColor="@color/Black"
         android:textStyle="bold"
-        android:text="@string/colon"
         android:layout_marginTop="61dp"
         android:layout_marginLeft="9dp"
         android:layout_toRightOf="@+id/hours_ones" />
@@ -134,7 +132,6 @@
         android:textSize="@dimen/countdown_size"
         android:textColor="@color/Black"
         android:textStyle="bold"
-        android:text="@string/colon"
         android:layout_marginTop="64dp"
         android:layout_marginLeft="9dp"
         android:layout_toRightOf="@+id/minutes_ones" />
@@ -149,7 +146,7 @@
         android:textStyle="bold"
         android:layout_marginTop="65dp"
         android:layout_marginLeft="7dp"
-        android:layout_toRightOf="@+id/colon_3" />
+        android:layout_toRightOf="@+id/colon_3"/>
     
     <!-- (136, 70) -->
     <TextView
@@ -162,6 +159,39 @@
         android:layout_marginTop="70dp"
         android:layout_marginLeft="7dp"
         android:layout_toRightOf="@+id/seconds_tens" />
+    
+    <TextView 
+        android:id="@+id/vert_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Green"
+        android:textStyle="bold"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/seconds_ones" />
+    
+    <TextView 
+        android:id="@+id/vert_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/vert_1" />
+    
+    <TextView 
+        android:id="@+id/vert_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/vert_2" />
     
     <!-- Header Text -->
     <TextView

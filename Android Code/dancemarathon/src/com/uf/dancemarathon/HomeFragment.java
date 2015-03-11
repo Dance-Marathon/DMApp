@@ -23,7 +23,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +31,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,12 +57,18 @@ public class HomeFragment extends Fragment
     private TextView text_days_h;
     private TextView text_days_t;
     private TextView text_days_o;
+    private TextView text_colon_1;
     private TextView text_hours_t;
     private TextView text_hours_o;
+    private TextView text_colon_2;
     private TextView text_minutes_t;
     private TextView text_minutes_o;
+    private TextView text_colon_3;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
+    private TextView text_vert_1;
+    private TextView text_vert_2;
+    private TextView text_vert_3;
     
 	public HomeFragment()
 	{
@@ -75,7 +81,6 @@ public class HomeFragment extends Fragment
 		f.c = c;
 		return f;
 	}
-	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -124,6 +129,13 @@ public class HomeFragment extends Fragment
 		}
 		
 		return v;
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		set_timer_DM(getView());
 	}
 	
 	public void onStop()
@@ -378,24 +390,32 @@ public class HomeFragment extends Fragment
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
-			date = df.parse("2015-03-14 14:00:00");
+			date = df.parse("2015-03-14 12:02:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
+        // Stand up 12:02 p.m. 3/14/15
+        // Sit down 2:14 p.m. 3/15/15
 
         long milliDiff = date.getTime() - Calendar.getInstance(Locale.US).getTimeInMillis(); 
 
         text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
         text_days_t = (TextView) v.findViewById(R.id.days_tens);
         text_days_o = (TextView) v.findViewById(R.id.days_ones);
+        text_colon_1 = (TextView) v.findViewById(R.id.colon_1);
         text_hours_t = (TextView) v.findViewById(R.id.hours_tens);
         text_hours_o = (TextView) v.findViewById(R.id.hours_ones);
+        text_colon_2 = (TextView) v.findViewById(R.id.colon_2);
         text_minutes_t = (TextView) v.findViewById(R.id.minutes_tens);
         text_minutes_o = (TextView) v.findViewById(R.id.minutes_ones);
+        text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
+        text_vert_1 = (TextView) v.findViewById(R.id.vert_1);
+        text_vert_2 = (TextView) v.findViewById(R.id.vert_2);
+        text_vert_3 = (TextView) v.findViewById(R.id.vert_3);
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -430,12 +450,18 @@ public class HomeFragment extends Fragment
                 text_days_h.setText(Integer.toString(days_hundreds));
                 text_days_t.setText(Integer.toString(days_tens));
                 text_days_o.setText(Integer.toString(days_ones));
+                text_colon_1.setText(":");
                 text_hours_t.setText(Integer.toString(hours_tens));
                 text_hours_o.setText(Integer.toString(hours_ones));
+                text_colon_2.setText(":");
                 text_minutes_t.setText(Integer.toString(minutes_tens));
                 text_minutes_o.setText(Integer.toString(minutes_ones));
+                text_colon_3.setText(":");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
+                text_vert_1.setText("D\nM");
+                text_vert_2.setText("a\nt");
+                text_vert_3.setText("U\nF");
             }
             
             @Override
@@ -444,12 +470,18 @@ public class HomeFragment extends Fragment
             	text_days_h.setText("S");
                 text_days_t.setText("T");
                 text_days_o.setText("A");
-                text_hours_t.setText("N");
-                text_hours_o.setText("D");
-                text_minutes_t.setText("↑");
-                text_minutes_o.setText("4");
-                text_seconds_t.setText("THE");
-                text_seconds_o.setText("KIDS!");
+                text_colon_1.setText("N");
+                text_hours_t.setText("D");
+                text_hours_o.setText("U");
+                text_colon_2.setText("P");
+                text_minutes_t.setText("F");
+                text_minutes_o.setText("O");
+                text_colon_3.setText("T");
+                text_seconds_t.setText("H");
+                text_seconds_o.setText("E");
+                text_vert_1.setText("KIDS");
+                text_vert_2.setText("!");
+                text_vert_3.setText("!");
             }
         }.start();
 	}

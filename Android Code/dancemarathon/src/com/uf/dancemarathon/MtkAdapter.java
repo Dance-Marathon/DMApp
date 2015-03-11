@@ -138,6 +138,11 @@ public class MtkAdapter extends BaseAdapter {
 						break;
 					}
 				}
+				
+				if (story.length() < 5)
+				{
+					story = "No story available.";
+				}
 
 				try
 				{
@@ -146,8 +151,7 @@ public class MtkAdapter extends BaseAdapter {
 				}
 				catch (ParseException e)
 				{
-					// Must remove this before release
-					//Log.d("Event Parsing", "Failed to parse event" + name);
+					e.printStackTrace();
 				}
 			}
 		

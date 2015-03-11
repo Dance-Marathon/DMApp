@@ -42,15 +42,13 @@ public class MtkFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View v, int position,
                     long id) 
             {
-            	if (((Kids) parent.getItemAtPosition(position)).getStory().length() > 10 || ((Kids) parent.getItemAtPosition(position)).getYoutube_id().length() > 2)
-            	{           	
-            		Intent intent = new Intent(getActivity(), MtkProfile.class);
-            		Bundle b = new Bundle();
-            		b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
-            		intent.putExtras(b);
-            		startActivity(intent);
-            	}
-            }
+
+        		Intent intent = new Intent(getActivity(), MtkProfile.class);
+        		Bundle b = new Bundle();
+        		b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
+        		intent.putExtras(b);
+        		startActivity(intent);
+        }
 	    });
 		// Inflate the layout for this fragment
 		return v;
