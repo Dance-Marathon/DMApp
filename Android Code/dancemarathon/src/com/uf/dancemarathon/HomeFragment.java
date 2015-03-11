@@ -18,14 +18,12 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +53,8 @@ public class HomeFragment extends Fragment
 	private String gameLink = "http://www.google.com";
 	private String websiteLink = "http://www.floridadm.org/";
 	private String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
-	
+
+	// TextViews to be used in the countdown
     private TextView text_days_h;
     private TextView text_days_t;
     private TextView text_days_o;
@@ -69,9 +67,6 @@ public class HomeFragment extends Fragment
     private TextView text_colon_3;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
-    private TextView text_vert_1;
-    private TextView text_vert_2;
-    private TextView text_vert_3;
     
     
 	public HomeFragment()
@@ -84,7 +79,6 @@ public class HomeFragment extends Fragment
 		HomeFragment f = new HomeFragment();
 		f.c = c;
 		return f;
-		
 	}
 	
 	@Override
@@ -93,9 +87,6 @@ public class HomeFragment extends Fragment
 	{	
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
-		
-		//Setup countdown
-		ImageView banner = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
 		
 		//Get textviews and set fonts
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
@@ -109,8 +100,6 @@ public class HomeFragment extends Fragment
 		
 		//Set button listeners
 		setButtonListeners(v);
-		
-		
 		
 		//Try to read data from cache
 		 Object o = CacheManager.readObjectFromCacheFile(c , "announcements");
@@ -138,7 +127,8 @@ public class HomeFragment extends Fragment
 	}
 	
 	@Override
-	public void onResume() {
+	public void onResume()
+	{
 		// TODO Auto-generated method stub
 		super.onResume();
 		set_timer_DM(getView());
@@ -215,7 +205,8 @@ public class HomeFragment extends Fragment
 		donateButton.setOnClickListener(new OnClickListener(){
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				// TODO Auto-generated method stub
 				sendButtonHit(donateButton);
 				openLink(donateButton);
@@ -244,12 +235,7 @@ public class HomeFragment extends Fragment
 	 * @param view The button which called this method
 	 */
 	public void openLink(View view)
-	{
-		//Website Paths that will be used if config file read fails//
-		String gameLink = "http://www.google.com";
-		String websiteLink = "http://www.floridadm.org/";
-		String donateLink = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
-		
+	{	
 		//Try to get settings
 		try {
 			ConfigFileReader cReader = new ConfigFileReader(getActivity());
@@ -390,9 +376,8 @@ public class HomeFragment extends Fragment
 		startActivity(intent);
 	}
 
-	public void set_timer_DM(View v)
+	public void set_timer_DM(final View v)
 	{	
-		ArrayList<TextView> views = new ArrayList<TextView>();
         Date date = new Date();
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -420,9 +405,6 @@ public class HomeFragment extends Fragment
         text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
-        text_vert_1 = (TextView) v.findViewById(R.id.vert_1);
-        text_vert_2 = (TextView) v.findViewById(R.id.vert_2);
-        text_vert_3 = (TextView) v.findViewById(R.id.vert_3);
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -466,81 +448,106 @@ public class HomeFragment extends Fragment
                 text_colon_3.setText(":");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
-                text_vert_1.setText("D\nM");
-                text_vert_2.setText("a\nt");
-                text_vert_3.setText("U\nF");
+            }
+            
+            @Override
+            public void onFinish()
+            {
+            	set_timer_stand(v);
+            }
+        }.start();
+	}
+	
+	public void set_timer_stand(View v)
+	{	
+        Date date_start = new Date();
+		Date date_end = new Date();
+        
+        SimpleDateFormat df_start = new SimpleDateFormat("yyy-MM-dd HH:nn:ss", Locale.US);
+        SimpleDateFormat df_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+        try {
+			date_start = df_start.parse("2015-03-14 12:02:00");
+        	date_end = df_end.parse("2015-03-15 2:14:00");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        long milliDiff = date_end.getTime() - date_start.getTime(); 
+
+        text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
+        text_days_t = (TextView) v.findViewById(R.id.days_tens);
+        text_days_o = (TextView) v.findViewById(R.id.days_ones);
+        text_colon_1 = (TextView) v.findViewById(R.id.colon_1);
+        text_hours_t = (TextView) v.findViewById(R.id.hours_tens);
+        text_hours_o = (TextView) v.findViewById(R.id.hours_ones);
+        text_colon_2 = (TextView) v.findViewById(R.id.colon_2);
+        text_minutes_t = (TextView) v.findViewById(R.id.minutes_tens);
+        text_minutes_o = (TextView) v.findViewById(R.id.minutes_ones);
+        text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
+        text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
+        text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
+        
+        new CountDownTimer(milliDiff, 1000)
+        {
+        	@Override	
+            public void onTick(long millisUntilFinished)
+            {
+            	Calendar cal = Calendar.getInstance(Locale.US);
+            	cal.setTimeInMillis(millisUntilFinished);
+            	
+            	int time_left = (int) millisUntilFinished / 1000;
+            	
+            	int days = time_left / 86400;
+            	int hours = (time_left - days * 86400) / 3600;
+            	int minutes = cal.get(Calendar.MINUTE);
+            	int seconds = cal.get(Calendar.SECOND);
+            	
+                // Filter time
+                int days_hundreds = days / 100;
+                int days_tens = (days - days_hundreds * 100) / 10;
+                int days_ones = (days - days_hundreds * 100 - days_tens * 10);
+                
+                int hours_tens = hours / 10;
+                int hours_ones = hours - hours_tens * 10;
+                
+                int minutes_tens = minutes / 10;
+                int minutes_ones = minutes - minutes_tens * 10;
+                
+                int seconds_tens = seconds / 10;
+                int seconds_ones = seconds - seconds_tens * 10;
+
+                
+                text_days_h.setText(Integer.toString(days_hundreds));
+                text_days_t.setText(Integer.toString(days_tens));
+                text_days_o.setText(Integer.toString(days_ones));
+                text_colon_1.setText(":");
+                text_hours_t.setText(Integer.toString(hours_tens));
+                text_hours_o.setText(Integer.toString(hours_ones));
+                text_colon_2.setText(":");
+                text_minutes_t.setText(Integer.toString(minutes_tens));
+                text_minutes_o.setText(Integer.toString(minutes_ones));
+                text_colon_3.setText(":");
+                text_seconds_t.setText(Integer.toString(seconds_tens));
+                text_seconds_o.setText(Integer.toString(seconds_ones));
             }
             
             @Override
             public void onFinish()
             {
             	text_days_h.setText("S");
-                text_days_t.setText("T");
-                text_days_o.setText("A");
-                text_colon_1.setText("N");
+                text_days_t.setText("I");
+                text_days_o.setText("T");
+                text_colon_1.setText(" ");
                 text_hours_t.setText("D");
-                text_hours_o.setText("U");
-                text_colon_2.setText("P");
-                text_minutes_t.setText("F");
-                text_minutes_o.setText("O");
-                text_colon_3.setText("T");
-                text_seconds_t.setText("H");
-                text_seconds_o.setText("E");
-                text_vert_1.setText("K\nI\nD\nS");
-                text_vert_2.setText("!");
-                text_vert_3.setText("!");
+                text_hours_o.setText("O");
+                text_colon_2.setText("W");
+                text_minutes_t.setText("N");
+                text_minutes_o.setText("!");
+                text_colon_3.setText("!");
+                text_seconds_t.setText("!");
+                text_seconds_o.setText("!");
             }
         }.start();
-        
-        views.add(text_days_h);
-        views.add(text_days_t);
-        views.add(text_days_o);
-        views.add(text_colon_1);
-        views.add(text_hours_t);
-        views.add(text_hours_o);
-        views.add(text_colon_2);
-        views.add(text_minutes_t);
-        views.add(text_minutes_o);
-        views.add(text_colon_3);
-        views.add(text_seconds_t);
-        views.add(text_seconds_o);
-        views.add(text_vert_1);
-        views.add(text_vert_2);
-        views.add(text_vert_3);   
-		
-		ArrayList<double[]> margins = new ArrayList<double[]>();
-		margins.add(new double[]{39,65,0,0});
-		margins.add(new double[]{9,62,0,0});
-		margins.add(new double[]{7,65,0,0});
-		margins.add(new double[]{8,62,0,0});
-		margins.add(new double[]{9,66,0,0});
-		margins.add(new double[]{5,67,0,0});
-		margins.add(new double[]{9,61,0,0});
-		margins.add(new double[]{10,66,0,0});
-		margins.add(new double[]{6,71,0,0});
-		margins.add(new double[]{9,64,0,0});
-		margins.add(new double[]{7,65,0,0});
-		margins.add(new double[]{7,70,0,0});
-		margins.add(new double[]{7,70,0,0});
-		margins.add(new double[]{7,70,0,0});
-		margins.add(new double[]{7,70,0,0});
-
-		double emulator_width = 480;
-		double emulator_height = 800;
-		
-		Display mdisp = getActivity().getWindowManager().getDefaultDisplay();
-		Point mdispSize = new Point();
-		mdisp.getSize(mdispSize);
-		int maxX = mdispSize.x; 
-		int maxY = mdispSize.y;
-		
-		for(int i = 0; i < margins.size(); i++)
-		{
-			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) views.get(i).getLayoutParams();
-			
-			double margin_left_ratio = margins.get(i)[0] / emulator_width;
-			double margin_top_ratio = margins.get(i)[1] / emulator_height;
-			params.setMargins((int) (margin_left_ratio * maxX), (int) (margin_top_ratio * maxY) , 0, 0); //substitute parameters for left, top, right, bottom
-		}	
-	}		
+	}
 }
