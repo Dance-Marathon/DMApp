@@ -22,44 +22,6 @@ public class ImageFrame {
 		this.maxRatio_Y = max_Y;
 	}
 	
-	public ImageFrame(double minX_coord, double minY_coord, double maxX_coord, double maxY_coord, double width, double height)
-	{
-		this.minRatio_X = minX_coord / width;
-		this.minRatio_Y = minY_coord / height;
-		this.maxRatio_X = maxX_coord / width;
-		this.maxRatio_Y = maxY_coord / height;
-	}
-	
-	protected double getMinXCoord(double imgWidth)
-	{
-		return minRatio_X * imgWidth;
-	}
-	
-	protected double getMaxXCoord(double imgWidth)
-	{
-		return maxRatio_X * imgWidth;
-	}
-	
-	protected double getMinYCoord(double imgHeight)
-	{
-		return minRatio_Y * imgHeight;
-	}
-	
-	protected double getMaxYCoord(double imgHeight)
-	{
-		return maxRatio_Y * imgHeight;
-	}
-	
-	protected double getWidth(double imgWidth)
-	{
-		return maxRatio_X *imgWidth - minRatio_X * imgWidth;
-	}
-	
-	protected double getHeight(double imgHeight)
-	{
-		return maxRatio_Y *imgHeight - minRatio_Y * imgHeight;
-	}
-	
 	/**
 	 * Check to see if a point is in this frame. All values in pixels.
 	 * @param x The x value of the point

@@ -31,7 +31,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,7 +64,6 @@ public class HomeFragment extends Fragment
     private TextView text_seconds_t;
     private TextView text_seconds_o;
     
-    
 	public HomeFragment()
 	{
 		// Required empty public constructor
@@ -76,45 +74,6 @@ public class HomeFragment extends Fragment
 		HomeFragment f = new HomeFragment();
 		f.c = c;
 		return f;
-		
-	}
-	
-	private ArrayList<ImageFrame> setupTextFrames(ArrayList<TextView> views, double imgHeight, double imgWidth)
-	{
-		ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
-		frames.add(new ImageFrame(83, 150, 121, 198, 720, 340));
-		frames.add(new ImageFrame(120, 139, 157, 192, 720, 340));
-		frames.add(new ImageFrame(159, 148, 192, 199, 720, 340));
-		frames.add(new ImageFrame(196, 142, 230, 194, 720, 340));
-		frames.add(new ImageFrame(232, 149, 263, 202, 720, 340));
-		frames.add(new ImageFrame(264, 153, 298, 202, 720, 340));
-		frames.add(new ImageFrame(300, 140, 334, 193, 720, 340));
-		frames.add(new ImageFrame(340, 150, 376, 200, 720, 340));
-		frames.add(new ImageFrame(375, 162, 408, 212, 720, 340));
-		//frames.add(new ImageFrame(411, 146 447, 200, 720, 340));
-		//frames.add(new ImageFrame(448, 149, 478, 201, 720, 340));
-		//frames.add(new ImageFrame(480, 154, 513, 211, 720, 340));
-		//frames.add(new ImageFrame(515, 155, 550, 212, 720, 340));
-		//frames.add(new ImageFrame(552, 156, 590, 211, 720, 340));
-		//frames.add(new ImageFrame(590, 155, 625, 207, 720, 340));
-		
-		for(int i = 0; i < frames.size(); i++)
-		{
-			TextView view = views.get(i);
-			ImageFrame f = frames.get(i);
-			
-			view.setX((float) f.getMinXCoord(imgWidth));
-			view.setY((float) f.getMinYCoord(imgHeight));
-			
-			view.setWidth((int) f.getWidth(imgWidth));
-			view.setHeight((int) f.getHeight(imgHeight));
-			
-		}
-		
-		
-		return frames;
-		
-		
 	}
 	
 	
@@ -125,10 +84,7 @@ public class HomeFragment extends Fragment
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
 		
-		//Setup countdown
-		ImageView banner = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
-		ArrayList<TextView> timerViews = set_timer_DM(v);
-		setupTextFrames(timerViews, banner.getHeight(), banner.getWidth() );
+		set_timer_DM(v);
 		
 		//Get textviews and set fonts
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
@@ -416,9 +372,8 @@ public class HomeFragment extends Fragment
 		startActivity(intent);
 	}
 
-	public ArrayList<TextView> set_timer_DM(View v)
+	public void set_timer_DM(View v)
 	{	
-		ArrayList<TextView> views = new ArrayList<TextView>();
         Date date = new Date();
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -497,18 +452,5 @@ public class HomeFragment extends Fragment
                 text_seconds_o.setText("KIDS!");
             }
         }.start();
-        
-        views.add(text_days_h);
-        views.add(text_days_t);
-        views.add(text_days_o);
-        views.add(text_hours_t);
-        views.add(text_hours_o);
-        views.add(text_minutes_t);
-        views.add(text_minutes_o);
-        views.add(text_seconds_t);
-        views.add(text_seconds_o);
-        
-        return views;
-        
 	}
 }
