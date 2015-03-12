@@ -230,7 +230,7 @@ public class MtkAdapter extends BaseAdapter {
 			
 				for(int i=0; i < loadedKids.size(); i++)
 				{
-					Thread.sleep(50);
+					Thread.sleep(20);
 					kids.add(loadedKids.get(i));
 					
 					((Activity) mContext).runOnUiThread(new Runnable(){
