@@ -411,7 +411,6 @@ public class HomeFragment extends Fragment
 
 	public void set_timer_DM(final View v)
 	{	
-		ArrayList<TextView> views = new ArrayList<TextView>();
         Date date = new Date();
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -487,26 +486,10 @@ public class HomeFragment extends Fragment
             	set_timer_stand(v);
             }
         }.start();
-        
-        views.add(text_days_h);
-        views.add(text_days_t);
-        views.add(text_colon_1);
-        views.add(text_hours_t);
-        views.add(text_hours_o);
-        views.add(text_colon_2);
-        views.add(text_minutes_t);
-        views.add(text_minutes_o);
-        views.add(text_colon_3);
-        views.add(text_seconds_t);
-        views.add(text_seconds_o);
-        
-        countdown_margins(views);
 	}
 	
 	public void set_timer_stand(View v)
 	{	
-		ArrayList<TextView> views = new ArrayList<TextView>();
-		
         Date date_start = new Date();
 		Date date_end = new Date();
         
@@ -596,52 +579,5 @@ public class HomeFragment extends Fragment
                 text_seconds_o.setText("!");
             }
         }.start();
-        
-        views.add(text_days_h);
-        views.add(text_days_t);
-        views.add(text_colon_1);
-        views.add(text_hours_t);
-        views.add(text_hours_o);
-        views.add(text_colon_2);
-        views.add(text_minutes_t);
-        views.add(text_minutes_o);
-        views.add(text_colon_3);
-        views.add(text_seconds_t);
-        views.add(text_seconds_o);
-
-        countdown_margins(views);
-	}
-
-	public void countdown_margins(ArrayList<TextView> views)
-	{
-		int left = 0;
-		int top = 0; 
-		int right = 0;
-		int bottom = 0;
-		
-		Display mdisp = getActivity().getWindowManager().getDefaultDisplay();
-		Point mdispSize = new Point();
-		mdisp.getSize(mdispSize);
-		int maxX = mdispSize.x; 
-		int maxY = mdispSize.y;
-		
-		double countdown_space = (double) maxX * 0.75 - (double) maxX * 0.25;
-		double interval = countdown_space / views.size();
-		
-		for(int i = 0; i < views.size(); i++)
-		{
-			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) views.get(i).getLayoutParams();
-			
-			if(i == 1)
-				left = (int) (maxX * 0.25);
-			else
-			{
-				left = (int) interval;
-			}
-			
-			top = (int) (maxY * 0.15);
-			
-			params.setMargins(left, top, right, bottom);
-		}
 	}
 }
