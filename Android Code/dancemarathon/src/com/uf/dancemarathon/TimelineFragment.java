@@ -226,12 +226,14 @@ public class TimelineFragment extends Fragment
 	
 	private void disableViewClicking()
 	{
-		this.getView().setClickable(false);
+		if(mEventListView != null)
+			mEventListView.setEnabled(false);
 	}
 	
 	private void enableViewClicking()
 	{
-		this.getView().setClickable(true);
+		if(mEventListView != null)
+			mEventListView.setEnabled(true);
 	}
 	
 	/**

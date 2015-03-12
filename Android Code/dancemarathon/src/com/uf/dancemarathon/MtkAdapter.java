@@ -12,7 +12,9 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ import com.uf.dancemarathon.FontSetter.fontName;
 public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kids> kids = new ArrayList<Kids>();
+	public KidsLoader loader;
 	
 	// Array of kids who have Milestones on YouTube
 	private String [] milestone_name = {
@@ -66,7 +69,8 @@ public class MtkAdapter extends BaseAdapter {
 
 	public MtkAdapter (Context c) {
 		mContext = c;
-		kids = ParseTheKids();
+		loader= new KidsLoader();
+		loader.execute();
 	}
 
 	@Override
@@ -108,64 +112,11 @@ public class MtkAdapter extends BaseAdapter {
 			ex.printStackTrace();
 			return null;
 		}
+		
 		return json;
 
 	}
 
-	private ArrayList<Kids> ParseTheKids() {
-		
-		ArrayList<Kids> kids_read = new ArrayList<Kids>();
-		
-		try {
-			JSONArray data_arr = new JSONArray(loadJSONFromAsset());
-
-			for (int i = 0; i < data_arr.length(); i++) 
-			{
-				String image_name = data_arr.getJSONObject(i)
-						.getString("image");
-				String story = data_arr.getJSONObject(i).getString("story");
-				String name = data_arr.getJSONObject(i).getString("name");
-				int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
-						"ageYear"));
-				String youtube_id = "";
-				
-				for(int j = 0; j < milestone_name.length; j++)
-				{
-					if (name.equals(milestone_name[j]))
-					{
-						youtube_id = milestone[j];
-						break;
-					}
-				}
-				
-				if (story.length() < 5)
-				{
-					story = "No story available.";
-				}
-
-				try
-				{
-					Kids k = new Kids(name, age, story, image_name, youtube_id);
-					kids_read.add(k);
-				}
-				catch (ParseException e)
-				{
-					// Must remove this before release
-					//Log.d("Event Parsing", "Failed to parse event" + name);
-				}
-			}
-		
-			// Alphabetizes arraylist by name if wanted
-			Collections.sort(kids_read, Kids.COMPARE_BY_NAME);
-			
-		} catch (IOException e) {
-			//e.printStackTrace();
-		} catch (JSONException e) {
-			//e.printStackTrace();
-		}
-		
-		return kids_read;
-	}
 	
 	public Kids getKid(int position)
 	{
@@ -218,4 +169,98 @@ public class MtkAdapter extends BaseAdapter {
 
 	    return convertView;
 	}
+	
+	
+	private class KidsLoader extends AsyncTask<Void, Void, Void>
+	 {
+		@Override
+		protected Void doInBackground(Void... params) {
+			ParseTheKids();
+			return null;
+		}
+
+		/* (non-Javadoc)
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(Void result) {	
+			
+		}
+		
+		private void ParseTheKids() {
+			
+			ArrayList<Kids> loadedKids = new ArrayList<Kids>();
+			try {
+				JSONArray data_arr = new JSONArray(loadJSONFromAsset());
+
+				for (int i = 0; i < data_arr.length(); i++) 
+				{
+					String image_name = data_arr.getJSONObject(i)
+							.getString("image");
+					String story = data_arr.getJSONObject(i).getString("story");
+					String name = data_arr.getJSONObject(i).getString("name");
+					int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
+							"ageYear"));
+					String youtube_id = "";
+					
+					for(int j = 0; j < milestone_name.length; j++)
+					{
+						if (name.equals(milestone_name[j]))
+						{
+							youtube_id = milestone[j];
+							break;
+						}
+					}
+					
+					if (story.length() < 5)
+					{
+						story = "No story available.";
+					}
+
+					
+					Kids k = new Kids(name, age, story, image_name, youtube_id);
+					loadedKids.add(k);
+					
+					
+				}
+				
+				// Alphabetizes arraylist by name 
+				Collections.sort(loadedKids, Kids.COMPARE_BY_NAME);
+				
+			
+				for(int i=0; i < loadedKids.size(); i++)
+				{
+					Thread.sleep(50);
+					kids.add(loadedKids.get(i));
+					
+					((Activity) mContext).runOnUiThread(new Runnable(){
+	
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							MtkAdapter.this.notifyDataSetChanged();
+						}
+						
+					});		
+				}
+				
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			} 
+			catch (JSONException e) {
+				e.printStackTrace();
+			} 
+			catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			catch (ParseException e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+		
+	 }
 }

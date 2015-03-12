@@ -49,6 +49,7 @@ public class SwipeActivity extends ActionBarActivity
 	KinteraUser user;
 	private String[] mOtherOptions;
 	boolean trackEnabled = false;
+	public boolean isScrolling = false;
     static final int GET_USER_REQUEST = 1;
 	
 	//These methods allow us to maintain the state of the user//
@@ -71,7 +72,7 @@ public class SwipeActivity extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe);
-		
+
 		//Hide Action Bar
 		getSupportActionBar().hide();
 		
@@ -96,6 +97,8 @@ public class SwipeActivity extends ActionBarActivity
 						sendTrackingView(statePos);
 						currPos = statePos;
 					}
+					
+					isScrolling = false;
 				}
 			}
 
@@ -103,7 +106,7 @@ public class SwipeActivity extends ActionBarActivity
 			public void onPageScrolled(int arg0, float arg1, int arg2)
 			{
 				// TODO Auto-generated method stub
-			
+				isScrolling = true;
 			}
 
 			@Override
@@ -392,7 +395,7 @@ public class SwipeActivity extends ActionBarActivity
 			case 0:return new Fragment(); //Return blank fragment because this will be covered by nav drawer
 			case 1:return HomeFragment.newInstance(SwipeActivity.this);
 			case 2:return TimelineFragment.newInstance(SwipeActivity.this);
-			case 3:return MtkFragment.newInstance();
+			case 3:return MtkFragment.newInstance(SwipeActivity.this);
 			}
 			return null;
 		}
