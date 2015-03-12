@@ -2,6 +2,7 @@
 <resources>
     <!-- DM Colors -->
      <color name="dm_orange_primary">#F37021</color>
+     <color name="dm_orange_primary_trans">#90F37021</color>
      <color name="dm_blue_primary">#014083</color>
      <color name="dm_orange_secondary">#F79B63</color>
      <color name="dm_blue_secondary">#617BA6</color>

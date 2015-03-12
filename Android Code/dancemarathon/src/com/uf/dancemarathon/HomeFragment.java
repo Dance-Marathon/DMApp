@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -70,6 +71,10 @@ public class HomeFragment extends Fragment
     private TextView text_seconds_t;
     private TextView text_seconds_o;
     
+    private ImageView bannerImage;
+    private RelativeLayout countdownView;
+
+    
 	public HomeFragment()
 	{
 		// Required empty public constructor
@@ -98,6 +103,10 @@ public class HomeFragment extends Fragment
 		
 		FontSetter.setFont(getActivity(), fontName.AGBReg, header_text, game_text, web_text, donate);
 		FontSetter.setFont(getActivity(), fontName.AGBBol, announcement_header);
+		
+		//Init banner stuff
+		bannerImage = (ImageView) v.findViewById(R.id.dance_marathon_header_image);
+		countdownView = (RelativeLayout) v.findViewById(R.id.countdown_container);
 		
 		//Set button listeners
 		setButtonListeners(v);
@@ -177,6 +186,7 @@ public class HomeFragment extends Fragment
 		final Button gameButton = (Button) v.findViewById(R.id.game);
 		final Button websiteButton = (Button) v.findViewById(R.id.website);
 		final Button donateButton = (Button) v.findViewById(R.id.donate);
+		final Button flipButton = (Button) v.findViewById(R.id.banner_flip_button);
 		
 		gameButton.setOnClickListener(new OnClickListener(){
 
@@ -213,6 +223,28 @@ public class HomeFragment extends Fragment
 				openLink(donateButton);
 			}
 		});
+		
+		flipButton.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(bannerImage.getVisibility() == View.VISIBLE)
+				{
+					bannerImage.setVisibility(View.GONE);
+					countdownView.setVisibility(View.VISIBLE);
+					flipButton.bringToFront();
+				}
+				else
+				{
+					bannerImage.setVisibility(View.VISIBLE);
+					countdownView.setVisibility(View.GONE);
+				}
+			}
+			
+		});
+		
+		flipButton.bringToFront();
 	}
 	
 	/**
