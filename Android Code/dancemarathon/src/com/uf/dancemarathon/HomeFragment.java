@@ -69,13 +69,6 @@ public class HomeFragment extends Fragment
     private TextView text_colon_3;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
-<<<<<<< HEAD
-    
-=======
-    private TextView text_vert_1;
-    private TextView text_vert_2;
-    private TextView text_vert_3;
->>>>>>> chris
     
 	public HomeFragment()
 	{
@@ -95,12 +88,7 @@ public class HomeFragment extends Fragment
 	{	
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_home, container, false);
-		
-<<<<<<< HEAD
-=======
-		set_timer_DM(v);
-		
->>>>>>> chris
+
 		//Get textviews and set fonts
 		TextView header_text = (TextView) v.findViewById(R.id.header_text);
 		TextView announcement_header = (TextView) v.findViewById(R.id.announcements_title);
@@ -418,12 +406,6 @@ public class HomeFragment extends Fragment
         text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
-<<<<<<< HEAD
-=======
-        text_vert_1 = (TextView) v.findViewById(R.id.vert_1);
-        text_vert_2 = (TextView) v.findViewById(R.id.vert_2);
-        text_vert_3 = (TextView) v.findViewById(R.id.vert_3);
->>>>>>> chris
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -467,12 +449,6 @@ public class HomeFragment extends Fragment
                 text_colon_3.setText(":");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
-<<<<<<< HEAD
-=======
-                text_vert_1.setText("D\nM");
-                text_vert_2.setText("a\nt");
-                text_vert_3.setText("U\nF");
->>>>>>> chris
             }
             
             @Override
@@ -482,7 +458,6 @@ public class HomeFragment extends Fragment
             }
         }.start();
 	}
-<<<<<<< HEAD
 	
 	public void set_timer_stand(View v)
 	{	
@@ -610,6 +585,3 @@ public class HomeFragment extends Fragment
 		}
 	}
 }
-=======
-}
->>>>>>> chris
