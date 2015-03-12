@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -58,6 +59,9 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 * The type of event it is (i.e. check-ins, hospitality night)
 	 */
 	private String category;
+	
+	private Bitmap image;
+	
 	/**
 	 * @param id The event id as specified on the server
 	 * @param title The title of the event
@@ -467,4 +471,19 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		    return new Event[size];
 		}
 	};
+
+	
+	/**
+	 * @return the image
+	 */
+	public Bitmap getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(Bitmap image) {
+		this.image = image;
+	}
 }

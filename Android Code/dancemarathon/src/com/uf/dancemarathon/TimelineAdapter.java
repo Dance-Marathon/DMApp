@@ -6,16 +6,16 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 
-
-
-import com.uf.dancemarathon.FontSetter.fontName;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.uf.dancemarathon.FontSetter.fontName;
 
 public class TimelineAdapter extends ArrayAdapter<Event>
 {
@@ -123,8 +123,30 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         
         // Set Fonts
         FontSetter.setFont(context, fontName.AGBReg, title, location, time, month, day);
+        
+        handleEventImage(itemView, e);
 	}
 	
+	/**
+	 * Removes the calendar icon and adds the event's image if image is not null
+	 * @param v The view 
+	 * @param e The event
+	 */
+	private void handleEventImage(View v, Event e){
+		if(e.getImage() == null)
+			return;
+		else
+		{
+			RelativeLayout iconLayout = (RelativeLayout) v.findViewById(R.id.tlineitem_calIcon);
+			ImageView icon = new ImageView(context);
+			icon.setLayoutParams(new ViewGroup.LayoutParams(
+			        ViewGroup.LayoutParams.WRAP_CONTENT,
+			        ViewGroup.LayoutParams.WRAP_CONTENT));
+			icon.setImageBitmap(e.getImage());
+			iconLayout.removeAllViews();
+			iconLayout.addView(icon);
+		}
+	}
 	/**
 	 * This method returns a string with as many words as can fit in the
 	 * input number of characters 

@@ -19,6 +19,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -554,12 +556,27 @@ public class TimelineFragment extends Fragment
 				String endDate = arr.getJSONObject(i).getString("endDate").trim();
 				String lastModified = arr.getJSONObject(i).getString("lastModified").trim();
 				String category = arr.getJSONObject(i).getString("category");
+				String imageUrl = arr.getJSONObject(i).getString("imageURL");
+				Bitmap image = null;
+				
+				if(imageUrl != null)
+				{
+					try {
+						image=downloadImage(imageUrl);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
 				try
 				{
 					Event e = new Event(id, title, location, startDate, endDate, lastModified, description);
 					
 					if(!(category.equals("null")))
 						e.setCategory(category.trim());
+					
+					if(image != null)
+						e.setImage(image);
 					
 					events.add(e);
 				} catch (ParseException e)
@@ -589,6 +606,15 @@ public class TimelineFragment extends Fragment
 					newEvents.remove(e);
 			}
 			return newEvents;
+		}
+		
+		private Bitmap downloadImage(String path) throws IOException{
+			URL url = new URL(path); //The path to the webservice 
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			Bitmap bp = null;
+			if(conn.getResponseCode() == 200)
+				bp = BitmapFactory.decodeStream(conn.getInputStream());
+			return bp;
 		}
 	}
 
