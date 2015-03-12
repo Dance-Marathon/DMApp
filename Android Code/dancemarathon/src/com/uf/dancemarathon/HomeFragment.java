@@ -390,7 +390,8 @@ public class HomeFragment extends Fragment
 				try
 				{
 					Announcement a = new Announcement(text, date, "yyyy-MM-dd HH:mm:ss");
-					announcements.add(a);
+					if(a.hasOccurred())
+						announcements.add(a);
 				} catch (ParseException e)
 				{
 					// Log.d("Announcements Parsing", "Failed to parse announcement" + text);
@@ -401,6 +402,7 @@ public class HomeFragment extends Fragment
 				loadSuccessful = false; //Loading nothing does not qualify as a "successful" load operation
 			return announcements; 
 		}
+		
 	}
 	
 	/**
