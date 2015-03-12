@@ -18,20 +18,22 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -549,5 +551,38 @@ public class HomeFragment extends Fragment
                 text_seconds_o.setText("!");
             }
         }.start();
+	}
+
+	public void countdown_margins(ArrayList<TextView> views)
+	{
+		int left = 0;
+		int top = 0; 
+		int right = 0;
+		int bottom = 0;
+		
+		Display mdisp = getActivity().getWindowManager().getDefaultDisplay();
+		Point mdispSize = new Point();
+		mdisp.getSize(mdispSize);
+		int maxX = mdispSize.x; 
+		int maxY = mdispSize.y;
+		
+		double countdown_space = (double) maxX * 0.75 - (double) maxX * 0.25;
+		double interval = countdown_space / views.size();
+		
+		for(int i = 0; i < views.size(); i++)
+		{
+			RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) views.get(i).getLayoutParams();
+			
+			if(i == 1)
+				left = (int) (maxX * 0.25);
+			else
+			{
+				left = (int) interval;
+			}
+			
+			top = (int) (maxY * 0.15);
+			
+			params.setMargins(left, top, right, bottom);
+		}
 	}
 }
