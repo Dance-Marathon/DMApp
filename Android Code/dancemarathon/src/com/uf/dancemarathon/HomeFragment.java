@@ -234,12 +234,14 @@ public class HomeFragment extends Fragment
 				{
 					bannerImage.setVisibility(View.GONE);
 					countdownView.setVisibility(View.VISIBLE);
+					countdown_text.setVisibility(View.VISIBLE);
 					flipButton.bringToFront();
 				}
 				else
 				{
 					bannerImage.setVisibility(View.VISIBLE);
 					countdownView.setVisibility(View.GONE);
+					countdown_text.setVisibility(View.GONE);
 				}
 			}
 			
@@ -440,7 +442,7 @@ public class HomeFragment extends Fragment
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
         countdown_text = (TextView) v.findViewById(R.id.countdown_text);
         
-        countdown_text.setText("Time Until Next Dance Marathon:" );
+        countdown_text.setText("Time Until Next Dance Marathon" );
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -525,7 +527,7 @@ public class HomeFragment extends Fragment
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
         countdown_text = (TextView) v.findViewById(R.id.countdown_text);
         
-        countdown_text.setText("Dance Marathon Time Left:" );
+        countdown_text.setText("Standing Time Remaining" );
         
         new CountDownTimer(milliDiff, 1000)
         {
