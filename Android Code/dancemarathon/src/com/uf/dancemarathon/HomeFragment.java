@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment
     private TextView text_colon_3;
     private TextView text_seconds_t;
     private TextView text_seconds_o;
+    private TextView countdown_text;
     
     private ImageView bannerImage;
     private RelativeLayout countdownView;
@@ -437,6 +438,9 @@ public class HomeFragment extends Fragment
         text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
+        countdown_text = (TextView) v.findViewById(R.id.countdown_text);
+        
+        countdown_text.setText("Time Until Next Dance Marathon:" );
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -495,11 +499,11 @@ public class HomeFragment extends Fragment
         Date date_start = new Date();
 		Date date_end = new Date();
         
-        SimpleDateFormat df_start = new SimpleDateFormat("yyy-MM-dd HH:nn:ss", Locale.US);
+        SimpleDateFormat df_start = new SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.US);
         SimpleDateFormat df_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
-			date_start = df_start.parse("2015-03-14 12:02:00");
-        	date_end = df_end.parse("2015-03-15 2:14:00");
+			date_start = df_start.parse("2015-03-14 12:00:00");
+        	date_end = df_end.parse("2015-03-15 14:12:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -519,6 +523,9 @@ public class HomeFragment extends Fragment
         text_colon_3 = (TextView) v.findViewById(R.id.colon_3);
         text_seconds_t = (TextView) v.findViewById(R.id.seconds_tens);
         text_seconds_o = (TextView) v.findViewById(R.id.seconds_ones);
+        countdown_text = (TextView) v.findViewById(R.id.countdown_text);
+        
+        countdown_text.setText("Dance Marathon Time Left:" );
         
         new CountDownTimer(milliDiff, 1000)
         {
@@ -562,6 +569,8 @@ public class HomeFragment extends Fragment
                 text_colon_3.setText(":");
                 text_seconds_t.setText(Integer.toString(seconds_tens));
                 text_seconds_o.setText(Integer.toString(seconds_ones));
+                
+                
             }
             
             @Override
