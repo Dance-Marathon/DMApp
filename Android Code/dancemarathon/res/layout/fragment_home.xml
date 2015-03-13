@@ -163,19 +163,19 @@
 		        android:textStyle="bold"
 		        android:layout_toRightOf="@+id/seconds_tens"
 		        android:layout_marginLeft="@dimen/countdown_interval" />
-		    
-		    <TextView
+    	</RelativeLayout>  
+    	
+    	<TextView
 		        android:id="@+id/countdown_text"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_above="@+id/colon_2"
+		        android:layout_above="@+id/countdown_container"
 		        android:layout_centerHorizontal="true"
-		        android:textSize="@dimen/countdown_size"
+		        android:textSize="18sp"
 		        android:textColor="@color/dm_orange_primary"
 		        android:textStyle="bold"
+		        android:visibility="gone"
 		        />
-    	</RelativeLayout>  
-    	
 	    <View
 	        android:layout_width="match_parent"
 	        android:layout_height="1dp"
