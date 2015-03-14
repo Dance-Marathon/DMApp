@@ -115,7 +115,7 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         //Set start time
         setStartTimeString(time, e);
         
-        boolean hasImage =  handleEventImage(itemView, e);
+        //boolean hasImage =  handleEventImage(itemView, e);
         
        
         //Set months
@@ -139,21 +139,13 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 	 * @param e The event
 	 */
 	private boolean handleEventImage(View v, Event e){
-		TextView month = (TextView) v.findViewById(R.id.tlineitem_month);
-	    TextView day = (TextView) v.findViewById(R.id.tlineitem_day);
-		RelativeLayout iconLayout = (RelativeLayout) v.findViewById(R.id.tlineitem_calIcon);
 		if(e.getImage() == null)
-		{
-			iconLayout.setBackgroundResource(R.drawable.calendar_icon);
-			month.setVisibility(View.VISIBLE);
-			day.setVisibility(View.VISIBLE);
 			return false;
-		}
 		else
 		{
+			RelativeLayout iconLayout = (RelativeLayout) v.findViewById(R.id.tlineitem_calIcon);
+			iconLayout.removeAllViews();
 			iconLayout.setBackground(new BitmapDrawable(context.getResources(), e.getImage()));
-			month.setVisibility(View.GONE);
-			day.setVisibility(View.GONE);
 			return true;
 		}
 	}
