@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Locale;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +115,10 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         //Set start time
         setStartTimeString(time, e);
         
-        //Set month
+        //boolean hasImage =  handleEventImage(itemView, e);
+        
+       
+        //Set months
         String monthText = e.getMonthText(true);
         month.setText(monthText);
         
@@ -124,7 +129,8 @@ public class TimelineAdapter extends ArrayAdapter<Event>
         // Set Fonts
         FontSetter.setFont(context, fontName.AGBReg, title, location, time, month, day);
         
-        handleEventImage(itemView, e);
+        
+       
 	}
 	
 	/**
@@ -132,19 +138,15 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 	 * @param v The view 
 	 * @param e The event
 	 */
-	private void handleEventImage(View v, Event e){
+	private boolean handleEventImage(View v, Event e){
 		if(e.getImage() == null)
-			return;
+			return false;
 		else
 		{
 			RelativeLayout iconLayout = (RelativeLayout) v.findViewById(R.id.tlineitem_calIcon);
-			ImageView icon = new ImageView(context);
-			icon.setLayoutParams(new ViewGroup.LayoutParams(
-			        ViewGroup.LayoutParams.WRAP_CONTENT,
-			        ViewGroup.LayoutParams.WRAP_CONTENT));
-			icon.setImageBitmap(e.getImage());
 			iconLayout.removeAllViews();
-			iconLayout.addView(icon);
+			iconLayout.setBackground(new BitmapDrawable(context.getResources(), e.getImage()));
+			return true;
 		}
 	}
 	/**
