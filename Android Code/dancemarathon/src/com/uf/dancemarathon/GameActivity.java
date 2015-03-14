@@ -28,14 +28,7 @@ public class GameActivity extends ActionBarActivity {
 		
 		//Set webview
 		WebView gameView = (WebView) findViewById(R.id.game_view);
-		 // disable scroll on touch
-		  gameView.setOnTouchListener(new View.OnTouchListener() {
-		    @Override
-		    public boolean onTouch(View v, MotionEvent event) {
-		      return (event.getAction() == MotionEvent.ACTION_MOVE);
-		    }
-		  });
-
+		
 		WebSettings settings = gameView.getSettings();
 		settings.setJavaScriptEnabled(true);
 		settings.setSupportMultipleWindows(true);

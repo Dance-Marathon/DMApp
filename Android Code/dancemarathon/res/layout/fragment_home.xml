@@ -25,7 +25,7 @@
             />
         <!-- Heading -->
 	    <ImageView android:id="@+id/dance_marathon_header_image"
-	        android:src="@drawable/countdown"
+	        android:src="@drawable/countdown_1"
 	        android:contentDescription="@string/dance_marathon"
 	        android:layout_width="match_parent"
 	        android:layout_height="@dimen/heading_pic_height"

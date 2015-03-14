@@ -70,8 +70,8 @@ public class MapActivity extends Activity {
 		{
 			ImageFrame f = frames.get(i);
 			
-			if(f.isPointInFrame(x, y,imgWidth, imgHeight))
-				makeFrameToast();
+			//			if(f.isPointInFrame(x, y,imgWidth, imgHeight))
+			//			makeFrameToast();
 			
 		}
 	}

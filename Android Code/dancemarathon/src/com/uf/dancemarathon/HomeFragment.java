@@ -505,7 +505,7 @@ public class HomeFragment extends Fragment
         SimpleDateFormat df_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
 			date_start = df_start.parse("2015-03-14 12:00:00");
-        	date_end = df_end.parse("2015-03-15 14:12:00");
+        	date_end = df_end.parse("2015-03-15 14:14:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
