@@ -27,6 +27,7 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,6 +126,7 @@ public class TimelineFragment extends Fragment
 			 String[] filterArray = getEventCategories(events);
 			 createFilterDialog(filterArray);
 			 showEventList(v, events);
+			 Log.d("cache", "read from cache");
 		 }
 		 else
 			 forceEventListUpdate();

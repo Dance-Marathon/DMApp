@@ -22,7 +22,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	/**
 	 * This ID is important when it comes to keeping event serializable
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 9L;
 	private String id;
 	/**
 	 * The title of the event
@@ -439,6 +439,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		dest.writeString(t_endDate);
 		dest.writeString(t_lastMod);
 		dest.writeString(description);
+		dest.writeParcelable(image, flags);
 	}
 	
 	private Event(Parcel in)
@@ -450,6 +451,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		t_endDate = in.readString();
 		t_lastMod = in.readString();
 		description = in.readString();
+		image = in.readParcelable(Bitmap.class.getClassLoader());
 		
 		try {
 			parseTimeStamps();
