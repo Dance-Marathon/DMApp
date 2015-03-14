@@ -557,16 +557,16 @@ public class TimelineFragment extends Fragment
 				String lastModified = arr.getJSONObject(i).getString("lastModified").trim();
 				String category = arr.getJSONObject(i).getString("category");
 				String imageUrl = arr.getJSONObject(i).getString("imageURL");
-				Bitmap image = null;
+				//Bitmap image = null;
 				
-				if(imageUrl != null)
+				/*if(imageUrl != null)
 				{
 					try {
 						image=downloadImage(imageUrl);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				}
+				}*/
 				
 				try
 				{
@@ -575,8 +575,8 @@ public class TimelineFragment extends Fragment
 					if(!(category.equals("null")))
 						e.setCategory(category.trim());
 					
-					if(image != null)
-						e.setImage(image);
+					/*if(image != null)
+						e.setImage(image);*/
 					
 					events.add(e);
 				} catch (ParseException e)
