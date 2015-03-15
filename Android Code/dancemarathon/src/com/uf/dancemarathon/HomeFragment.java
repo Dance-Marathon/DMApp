@@ -501,6 +501,10 @@ public class HomeFragment extends Fragment
         Date date_start = new Date();
 		Date date_end = new Date();
         
+		//Here's the problem
+		//Need to initialize start date with Calendar.getInstance()
+		//Each time app opens, set_timer_DM()'s onFinish() gets immediately called.
+		//Then this method runs and start date stays the same at 12
         SimpleDateFormat df_start = new SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.US);
         SimpleDateFormat df_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
