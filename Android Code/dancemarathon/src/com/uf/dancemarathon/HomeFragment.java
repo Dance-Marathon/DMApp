@@ -498,24 +498,17 @@ public class HomeFragment extends Fragment
 	
 	public void set_timer_stand(View v)
 	{	
-        Date date_start = new Date();
-		Date date_end = new Date();
+        Date date = new Date();
         
-		//Here's the problem
-		//Need to initialize start date with Calendar.getInstance()
-		//Each time app opens, set_timer_DM()'s onFinish() gets immediately called.
-		//Then this method runs and start date stays the same at 12
-        SimpleDateFormat df_start = new SimpleDateFormat("yyy-MM-dd HH:mm:ss", Locale.US);
-        SimpleDateFormat df_end = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         try {
-			date_start = df_start.parse("2015-03-14 12:00:00");
-        	date_end = df_end.parse("2015-03-15 14:14:00");
+			date = df.parse("2015-03-15 14:14:00");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-        long milliDiff = date_end.getTime() - date_start.getTime(); 
+        long milliDiff = date.getTime() - Calendar.getInstance(Locale.US).getTimeInMillis();
 
         text_days_h = (TextView) v.findViewById(R.id.days_hundreds);
         text_days_t = (TextView) v.findViewById(R.id.days_tens);
