@@ -63,7 +63,9 @@
     <string-array name="navList">
         <item>Map</item>
         <item>FAQs</item>
+        <item>Calendar</item>
         <item>Social Media</item>
+        <item>Meet The Kids</item>
         <item>My Fundraising Progress</item>
         <item>About Dance Marathon</item>
         <item>Contact Us!</item>
@@ -107,5 +109,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="event_in_progress">In Progress</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_mtk">MtkActivity</string>
 
 </resources>

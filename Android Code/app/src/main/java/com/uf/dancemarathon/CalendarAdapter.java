@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.uf.dancemarathon.FontSetter.fontName;
 
-public class TimelineAdapter extends ArrayAdapter<Event>
+public class CalendarAdapter extends ArrayAdapter<Event>
 {
 
 	private Context context;
@@ -28,7 +28,7 @@ public class TimelineAdapter extends ArrayAdapter<Event>
 	 */
 	private ArrayList<Event> events;
 	
-	public TimelineAdapter(Context c, ArrayList<Event> events)
+	public CalendarAdapter(Context c, ArrayList<Event> events)
 	{
 		//Must make call to the parent constructor
 		super(c, R.layout.timeline_item_view, events);

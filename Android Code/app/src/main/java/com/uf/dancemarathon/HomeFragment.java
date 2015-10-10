@@ -261,7 +261,7 @@ public class HomeFragment extends Fragment
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity().getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
-			//Log.d("Tracking", "SwipeActivity");
+			//Log.d("Tracking", "HomeActivity");
 			TrackerManager.sendEvent((MyApplication) getActivity().getApplication(), "Button", "Clicked", buttonName);
 		}
 	}

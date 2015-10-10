@@ -15,7 +15,7 @@ import android.view.MenuItem;
 public class LoginActivity extends ActionBarActivity
 {
 	/**
-	 * Flag used to pass back user to SwipeActivity.
+	 * Flag used to pass back user to HomeActivity.
 	 */
 	public static int IS_USER_STILL_LOGGED_IN = 5;
 	

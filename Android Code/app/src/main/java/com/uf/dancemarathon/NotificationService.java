@@ -15,7 +15,6 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 import android.util.SparseArray;
 
 
@@ -219,16 +218,16 @@ public class NotificationService extends Service {
 	}
 	
 	/**
-	 * This method creates a pending intent to open the SwipeActivity when
+	 * This method creates a pending intent to open the HomeActivity when
 	 * the notification is pressed.
 	 * @return The pending intent to use
 	 */
 	private PendingIntent getMainPendingIntent()
 	{
-		Intent intent = new Intent(this, SwipeActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 		intent.putExtra("start_source", "Service");
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-		stackBuilder.addParentStack(SwipeActivity.class);
+		stackBuilder.addParentStack(HomeActivity.class);
 		stackBuilder.addNextIntent(intent);
 		PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		

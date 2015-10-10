@@ -48,7 +48,7 @@ import android.widget.Toast;
  * an {@link AsyncTask} to load the data and then it updates the UI accordingly.
  * 
  */
-public class TimelineFragment extends Fragment
+public class CalendarFragment extends Fragment
 {
 	private Context c;
 	/**
@@ -69,10 +69,10 @@ public class TimelineFragment extends Fragment
 	private AlertDialog mFilterDialog;
 	private Button mFilterButton;
 	private ListView mEventListView;
-	private TimelineAdapter mEventAdapter;
+	private CalendarAdapter mEventAdapter;
 	private SwipeRefreshLayout mListLayout;
 	
-	public TimelineFragment()
+	public CalendarFragment()
 	{
 		// Required empty public constructor
 	}
@@ -82,9 +82,9 @@ public class TimelineFragment extends Fragment
 	 * for a fragment in Android
 	 * @return A new instance of timeline fragment that is executing the load operation
 	 */
-	public static TimelineFragment newInstance(Context c)
+	public static CalendarFragment newInstance(Context c)
 	{
-		TimelineFragment f = new TimelineFragment();
+		CalendarFragment f = new CalendarFragment();
 		f.c = c;
 		f.isRefreshing = false;
 		f.resetLoader();
@@ -100,7 +100,7 @@ public class TimelineFragment extends Fragment
 			Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		 View v = inflater.inflate(R.layout.fragment_timeline, container, false);
+		 View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 		 
 		 initializeEventListViews(v);
 		 
@@ -137,7 +137,7 @@ public class TimelineFragment extends Fragment
 	private void initializeEventListViews(View v)
 	{
 		//Populate list view
-		mEventAdapter = new TimelineAdapter(getActivity(), events);								 
+		mEventAdapter = new CalendarAdapter(getActivity(), events);
 		mEventListView = (ListView) v.findViewById(R.id.event_list); //Get the list view
 		
 		mEventListView.setAdapter(mEventAdapter);

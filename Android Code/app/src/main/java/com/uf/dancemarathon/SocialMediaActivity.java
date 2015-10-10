@@ -13,7 +13,7 @@ import android.view.View;
 
 
 
-public class SocialMedia extends ActionBarActivity {
+public class SocialMediaActivity extends ActionBarActivity {
 
 	/**
 	 * This is the DM over the years video
@@ -90,7 +90,7 @@ public class SocialMedia extends ActionBarActivity {
 		try
 		{
 			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMedia.facebook_Id));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.facebook_Id));
 		}
 		// Open Facebook page in browser
 		catch (Exception e)
@@ -106,7 +106,7 @@ public class SocialMedia extends ActionBarActivity {
 		try
 		{
 		    context.getPackageManager().getPackageInfo("com.twitter.android", 0);
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMedia.twitter_Id));
+		    return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.twitter_Id));
 		}
 		// Open Twitter profile in browser
 		catch (Exception e)
@@ -121,7 +121,7 @@ public class SocialMedia extends ActionBarActivity {
 		// Open Instagram profile in Instagram app
 		try{
 			context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMedia.instagram_Id));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.instagram_Id));
 		}
 		// Open Instagram profile in browser
 		catch (Exception e)
@@ -138,7 +138,7 @@ public class SocialMedia extends ActionBarActivity {
 		try
 		{
 			context.getPackageManager().getPackageInfo("com.google.android.youtube", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + SocialMedia.defaultYoutubeVideoId));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + SocialMediaActivity.defaultYoutubeVideoId));
 		}
 		// Open YouTube channel in browser
 		catch (Exception e)
