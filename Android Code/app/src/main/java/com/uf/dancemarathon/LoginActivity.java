@@ -16,10 +16,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class LoginActivity extends AppCompatActivity
 {
-	/**
-	 * Flag used to pass back user to HomeActivity.
-	 */
-	public int IS_USER_STILL_LOGGED_IN = 5;
 	
 	@Override	
 	protected void onCreate(Bundle savedInstanceState)
@@ -73,23 +69,5 @@ public class LoginActivity extends AppCompatActivity
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	//This method handles passing the user object back
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		if(requestCode == LoginFragment.IS_USER_STILL_LOGGED_IN)
-		{
-			if(resultCode == Activity.RESULT_CANCELED)
-			{
-				setResult(Activity.RESULT_CANCELED, new Intent());
-			}
-			else if(resultCode == Activity.RESULT_OK)
-			{
-				setResult(Activity.RESULT_OK, data);
-			}
-			
-			this.finish();
-		}
 	}
 }

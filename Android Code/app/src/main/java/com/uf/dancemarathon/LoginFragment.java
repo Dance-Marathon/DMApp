@@ -1,11 +1,14 @@
 package com.uf.dancemarathon;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
@@ -32,7 +35,6 @@ import android.widget.Toast;
  */
 public class LoginFragment extends Fragment
 {
-	public static int IS_USER_STILL_LOGGED_IN = 5;
 
 	public LoginFragment()
 	{
@@ -64,47 +66,43 @@ public class LoginFragment extends Fragment
 		});
 		
 		//Set the actions to perform if //Login button is clicked
-		v.findViewById(R.id.login_button).setOnClickListener(new OnClickListener(){
+		v.findViewById(R.id.login_button).setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v)
-			{
-				hideKeyboard();
-				if(isFormFilled())
-				{
-					//Get the username and password from the //Login form
-					EditText usernameF = (EditText) getView().findViewById(R.id.username_field);
-					EditText passwordF = (EditText) getView().findViewById(R.id.password_field);
-					String username = usernameF.getText().toString();
-					String password = passwordF.getText().toString();
-					
-					//Hide login button
-					Button loginB = (Button) getView().findViewById(R.id.login_button);
-					loginB.setVisibility(View.GONE);
-					
-					//Show progress bar
-					ProgressBar bar = (ProgressBar) getView().findViewById(R.id.login_loading_wheel);
-					bar.setVisibility(View.VISIBLE);
-					
-					//Execute load with credentials
-					new UserLoader().execute(username, password);
-				}
-				else
-					makeToast("Fields cannot be blank!");
-			}
-			
-			//Check to make sure the form is filled in
-			private Boolean isFormFilled()
-			{
-				int uSize = ((EditText) getView().findViewById(R.id.username_field)).getText().length();
-				int pSize = ((EditText) getView().findViewById(R.id.password_field)).getText().length();
-				if(uSize > 0 && pSize > 0)
-					return true;
-				else
-					return false;
-			}
-			
-		});
+            @Override
+            public void onClick(View v) {
+                hideKeyboard();
+                if (isFormFilled()) {
+                    //Get the username and password from the //Login form
+                    EditText usernameF = (EditText) getView().findViewById(R.id.username_field);
+                    EditText passwordF = (EditText) getView().findViewById(R.id.password_field);
+                    String username = usernameF.getText().toString();
+                    String password = passwordF.getText().toString();
+
+                    //Hide login button
+                    Button loginB = (Button) getView().findViewById(R.id.login_button);
+                    loginB.setVisibility(View.GONE);
+
+                    //Show progress bar
+                    ProgressBar bar = (ProgressBar) getView().findViewById(R.id.login_loading_wheel);
+                    bar.setVisibility(View.VISIBLE);
+
+                    //Execute load with credentials
+                    new UserLoader().execute(username, password);
+                } else
+                    makeToast("Fields cannot be blank!");
+            }
+
+            //Check to make sure the form is filled in
+            private Boolean isFormFilled() {
+                int uSize = ((EditText) getView().findViewById(R.id.username_field)).getText().length();
+                int pSize = ((EditText) getView().findViewById(R.id.password_field)).getText().length();
+                if (uSize > 0 && pSize > 0)
+                    return true;
+                else
+                    return false;
+            }
+
+        });
 		
 		return v;
 	}
@@ -116,7 +114,7 @@ public class LoginFragment extends Fragment
 	{
 		//Hide keyboard 
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-			    Activity.INPUT_METHOD_SERVICE);
+                Activity.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 	}
 	
@@ -139,8 +137,10 @@ public class LoginFragment extends Fragment
 	 */
 	private class UserLoader extends AsyncTask<String, String, KinteraUser>
 	{
-		String username="";
-		String password="";
+		private String username="";
+		private String password="";
+        private final String USER_WEBSERVICE_PATH = "http://dev.floridadm.org/app/kintera.php";
+
 		boolean loadSuccessful = false;
 		@Override
 		protected KinteraUser doInBackground(String... params)
@@ -155,16 +155,25 @@ public class LoginFragment extends Fragment
 				password = params[1];
 				
 				//Set path
-				String path = "http://mickmaccallum.com/ian/kintera.php?";
-				path += "username=" + username;
-				path += "&password=" + password;
+				String path = USER_WEBSERVICE_PATH;
 				
 				//Connect to the webservice
+                String urlParams  = "username=" + username + "&password=" + password;
+                byte[] postData = urlParams.getBytes( StandardCharsets.UTF_8 );
+
 				url = new URL(path);
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                conn.setRequestMethod("POST");
+                conn.setDoOutput(true);
+
+                //Write parameters to POST
+                DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+                wr.writeBytes(urlParams);
+                wr.flush();
+                wr.close();
 				
 				//Parse JSON response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				if(conn.getResponseCode() == 200)
 				{
 					String jsonRep = reader.readLine().trim();
@@ -215,8 +224,9 @@ public class LoginFragment extends Fragment
 				Intent intent = new Intent(getActivity(), UserActivity.class);
 				Bundle b = new Bundle();
 				b.putParcelable("user", user);
+                b.putString("password", password);
 				intent.putExtras(b);
-				startActivityForResult(intent, LoginFragment.IS_USER_STILL_LOGGED_IN);
+				startActivity(intent);
 			
 				//Write user data to cache
 				CacheManager.clearCacheFile(getActivity(), "user");
@@ -245,7 +255,7 @@ public class LoginFragment extends Fragment
 			double fundGoal = Double.parseDouble(o.getString("PersonalGoal"));
 			double fundRaised = Double.parseDouble(o.getString("PersonalRaised"));
 			
-			KinteraUser user = new KinteraUser(username, password, realName, fundGoal, fundRaised, pageURL);
+			KinteraUser user = new KinteraUser(username,realName, fundGoal, fundRaised, pageURL);
 			return user;
 		}
 	}

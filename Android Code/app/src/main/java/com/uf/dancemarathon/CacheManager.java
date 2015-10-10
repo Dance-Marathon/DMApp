@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 /**
  * @author Chris Whitten
@@ -18,6 +19,7 @@ import android.content.Context;
  */
 public class CacheManager
 {
+
 	/**
 	 * This method will write the object to a cache file. If the cache file does not exist,
 	 * then a new file will be created with the given path.
