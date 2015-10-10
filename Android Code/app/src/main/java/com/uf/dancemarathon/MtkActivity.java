@@ -1,5 +1,6 @@
 package com.uf.dancemarathon;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -24,13 +25,19 @@ public class MtkActivity extends AppCompatActivity {
         //Customize action bar
         ActionBar bar = getSupportActionBar();
         bar.setTitle(ACTION_BAR_TITLE);
+
+        int color = getResources().getColor(R.color.action_bar_color);
+        ColorDrawable cd = new ColorDrawable();
+        cd.setColor(color);
+        bar.setBackgroundDrawable(cd);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_mtk, menu);
-        return true;
+
+        return false; //return false to hide the menu
     }
 
     @Override

@@ -1,23 +1,25 @@
 package com.uf.dancemarathon;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
-public class LoginActivity extends ActionBarActivity
+
+public class LoginActivity extends AppCompatActivity
 {
 	/**
 	 * Flag used to pass back user to HomeActivity.
 	 */
-	public static int IS_USER_STILL_LOGGED_IN = 5;
+	public int IS_USER_STILL_LOGGED_IN = 5;
 	
 	@Override	
 	protected void onCreate(Bundle savedInstanceState)
@@ -26,15 +28,16 @@ public class LoginActivity extends ActionBarActivity
 		setContentView(R.layout.activity_login);
 		
 		//Hide Action Bar
-		getSupportActionBar().hide();
-				
+		ActionBar bar = getSupportActionBar();
+
+        int color = getResources().getColor(R.color.action_bar_color);
+        ColorDrawable cd = new ColorDrawable();
+        cd.setColor(color);
+        bar.setBackgroundDrawable(cd);
+
+		//Add login fragment
 		FragmentManager manager = getSupportFragmentManager();
-		
-		//We don't want duplicate fragments on top of each other
-		if(savedInstanceState != null)
-			return;
-		
-		manager.beginTransaction().add(R.id.kintera_container, LoginFragment.newInstance()).commit();
+		manager.beginTransaction().replace(R.id.kintera_container, LoginFragment.newInstance()).commit();
 	}
 	
 	protected void onStart()
@@ -54,7 +57,8 @@ public class LoginActivity extends ActionBarActivity
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
+
+        return false; //return false to hide the menu
 	}
 
 	@Override

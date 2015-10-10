@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,11 +29,12 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 
 
-public class UserActivity extends ActionBarActivity
+public class UserActivity extends AppCompatActivity
 {
 	private KinteraUser user;
 	private UserLoader loader;
-	private final String kinteraWebServicePath = "http://dev.floridadm.org/app/kintera.php";
+	private final String USER_WEBSERVICE_PATH = "http://dev.floridadm.org/app/kintera.php";
+	private final String ACTION_BAR_TITLE = "Fundraising Progress";
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -55,9 +57,9 @@ public class UserActivity extends ActionBarActivity
 		
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
-		bar.setTitle("Fundraising Progress");
-		
-		int color = getResources().getColor(R.color.dm_orange_primary);
+		bar.setTitle(ACTION_BAR_TITLE);
+
+		int color = getResources().getColor(R.color.action_bar_color);
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
@@ -164,7 +166,9 @@ public class UserActivity extends ActionBarActivity
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.user, menu);
-		return true;
+
+
+        return false; //return false to hide the menu
 	}
 
 	@Override

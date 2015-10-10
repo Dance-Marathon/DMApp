@@ -7,13 +7,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 
 
-public class SocialMediaActivity extends ActionBarActivity {
+public class SocialMediaActivity extends AppCompatActivity {
 
 	/**
 	 * This is the DM over the years video
@@ -34,8 +35,8 @@ public class SocialMediaActivity extends ActionBarActivity {
 		// Set action bar title and color
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle("Social Media");
-		
-		int color = getResources().getColor(R.color.dm_orange_primary);
+
+		int color = getResources().getColor(R.color.action_bar_color);
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
