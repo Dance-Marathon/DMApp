@@ -2,19 +2,21 @@ package com.uf.dancemarathon;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-public class MapActivity extends Activity {
+public class MapActivity extends AppCompatActivity {
 
 	private TouchImageView mMap;
 	private ArrayList<ImageFrame> frames;
-	
+	private String ACTION_BAR_TITLE="Map";
 	   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,14 @@ public class MapActivity extends Activity {
 		
 		initFrames();
 		mMap.setOnTouchListener(new MyTouchListener());
+
+		ActionBar bar = getSupportActionBar();
+        bar.setTitle(ACTION_BAR_TITLE);
+
+		int color = getResources().getColor(R.color.action_bar_color);
+		ColorDrawable cd = new ColorDrawable();
+		cd.setColor(color);
+		bar.setBackgroundDrawable(cd);
 		
 	}
 	
@@ -49,7 +59,8 @@ public class MapActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.map, menu);
-		return true;
+
+		return false; //return false to hide the menu
 	}
 
 	@Override

@@ -27,8 +27,6 @@ public class HomeActivity extends AppCompatActivity
 	KinteraUser user;
 	private String[] mDrawerNames;
 	boolean trackEnabled = false;
-	public boolean isScrolling = false;
-    static final int GET_USER_REQUEST = 1;
 	
 	//These methods allow us to maintain the state of the user//
 	public void onSaveInstanceState(Bundle savedInstanceState)
@@ -57,7 +55,6 @@ public class HomeActivity extends AppCompatActivity
             b.hide();
 
 		setUpNavDrawer();
-		user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
 
         //Add HomeFragement
         FragmentManager fm = getSupportFragmentManager();
@@ -68,6 +65,10 @@ public class HomeActivity extends AppCompatActivity
 	protected void onStart()
 	{
 		super.onStart();
+
+        //Maintain user state
+        user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
+
 		//Register google analytics page hit
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
 		if(canTrack == ConnectionResult.SUCCESS)
@@ -186,12 +187,11 @@ public class HomeActivity extends AppCompatActivity
             Bundle b = new Bundle();
             b.putParcelable("user", user);
             intent.putExtras(b);
-            startActivityForResult(intent, GET_USER_REQUEST);
+            startActivity(intent);
         }
         else
         {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivityForResult(intent, GET_USER_REQUEST);
+            openActivity(LoginActivity.class);
         }
     }
 	
@@ -208,25 +208,6 @@ public class HomeActivity extends AppCompatActivity
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int, android.content.Intent)
-	 * The current implementation allows the user data to be passed back from the //Login activity
-	 */
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		if(requestCode == GET_USER_REQUEST)
-		{
-			if(resultCode == RESULT_OK)
-			{
-				user = data.getExtras().getParcelable("user");
-			}
-			else if(resultCode == RESULT_CANCELED)
-			{
-				user = null;
-			}
-		}
 	}
 }
 

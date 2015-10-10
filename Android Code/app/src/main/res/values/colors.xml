@@ -6,6 +6,7 @@
      <color name="dm_blue_primary">#014083</color>
      <color name="dm_orange_secondary">#F79B63</color>
      <color name="dm_blue_secondary">#617BA6</color>
+	 <color name="action_bar_color">#F37021</color>
     
     <!-- Basic Colors -->
      <color name="yellow">#FFFF00</color>

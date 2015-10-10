@@ -16,6 +16,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.Menu;
@@ -28,7 +29,7 @@ import android.widget.Toast;
  * @author Chris Whitten
  *
  */
-public class AboutActivity extends ActionBarActivity {
+public class AboutActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,8 @@ public class AboutActivity extends ActionBarActivity {
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle("About Us");
-		
-		int color = getResources().getColor(R.color.dm_orange_primary);
+
+		int color = getResources().getColor(R.color.action_bar_color);
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);

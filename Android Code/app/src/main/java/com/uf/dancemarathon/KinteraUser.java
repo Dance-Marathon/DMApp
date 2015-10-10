@@ -15,18 +15,16 @@ public class KinteraUser implements Parcelable, Serializable
 	/**
 	 * This ID is important to keep KinteraUser serializable
 	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 9L;
 	public String userName;
 	public String realName;
 	public String pageURL;
-	private String password;
 	public double fundGoal;
 	public double fundRaised;
 
-	public KinteraUser(String userName, String password, String realName, double fundGoal, double fundRaised, String pageURL)
+	public KinteraUser(String userName, String realName, double fundGoal, double fundRaised, String pageURL)
 	{
 		this.userName = userName;
-		this.setPassword(password);
 		this.realName = realName;
 		this.fundGoal = fundGoal;
 		this.fundRaised = fundRaised;
@@ -52,7 +50,6 @@ public class KinteraUser implements Parcelable, Serializable
 	{
 		// TODO Auto-generated method stub
 		dest.writeString(userName);
-		dest.writeString(password);
 		dest.writeString(realName);
 		dest.writeString(pageURL);
 		dest.writeDouble(fundGoal);
@@ -62,7 +59,6 @@ public class KinteraUser implements Parcelable, Serializable
 	private KinteraUser(Parcel in)
 	{
 		this.userName = in.readString();
-		this.password = in.readString();
 		this.realName = in.readString();
 		this.pageURL = in.readString();
 		this.fundGoal = in.readDouble();
@@ -80,24 +76,6 @@ public class KinteraUser implements Parcelable, Serializable
 		    return new KinteraUser[size];
 		}
 	};
-	
-	//----------------------//
-	
-	/**
-	 * @return the password
-	 */
-	public String getPassword()
-	{
-		return password;
-	}
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
 
 	
 }

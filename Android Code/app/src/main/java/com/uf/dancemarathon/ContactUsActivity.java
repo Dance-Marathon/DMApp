@@ -29,8 +29,8 @@ public class ContactUsActivity extends ActionBarActivity {
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle("Contact Us");
-		
-		int color = getResources().getColor(R.color.dm_orange_primary);
+
+		int color = getResources().getColor(R.color.action_bar_color);
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
