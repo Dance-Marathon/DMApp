@@ -1,6 +1,7 @@
 package com.uf.dancemarathon;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
@@ -26,35 +27,35 @@ public class FontSetter
 		for(int index = 0; index < params.length; index++)
 		{
 			TextView curr = params[index];
-			
+			AssetManager manager = c.getAssets();
 			switch(f)
 			{
 			case AGBBol: 
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + AGBBol));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + AGBBol));
 				break;
 			case AGBMed:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + AGBBol));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + AGBBol));
 				break;
 			case AGBReg:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + AGBReg));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + AGBReg));
 				break;
 			case ALTB:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + ALTB));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + ALTB));
 				break;
 			case ALTL:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + ALTL));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + ALTL));
 				break;
 			case ALTM:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + ALTM));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + ALTM));
 				break;
 			case ALTMO:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + ALTMO));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + ALTMO));
 				break;
 			case ALTR:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + ALTR));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + ALTR));
 				break;
 			case P:
-				curr.setTypeface(Typeface.createFromAsset(c.getAssets(), "fonts/" + P));
+				curr.setTypeface(Typeface.createFromAsset(manager, "fonts/" + P));
 				break;
 			default:
 				break;
