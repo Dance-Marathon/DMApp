@@ -48,8 +48,6 @@ public class CircleView extends ImageView
 
         paintBorder = new Paint();
         setBorderColor(Color.WHITE);
-        paintBorder.setAntiAlias(true);
-        this.setLayerType(LAYER_TYPE_SOFTWARE, paintBorder);
         paintBorder.setShadowLayer(4.0f, 0.0f, 2.0f, Color.BLACK);
     }
 
