@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,14 +15,24 @@ import android.view.View;
 
 public class SocialMediaActivity extends AppCompatActivity {
 
-	/**
-	 * This is the DM over the years video
-	 */
-	private static String defaultYoutubeVideoId = "ZRc6rjZleMs";
-	private static String twitter_Id = "twitter://user?user_id=34755385";
-	private static String facebook_Id = "fb://page/116374146706";
-	private static String instagram_Id = "http://instagram.com/dmatuf";
-	
+    //Package names for social media apps
+    private static String TWITTER_PACKAGE = "com.twitter.android";
+    private static String FACEBOOK_PACKAGE = "com.facebook.katana";
+    private static String INSTAGRAM_PACKAGE = "com.instagram.android";
+    private static String YOUTUBE_PACKAGE = "com.google.android.youtube";
+
+	//IDs for Dance Marathon page on various social media sites to open through their respective apps
+	private static String TWITTER_ID = "twitter://user?user_id=34755385";
+	private static String FACEBOOK_ID = "fb://page/116374146706";
+	private static String INSTAGRAM_ID = "http://instagram.com/dmatuf";
+    private static String YOUTUBE_ID = "ZRc6rjZleMs"; //DM over the years video
+
+    //Websites for Dance Marathon page on various social media sites to open through web browser
+    private static String TWITTER_URL = "https://www.twitter.com/floridadm";
+    private static String FACEBOOK_URL = "https://www.facebook.com/floridaDM";
+    private static String INSTAGRAM_URL = "https://www.instagram.com/dmatuf";
+    private static String YOUTUBE_URL = "https://www.youtube.com/user/UFDanceMarathon";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,13 +99,13 @@ public class SocialMediaActivity extends AppCompatActivity {
 		// Open Facebook page in Facebook app
 		try
 		{
-			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.facebook_Id));
+			context.getPackageManager().getPackageInfo(FACEBOOK_PACKAGE, 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.FACEBOOK_ID));
 		}
 		// Open Facebook page in browser
 		catch (Exception e)
 		{
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/floridaDM"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(FACEBOOK_URL));
 		}
 	}
 	
@@ -106,13 +115,13 @@ public class SocialMediaActivity extends AppCompatActivity {
 		// Open Twitter profile in Twitter app
 		try
 		{
-		    context.getPackageManager().getPackageInfo("com.twitter.android", 0);
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.twitter_Id));
+		    context.getPackageManager().getPackageInfo(TWITTER_PACKAGE, 0);
+		    return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.TWITTER_ID));
 		}
 		// Open Twitter profile in browser
 		catch (Exception e)
 		{
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.twitter.com/floridadm"));
+		    return new Intent(Intent.ACTION_VIEW, Uri.parse(TWITTER_URL));
 		}
 	}
 	
@@ -121,13 +130,13 @@ public class SocialMediaActivity extends AppCompatActivity {
 	{
 		// Open Instagram profile in Instagram app
 		try{
-			context.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
-			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.instagram_Id));
+			context.getPackageManager().getLaunchIntentForPackage(INSTAGRAM_PACKAGE);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(SocialMediaActivity.INSTAGRAM_ID));
 		}
 		// Open Instagram profile in browser
 		catch (Exception e)
 		{
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/dmatuf"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(INSTAGRAM_URL));
 		}
 	}
 	
@@ -138,13 +147,13 @@ public class SocialMediaActivity extends AppCompatActivity {
 		// Open YouTube channel in YouTube app
 		try
 		{
-			context.getPackageManager().getPackageInfo("com.google.android.youtube", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + SocialMediaActivity.defaultYoutubeVideoId));
+			context.getPackageManager().getPackageInfo(YOUTUBE_PACKAGE, 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + SocialMediaActivity.YOUTUBE_ID));
 		}
 		// Open YouTube channel in browser
 		catch (Exception e)
 		{
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/user/UFDanceMarathon"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_URL));
 		}
 	}
 }
