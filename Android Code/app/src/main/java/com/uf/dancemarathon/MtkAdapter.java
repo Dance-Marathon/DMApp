@@ -15,7 +15,6 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ import com.uf.dancemarathon.FontSetter.fontName;
  */
 public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
-	private ArrayList<Kids> kids = new ArrayList<Kids>();
+	private ArrayList<Kid> kids = new ArrayList<Kid>();
 	public KidsLoader loader;
 	
 	// Array of kids who have Milestones on YouTube
@@ -118,7 +117,7 @@ public class MtkAdapter extends BaseAdapter {
 	}
 
 	
-	public Kids getKid(int position)
+	public Kid getKid(int position)
 	{
 		return this.kids.get(position);
 	}
@@ -133,7 +132,7 @@ public class MtkAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
     	ViewHolder holder = null;
     	
-    	Kids currKid = kids.get(position);
+    	Kid currKid = kids.get(position);
 		int imageId = currKid.getImageId(mContext);
 		
 	    if (convertView == null) 
@@ -189,7 +188,7 @@ public class MtkAdapter extends BaseAdapter {
 		
 		private void ParseTheKids() {
 			
-			ArrayList<Kids> loadedKids = new ArrayList<Kids>();
+			ArrayList<Kid> loadedKids = new ArrayList<Kid>();
 			try {
 				JSONArray data_arr = new JSONArray(loadJSONFromAsset());
 
@@ -218,14 +217,14 @@ public class MtkAdapter extends BaseAdapter {
 					}
 
 					
-					Kids k = new Kids(name, age, story, image_name, youtube_id);
+					Kid k = new Kid(name, age, story, image_name, youtube_id);
 					loadedKids.add(k);
 					
 					
 				}
 				
 				// Alphabetizes arraylist by name 
-				Collections.sort(loadedKids, Kids.COMPARE_BY_NAME);
+				Collections.sort(loadedKids, Kid.COMPARE_BY_NAME);
 				
 			
 				for(int i=0; i < loadedKids.size(); i++)

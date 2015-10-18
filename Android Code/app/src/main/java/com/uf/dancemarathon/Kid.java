@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Kids implements Parcelable
+public class Kid implements Parcelable
 {
 	private String name;
 	private int age;
@@ -16,7 +16,7 @@ public class Kids implements Parcelable
 	private String image_name;
 	private String youtube_id;
 	
-	public Kids(String name, int age, String story, String image_name, String youtube_id) throws ParseException 
+	public Kid(String name, int age, String story, String image_name, String youtube_id) throws ParseException
 	{
 		this.name = name;
 		this.age = age;
@@ -25,7 +25,7 @@ public class Kids implements Parcelable
 		this.youtube_id = youtube_id;
 	}
 	
-	public Kids()
+	public Kid()
 	{
 		// TODO Auto-generated constructor stub
 	}
@@ -56,7 +56,7 @@ public class Kids implements Parcelable
 		dest.writeString(this.youtube_id);
 	}
 	
-	private Kids(Parcel in)
+	private Kid(Parcel in)
 	{
 		name = in.readString();
 		age = in.readInt();
@@ -66,15 +66,15 @@ public class Kids implements Parcelable
 	}
 	
 
-	public static final Parcelable.Creator<Kids> CREATOR
-    		= new Parcelable.Creator<Kids>() {
+	public static final Parcelable.Creator<Kid> CREATOR
+    		= new Parcelable.Creator<Kid>() {
 		
-		public Kids createFromParcel(Parcel in) {
-		    return new Kids(in);
+		public Kid createFromParcel(Parcel in) {
+		    return new Kid(in);
 		}
 		
-		public Kids[] newArray(int size) {
-		    return new Kids[size];
+		public Kid[] newArray(int size) {
+		    return new Kid[size];
 		}
 	};
 	
@@ -129,8 +129,8 @@ public class Kids implements Parcelable
 		this.youtube_id = youtube_id;
 	}
 	
-	public static Comparator<Kids> COMPARE_BY_NAME = new Comparator<Kids>() {
-        public int compare(Kids one, Kids other) {
+	public static Comparator<Kid> COMPARE_BY_NAME = new Comparator<Kid>() {
+        public int compare(Kid one, Kid other) {
             return one.getName().compareTo(other.getName());
         }
     };

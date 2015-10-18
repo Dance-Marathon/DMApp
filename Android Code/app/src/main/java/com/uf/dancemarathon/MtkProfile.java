@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -20,7 +19,7 @@ import android.widget.TextView;
  */
 public class MtkProfile extends ActionBarActivity
 {
-	Kids kid;
+	Kid kid;
 	
 	public MtkProfile()
 	{
@@ -33,7 +32,7 @@ public class MtkProfile extends ActionBarActivity
 		setContentView(R.layout.activity_mtk_profile);
 		
 		//Get user from intent
-		Kids kid = getIntent().getExtras().getParcelable("kid");
+		Kid kid = getIntent().getExtras().getParcelable("kid");
 		this.kid = kid;
 		
 		setFields(kid);
@@ -68,7 +67,7 @@ public class MtkProfile extends ActionBarActivity
 		return f;
 	}
 	
-	private void setFields(final Kids kid)
+	private void setFields(final Kid kid)
 	{
 		ImageView pic  = (ImageView) findViewById(R.id.kid_pic);
 		TextView story = (TextView) findViewById(R.id.kid_story);
