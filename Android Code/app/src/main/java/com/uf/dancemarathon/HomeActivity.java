@@ -74,7 +74,7 @@ public class HomeActivity extends AppCompatActivity
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "HomeActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "Main Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.HOME_ACTIVITY_NAME);
 			trackEnabled = true;
 		}
 		

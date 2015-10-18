@@ -73,7 +73,7 @@ public class AboutActivity extends AppCompatActivity {
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			////Log.d("Tracking", "AboutActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "About Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.ABOUT_ACTIVITY_NAME);
 		}
 	}
 	

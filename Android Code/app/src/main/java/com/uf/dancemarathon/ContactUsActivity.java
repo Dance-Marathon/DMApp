@@ -60,7 +60,7 @@ public class ContactUsActivity extends ActionBarActivity {
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "ContactUsActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "Contact Us Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.CONTACTUS_ACTIVITY_NAME);
 		}
 	}
 

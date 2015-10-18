@@ -82,7 +82,7 @@ public class UserActivity extends AppCompatActivity
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "UserActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "User Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.USER_ACTIVITY_NAME);
 		}
 	}
 	

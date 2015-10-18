@@ -77,7 +77,7 @@ public class FAQActivity extends ActionBarActivity {
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "FAQActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "FAQ Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.FAQ_ACTIVITY_NAME);
 		}
 	}
 	

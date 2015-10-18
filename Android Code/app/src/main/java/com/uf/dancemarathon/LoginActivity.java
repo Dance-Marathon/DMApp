@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "//LoginActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "//Login Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.LOGIN_ACTIVITY_NAME);
 		}
 	}
 	

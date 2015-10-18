@@ -10,6 +10,16 @@ import com.google.android.gms.analytics.Tracker;
  */
 public class TrackerManager
 {
+
+	public final static String ABOUT_ACTIVITY_NAME = "about_screen";
+    public final static String CONTACTUS_ACTIVITY_NAME = "Contact Us Screen";
+    public final static String EVENT_ACTIVITY_PREFIX = "Event: ";
+    public final static String FAQ_ACTIVITY_NAME = "FAQ Screen";
+    public final static String HOME_ACTIVITY_NAME = "Main Screen";
+    public final static String LOGIN_ACTIVITY_NAME = "Login Screen";
+    public final static String SPONSOR_ACTIVITY_NAME = "Sponsor Screen";
+    public final static String USER_ACTIVITY_NAME = "User Screen";
+
 	/**
 	 * Send a screen view hit using the default app tracker
 	 * @param a The application object

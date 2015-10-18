@@ -99,7 +99,7 @@ public class EventActivity extends ActionBarActivity
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "EventActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "Event: " + event.getTitle());
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.EVENT_ACTIVITY_PREFIX + event.getTitle());
 		}
 	}
 	
