@@ -23,10 +23,6 @@ import android.widget.TextView;
 
 import com.uf.dancemarathon.FontSetter.fontName;
 
-/**
- * @author Chris Whitten This class provides the image information to the mtk
- *         grid view. See the Android developer guide for more information.
- */
 public class MtkAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Kid> kids = new ArrayList<Kid>();
@@ -185,9 +181,14 @@ public class MtkAdapter extends BaseAdapter {
 		protected void onPostExecute(Void result) {	
 			
 		}
-		
-		private void ParseTheKids() {
-			
+
+		 @Override
+		 protected void onProgressUpdate(Void... values) {
+			 MtkAdapter.this.notifyDataSetChanged();
+		 }
+
+		 private void ParseTheKids() {
+
 			ArrayList<Kid> loadedKids = new ArrayList<Kid>();
 			try {
 				JSONArray data_arr = new JSONArray(loadJSONFromAsset());
@@ -216,43 +217,20 @@ public class MtkAdapter extends BaseAdapter {
 						story = "No story available.";
 					}
 
-					
 					Kid k = new Kid(name, age, story, image_name, youtube_id);
-					loadedKids.add(k);
-					
-					
+					kids.add(k);
+
+                    // Alphabetizes arraylist by name
+                    Collections.sort(kids, Kid.COMPARE_BY_NAME);
+
+                    publishProgress();
 				}
-				
-				// Alphabetizes arraylist by name 
-				Collections.sort(loadedKids, Kid.COMPARE_BY_NAME);
-				
-			
-				for(int i=0; i < loadedKids.size(); i++)
-				{
-					Thread.sleep(20);
-					kids.add(loadedKids.get(i));
-					
-					((Activity) mContext).runOnUiThread(new Runnable(){
-	
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							MtkAdapter.this.notifyDataSetChanged();
-						}
-						
-					});		
-				}
-				
 			} 
 			catch (IOException e) {
 				e.printStackTrace();
 			} 
 			catch (JSONException e) {
 				e.printStackTrace();
-			} 
-			catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 			catch (ParseException e)
 			{
