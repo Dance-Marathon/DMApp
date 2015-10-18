@@ -95,7 +95,7 @@ public class NotificationService extends Service {
 	 */
 	private void setupEventNotifications()
 	{
-		Object o = CacheManager.readObjectFromCacheFile(this, "events");
+		Object o = CacheManager.readObjectFromCacheFile(this, CacheManager.EVENTS_FILENAME);
 		//Stop this service if there is no event cache file
 		if(o == null)
 			this.stopSelf();

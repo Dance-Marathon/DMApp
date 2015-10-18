@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment
 		setButtonListeners(v);
 		
 		//Try to read data from cache
-		 Object o = CacheManager.readObjectFromCacheFile(c , "announcements");
+		 Object o = CacheManager.readObjectFromCacheFile(c , CacheManager.ANNOUNCEMENTS_FILENAME);
 		 //If failed, force update
 		if(o == null)
 		{
@@ -332,7 +332,7 @@ public class HomeFragment extends Fragment
 				announcements = parseAnnouncementsJSON(arr);
 				
 				//Write data to cache
-				CacheManager.writeObjectToCacheFile(getActivity(), announcements, "announcements");
+				CacheManager.writeObjectToCacheFile(getActivity(), announcements, CacheManager.ANNOUNCEMENTS_FILENAME);
 				
 				//Set success flag to true
 				loadSuccessful = true;

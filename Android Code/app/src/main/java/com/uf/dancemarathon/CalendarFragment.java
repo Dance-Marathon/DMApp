@@ -416,7 +416,7 @@ public class CalendarFragment extends Fragment
 	public ArrayList<Event> forceCacheRead()
 	{
 		//Try to read data from cache
-		 Object o = CacheManager.readObjectFromCacheFile(c , "events");
+		 Object o = CacheManager.readObjectFromCacheFile(c , CacheManager.EVENTS_FILENAME);
 		 
 		if(o != null)
 			return (ArrayList<Event>) o;
@@ -475,7 +475,7 @@ public class CalendarFragment extends Fragment
 				setEvents(events);
 				
 				//Write data to cache
-				CacheManager.writeObjectToCacheFile(getActivity(), events, "events");
+				CacheManager.writeObjectToCacheFile(getActivity(), events, CacheManager.EVENTS_FILENAME);
 				
 				//Set success flag to true
 				loadSuccessful = true;

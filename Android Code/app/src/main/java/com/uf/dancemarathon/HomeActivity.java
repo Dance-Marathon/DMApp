@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity
 		super.onStart();
 
         //Maintain user state
-        user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, "user");
+        user = (KinteraUser) CacheManager.readObjectFromCacheFile(this, CacheManager.USER_FILENAME);
 
 		//Register google analytics page hit
 		int canTrack = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplication());
