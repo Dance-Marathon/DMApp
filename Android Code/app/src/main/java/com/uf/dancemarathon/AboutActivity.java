@@ -15,7 +15,6 @@ import com.uf.dancemarathon.FontSetter.fontName;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
@@ -31,13 +30,16 @@ import android.widget.Toast;
  */
 public class AboutActivity extends AppCompatActivity {
 
+	private String ACTION_BAR_TITLE = "About Us";
+    private String CONTENT_FILENAME = "about.json";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
 		
 		try {
-			String aboutContent = parseJSONData("about.json");
+			String aboutContent = parseJSONData(CONTENT_FILENAME);
 			
 			//Set content
 			TextView contentView = (TextView) findViewById(R.id.aboutus_content);
@@ -56,7 +58,7 @@ public class AboutActivity extends AppCompatActivity {
 		
 		//Set action bar title and color
 		ActionBar bar = getSupportActionBar();
-		bar.setTitle("About Us");
+		bar.setTitle(ACTION_BAR_TITLE);
 
 		int color = getResources().getColor(R.color.action_bar_color);
 		ColorDrawable cd = new ColorDrawable();
