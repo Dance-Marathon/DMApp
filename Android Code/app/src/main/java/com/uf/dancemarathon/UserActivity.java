@@ -82,7 +82,7 @@ public class UserActivity extends AppCompatActivity
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "UserActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "User Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.USER_ACTIVITY_NAME);
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class UserActivity extends AppCompatActivity
 	 */
 	public void logout(View v)
 	{
-		CacheManager.clearCacheFile(this, "user");
+		CacheManager.clearCacheFile(this, CacheManager.USER_FILENAME);
 		this.finish();
 	}
 	
@@ -274,8 +274,8 @@ public class UserActivity extends AppCompatActivity
 			if(loadSuccessful)
 			{
 				//Write user data to cache
-				CacheManager.clearCacheFile(UserActivity.this, "user");
-				CacheManager.writeObjectToCacheFile(UserActivity.this, user, "user");
+				CacheManager.clearCacheFile(UserActivity.this, CacheManager.USER_FILENAME);
+				CacheManager.writeObjectToCacheFile(UserActivity.this, user, CacheManager.USER_FILENAME);
 				
 				//Refresh the page
 				setFields(user);

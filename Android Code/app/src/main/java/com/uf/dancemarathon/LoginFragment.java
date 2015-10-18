@@ -229,8 +229,8 @@ public class LoginFragment extends Fragment
 				startActivity(intent);
 			
 				//Write user data to cache
-				CacheManager.clearCacheFile(getActivity(), "user");
-				CacheManager.writeObjectToCacheFile(getActivity(), user, "user");
+				CacheManager.clearCacheFile(getActivity(), CacheManager.USER_FILENAME);
+				CacheManager.writeObjectToCacheFile(getActivity(), user, CacheManager.USER_FILENAME);
 			}
 			else
 			{

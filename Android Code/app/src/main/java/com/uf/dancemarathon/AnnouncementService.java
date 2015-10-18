@@ -80,7 +80,7 @@ public class AnnouncementService extends Service {
 	@SuppressWarnings("unchecked")
 	private ArrayList<Announcement> readCache()
 	{
-		Object o = CacheManager.readObjectFromCacheFile(this, "announcements");
+		Object o = CacheManager.readObjectFromCacheFile(this, CacheManager.ANNOUNCEMENTS_FILENAME);
 		if(o != null)
 			return (ArrayList<Announcement>) o;
 		else
@@ -112,7 +112,7 @@ public class AnnouncementService extends Service {
 			//If new announcements have been found, update ments and cache
 			if(announcements.size() > lastSize)
 			{
-				CacheManager.writeObjectToCacheFile(this, announcements, "announcements");
+				CacheManager.writeObjectToCacheFile(this, announcements, CacheManager.ANNOUNCEMENTS_FILENAME);
 				isNew = true;
 			}	
 			lastSize = announcements.size();

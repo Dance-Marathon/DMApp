@@ -39,7 +39,7 @@ public class SponsorActivity extends ActionBarActivity {
 		if(canTrack == ConnectionResult.SUCCESS)
 		{
 			//Log.d("Tracking", "SponsorActivity");
-			TrackerManager.sendScreenView((MyApplication) getApplication(), "Sponsor Screen");
+			TrackerManager.sendScreenView((MyApplication) getApplication(), TrackerManager.SPONSOR_ACTIVITY_NAME);
 		}
 	}
 

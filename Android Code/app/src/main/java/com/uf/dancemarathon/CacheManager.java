@@ -20,6 +20,10 @@ import android.content.SharedPreferences;
 public class CacheManager
 {
 
+	public final static String USER_FILENAME = "user";
+    public final static String ANNOUNCEMENTS_FILENAME = "announcements";
+    public final static String EVENTS_FILENAME = "events";
+
 	/**
 	 * This method will write the object to a cache file. If the cache file does not exist,
 	 * then a new file will be created with the given path.

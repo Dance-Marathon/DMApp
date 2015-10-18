@@ -2,7 +2,6 @@ package com.uf.dancemarathon;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -45,7 +44,7 @@ public class MtkFragment extends Fragment
 
         		Intent intent = new Intent(getActivity(), MtkProfile.class);
         		Bundle b = new Bundle();
-        		b.putParcelable("kid", (Kids)parent.getItemAtPosition(position));
+        		b.putParcelable("kid", (Kid)parent.getItemAtPosition(position));
         		intent.putExtras(b);
         		startActivity(intent);
         }
