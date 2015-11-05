@@ -1,12 +1,14 @@
 package com.uf.dancemarathon;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spannable;
@@ -29,10 +31,11 @@ public class HomeActivity extends AppCompatActivity
 {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 	private KinteraUser user;
 	private String[] mDrawerNames;
 	boolean trackEnabled = false;
-	private String ACTION_BAR_TITLE = "Welcome to Dance Marathon at UF!";
+	private String ACTION_BAR_TITLE = "Welcome to Dance Marathon!";
 
 	//These methods allow us to maintain the state of the user//
 	public void onSaveInstanceState(Bundle savedInstanceState)
@@ -71,6 +74,9 @@ public class HomeActivity extends AppCompatActivity
         ColorDrawable cd = new ColorDrawable();
         cd.setColor(color);
         bar.setBackgroundDrawable(cd);
+
+        bar.setDisplayHomeAsUpEnabled(true);
+        bar.setHomeButtonEnabled(true);
     }
 	
 	
@@ -127,7 +133,12 @@ public class HomeActivity extends AppCompatActivity
         //Increase the width of the window for swipe gesture that will open the drawer
         increaseNavDrawerEdgeSize(3);
 
-	     // Set the adapter for the list view
+         //Set the action bar icon behavior
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.drawer_open, R.string.drawer_close);
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // Set the adapter for the list view
 	     mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                  R.layout.nav_drawer_item, R.id.nav_item, mDrawerNames));
 	     // Set the list's click listener
@@ -213,13 +224,25 @@ public class HomeActivity extends AppCompatActivity
 		return true;
 	}
 
-	@Override
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		return true;
+		if(mDrawerToggle.onOptionsItemSelected(item))
+		    return true;
+
+        return super.onOptionsItemSelected(item);
 	}
 }
 

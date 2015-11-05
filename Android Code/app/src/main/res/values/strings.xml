@@ -111,5 +111,7 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="title_activity_mtk">MtkActivity</string>
+    <string name="drawer_open">Drawer is open</string>
+    <string name="drawer_close">Drawer is closed</string>
 
 </resources>
