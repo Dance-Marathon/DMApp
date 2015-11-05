@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 public class MtkActivity extends AppCompatActivity {
 
-    private String ACTION_BAR_TITLE = "Meet The Kid";
+    private String ACTION_BAR_TITLE = "Meet The Kids";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

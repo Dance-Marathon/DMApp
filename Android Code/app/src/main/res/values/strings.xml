@@ -39,7 +39,7 @@
     <string name="game">Game</string>
     <string name="donate">Donate</string>
     <string name="website">DMatUF</string>
-    <string name="header">Join us on <b>March 14&#8211;15, 2015</b> at the O\'Connell Center at UF</string>
+    <string name="header">Join us on <i>March 19&#8211;20, 2016</i> at the O\'Connell Center at UF</string>
     <string name="announcements">Announcements</string>
     <string name="accouncements_content">Content</string>
     <string name="balloon">balloon</string>
@@ -68,7 +68,7 @@
         <item>Meet The Kids</item>
         <item>My Fundraising Progress</item>
         <item>About Dance Marathon</item>
-        <item>Contact Us!</item>
+        <item>Contact Us</item>
     </string-array>
 
     <!-- Contact Us Activity strings -->

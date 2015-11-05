@@ -1,12 +1,17 @@
 package com.uf.dancemarathon;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,12 +27,13 @@ import java.lang.reflect.Field;
 
 public class HomeActivity extends AppCompatActivity
 {
-	DrawerLayout mDrawerLayout;
-	ListView mDrawerList;
-	KinteraUser user;
+	private DrawerLayout mDrawerLayout;
+	private ListView mDrawerList;
+	private KinteraUser user;
 	private String[] mDrawerNames;
 	boolean trackEnabled = false;
-	
+	private String ACTION_BAR_TITLE = "Welcome to Dance Marathon at UF!";
+
 	//These methods allow us to maintain the state of the user//
 	public void onSaveInstanceState(Bundle savedInstanceState)
 	{
@@ -41,25 +47,31 @@ public class HomeActivity extends AppCompatActivity
 		//Get user from savedInstanceState
 		user = savedInstanceState.getParcelable("user");
 	}
+
 	//
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
-		//Hide Action Bar
-		ActionBar b = getSupportActionBar();
-        if(b != null)
-            b.hide();
-
-		setUpNavDrawer();
+        setupActionBar();
+		setupNavDrawer();
 
         //Add HomeFragement
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.home_fragment_container, HomeFragment.newInstance(this)).commit();
 	}
+
+    private void setupActionBar(){
+        //Set action bar title and color
+        ActionBar bar = getSupportActionBar();
+        bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + ACTION_BAR_TITLE + "</font>"));
+        int color = getResources().getColor(R.color.action_bar_color);
+        ColorDrawable cd = new ColorDrawable();
+        cd.setColor(color);
+        bar.setBackgroundDrawable(cd);
+    }
 	
 	
 	protected void onStart()
@@ -106,7 +118,7 @@ public class HomeActivity extends AppCompatActivity
 	/**
 	 * This method handles the initializations for the navigation drawer
 	 */
-	private void setUpNavDrawer()
+	private void setupNavDrawer()
 	{
 		 mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 	     mDrawerList = (ListView) findViewById(R.id.left_drawer);
