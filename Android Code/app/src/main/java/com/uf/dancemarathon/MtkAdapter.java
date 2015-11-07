@@ -211,11 +211,6 @@ public class MtkAdapter extends BaseAdapter {
 							break;
 						}
 					}
-					
-					if (story.length() < 5)
-					{
-						story = "No story available.";
-					}
 
 					Kid k = new Kid(name, age, story, image_name, youtube_id);
 					kids.add(k);

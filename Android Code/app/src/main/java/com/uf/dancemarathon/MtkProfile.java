@@ -2,25 +2,29 @@ package com.uf.dancemarathon;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
  * 
  */
-public class MtkProfile extends ActionBarActivity
+public class MtkProfile extends AppCompatActivity
 {
 	Kid kid;
-	
+
 	public MtkProfile()
 	{
 		// Required empty public constructor
@@ -55,10 +59,6 @@ public class MtkProfile extends ActionBarActivity
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
-		
-		//Set milestone onclick
-		
-		
 	}
 	
 	public static MtkProfile newInstance()
@@ -76,7 +76,7 @@ public class MtkProfile extends ActionBarActivity
 		pic.setImageResource(kid.getImageId(this));
 		story.setText(kid.getStory());
 		
-		if (kid.getYoutube_id().length() > 5)
+		if (kid.getYoutube_id().length() > 0)
 		{
 			mile.setTag(kid.getYoutube_id());
 			mile.setText("View " + kid.getName() + "'s Milestone");

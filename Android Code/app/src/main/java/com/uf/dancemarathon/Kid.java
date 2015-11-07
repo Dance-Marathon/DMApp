@@ -27,7 +27,6 @@ public class Kid implements Parcelable
 	
 	public Kid()
 	{
-		// TODO Auto-generated constructor stub
 	}
 	
 	protected int getImageId(Context c)
@@ -89,7 +88,7 @@ public class Kid implements Parcelable
 		return age;
 	}
 	
-	protected String getStory()
+	public String getStory()
 	{
 		return story;
 	}
@@ -115,9 +114,17 @@ public class Kid implements Parcelable
 	}
 	
 	protected void setStory(String story)
-	{
+    {
 		this.story = story;
 	}
+
+    public boolean hasStory()
+    {
+        if(story != null || story.length() > 10)
+            return true;
+        else
+            return false;
+    }
 	
 	protected void setImage_name(String image_name)
 	{
