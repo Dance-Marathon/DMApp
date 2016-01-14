@@ -7,9 +7,9 @@
 
 	"websitePath":			"http://www.floridadm.org/",
 
-	"donatePath":			"http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2",
+	"donatePath":			"http://events.dancemarathon.com/index.cfm?fuseaction=donorDrive.event&eventID=786",
 	
 	"gamePath":				"http://dev.floridadm.org/Stand/game.html",
 
-	"DMEventStartDate":		"2015-03-14 12:00:00"
+	"DMEventStartDate":		"2016-03-19 12:00:00"
 }

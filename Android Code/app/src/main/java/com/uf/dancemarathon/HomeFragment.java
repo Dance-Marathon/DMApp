@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment
 	//Website Paths that will be used if config file read fails//
 	private final String DEFAULT_GAME_PATH = "http://www.google.com";
 	private final String DEFAULT_WEBSITE_PATH = "http://www.floridadm.org/";
-	private final String DEFAULT_DONATE_PATH = "http://floridadm.kintera.org/faf/search/searchParticipants.asp?ievent=1114670&amp;lis=1&amp;kntae1114670=15F87DA40F9142E489120152BF028EB2";
+	private final String DEFAULT_DONATE_PATH = "http://events.dancemarathon.com/index.cfm?fuseaction=donorDrive.event&eventID=786";
 
     
 	public HomeFragment()
@@ -80,7 +80,8 @@ public class HomeFragment extends Fragment
 		setButtonListeners(v);
 		
 		//Try to read data from cache
-		 Object o = CacheManager.readObjectFromCacheFile(c , CacheManager.ANNOUNCEMENTS_FILENAME);
+		 Object o = CacheManager.readObjectFromCacheFile(getActivity(), CacheManager.ANNOUNCEMENTS_FILENAME);
+
 		 //If failed, force update
 		if(o == null)
 		{

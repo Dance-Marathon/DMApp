@@ -24,7 +24,14 @@ import android.widget.ListView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class HomeActivity extends AppCompatActivity
@@ -67,8 +74,18 @@ public class HomeActivity extends AppCompatActivity
 	}
 
     private void setupActionBar(){
+
         //Set action bar title and color
         ActionBar bar = getSupportActionBar();
+
+        try {
+            ACTION_BAR_TITLE = String.valueOf(calcDaysLeftUntilDM()) + " Days Until Dance Marathon";
+        } catch (Exception e) {
+            e.printStackTrace();
+            ACTION_BAR_TITLE = "Welcome to Dance Marathon!";
+
+        }
+
         bar.setTitle(Html.fromHtml("<font color='#ffffff'>" + ACTION_BAR_TITLE + "</font>"));
         int color = getResources().getColor(R.color.action_bar_color);
         ColorDrawable cd = new ColorDrawable();
@@ -77,6 +94,22 @@ public class HomeActivity extends AppCompatActivity
 
         bar.setDisplayHomeAsUpEnabled(true);
         bar.setHomeButtonEnabled(true);
+    }
+
+    /**
+     * Attempts to read event date from config file and calculates the days
+     * left until it happens
+     * @return The number of days left until DM (may be negative)
+     * @throws IOException If failed to open config file
+     * @throws JSONException If failed to parse config file
+     */
+    private int calcDaysLeftUntilDM() throws IOException, JSONException {
+        Date current = new Date();
+        String eventString = new ConfigFileReader(this).getSetting("DMEventStartDate");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date event = sdf.parse(eventString, new ParsePosition(0));
+
+        return (int) TimeUtility.getTimeDifference(event, current, TimeUtility.DAY);
     }
 	
 	
