@@ -153,14 +153,17 @@ public class MtkAdapter extends BaseAdapter {
         // Set font
         FontSetter.setFont(mContext, fontName.P, holder.name);
         
-        // Set orange border for even positions, blue for odd
+        /*// Set orange border for even positions, blue for odd
  		if (position % 2 == 0) {
- 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_primary));
+ 			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_orange_secondary));
  		} 
  		else
  		{
  			holder.pic.setBorderColor(mContext.getResources().getColor(R.color.dm_blue_primary));
- 		}
+ 		}*/
+
+		//Remove colored border around circleview
+		holder.pic.setBorderWidth(0);
 
 	    return convertView;
 	}

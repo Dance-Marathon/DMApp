@@ -9,5 +9,5 @@
     android:paddingTop="7dp"
     android:paddingBottom="7dp"
     android:textSize="18sp"
-    android:textColor="@color/dm_orange_primary">
+    android:textColor="@color/dm_orange_secondary">
 </TextView>

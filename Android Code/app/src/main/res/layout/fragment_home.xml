@@ -9,44 +9,30 @@
     <RelativeLayout
         android:id="@+id/banner_container"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
-
-        <View
-            android:id="@+id/banner_divider_top"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/dm_blue_primary"/>
+        android:layout_height="135dp">
 
         <!-- Heading -->
 	    <ImageView android:id="@+id/dance_marathon_header_image"
 	        android:contentDescription="@string/dance_marathon"
 	        android:layout_width="match_parent"
-	        android:layout_height="136dp"
-	        android:layout_below="@+id/banner_divider_top"
+	        android:layout_height="match_parent"
             android:background="@drawable/dmtotal"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_below="@+id/dance_marathon_header_image"
-            android:background="@color/dm_blue_primary"/>
 
     </RelativeLayout>
     
     <!-- Header Text -->
     <TextView
         android:id="@+id/header_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/header"
         android:textSize="@dimen/header_text_textsize"
         android:textStyle="bold"
-        android:textColor="@color/dm_blue_primary"
+        android:textColor="@color/White"
+        android:background="@color/dm_blue_primary"
         android:gravity="center"
-        android:layout_marginLeft="@dimen/header_text_margin_left"
-        android:layout_marginTop="@dimen/header_text_margin_top"
-        android:layout_marginRight="@dimen/header_text_margin_right" 
+        android:paddingBottom="@dimen/header_text_padding_bottom"
+        android:paddingTop="@dimen/header_text_padding_top"
         android:layout_below="@+id/banner_container"
         android:layout_centerHorizontal="true"/>
 
@@ -63,14 +49,15 @@
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="@dimen/announcements_text_margin_top"
 	        android:text="@string/announcements"
-	        android:textColor="@color/dm_orange_primary"
+	        android:textColor="@color/dm_orange_secondary"
 	        android:textSize="@dimen/announcements_textsize"/>
 	    
 	    <ListView
-	       android:id="@+id/announcements_list"
-	       android:layout_width="wrap_content"
-	       android:layout_height="@dimen/announcements_list_height"
-	       android:layout_below="@+id/announcements_title"/>
+	        android:id="@+id/announcements_list"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_below="@+id/announcements_title"/>
+
    </RelativeLayout>
 
     <!-- Button Layout -->
@@ -79,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="@color/Black">
+        android:background="@color/White">
 
         <!-- Game Button -->
         <Button
@@ -88,7 +75,7 @@
             android:layout_height="@dimen/homepage_button_height"
             android:layout_weight="1"
             android:layout_margin="@dimen/homepage_button_margin_arb"
-            android:background="@color/dm_blue_primary"
+            android:background="@color/dm_orange_secondary"
             android:textColor="@color/White"
             android:textStyle="bold"
             android:text="@string/game"
@@ -105,7 +92,7 @@
             android:layout_marginBottom="@dimen/homepage_button_margin_arb"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:background="@color/dm_blue_primary"
+            android:background="@color/dm_orange_secondary"
             android:textColor="@color/White"
             android:textStyle="bold"
             android:text="@string/website"
@@ -118,7 +105,7 @@
                 android:layout_height="@dimen/homepage_button_height"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/homepage_button_margin_arb"
-                android:background="@color/dm_blue_primary"
+                android:background="@color/dm_orange_secondary"
                 android:textColor="@color/White"
                 android:textStyle="bold"
                 android:text="@string/donate"

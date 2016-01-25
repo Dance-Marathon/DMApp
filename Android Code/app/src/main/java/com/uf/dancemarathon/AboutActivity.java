@@ -43,13 +43,13 @@ public class AboutActivity extends AppCompatActivity {
 			
 			//Set content
 			TextView contentView = (TextView) findViewById(R.id.aboutus_content);
-			FontSetter.setFont(this, fontName.AGBReg, contentView);
+			FontSetter.setFont(this, fontName.ALTR, contentView);
 			contentView.setText(aboutContent);
 			contentView.setMovementMethod(new ScrollingMovementMethod());
 			
 			//Set title
 			TextView aboutTitle = (TextView) findViewById(R.id.aboutus_title);
-			FontSetter.setFont(this, fontName.AGBBol, aboutTitle);
+			FontSetter.setFont(this, fontName.ALTB, aboutTitle);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			displayErrorToast();

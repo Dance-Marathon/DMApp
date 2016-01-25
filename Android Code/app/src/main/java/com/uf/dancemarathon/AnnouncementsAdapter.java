@@ -96,7 +96,7 @@ public class AnnouncementsAdapter extends ArrayAdapter<Announcement>
         date.setText(timeText);
         
         // Set font
-        FontSetter.setFont(context, fontName.AGBReg, text_announce, date);
+        FontSetter.setFont(context, fontName.ALTR, text_announce, date);
 	}
 	
 }

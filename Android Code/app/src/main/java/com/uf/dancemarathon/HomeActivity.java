@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity
         ActionBar bar = getSupportActionBar();
 
         try {
-            ACTION_BAR_TITLE = String.valueOf(calcDaysLeftUntilDM()) + " Days Until Dance Marathon";
+            ACTION_BAR_TITLE = String.valueOf(calcDaysLeftUntilDM()) + " DAYS LEFT UNTIL DM";
         } catch (Exception e) {
             e.printStackTrace();
             ACTION_BAR_TITLE = "Welcome to Dance Marathon!";

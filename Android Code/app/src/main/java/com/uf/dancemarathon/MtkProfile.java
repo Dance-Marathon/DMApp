@@ -55,7 +55,7 @@ public class MtkProfile extends AppCompatActivity
 		ActionBar bar = getSupportActionBar();
 		bar.setTitle(kid.getName());
 		
-		int color = getResources().getColor(R.color.dm_orange_primary);
+		int color = getResources().getColor(R.color.dm_orange_secondary);
 		ColorDrawable cd = new ColorDrawable();
 		cd.setColor(color);
 		bar.setBackgroundDrawable(cd);
