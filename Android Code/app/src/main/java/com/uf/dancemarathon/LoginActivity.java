@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -16,20 +18,18 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class LoginActivity extends AppCompatActivity
 {
-	
+	private String ACTION_BAR_TITLE = "Login to Donor Drive";
+
 	@Override	
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
-		//Hide Action Bar
-		ActionBar bar = getSupportActionBar();
 
-        int color = getResources().getColor(R.color.action_bar_color);
-        ColorDrawable cd = new ColorDrawable();
-        cd.setColor(color);
-        bar.setBackgroundDrawable(cd);
+		//Customize action bar
+		ActionBar bar = getSupportActionBar();
+		TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+		FontSetter.setFont(this, FontSetter.fontName.ALTB, customBar);
 
 		//Add login fragment
 		FragmentManager manager = getSupportFragmentManager();

@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -21,19 +22,17 @@ import com.uf.dancemarathon.FontSetter.fontName;
  */
 public class ContactUsActivity extends ActionBarActivity {
 
+    private String ACTION_BAR_TITLE = "Contact Us";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contact_us);
-		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle("Contact Us");
 
-		int color = getResources().getColor(R.color.action_bar_color);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
+		//Customize action bar
+		ActionBar bar = getSupportActionBar();
+		TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+        FontSetter.setFont(this, fontName.ALTB, customBar);
+
 		
 		// Set font of textviews
 		
@@ -46,8 +45,8 @@ public class ContactUsActivity extends ActionBarActivity {
 		TextView cu_label4 = (TextView) findViewById(R.id.cu_label4);
 		TextView cu_content4 = (TextView) findViewById(R.id.cu_content4);
 		
-		FontSetter.setFont(this, fontName.AGBMed, cu_label1, cu_label2, cu_label3, cu_label4);
-		FontSetter.setFont(this, fontName.AGBReg, cu_content1, cu_content2, cu_content3, cu_content4);
+		FontSetter.setFont(this, fontName.ALTB, cu_label1, cu_label2, cu_label3, cu_label4);
+		FontSetter.setFont(this, fontName.ALTR, cu_content1, cu_content2, cu_content3, cu_content4);
 		
 	}
 	

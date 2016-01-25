@@ -7,10 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.TextView;
 
 
 public class SocialMediaActivity extends AppCompatActivity {
@@ -33,22 +34,21 @@ public class SocialMediaActivity extends AppCompatActivity {
     private static String INSTAGRAM_URL = "https://www.instagram.com/dmatuf";
     private static String YOUTUBE_URL = "https://www.youtube.com/user/UFDanceMarathon";
 
+    private String ACTION_BAR_TITLE = "Social Media";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_social_media);
+
+		//Customize action bar
+		ActionBar bar = getSupportActionBar();
+		TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+		FontSetter.setFont(this, FontSetter.fontName.ALTB, customBar);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle("Social Media");
-
-		int color = getResources().getColor(R.color.action_bar_color);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
 		
 		return true;
 	}

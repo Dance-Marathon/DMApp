@@ -8,28 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/White"
     tools:context="com.uf.dancemarathon.AboutActivity" >
-
-    <TextView
-        android:id="@+id/aboutus_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/aboutus_title"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/dm_blue_primary"/>
     
     <TextView
         android:id="@+id/aboutus_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/aboutus_title"
-        android:layout_marginTop="7dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
         android:paddingEnd="5dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textColor="@color/Black"
         android:maxLines = "30"
 		android:scrollbars = "vertical"/>

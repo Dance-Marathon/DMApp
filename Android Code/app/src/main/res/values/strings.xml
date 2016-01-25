@@ -73,14 +73,14 @@
 
     <!-- Contact Us Activity strings -->
     <string name="title_activity_contact_us">ContactUsActivity</string>
-    <string name="cu_label1"><b>General\nQuestions</b></string>
+    <string name="cu_label1"><b>General Questions</b></string>
     <string name="cu_label2"><b>Overalls</b></string>
-    <string name="cu_label3"><b>UF &amp;\nShands OD</b></string>
-    <string name="cu_label4"><b>Check\nDonations</b></string>
+    <string name="cu_label3"><b>UF &amp; Shands OD</b></string>
+    <string name="cu_label4"><b>Check Donations</b></string>
     <string name="cu_content1">floridadm@floridadm.org</string>
     <string name="cu_content2">http://www.floridadm.org/overall</string>
     <string name="cu_content3">352&#8211;265&#8211;7237\nhttps://ufhealth.org/shands-hospital-children-uf</string>
-    <string name="cu_content4"><i>330C J. Wayne Reitz Union</i>, PO Box 11805\nGainesville, FL 32611</string>
+    <string name="cu_content4"><i>CMN Attn: DM at UF</i>\nPO Box 100386 \nGainesville, FL 32610</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_faq">FAQActivity</string>

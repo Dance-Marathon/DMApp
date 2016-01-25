@@ -30,7 +30,7 @@ import android.widget.Toast;
  */
 public class AboutActivity extends AppCompatActivity {
 
-	private String ACTION_BAR_TITLE = "About Us";
+	private String ACTION_BAR_TITLE = "Our Story";
     private String CONTENT_FILENAME = "about.json";
 
 	@Override
@@ -47,18 +47,20 @@ public class AboutActivity extends AppCompatActivity {
 			contentView.setText(aboutContent);
 			contentView.setMovementMethod(new ScrollingMovementMethod());
 			
-			//Set title
+			/*//Set title
 			TextView aboutTitle = (TextView) findViewById(R.id.aboutus_title);
-			FontSetter.setFont(this, fontName.ALTB, aboutTitle);
+			FontSetter.setFont(this, fontName.ALTB, aboutTitle);*/
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			displayErrorToast();
 			//e.printStackTrace();
-		} 
-		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle(ACTION_BAR_TITLE);
+		}
+
+        //Customize action bar
+        ActionBar bar = getSupportActionBar();
+        TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+        FontSetter.setFont(this, fontName.ALTB, customBar);
 
 		int color = getResources().getColor(R.color.action_bar_color);
 		ColorDrawable cd = new ColorDrawable();

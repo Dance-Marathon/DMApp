@@ -37,6 +37,8 @@ import android.widget.Toast;
  */
 public class FAQActivity extends ActionBarActivity {
 
+	private String ACTION_BAR_TITLE = "FAQs";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,15 +59,11 @@ public class FAQActivity extends ActionBarActivity {
 			list.setVisibility(View.GONE);
 			//e.printStackTrace();
 		}
-		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle("FAQs");
 
-		int color = getResources().getColor(R.color.action_bar_color);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
+		//Customize action bar
+		ActionBar bar = getSupportActionBar();
+		TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+		FontSetter.setFont(this, fontName.ALTB, customBar);
 	}
 
 	protected void onStart()

@@ -45,5 +45,6 @@
 	<dimen name="cu_textMargin">15dp</dimen>
 	<dimen name="cu_sectionMarginVertical">15dp</dimen>
 	<dimen name="cu_textStyle_in">17sp</dimen>
+	<dimen name="cu_labelMarginBottom">5dp</dimen>
 	
 </resources>

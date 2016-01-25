@@ -7,6 +7,8 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +20,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.uf.dancemarathon.FontSetter.fontName;
 
-public class EventActivity extends ActionBarActivity
+public class EventActivity extends AppCompatActivity
 {
-
+	private String ACTION_BAR_TITLE = "Event Details";
 	private Event event;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -63,15 +65,11 @@ public class EventActivity extends ActionBarActivity
 		stime.setText(event.getFormattedStartDate("hh:mm aa   MM/dd/yyyy"));
 		etime.setText(event.getFormattedEndDate("hh:mm aa   MM/dd/yyyy"));
 		location.setText(event.getLocation());
-		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle("Event Details");
 
-		int color = getResources().getColor(R.color.action_bar_color);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
+		//Customize action bar
+		ActionBar bar = getSupportActionBar();
+		TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+		FontSetter.setFont(this, fontName.ALTB, customBar);
 	}
 	
 	/**
