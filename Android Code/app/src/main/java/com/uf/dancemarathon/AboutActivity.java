@@ -43,7 +43,7 @@ public class AboutActivity extends AppCompatActivity {
 			
 			//Set content
 			TextView contentView = (TextView) findViewById(R.id.aboutus_content);
-			FontSetter.setFont(this, fontName.ALTR, contentView);
+			FontSetter.setFont(this, fontName.ALTL, contentView);
 			contentView.setText(aboutContent);
 			contentView.setMovementMethod(new ScrollingMovementMethod());
 			

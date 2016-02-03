@@ -19,6 +19,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +27,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +40,7 @@ import android.widget.Toast;
  * @author Chris Whitten
  *
  */
-public class FAQActivity extends ActionBarActivity {
+public class FAQActivity extends AppCompatActivity {
 
 	private String ACTION_BAR_TITLE = "FAQs";
 
@@ -45,13 +50,14 @@ public class FAQActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_faq);
 		
 		//Get the listview
-		ListView list = (ListView) findViewById(R.id.faq_list);
+		ExpandableListView list = (ExpandableListView) findViewById(R.id.faq_list);
 		
 		//Get the faqs
 		try {
 			ArrayList<FAQ> faqs = parseJSONData("faq.json");
-			list.setAdapter(new faqAdapter(this, faqs));
-			list.setClickable(false);
+            list.setAdapter(new faqAdapter(this, faqs));
+            list.setGroupIndicator(null);
+            list.setDivider(null);
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -108,79 +114,93 @@ public class FAQActivity extends ActionBarActivity {
 	 * @author Chris Whitten
 	 *
 	 */
-	private class faqAdapter extends ArrayAdapter<FAQ>
+	private class faqAdapter extends BaseExpandableListAdapter
 	{
 		private Context c;
 		private ArrayList<FAQ> faqs;
-		
+		private LayoutInflater inflater;
 		public faqAdapter(Context c, ArrayList<FAQ> faqs)
 		{
-			super(c, R.layout.faq_list_item, faqs);
 			this.faqs = faqs;
 			this.c = c;
+			this.inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 
-		/* (non-Javadoc)
-		 * @see android.widget.ArrayAdapter#getCount()
-		 */
 		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
+		public int getGroupCount() {
 			return faqs.size();
 		}
 
-		/* (non-Javadoc)
-		 * @see android.widget.ArrayAdapter#getItem(int)
-		 */
 		@Override
-		public FAQ getItem(int position) {
-			// TODO Auto-generated method stub
-			return faqs.get(position);
+		public int getChildrenCount(int groupPosition) {
+			return 1;
 		}
 
-		/* (non-Javadoc)
-		 * @see android.widget.ArrayAdapter#getPosition(java.lang.Object)
-		 */
 		@Override
-		public int getPosition(FAQ item) {
-			// TODO Auto-generated method stub
-			return faqs.indexOf(item);
+		public Object getGroup(int groupPosition) {
+			return faqs.get(groupPosition);
 		}
 
-		/* (non-Javadoc)
-		 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
-		 */
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public Object getChild(int groupPosition, int childPosition) {
+			return ((FAQ) faqs.get(groupPosition)).answer;
+		}
 
-			LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			
-			if(convertView == null)
-			{
-				convertView = inflater.inflate(R.layout.faq_list_item, parent, false);
-			}
-			
-			setFAQDetails(convertView, faqs.get(position));
-			return convertView;
+		@Override
+		public long getGroupId(int groupPosition) {
+			return 0;
 		}
-		
-		/**
-		 * Set the textviews for the given view using the input FAQ object
-		 * @param v The view representing the entire item in the list
-		 * @param f The FAQ object
-		 */
-		private void setFAQDetails(View v, FAQ f)
-		{
-			TextView question = (TextView) v.findViewById(R.id.faq_item_question);
-			TextView answer = (TextView) v.findViewById(R.id.faq_item_answer);
-			
-			FontSetter.setFont(c, fontName.AGBMed, question);
-			FontSetter.setFont(c, fontName.AGBReg, answer);
-			
-			question.setText(f.question);
-			answer.setText(f.answer);
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			return 0;
 		}
-		
+
+		@Override
+		public boolean hasStableIds() {
+			return false;
+		}
+
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            FAQ f = faqs.get(groupPosition);
+
+            View v;
+            if(convertView == null)
+                v = inflater.inflate(R.layout.faq_group_item, parent, false);
+            else
+                v = convertView;
+
+
+            TextView question = (TextView) v.findViewById(R.id.faq_item_question);
+            FontSetter.setFont(c, fontName.ALTB, question);
+            question.setText(f.question);
+
+			return v;
+		}
+
+		@Override
+		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+            FAQ f = faqs.get(groupPosition);
+
+            View v;
+            if(convertView == null)
+                v = inflater.inflate(R.layout.faq_list_item, parent, false);
+            else
+                v = convertView;
+
+
+            TextView answer = (TextView) v.findViewById(R.id.faq_item_answer);
+            FontSetter.setFont(c, fontName.ALTM, answer);
+            answer.setText(f.answer);
+
+            return v;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return false;
+		}
 	}
 	
 	

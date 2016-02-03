@@ -46,5 +46,12 @@
 	<dimen name="cu_sectionMarginVertical">15dp</dimen>
 	<dimen name="cu_textStyle_in">17sp</dimen>
 	<dimen name="cu_labelMarginBottom">5dp</dimen>
+
+	<!-- FAQ Activity -->
+	<dimen name="faq_question_text_size">17sp</dimen>
+	<dimen name="faq_answer_text_size">17sp</dimen>
+    <dimen name="faq_question_margin_vertical">5dp</dimen>
+    <dimen name="faq_question_padding_vertical">15dp</dimen>
+    <dimen name="faq_question_padding_horizontal">5dp</dimen>
 	
 </resources>
