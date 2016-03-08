@@ -12,6 +12,9 @@
 bin/
 gen/
 
+#Keys file
+Android Code/app/src/main/java/com/uf/dancemarathon/InfoHolder.java
+
 # Gradle files
 .gradle/
 build/
@@ -37,3 +40,7 @@ Android Code/dancemarathon/project.properties
 Android Code/dancemarathon/.classpath
 Android Code/dancemarathon/project.properties
 Android Code/.idea/workspace.xml
+
+
+# idea files
+Android Code/.idea/*
