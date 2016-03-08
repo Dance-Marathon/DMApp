@@ -41,8 +41,9 @@ public class HomeActivity extends AppCompatActivity
 {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "KgdxfRoSVmP4oXSA06l2oe26G";
-    private static final String TWITTER_SECRET = "O15p0MNyfz1OkKzVO8XrqBPuGKat0h1Bsj8XmQt0XDXimID2Rk";
+    InfoHolder ih = new InfoHolder();
+    private final String TWITTER_KEY = ih.getKey();
+    private final String TWITTER_SECRET = ih.getSecret();
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;

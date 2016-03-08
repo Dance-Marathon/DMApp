@@ -19,10 +19,23 @@ public class TwitterTimelineFragment extends ListFragment {
         final UserTimeline userTimeline = new UserTimeline.Builder()
                 .screenName("floridadm")
                 .build();
+
         final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter.Builder(getActivity())
                 .setTimeline(userTimeline)
                 .build();
+        
         setListAdapter(adapter);
+
+
+//        final UserTimeline userTimeline1 = new UserTimeline.Builder()
+//                .screenName("CMNHospitals")
+//                .build();
+//
+//        final TweetTimelineListAdapter adapter1 = new TweetTimelineListAdapter.Builder(getActivity())
+//                .setTimeline(userTimeline1)
+//                .build();
+//
+//        setListAdapter(adapter1);
     }
 
     @Override
