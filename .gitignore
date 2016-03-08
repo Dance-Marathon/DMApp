@@ -13,7 +13,7 @@ bin/
 gen/
 
 #Keys file
-#Android Code/app/src/main/java/com/uf/dancemarathon/InfoHolder.java
+Android Code/app/src/main/java/com/uf/dancemarathon/InfoHolder.java
 
 # Gradle files
 .gradle/
