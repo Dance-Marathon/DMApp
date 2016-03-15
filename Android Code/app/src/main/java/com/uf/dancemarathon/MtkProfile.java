@@ -71,7 +71,7 @@ public class MtkProfile extends AppCompatActivity
         pic.setImageResource(kid.getImageId(this));
 
         story.setText(kid.getStory());
-        FontSetter.setFont(this, FontSetter.fontName.ALTL, story);
+        FontSetter.setFont(this, FontSetter.fontName.ALTMO, story);
 
         setupStoryPanel();
         setupTitleButton();

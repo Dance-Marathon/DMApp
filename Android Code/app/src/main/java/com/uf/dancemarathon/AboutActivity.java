@@ -43,7 +43,7 @@ public class AboutActivity extends AppCompatActivity {
 			
 			//Set content
 			TextView contentView = (TextView) findViewById(R.id.aboutus_content);
-			FontSetter.setFont(this, fontName.ALTL, contentView);
+			FontSetter.setFont(this, fontName.ALTMO, contentView);
 			contentView.setText(aboutContent);
 			contentView.setMovementMethod(new ScrollingMovementMethod());
 			
@@ -62,10 +62,6 @@ public class AboutActivity extends AppCompatActivity {
         TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
         FontSetter.setFont(this, fontName.ALTB, customBar);
 
-		int color = getResources().getColor(R.color.action_bar_color);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
 	}
 	
 	protected void onStart()

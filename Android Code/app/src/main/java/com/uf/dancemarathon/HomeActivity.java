@@ -1,5 +1,6 @@
 package com.uf.dancemarathon;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
@@ -14,13 +15,17 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -169,11 +174,13 @@ public class HomeActivity extends AppCompatActivity
          //Set the action bar icon behavior
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        NavDrawerAdapter adapter = new NavDrawerAdapter(this,
+                R.layout.nav_drawer_item, R.id.nav_item, mDrawerNames);
 
         // Set the adapter for the list view
-	     mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                 R.layout.nav_drawer_item, R.id.nav_item, mDrawerNames));
+	     mDrawerList.setAdapter(adapter);
 	     // Set the list's click listener
 	     mDrawerList.setOnItemClickListener(new OnItemClickListener() {
 
@@ -277,5 +284,21 @@ public class HomeActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
 	}
+
+    private class NavDrawerAdapter extends ArrayAdapter<String>{
+
+        public NavDrawerAdapter(Context context, int resource, int textViewResourceId, String[] objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //Modify text font for each nav item
+            View v = super.getView(position, convertView, parent);
+            TextView item = (TextView) v.findViewById(R.id.nav_item);
+            FontSetter.setFont(HomeActivity.this, FontSetter.fontName.ALTB, item);
+            return v;
+        }
+    }
 }
 
