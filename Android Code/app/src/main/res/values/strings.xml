@@ -12,7 +12,6 @@
     <string name="location_label">Location:</string>
     <string name="description_label">Description: </string>
     <string name="retry">Retry</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="addToCal_buttontext">Add Event to Calendar</string>
 
     <!-- Timeline Activity strings -->
@@ -113,5 +112,6 @@
     <string name="title_activity_mtk">MtkActivity</string>
     <string name="drawer_open">Drawer is open</string>
     <string name="drawer_close">Drawer is closed</string>
+    <string name="no_story_available">No Story Available</string>
 
 </resources>
