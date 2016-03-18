@@ -178,7 +178,7 @@ public class CalendarFragment extends Fragment
 		});
 		
 		//Set refresh layout colors
-		mListLayout.setColorSchemeResources(R.color.dm_orange_primary, R.color.dm_blue_secondary, R.color.GreenYellow);
+		mListLayout.setColorSchemeResources(R.color.dm_orange_secondary, R.color.dm_blue_secondary, R.color.GreenYellow);
 	}
 	
 	/**

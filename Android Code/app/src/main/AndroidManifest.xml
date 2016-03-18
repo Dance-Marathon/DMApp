@@ -107,6 +107,9 @@
             android:name=".MtkActivity"
             android:label="@string/title_activity_mtk" >
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="1ca110e7b42000c34560627642e357ccaeebbb9f" />
     </application>
 
 </manifest>

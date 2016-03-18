@@ -16,35 +16,35 @@
 	    android:background="#f6f6f6"/>
     
     <!-- Section 1 -->
-    <LinearLayout 
+    <RelativeLayout 
         android:id="@+id/cu_section1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cu_divider1"
         android:layout_marginTop="@dimen/cu_sectionMarginVertical"
-        android:layout_marginBottom="@dimen/cu_sectionMarginVertical" 
-        android:weightSum="3">
+        android:layout_marginBottom="@dimen/cu_sectionMarginVertical">
+		
     	<TextView
     	    android:id="@+id/cu_label1"
-	        android:layout_width="0dp"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:layout_marginRight="@dimen/cu_textMargin"
-	        android:layout_marginEnd="@dimen/cu_textMargin"
-	        android:gravity="end"
+	        android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/cu_labelMarginBottom"
 	        android:text="@string/cu_label1"
 	        android:textColor="@color/dm_blue_primary"
 	        android:textSize="18sp"/>
     	<TextView 
     	    android:id="@+id/cu_content1"
-    	    android:layout_width="0dp"
+    	    android:layout_width= "wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="2"
-	        android:layout_gravity="center_vertical"
+	        android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cu_label1"
+            android:gravity="center"
 	        android:textSize="@dimen/cu_textStyle_in"
-	        android:textColor="@color/dm_orange_primary"
+	        android:textColor="@color/dm_orange_secondary"
 	        android:text="@string/cu_content1"/>
-	</LinearLayout>
+        
+	</RelativeLayout>
 	
     <View 
 	    android:id="@+id/cu_divider2"
@@ -54,7 +54,7 @@
 	    android:background="#f6f6f6"/>
 	
     <!-- Section 2 -->
-    <LinearLayout 
+    <RelativeLayout 
         android:id="@+id/cu_section2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,24 +64,24 @@
         android:weightSum="3">
     	<TextView
     	    android:id="@+id/cu_label2"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:layout_marginRight="@dimen/cu_textMargin"
-	        android:gravity="end"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/cu_labelMarginBottom"
 	        android:text="@string/cu_label2"
 	        android:textColor="@color/dm_blue_primary"
 	        android:textSize="18sp"/>
     	<TextView 
     	    android:id="@+id/cu_content2"
-    	    android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="2"
-	        android:layout_gravity="center_vertical"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cu_label2"
+            android:gravity="center"
 	        android:textSize="@dimen/cu_textStyle_in"
-	        android:textColor="@color/dm_orange_primary"
+	        android:textColor="@color/dm_orange_secondary"
 	        android:text="@string/cu_content2"/>
-	</LinearLayout>
+	</RelativeLayout>
 	
     <View 
 	    android:id="@+id/cu_divider3"
@@ -91,34 +91,35 @@
 	    android:background="#f6f6f6"/>
  
     <!-- Section 3 -->
-    <LinearLayout 
+    <RelativeLayout 
         android:id="@+id/cu_section3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cu_divider3"
         android:layout_marginTop="@dimen/cu_sectionMarginVertical"
-        android:layout_marginBottom="@dimen/cu_sectionMarginVertical" 
-        android:weightSum="3">
+        android:layout_marginBottom="@dimen/cu_sectionMarginVertical">
+
     	<TextView
     	    android:id="@+id/cu_label3"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:layout_marginRight="@dimen/cu_textMargin"
-	        android:gravity="end"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/cu_labelMarginBottom"
 	        android:text="@string/cu_label3"
 	        android:textColor="@color/dm_blue_primary"
 	        android:textSize="18sp"/>
-    	<TextView 
-    	    android:id="@+id/cu_content3"
-    	    android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="2"
-	        android:layout_gravity="center_vertical"
-	        android:textSize="@dimen/cu_textStyle_in"
-	        android:textColor="@color/dm_orange_primary"
-	        android:text="@string/cu_content3"/>
-	</LinearLayout>
+    	<TextView
+            android:id="@+id/cu_content3"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cu_label3"
+            android:gravity="center"
+            android:textSize="@dimen/cu_textStyle_in"
+            android:textColor="@color/dm_orange_secondary"
+            android:text="@string/cu_content3"/>
+
+	</RelativeLayout>
 	
     <View 
 	    android:id="@+id/cu_divider4"
@@ -129,34 +130,34 @@
     
     
     <!-- Section 4 -->
-    <LinearLayout 
+    <RelativeLayout 
         android:id="@+id/cu_section4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cu_divider4"
         android:layout_marginTop="@dimen/cu_sectionMarginVertical"
-        android:layout_marginBottom="@dimen/cu_sectionMarginVertical" 
-        android:weightSum="3">
+        android:layout_marginBottom="@dimen/cu_sectionMarginVertical">
+
     	<TextView
     	    android:id="@+id/cu_label4"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:layout_marginRight="@dimen/cu_textMargin"
-	        android:gravity="end"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/cu_labelMarginBottom"
 	        android:text="@string/cu_label4"
 	        android:textColor="@color/dm_blue_primary"
 	        android:textSize="18sp"/>
     	<TextView 
     	    android:id="@+id/cu_content4"
-    	    android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="2"
-	        android:layout_gravity="center_vertical"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cu_label4"
+            android:gravity="center"
 	        android:textSize="@dimen/cu_textStyle_in"
-	        android:textColor="@color/dm_orange_primary"
+	        android:textColor="@color/dm_orange_secondary"
 	        android:text="@string/cu_content4"/>
-	</LinearLayout>
+	</RelativeLayout>
 	
     <View 
 	    android:id="@+id/cu_divider5"

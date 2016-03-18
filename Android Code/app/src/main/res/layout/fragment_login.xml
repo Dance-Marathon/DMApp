@@ -10,28 +10,17 @@
     android:layout_marginRight="@dimen/login_margin_right"
     android:layout_marginEnd="@dimen/login_margin_right"
     android:layout_marginTop="@dimen/login_margin_top">
-    
-  <TextView 
-      android:id="@+id/login_title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="15dp"
-      android:layout_marginBottom="20dp"
-      android:layout_centerHorizontal="true"
-      android:text="@string/login_title"
-      android:textSize="20sp"
-      android:textColor="@color/dm_orange_primary"/>
   
   <TextView 
         android:id="@+id/username_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:text="@string/username_field"
         android:textSize="16sp"
         android:textColor="@color/White"
         android:paddingLeft="7dp"
         android:paddingStart="7dp"
-        android:layout_below="@+id/login_title"
         android:background="@color/dm_blue_primary"
         />
     

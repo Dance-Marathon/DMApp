@@ -6,8 +6,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MtkActivity extends AppCompatActivity {
 
@@ -24,12 +26,8 @@ public class MtkActivity extends AppCompatActivity {
 
         //Customize action bar
         ActionBar bar = getSupportActionBar();
-        bar.setTitle(ACTION_BAR_TITLE);
-
-        int color = getResources().getColor(R.color.action_bar_color);
-        ColorDrawable cd = new ColorDrawable();
-        cd.setColor(color);
-        bar.setBackgroundDrawable(cd);
+        TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+        FontSetter.setFont(this, FontSetter.fontName.ALTB, customBar);
     }
 
     @Override

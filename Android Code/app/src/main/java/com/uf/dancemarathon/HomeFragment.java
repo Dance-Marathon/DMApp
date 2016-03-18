@@ -73,8 +73,8 @@ public class HomeFragment extends Fragment
 		TextView web_text = (TextView) v.findViewById(R.id.website);
 		TextView donate = (TextView) v.findViewById(R.id.donate);
 		
-		FontSetter.setFont(getActivity(), fontName.AGBBol, header_text, game_text, web_text, donate);
-		FontSetter.setFont(getActivity(), fontName.AGBBol, announcement_header);
+		FontSetter.setFont(getActivity(), fontName.ALTM, header_text, game_text, web_text, donate);
+		FontSetter.setFont(getActivity(), fontName.ALTB, announcement_header);
 
 		//Set button listeners
 		setButtonListeners(v);

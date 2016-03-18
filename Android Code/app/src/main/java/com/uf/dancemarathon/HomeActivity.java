@@ -1,5 +1,6 @@
 package com.uf.dancemarathon;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
@@ -14,16 +15,23 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -36,6 +44,12 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity
 {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    InfoHolder ih = new InfoHolder();
+    private final String TWITTER_KEY = ih.getKey();
+    private final String TWITTER_SECRET = ih.getSecret();
+
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -63,6 +77,8 @@ public class HomeActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+		Fabric.with(this, new Twitter(authConfig));
 		setContentView(R.layout.activity_home);
 
         setupActionBar();
@@ -79,7 +95,7 @@ public class HomeActivity extends AppCompatActivity
         ActionBar bar = getSupportActionBar();
 
         try {
-            ACTION_BAR_TITLE = String.valueOf(calcDaysLeftUntilDM()) + " Days Until Dance Marathon";
+            ACTION_BAR_TITLE = String.valueOf(calcDaysLeftUntilDM()) + " DAYS LEFT UNTIL DM";
         } catch (Exception e) {
             e.printStackTrace();
             ACTION_BAR_TITLE = "Welcome to Dance Marathon!";
@@ -171,9 +187,11 @@ public class HomeActivity extends AppCompatActivity
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+        NavDrawerAdapter adapter = new NavDrawerAdapter(this,
+                R.layout.nav_drawer_item, R.id.nav_item, mDrawerNames);
+
         // Set the adapter for the list view
-	     mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                 R.layout.nav_drawer_item, R.id.nav_item, mDrawerNames));
+	     mDrawerList.setAdapter(adapter);
 	     // Set the list's click listener
 	     mDrawerList.setOnItemClickListener(new OnItemClickListener() {
 
@@ -277,5 +295,21 @@ public class HomeActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
 	}
+
+    private class NavDrawerAdapter extends ArrayAdapter<String>{
+
+        public NavDrawerAdapter(Context context, int resource, int textViewResourceId, String[] objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //Modify text font for each nav item
+            View v = super.getView(position, convertView, parent);
+            TextView item = (TextView) v.findViewById(R.id.nav_item);
+            FontSetter.setFont(HomeActivity.this, FontSetter.fontName.ALTB, item);
+            return v;
+        }
+    }
 }
 

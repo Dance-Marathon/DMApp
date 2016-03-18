@@ -42,7 +42,7 @@
          android:layout_marginRight="5dp"
 	     android:text="@string/start_time_label"
 	     android:textSize="22sp"
-	     android:textColor="@color/dm_orange_primary" />
+	     android:textColor="@color/dm_orange_secondary" />
 	 
 	 <!-- Event page start time-->
 	 <TextView
@@ -68,7 +68,7 @@
         android:layout_marginRight="5dp"
         android:textSize="22sp"
         android:text="@string/end_time_label"
-        android:textColor="@color/dm_orange_primary"/>
+        android:textColor="@color/dm_orange_secondary"/>
 	 
 	 <!-- Event page end time -->
 	 <TextView
@@ -94,7 +94,7 @@
         android:layout_marginRight="5dp"
         android:textSize="22sp"
         android:text="@string/location_label"
-        android:textColor="@color/dm_orange_primary" />
+        android:textColor="@color/dm_orange_secondary" />
 	 
 	 <!-- Event page location -->
 	 <TextView

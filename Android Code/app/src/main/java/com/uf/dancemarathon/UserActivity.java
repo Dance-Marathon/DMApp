@@ -55,15 +55,11 @@ public class UserActivity extends AppCompatActivity
 		
 		//Instantiate loader to prevent null
 		loader = new UserLoader();
-		
-		//Set action bar title and color
-		ActionBar bar = getSupportActionBar();
-		bar.setTitle(ACTION_BAR_TITLE);
 
-		int color = getResources().getColor(R.color.action_bar_color);
-		ColorDrawable cd = new ColorDrawable();
-		cd.setColor(color);
-		bar.setBackgroundDrawable(cd);
+		//Customize action bar
+		ActionBar bar = getSupportActionBar();
+		TextView customBar = ActionBarUtility.customizeActionBar(this, bar, R.color.action_bar_color, R.color.White, Gravity.CENTER, 20, ACTION_BAR_TITLE);
+		FontSetter.setFont(this, FontSetter.fontName.ALTB, customBar);
 	}
 	
 	protected void onStop()

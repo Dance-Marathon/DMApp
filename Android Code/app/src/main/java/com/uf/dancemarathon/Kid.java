@@ -120,7 +120,7 @@ public class Kid implements Parcelable
 
     public boolean hasStory()
     {
-        if(story != null || story.length() > 10)
+        if(story != null && story.length() > 10)
             return true;
         else
             return false;
@@ -135,7 +135,10 @@ public class Kid implements Parcelable
 	{
 		this.youtube_id = youtube_id;
 	}
-	
+
+	public boolean hasMilestone(){
+		return youtube_id.length() > 0;
+	}
 	public static Comparator<Kid> COMPARE_BY_NAME = new Comparator<Kid>() {
         public int compare(Kid one, Kid other) {
             return one.getName().compareTo(other.getName());
