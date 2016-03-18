@@ -185,7 +185,7 @@ public class HomeActivity extends AppCompatActivity
          //Set the action bar icon behavior
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         NavDrawerAdapter adapter = new NavDrawerAdapter(this,
                 R.layout.nav_drawer_item, R.id.nav_item, mDrawerNames);

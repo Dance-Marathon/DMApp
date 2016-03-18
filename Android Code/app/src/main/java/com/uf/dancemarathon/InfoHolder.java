@@ -5,7 +5,8 @@ package com.uf.dancemarathon;
  */
 public class InfoHolder {
 
-
+    private static String key = "";
+    private static String secret = "";
 
     public String getKey() {
         return this.key;

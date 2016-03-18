@@ -19,7 +19,6 @@ public class SocialMediaActivity extends AppCompatActivity {
 
 	private String ACTION_BAR_TITLE = "Dance Marathon @ UF";
 
-    private String ACTION_BAR_TITLE = "Social Media";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
