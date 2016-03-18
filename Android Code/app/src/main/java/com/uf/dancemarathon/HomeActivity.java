@@ -29,6 +29,9 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -41,6 +44,12 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity
 {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    InfoHolder ih = new InfoHolder();
+    private final String TWITTER_KEY = ih.getKey();
+    private final String TWITTER_SECRET = ih.getSecret();
+
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -68,6 +77,8 @@ public class HomeActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+		Fabric.with(this, new Twitter(authConfig));
 		setContentView(R.layout.activity_home);
 
         setupActionBar();
