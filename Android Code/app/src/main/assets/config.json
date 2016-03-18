@@ -1,9 +1,9 @@
 {
-	"eventsPath":			"http://dev.floridadm.org/app/events.php",
+	"eventsPath":			"https://api.apple-cloudkit.com/database/1/iCloud.com.dancemarathon.DMatUF/production/public/records/query?&ckWebAuthToken=null&ckSession=null&ckAPIToken=3465bd5840b0b5a61bfe81883156dcc3c863ea2f54ca0103212e6a1c6cae392b",
 
 	"kinteraPath":			"http://dev.floridadm.org/app/kintera.php",
 
-	"announcementsPath":	"http://dev.floridadm.org/app/announcements.php",
+	"announcementsPath":	"http://dev.floridadm.org/app/getAnnouncements.html",
 
 	"websitePath":			"http://www.floridadm.org/",
 

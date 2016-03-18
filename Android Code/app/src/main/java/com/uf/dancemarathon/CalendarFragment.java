@@ -1,19 +1,27 @@
 package com.uf.dancemarathon;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -27,6 +35,7 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -411,8 +420,7 @@ public class CalendarFragment extends Fragment
 	
 	/**
 	 * Forces a read from cache
-	 * @param v T
-	 */
+     */
 	public ArrayList<Event> forceCacheRead()
 	{
 		//Try to read data from cache
@@ -459,17 +467,36 @@ public class CalendarFragment extends Fragment
 		{
 			ArrayList<Event> events = new ArrayList<Event>();
 			try
-			{	
+			{
+                Log.e("json", "here");
 				String path = new ConfigFileReader(c).getSetting("eventsPath");
-				URL url = new URL(path); //The path to the webservice 
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				
-				//Parse JSON response
-				String eventsJSON = reader.readLine();
-				// //Log.d("json", eventsJSON);
-				JSONArray arr = new JSONArray(eventsJSON);
-				events = parseEventJSON(arr);
+				URL url = new URL(path);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                String query = "{\"query\": {\"recordType\": \"Event\"}}";
+
+                //Write params
+                byte[] paramData = query.getBytes();
+                int paramLength = paramData.length;
+                conn.setRequestProperty("Content-Length", Integer.toString(paramLength));
+                DataOutputStream wr = new DataOutputStream( conn.getOutputStream());
+                wr.write(paramData);
+                wr.close();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line="";
+                String eventsJSON="";
+                while((line = reader.readLine()) != null)
+                   eventsJSON += line;
+
+                reader.close();
+
+				Log.e("json", "json:" + eventsJSON);
+				events = parseEventJSON(eventsJSON);
 				events = removeOldEvents(events);
 				
 				setEvents(events);
@@ -483,21 +510,21 @@ public class CalendarFragment extends Fragment
 				
 			} catch (MalformedURLException e)
 			{
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
+                Log.e("json", e.getMessage());
 				loadSuccessful = false;
 			} catch (IOException e)
 			{
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
+                Log.e("json", "IOException "  + e.getMessage());
 				loadSuccessful = false;
 			} catch (JSONException e)
 			{
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
+                Log.e("json", "JSONException " + e.getMessage());
 				loadSuccessful = false;
 			}
-			
+            Log.e("json", Integer.toString(events.size()));
 			return events;
 		}
 		
@@ -539,52 +566,68 @@ public class CalendarFragment extends Fragment
 		}
 		
 		/**
-		 * @param obj The JSON object containing the events
+		 * @param json The JSON string containing the events
 		 * @return An arraylist of events
 		 * @throws JSONException if parse fails
 		 */
-		protected ArrayList<Event> parseEventJSON(JSONArray arr) throws JSONException
+		protected ArrayList<Event> parseEventJSON(String json)
 		{
-			ArrayList<Event> events = new ArrayList<Event>();
-			for(int i = 0; i < arr.length(); i++)
-			{
-				String id = arr.getJSONObject(i).getString("id");
-				String title = arr.getJSONObject(i).getString("title").trim();
-				String location = arr.getJSONObject(i).getString("location").trim();
-				String description = arr.getJSONObject(i).getString("description").trim();
-				String startDate = arr.getJSONObject(i).getString("startDate").trim();
-				String endDate = arr.getJSONObject(i).getString("endDate").trim();
-				String lastModified = arr.getJSONObject(i).getString("lastModified").trim();
-				String category = arr.getJSONObject(i).getString("category");
-				String imageUrl = arr.getJSONObject(i).getString("imageURL");
-				//Bitmap image = null;
-				
-				/*if(imageUrl != null)
-				{
-					try {
-						image=downloadImage(imageUrl);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}*/
-				
-				try
-				{
-					Event e = new Event(id, title, location, startDate, endDate, lastModified, description);
-					
-					if(!(category.equals("null")))
-						e.setCategory(category.trim());
-					
-					/*if(image != null)
-						e.setImage(image);*/
-					
-					events.add(e);
-				} catch (ParseException e)
-				{
-					//Log.d("Event Parsing", "Failed to parse event" + title);
-				}
-			}
-			
+            ArrayList<Event> events = new ArrayList<Event>();
+            try {
+                JSONObject jsonObj = new JSONObject(json);
+                JSONArray arr = jsonObj.getJSONArray("records");
+
+                for (int i = 0; i < arr.length(); i++) {
+                    try {
+                        JSONObject curr = arr.getJSONObject(i);
+                        JSONObject currFields = curr.getJSONObject("fields");
+                        String id = curr.getString("recordName");
+                        String title = currFields.getJSONObject("title").getString("value").trim();
+                        String location = currFields.getJSONObject("locationDescription").getString("value").trim();
+                        String description = currFields.getJSONObject("description").getString("value").trim();
+
+                        long startTime = currFields.getJSONObject("start").getLong("value");
+                        long endTime = currFields.getJSONObject("end").getLong("value");
+                        long lastModified = curr.getJSONObject("modified").getLong("timestamp");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC")); //Cloudkit's timezone is UTC
+                        Date referenceDate = dateFormat.parse("2001-01-01 00:00:00");
+
+
+                        Event e = new Event(id, title, location, startTime, endTime, lastModified, referenceDate, description);
+
+                        //String imageUrl = currFields.getJSONObject("image").getJSONObject("value").getString("downloadURL");
+                        //Bitmap image = null;
+                        /*if(imageUrl != null)
+                        {
+                            try {
+                                image=downloadImage(imageUrl);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }*/
+
+                         /*if(image != null)
+                                e.setImage(image);*/
+
+                        events.add(e);
+
+                    } catch (ParseException e){
+                        e.printStackTrace();
+                       Log.e("Event Parsing", "Failed to parse event");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                       Log.e("Event Parsing", "Failed to parse event");
+                    }
+
+
+
+                }
+            }
+            catch(JSONException e){
+               //Log.d("Event Parsing", "Failed to begin parsing events");
+            }
+
 			return events; 
 		}
 	

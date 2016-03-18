@@ -33,6 +33,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 */
 	private String location;
 	private final String timeStampFormat = "yyyy-MM-dd HH:mm:ss";
+
 	/**
 	 * A timestamp of the start date in the format yyyy-MM-dd HH:mm:ss
 	 */
@@ -87,6 +88,18 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		parseTimeStamps();
 	}
 
+    public Event(String id, String title, String location, long t_startDate,
+                long t_endDate, long t_lastMod, Date referenceDate, String description) throws ParseException
+    {
+        this.id = id;
+        this.title = title;
+        setLocation(location);
+        this.description = description;
+        this.category = null;
+
+        parseIntegerTimeStamps(t_startDate, t_endDate, t_lastMod, referenceDate);
+    }
+
 	/**
 	 * This method will parse the timestamps of the event to give values to the {@link Date} objects
 	 */
@@ -98,7 +111,21 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		endDate = df.parse(t_endDate);
 		lastMod = df.parse(t_lastMod);
 	}
-	
+
+	/**
+	 * Set start and end dates given integer millisecond offsets from a reference time
+	 * @param start
+	 * @param end
+	 * @param reference
+	 */
+	private void parseIntegerTimeStamps(long start, long end, long lastMod, Date reference){
+
+		setStartDate(new Date(start));
+		setEndDate(new Date(end));
+        setLastMod(new Date(lastMod));
+
+	}
+
 	/**
 	 * @return the id
 	 */
@@ -349,7 +376,9 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 */
 	protected void setStartDate(Date startDate)
 	{
+		SimpleDateFormat df = new SimpleDateFormat(timeStampFormat, Locale.US);
 		this.startDate = startDate;
+		this.t_startDate = df.format(startDate);
 	}
 
 
@@ -359,7 +388,9 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 */
 	protected void setEndDate(Date endDate)
 	{
+		SimpleDateFormat df = new SimpleDateFormat(timeStampFormat, Locale.US);
 		this.endDate = endDate;
+		this.t_endDate = df.format(endDate);
 	}
 
 
@@ -369,7 +400,9 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 */
 	protected void setLastMod(Date lastMod)
 	{
+        SimpleDateFormat df = new SimpleDateFormat(timeStampFormat, Locale.US);
 		this.lastMod = lastMod;
+        this.t_lastMod = df.format(lastMod);
 	}
 
 	/**
