@@ -55,36 +55,32 @@
 	        android:layout_alignParentTop="true"
 	        android:textSize="17sp"
 	        android:textColor="@color/Black"/>
-        
-    	<TextView
-    	    android:id="@+id/tlineitem_location"
-       		android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-    	    android:layout_toEndOf="@+id/tlineitem_locIcon"
-    	    android:layout_alignBottom="@+id/tlineitem_locIcon"
-	        android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tlineitem_startTime"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toStartOf="@+id/tlineitem_title"
+            android:layout_alignBottom="@+id/tlineitem_title"
+            android:textSize="14sp"
+            android:textColor="@color/dm_blue_primary"
+            android:gravity="center"/>
     	
-    	<ImageView
-    	    android:id="@+id/tlineitem_locIcon"
-    	    android:layout_width="14dp"
-    	    android:layout_height="14dp"
-    	    android:layout_below="@+id/tlineitem_title"
-    	    android:layout_marginTop="3dp"
-    	    android:src="@android:drawable/ic_menu_mylocation"/>
+
     </RelativeLayout>
     
-    <!-- Start Time -->
-    
-    <TextView
-        android:id="@+id/tlineitem_startTime"
-   	    android:layout_height="wrap_content"
-   	    android:layout_width="wrap_content"
-   	    android:layout_centerVertical="true"
-   	    android:layout_alignParentEnd="true"
-   	    android:paddingEnd="7dp"
-    	android:paddingStart="2dp"
-   	    android:textSize="14sp"
-   	    android:textColor="@color/dm_blue_primary"
-   	    android:gravity="center"/>
+    <!-- Loading wheel for image download -->
+
+	<ProgressBar
+		android:id="@+id/progress_wheel"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:indeterminateOnly="true"
+		android:layout_centerInParent="true"
+		android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="7dp"
+        android:paddingStart="2dp"/>
     
 </RelativeLayout>

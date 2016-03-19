@@ -66,22 +66,24 @@ public class CalendarAdapter extends ArrayAdapter<Event>
 		View itemView;
 		//Create inflater 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        
-        //If convert view is null, we need to make the individual view for the event
-        if(convertView == null)
-        {
-	        //Get the individual item view
-	        itemView = inflater.inflate(R.layout.timeline_item_view, parent, false);
-	        
-	        //Set all the values for the view
-	        setItemView(itemView, position);
-	        
+        Event e = events.get(position);
+
+        //If e doesn't have an image yet, show item view with some basic info and a loading wheel
+        if(!e.hasImage()) {
+            //Get the individual item view
+            itemView = inflater.inflate(R.layout.timeline_item_view, parent, false);
+
+            //Set all the values for the view
+            setItemView(itemView, position);
         }
-        //Else we can use the recycled view passed in as convertView
+        //Else, show the image
         else
         {
-        	itemView = convertView;
-        	setItemView(itemView, position); //We must set the recycled view with the new information
+            //Inflate the imageview
+            itemView = inflater.inflate(R.layout.event_image_item_view, parent, false);
+
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.event_item_image);
+            imageView.setImageBitmap(e.getImage());
         }
 
         return itemView;
@@ -89,7 +91,7 @@ public class CalendarAdapter extends ArrayAdapter<Event>
 	
 	/**
 	 * This method sets the values of all the views which comprise the individual event view.
-	 * @param v The view to modify
+	 * @param itemView The view to modify
 	 * @param position The position of the item
 	 */
 	private void setItemView(View itemView, int position)
@@ -98,7 +100,6 @@ public class CalendarAdapter extends ArrayAdapter<Event>
 		
 		//Get title and location text views
         TextView title = (TextView) itemView.findViewById(R.id.tlineitem_title);
-        TextView location = (TextView) itemView.findViewById(R.id.tlineitem_location);
         TextView time = (TextView) itemView.findViewById(R.id.tlineitem_startTime);
         TextView month = (TextView) itemView.findViewById(R.id.tlineitem_month);
         TextView day = (TextView) itemView.findViewById(R.id.tlineitem_day);
@@ -108,9 +109,7 @@ public class CalendarAdapter extends ArrayAdapter<Event>
         //Set title
         String titleText = e.getTitle();
         title.setText(makeCondensedString(titleText, 24));
-        
-        //Set location
-        location.setText(makeCondensedString(e.getLocation(), 30));
+
         
         //Set start time
         setStartTimeString(time, e);
@@ -127,7 +126,7 @@ public class CalendarAdapter extends ArrayAdapter<Event>
         day.setText(dayText);
         
         // Set Fonts
-        FontSetter.setFont(context, fontName.AGBReg, title, location, time, month, day);
+        FontSetter.setFont(context, fontName.AGBReg, title, time, month, day);
         
         
        

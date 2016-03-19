@@ -22,7 +22,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	/**
 	 * This ID is important when it comes to keeping event serializable
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3L;
 	private String id;
 	/**
 	 * The title of the event
@@ -60,7 +60,8 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 * The type of event it is (i.e. check-ins, hospitality night)
 	 */
 	private String category;
-	
+
+    private String imageURL;
 	private Bitmap image;
 	
 	/**
@@ -88,8 +89,8 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 		parseTimeStamps();
 	}
 
-    public Event(String id, String title, String location, long t_startDate,
-                long t_endDate, long t_lastMod, Date referenceDate, String description) throws ParseException
+    public Event(String id, String title, String location, long startTime,
+                long endTime, long lastMod, String description) throws ParseException
     {
         this.id = id;
         this.title = title;
@@ -97,7 +98,7 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
         this.description = description;
         this.category = null;
 
-        parseIntegerTimeStamps(t_startDate, t_endDate, t_lastMod, referenceDate);
+        parseIntegerTimeStamps(startTime, endTime, lastMod);
     }
 
 	/**
@@ -116,9 +117,8 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	 * Set start and end dates given integer millisecond offsets from a reference time
 	 * @param start
 	 * @param end
-	 * @param reference
 	 */
-	private void parseIntegerTimeStamps(long start, long end, long lastMod, Date reference){
+	private void parseIntegerTimeStamps(long start, long end, long lastMod){
 
 		setStartDate(new Date(start));
 		setEndDate(new Date(end));
@@ -519,4 +519,16 @@ public class Event implements Serializable, Comparable<Event>, Parcelable
 	public void setImage(Bitmap image) {
 		this.image = image;
 	}
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public boolean hasImage(){
+        return (image == null) ? false : true;
+    }
 }

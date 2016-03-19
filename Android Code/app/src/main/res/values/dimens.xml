@@ -58,5 +58,8 @@
     <dimen name="kidimage_marginVertical">15dp</dimen>
     <dimen name="kidimage_marginHorizontal">15dp</dimen>
 	<dimen name="titlebar_height">130dp</dimen>
+
+	<!-- Calendar Dimensions -->
+	<dimen name="event_image_height">150dp</dimen>
 	
 </resources>
