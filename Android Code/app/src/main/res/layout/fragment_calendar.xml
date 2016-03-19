@@ -60,7 +60,8 @@
       	android:layout_alignParentEnd="true"
       	android:textColor="@color/White"
       	android:text="@string/filter_button_text"
-      	android:background="@color/transBlack"/>
+      	android:background="@color/transBlack"
+        android:visibility="gone"/>
     
     <!-- Hazy foregroud for loading operations -->
     <View 

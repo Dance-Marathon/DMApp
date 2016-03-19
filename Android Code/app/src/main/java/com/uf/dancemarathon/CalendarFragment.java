@@ -1,16 +1,12 @@
 package com.uf.dancemarathon;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,11 +20,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -124,6 +120,8 @@ public class CalendarFragment extends Fragment {
 
         });
 
+        //Disable filter button
+        mFilterButton.setVisibility(View.GONE);
 
         //Load events
         ArrayList<Event> cacheEvents = forceCacheRead();
@@ -132,12 +130,20 @@ public class CalendarFragment extends Fragment {
             String[] filterArray = getEventCategories(events);
             createFilterDialog(filterArray);
             showEventList(v, events);
-            Log.e("in cache", "events:" + events.size());
         } else
             forceEventListUpdate();
 
+        //This method will start new download threads for events that do not have images yet
+        downloadImagesMultiThread();
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(getActivity() != null)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private void initializeEventListViews(View v) {
@@ -290,7 +296,7 @@ public class CalendarFragment extends Fragment {
 
         //Set visibility in case they have been hidden
         mListLayout.setVisibility(View.VISIBLE);
-        mFilterButton.setVisibility(View.VISIBLE);
+        //mFilterButton.setVisibility(View.VISIBLE);
 
         //Hide progress wheel
         ProgressBar bar = (ProgressBar) v.findViewById(R.id.progress_wheel);
@@ -531,7 +537,6 @@ public class CalendarFragment extends Fragment {
 
             //Start thread for loading even images
             downloadImagesMultiThread();
-
         }
 
         /**
@@ -629,11 +634,12 @@ public class CalendarFragment extends Fragment {
                 Event curr = i.next();
                 String imageURL = curr.getImageURL();
                 try {
-                    curr.setImage(downloadImage(imageURL));
-                    Log.e("ImageDL", "Downloaded image for " + curr.getTitle());
+                    if(imageURL != null)
+                        curr.setImage(downloadImage(imageURL));
+                    //Log.e("ImageDL", "Downloaded image for " + curr.getTitle());
                 } catch (IOException e) {
-                    Log.e("ImageDL", "Failed to download image for " + curr.getTitle());
-                    e.printStackTrace();
+                    //Log.e("ImageDL", "Failed to download image for " + curr.getTitle());
+                    //e.printStackTrace();
                 }
 
                 //Notify fragment's adapter to update it's views
@@ -645,6 +651,8 @@ public class CalendarFragment extends Fragment {
                     }
                 });
             }
+
+            CacheManager.writeObjectToCacheFile(CalendarFragment.this.getActivity(), events, CacheManager.EVENTS_FILENAME);
         }
     }
 
@@ -665,7 +673,7 @@ public class CalendarFragment extends Fragment {
                 Log.e("ImageDL", "Downloaded image for " + event.getTitle());
             } catch (IOException e) {
                 Log.e("ImageDL", "Failed to download image for " + event.getTitle());
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
             //Notify fragment's adapter to update it's views
@@ -691,15 +699,21 @@ public class CalendarFragment extends Fragment {
     }
 
     private void downloadImagesMultiThread(){
+
+
         for(int i = 0; i < events.size(); i++){
-            new EventImageLoaderSingle(events.get(i), i).start();
+            Event curr = events.get(i);
+            if(!curr.hasImage()  && curr.getImageURL() != null) {
+                new EventImageLoaderSingle(curr, i).start();
+            }
+
         }
     }
 
     private void downloadImagesSingleThread(){
         new EventImageLoader(events).start();
     }
-    
+
 	/**
 	 * @return the events
 	 */

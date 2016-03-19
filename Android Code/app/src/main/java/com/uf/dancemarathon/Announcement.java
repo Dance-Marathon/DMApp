@@ -31,6 +31,11 @@ public class Announcement implements Comparable<Announcement>, Serializable
 		this.text = text;
 		setDate(date, dateFormat);
 	}
+
+	public Announcement(String text, Date date){
+		this.text = text;
+		this.date = date;
+	}
 	
 	/**
 	 * This method parses the input string to create set this object's date

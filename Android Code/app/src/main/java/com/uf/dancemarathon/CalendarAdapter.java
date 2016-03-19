@@ -7,8 +7,11 @@ import java.util.Collections;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +86,12 @@ public class CalendarAdapter extends ArrayAdapter<Event>
             itemView = inflater.inflate(R.layout.event_image_item_view, parent, false);
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.event_item_image);
-            imageView.setImageBitmap(e.getImage());
+            imageView.setImageDrawable(new BitmapDrawable(context.getResources(), e.getImage()));
+
+            TextView timeView = (TextView) itemView.findViewById(R.id.event_item_image_time);
+            setStartTimeString(timeView, e);
+            timeView.bringToFront();
+            FontSetter.setFont(context, fontName.ALTM, timeView);
         }
 
         return itemView;
@@ -114,8 +122,6 @@ public class CalendarAdapter extends ArrayAdapter<Event>
         //Set start time
         setStartTimeString(time, e);
         
-        //boolean hasImage =  handleEventImage(itemView, e);
-        
        
         //Set months
         String monthText = e.getMonthText(true);
@@ -131,23 +137,7 @@ public class CalendarAdapter extends ArrayAdapter<Event>
         
        
 	}
-	
-	/**
-	 * Removes the calendar icon and adds the event's image if image is not null
-	 * @param v The view 
-	 * @param e The event
-	 */
-	private boolean handleEventImage(View v, Event e){
-		if(e.getImage() == null)
-			return false;
-		else
-		{
-			RelativeLayout iconLayout = (RelativeLayout) v.findViewById(R.id.tlineitem_calIcon);
-			iconLayout.removeAllViews();
-			iconLayout.setBackground(new BitmapDrawable(context.getResources(), e.getImage()));
-			return true;
-		}
-	}
+
 	/**
 	 * This method returns a string with as many words as can fit in the
 	 * input number of characters 

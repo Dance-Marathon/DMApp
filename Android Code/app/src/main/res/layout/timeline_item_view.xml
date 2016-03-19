@@ -60,11 +60,12 @@
             android:id="@+id/tlineitem_startTime"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_toStartOf="@+id/tlineitem_title"
-            android:layout_alignBottom="@+id/tlineitem_title"
+            android:layout_alignLeft="@+id/tlineitem_title"
+            android:layout_below="@+id/tlineitem_title"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="3dp"
             android:textSize="14sp"
-            android:textColor="@color/dm_blue_primary"
-            android:gravity="center"/>
+            android:textColor="@color/dm_blue_primary"/>
     	
 
     </RelativeLayout>
@@ -73,8 +74,8 @@
 
 	<ProgressBar
 		android:id="@+id/progress_wheel"
-		android:layout_width="30dp"
-		android:layout_height="30dp"
+		android:layout_width="20dp"
+		android:layout_height="20dp"
 		android:indeterminateOnly="true"
 		android:layout_centerInParent="true"
 		android:visibility="visible"

@@ -1,14 +1,17 @@
 package com.uf.dancemarathon;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -255,13 +258,30 @@ public class HomeFragment extends Fragment
 				String path = new ConfigFileReader(getActivity()).getSetting("announcementsPath");
 				URL url = new URL(path); //The path to the webservice 
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Type", "application/json");
+				conn.setDoInput(true);
+				conn.setDoOutput(true);
+
+				String query = "{\"query\": {\"recordType\": \"Announcement\"}}";
+
+				//Write params
+				byte[] paramData = query.getBytes();
+				int paramLength = paramData.length;
+				conn.setRequestProperty("Content-Length", Integer.toString(paramLength));
+				DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+				wr.write(paramData);
+				wr.close();
+
 				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				
-				//Parse JSON response
-				String announcementsJSON = reader.readLine();
-				// Log.d("json", eventsJSON);
-				JSONArray arr = new JSONArray(announcementsJSON);
-				announcements = parseAnnouncementsJSON(arr);
+				String line = "";
+				String announcementsJSON = "";
+				while ((line = reader.readLine()) != null)
+					announcementsJSON += line;
+
+				reader.close();
+
+				announcements = parseAnnouncementsJSON(new JSONObject(announcementsJSON));
 				
 				//Write data to cache
 				CacheManager.writeObjectToCacheFile(getActivity(), announcements, CacheManager.ANNOUNCEMENTS_FILENAME);
@@ -293,31 +313,28 @@ public class HomeFragment extends Fragment
 		}
 		
 		/**
-		 * @param arr The JSON object containing the events
+		 * @param aJson The JSON object containing the events
 		 * @return An arraylist of events
 		 * @throws JSONException if parse fails
 		 */
-		protected ArrayList<Announcement> parseAnnouncementsJSON(JSONArray arr) throws JSONException
+		protected ArrayList<Announcement> parseAnnouncementsJSON(JSONObject aJson)
 		{
-			ArrayList<Announcement> announcements = new ArrayList<Announcement>();
-			for(int i = 0; i < arr.length(); i++)
-			{
-				String text = arr.getJSONObject(i).getString("text").trim();
-				String date = arr.getJSONObject(i).getString("date").trim();
-				
-				try
-				{
-					Announcement a = new Announcement(text, date, "yyyy-MM-dd HH:mm:ss");
-					if(a.hasOccurred())
-						announcements.add(a);
-				} catch (ParseException e)
-				{
-					// Log.d("Announcements Parsing", "Failed to parse announcement" + text);
-				}
-			}
-			
-			if(announcements.size() <= 0)
-				loadSuccessful = false; //Loading nothing does not qualify as a "successful" load operation
+            ArrayList<Announcement> announcements = new ArrayList<Announcement>();
+            try {
+                JSONArray arr = aJson.getJSONArray("records");
+
+                for (int i = 0; i < arr.length(); i++) {
+                    String text = arr.getJSONObject(i).getJSONObject("fields").getJSONObject("text").getString("value").trim();
+                    long date = arr.getJSONObject(i).getJSONObject("fields").getJSONObject("date").getLong("value");
+                    Date d = new Date(date);
+                    Announcement a = new Announcement(text, d);
+                    if (a.hasOccurred())
+                        announcements.add(a);
+                }
+
+            } catch(JSONException e){
+            }
+
 			return announcements; 
 		}
 	}
