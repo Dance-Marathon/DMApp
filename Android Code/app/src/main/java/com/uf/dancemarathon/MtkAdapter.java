@@ -190,30 +190,35 @@ public class MtkAdapter extends BaseAdapter {
 
 				for (int i = 0; i < data_arr.length(); i++) 
 				{
-					String image_name = data_arr.getJSONObject(i)
-							.getString("image");
-					String story = data_arr.getJSONObject(i).getString("story");
-					String name = data_arr.getJSONObject(i).getString("name");
-					int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
-							"ageYear"));
-					String youtube_id = "";
-					
-					for(int j = 0; j < milestone_name.length; j++)
-					{
-						if (name.equals(milestone_name[j]))
-						{
-							youtube_id = milestone[j];
-							break;
-						}
+					try{
+                        String image_name = data_arr.getJSONObject(i)
+                                .getString("image");
+                        String story = data_arr.getJSONObject(i).getString("story");
+                        String name = data_arr.getJSONObject(i).getString("name");
+                        int age = Integer.parseInt(data_arr.getJSONObject(i).getString(
+                                "ageYear"));
+                        String youtube_id = "";
+
+                        for(int j = 0; j < milestone_name.length; j++)
+                        {
+                            if (name.equals(milestone_name[j]))
+                            {
+                                youtube_id = milestone[j];
+                                break;
+                            }
+                        }
+
+                        Kid k = new Kid(name, age, story, image_name, youtube_id);
+                        kids.add(k);
+
+                        // Alphabetizes arraylist by name
+                        Collections.sort(kids, Kid.COMPARE_BY_NAME);
+
+                        publishProgress();
+					}
+					catch (JSONException e){
 					}
 
-					Kid k = new Kid(name, age, story, image_name, youtube_id);
-					kids.add(k);
-
-                    // Alphabetizes arraylist by name
-                    Collections.sort(kids, Kid.COMPARE_BY_NAME);
-
-                    publishProgress();
 				}
 			} 
 			catch (IOException e) {

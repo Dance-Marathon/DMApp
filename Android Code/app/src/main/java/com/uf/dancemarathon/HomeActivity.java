@@ -199,14 +199,12 @@ public class HomeActivity extends AppCompatActivity
              public void onItemClick(AdapterView<?> parent, View view,
                                      int position, long id) {
                  switch (position) {
-                     case 0:openActivity(MapActivity.class);break;
-                     case 1:openActivity(FAQActivity.class);break;
-                     case 2:openActivity(CalendarActivity.class);break;
-                     case 3:openActivity(SocialMediaActivity.class);break;
-                     case 4:openActivity(MtkActivity.class);break;
-                     case 5:openFundraisingActivity();break;
-                     case 6:openActivity(AboutActivity.class);break;
-                     case 7:openActivity(ContactUsActivity.class);break;
+                     case 0:openActivity(FAQActivity.class);break;
+                     case 1:openActivity(CalendarActivity.class);break;
+                     case 2:openActivity(SocialMediaActivity.class);break;
+                     case 3:openActivity(MtkActivity.class);break;
+                     case 4:openActivity(AboutActivity.class);break;
+                     case 5:openActivity(ContactUsActivity.class);break;
                  }
 
              }

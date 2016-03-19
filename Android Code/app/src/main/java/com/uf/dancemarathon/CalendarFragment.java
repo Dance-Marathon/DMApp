@@ -677,7 +677,8 @@ public class CalendarFragment extends Fragment {
             }
 
             //Notify fragment's adapter to update it's views
-            CalendarFragment.this.getActivity().runOnUiThread(new Runnable() {
+            if(CalendarFragment.this.getActivity() != null)
+                CalendarFragment.this.getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     CalendarFragment.this.events.set(position, event);
